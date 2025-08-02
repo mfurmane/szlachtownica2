@@ -4,15 +4,12 @@ public enum PlaceType {
     CAPITAL,
     SETTLEMENT,         // zwykła osada
     FORTIFIED_SETTLEMENT,
-    TRADING_CENTER,     // handlowa
-    ARTISAN_CENTER,     // rzemieślnicza
-    MINING_SITE,        // górnicza
-    SPIRITUAL_CENTER,
-    DRUIDIC_CENTER,
-    MAGIC_CENTER,
-    RELIGIOUS_CENTER,   // świątynia lub inny kultowy
+    TRADING_SETTLEMENT,     // handlowa
+    ARTISAN_SETTLEMENT,     // rzemieślnicza
+    MINING_SETTLEMENT,        // górnicza
+    ENCHANT_SETTLEMENT,
     MONASTERY,          // klasztor / zakon,
-    MILITARY_SITE,      // koszary, garnizon
+    MILITARY_SETTLEMENT,      // koszary, garnizon
     FORTRESS,           // fort, twierdza
     SEA_PORT,
     RIVER_PORT,
