@@ -1,13 +1,12 @@
 package priv.mfurmane.szlachtownica.model.simulation.terrain;
 
 public enum PlaceType {
-    CAPITAL,
     SETTLEMENT,         // zwykła osada
     FORTIFIED_SETTLEMENT,
     TRADING_SETTLEMENT,     // handlowa
     ARTISAN_SETTLEMENT,     // rzemieślnicza
     MINING_SETTLEMENT,        // górnicza
-    ENCHANT_SETTLEMENT,
+    ENCHANT_CENTER,
     MONASTERY,          // klasztor / zakon,
     MILITARY_SETTLEMENT,      // koszary, garnizon
     FORTRESS,           // fort, twierdza
