@@ -1,0 +1,48 @@
+{
+  "id": 10,
+  "name": "Pirena",
+  "regionsCount": 154,
+  "initiallyOccupiedRegions": 29,
+  "subProvinces": 6,
+  "initialProfile": {
+	"FOREST": 0.15,
+	"GREENWOODS": 0.25,
+	"WOODS": 0.25,
+	"PINE_CRAG": 0.3,
+	"RIVERLAND": 0.05,
+  },
+  "preferredDirections": ["FIELDS", "ORCHARDS", "FRUIT_PLANTATIONS", "VINEYARDS", "VERDANT_REACH", "FARMS"],
+  "climate": {
+	"COLD": 0.2,
+	"NEUTRAL": 0.8
+  },
+  "humidity": {
+	"EXTRA_DRY": 0.1,
+	"DRY": 0.3,
+    "NEUTRAL": 0.5,
+	"WET": 0.1
+  },
+  "woodRichness": 8,
+  "resourceRichness": 8,
+  "enchantDistribution": {
+	"NONE": 0.92,
+    "WILDERNESS": 0.01,
+    "CURSED": 0.01,
+    "TWISTED": 0.01,
+    "WARPED": 0.01,
+    "VEIL": 0.01,
+    "ENCHANTED": 0.01,
+	"SACRED": 0.02
+  },
+  "initialCities": [],
+  "growthPotential": 0.65,
+  "instability": 0.2,
+  "terrainProfile": {
+    "FLATLANDS": 0.3,
+    "VALLEY": 0.2,
+    "MOUNTAINS": 0.05,
+    "HILLS": 0.3,
+    "HIGHLANDS": 0.1,
+    "PLATEAUS": 0.05
+  }
+}

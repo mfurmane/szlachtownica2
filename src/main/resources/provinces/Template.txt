@@ -1,0 +1,38 @@
+{
+  "id": ,
+  "name": "",
+  "regionsCount": ,
+  "initiallyOcupiedRegions": ,
+  "subProvinces": ,
+  "initialProfile": {
+  
+  },
+  "preferredDirections": [""],
+  "climate": {
+    "": 1
+  },
+  "humidity": {
+    "": 1
+  },
+  "woodRichness": ,
+  "resourceRichness": ,
+  "enchantDistribution": {
+	"NONE": 0.,
+    "WILDERNESS": 0.,
+    "CURSED": 0.,
+    "TWISTED": 0.,
+    "WARPED": 0.,
+    "VEIL": 0.,
+    "ENCHANTED": 0.,
+    "SACRED": 0.
+  },
+  "initialCities": [],
+  "growthPotential": 0.75,
+  "instability": 0.2,
+  "terrainProfile": {
+    "flatlands": 0.45,
+    "hills": 0.4,
+    "mountains": 0.1,
+    "marsh": 0.05
+  }
+}

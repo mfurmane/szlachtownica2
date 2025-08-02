@@ -1,0 +1,50 @@
+{
+  "id": 5,
+  "name": "Alstederia",
+  "regionsCount": 234,
+  "initiallyOccupiedRegions": 32,
+  "subProvinces": 9,
+  "initialProfile": {
+	"FOREST": 0.04,
+	"GREENWOODS": 0.09,
+	"WOODS": 0.09,
+	"PINE_CRAG": 0.04,
+	"LAKE": 0.09,
+	"RIVERLAND": 0.14,
+	"SWAMP": 0.09,
+	"FISHING_COAST": 0.09,
+	"FISHING_REGION": 0.09,
+	"HUNTING_REGION": 0.04
+  },
+  "preferredDirections": ["SETTLERS_REACH", "FISHING_COAST", "FISHING_REGION", "ORCHARDS", "CRAFTS_LAND", "MERCHANTS_REACH", "RESORT_BELT"],
+  "climate": {
+	"WARM": 0.2,
+	"EXTRA_WARM": 0.8
+  },
+  "humidity": {
+    "NEUTRAL": 0.7,
+	"WET": 0.3
+  },
+  "woodRichness": 10,
+  "resourceRichness": 4,
+  "enchantDistribution": {
+	"NONE": 0.9,
+    "WILDERNESS": 0.02,
+    "CURSED": 0.01,
+    "TWISTED": 0.01,
+    "WARPED": 0.015,
+    "VEIL": 0.01,
+    "ENCHANTED": 0.02,
+    "SACRED": 0.015
+  },
+  "initialCities": [7],
+  "growthPotential": 0.85,
+  "instability": 0.3,
+  "terrainProfile": {
+    "FLATLANDS": 0.49,
+	"VALLEY": 0.3,
+    "HILLS": 0.1,
+	"BADLANDS": 0.01,
+    "WETBASIN": 0.1
+  }
+}

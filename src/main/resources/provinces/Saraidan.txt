@@ -1,0 +1,47 @@
+{
+  "id": 3,
+  "name": "Saraidan",
+  "regionsCount": 489,
+  "initiallyOccupiedRegions": 46,
+  "subProvinces": 19,
+  "initialProfile": {
+	"FOREST": 0.4,
+	"GREENWOODS": 0.2,
+	"SWAMP": 0.1,
+	"LAKE": 0.05,
+	"RIVERLAND": 0.05,
+	"GROVE": 0.05,
+	"COMFORT_VALE": 0.05
+  },
+  "preferredDirections": ["ORCHARDS", "FRUIT_PLANTATIONS", "VINEYARDS", "VERDANT_REACH", "BLOOMING_REACH", "COMFORT_VALE", "SPIRITED_LANDS", "GROVE"],
+  "climate": {
+    "NEUTRAL": 0.3,
+	"WARM": 0.7
+  },
+  "humidity": {
+    "NEUTRAL": 0.35,
+	"WET": 0.4,
+	"EXTRA_WET": 0.25
+  },
+  "woodRichness": 20,
+  "resourceRichness": 6,
+  "enchantDistribution": {
+	"NONE": 0.8,
+    "WILDERNESS": 0.12,
+    "CURSED": 0.01,
+    "TWISTED": 0.04,
+    "WARPED": 0,
+    "VEIL": 0.01,
+    "ENCHANTED": 0.01,
+    "SACRED": 0.01
+  },
+  "initialCities": [3, 4],
+  "growthPotential": 0.6,
+  "instability": 0.1,
+  "terrainProfile": {
+    "FLATLANDS": 0.4,
+	"VALLEY": 0.4,
+    "HILLS": 0.1,
+    "WETBASIN": 0.1,
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": 6,
+  "name": "Viroelann",
+  "regionsCount": 312,
+  "initiallyOccupiedRegions": 39,
+  "subProvinces": 12,
+  "initialProfile": {
+	"FOREST": 0.1,
+	"GREENWOODS": 0.15,
+	"WOODS": 0.25,
+	"PINE_CRAG": 0.05,
+	"LAKE": 0.05,
+	"RIVERLAND": 0.1,
+	"FISHING_COAST": 0.05,
+	"HUNTING_REGION": 0.05,
+	"GROVE": 0.02,
+	"COMFORT_VALE": 0.08
+  },
+  "preferredDirections": ["ORCHARDS", "FARMS", "GARDENS", "BLOOMING_REACH", "PAVILIONS_LANDS", "ARCANE_REACH", "ARCANE_EXPANSE"],
+  "climate": {
+	"WARM": 1
+  },
+  "humidity": {
+	"DRY": 0.15,
+    "NEUTRAL": 0.6,
+	"WET": 0.25
+  },
+  "woodRichness": 8,
+  "resourceRichness": 8,
+  "enchantDistribution": {
+	"NONE": 0.78,
+    "WILDERNESS": 0.02,
+    "CURSED": 0.01,
+    "TWISTED": 0.05,
+    "WARPED": 0.01,
+    "VEIL": 0.02,
+    "ENCHANTED": 0.1,
+    "SACRED": 0.01
+  },
+  "initialCities": [8],
+  "growthPotential": 0.7,
+  "instability": 0.3,
+  "terrainProfile": {
+    "FLATLANDS": 0.3,
+    "HILLS": 0.1,
+	"HIGHLANDS": 0.1,
+	"MOUNTAINS": 0.1,
+	"PLATEAUS":  0.1,
+	"CANYONS": 0.1,
+	"VALLEY": 0.19,
+	"BADLANDS": 0.01
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "basicInfo": {
+    "id": 1,
+    "race": "human",
+    "sex": "FEMALE",
+    "born": "1168-03-17",
+    "died": 1226-09-02,
+    "mourningEnd": null,
+    "name": "Tagara",
+    "middleName": "I Budownicza",
+    "plebsSurname": null,
+    "plebs": false
+  },
+  "relations": {
+    "family": "tagar",
+    "parentsFamily": "tagar",
+    "mother": null,
+    "father": null,
+    "officialFather": null,
+    "relationships": [2],
+    "ons": {},
+    "knownKids": [3]
+  },
+  "info": {
+    "age": null,
+    "importance": 10.0,
+    "membershipStrength": 10.0,
+    "lineImportance": 10.0,
+    "hornyAge": 16,
+    "stableAge": 20,
+    "marriageAge": 18,
+    "mourningTime": 16
+  },
+  "factors": {
+    "travel": 0.2,
+    "horny": 0.7,
+    "loyal": 0.96,
+    "homo": 0.1,
+    "interracial": 0.5,
+    "attachment": 0.9,
+    "poliamoric": 0.1,
+    "jealous": 0.4,
+    "impulsive": 0.1,
+    "proud": 0.5,
+    "amorous": 0.1,
+    "divorcable": 0.01,
+    "revengous": 0.1
+  },
+  "controls": {
+    "events": [],
+    "pregnantCounter": 0,
+    "childFather": null
+  },
+  "matrimonialPhase": "INNOCENT"
+}

@@ -1,0 +1,48 @@
+{
+  "id": 12,
+  "name": "Orvanor",
+  "regionsCount": 140,
+  "initiallyOccupiedRegions": 15,
+  "subProvinces": 5,
+  "initialProfile": {
+	"FOREST": 0.05,
+	"GREENWOODS": 0.25,
+	"WOODS": 0.2,
+	"PINE_CRAG": 0.15,
+	"LAKE": 0.15,
+	"SWAMP": 0.2
+  },
+  "preferredDirections": ["SETTLERS_REACH", "CRAFTS_LAND", "GARDENS"],
+  "climate": {
+	"VERY_COLD": 0.2,
+	"COLD": 0.65,
+	"NEUTRAL": 0.15
+  },
+  "humidity": {
+	"WET": 0.7,
+	"EXTRA_WET": 0.3
+  },
+  "woodRichness": 10,
+  "resourceRichness": 7,
+  "enchantDistribution": {
+	"NONE": 0.9,
+    "WILDERNESS": 0.005,
+    "CURSED": 0.02,
+    "TWISTED": 0.01,
+    "WARPED": 0.005,
+    "VEIL": 0.02,
+    "ENCHANTED": 0.02,
+	"SACRED": 0.02
+  },
+  "initialCities": [],
+  "growthPotential": 0.5,
+  "instability": 0.25,
+  "terrainProfile": {
+    "WETBASIN": 0.4,
+    "VALLEY": 0.2,
+    "MOUNTAINS": 0.05,
+    "HILLS": 0.15,
+    "HIGHLANDS": 0.15,
+    "PLATEAUS": 0.05
+  }
+}

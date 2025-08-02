@@ -1,0 +1,48 @@
+{
+  "id": 2,
+  "name": "Nowa Corellia",
+  "regionsCount": 192,
+  "initiallyOccupiedRegions": 42,
+  "subProvinces": 8,
+  "initialProfile": {
+	"MEADOWS": 0.5,
+	"LAKE": 0.05,
+	"RIVERLAND": 0.05,
+	"WOODS": 0.1,
+	"GREENWOODS": 0.15,
+	"FOREST": 0.05	
+  },
+  "preferredDirections": ["STUDS", "FARMS", "PILGRIMS_SPAN", "HOLY_EXPANSE", "SHELTER_LANDS"],
+  "climate": {
+    "NEUTRAL": 1
+  },
+  "humidity": {
+    "DRY": 0.1,
+    "NEUTRAL": 0.7,
+    "WET": 0.2
+  },
+  "woodRichness": 7,
+  "resourceRichness": 3,
+  "enchantDistribution": {
+	"NONE": 0.8,
+    "WILDERNESS": 0.06,
+    "CURSED": 0.005,
+    "TWISTED": 0.02,
+    "WARPED": 0.005,
+    "VEIL": 0.03,
+    "ENCHANTED": 0.02,
+    "SACRED": 0.06
+  },
+  "initialCities": [2],
+  "growthPotential": 0.75,
+  "instability": 0.15,
+  "terrainProfile": {
+    "FLATLANDS": 0.4,
+    "HILLS": 0.3,
+    "HIGHLANDS": 0.13,
+    "MOUNTAINS": 0.11,
+    "VALLEY": 0.01,
+    "CANYONS": 0.02,
+    "PLATEAUS": 0.03
+  }
+}

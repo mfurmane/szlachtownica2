@@ -1,0 +1,47 @@
+{
+  "id": 4,
+  "name": "Druantia",
+  "regionsCount": 315,
+  "initiallyOccupiedRegions": 39,
+  "subProvinces": 8,
+  "initialProfile": {
+	"FOREST": 0.15,
+	"GREENWOODS": 0.25,
+	"WOODS": 0.2,
+	"LAKE": 0.1,
+	"RIVERLAND": 0.1,
+	"GROVE": 0.05,
+	"COMFORT_VALE": 0.05
+  },
+  "preferredDirections": ["ORCHARDS", "FRUIT_PLANTATIONS", "VINEYARDS", "VERDANT_REACH", "BLOOMING_REACH", "COMFORT_VALE", "RESORT_BELT", "PAVILIONS_LANDS", "GROVE"],
+  "climate": {
+	"WARM": 1
+  },
+  "humidity": {
+	"DRY": 0.1,
+    "NEUTRAL": 0.45,
+	"WET": 0.45
+  },
+  "woodRichness": 16,
+  "resourceRichness": 6,
+  "enchantDistribution": {
+	"NONE": 0.8,
+    "WILDERNESS": 0.08,
+    "CURSED": 0.01,
+    "TWISTED": 0.02,
+    "WARPED": 0.02,
+    "VEIL": 0.01,
+    "ENCHANTED": 0.04,
+    "SACRED": 0.01
+  },
+  "initialCities": [5, 6],
+  "growthPotential": 0.7,
+  "instability": 0.2,
+  "terrainProfile": {
+    "FLATLANDS": 0.4,
+	"VALLEY": 0.2,
+    "HILLS": 0.2,
+	"HIGHLANDS": 0.19,
+	"BADLANDS": 0.01
+  }
+}

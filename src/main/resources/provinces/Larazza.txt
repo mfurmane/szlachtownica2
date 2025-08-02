@@ -1,0 +1,47 @@
+{
+  "id": 7,
+  "name": "Larazza",
+  "regionsCount": 231,
+  "initiallyOccupiedRegions": 21,
+  "subProvinces": 7,
+  "initialProfile": {
+	"FOREST": 0.15,
+	"GREENWOODS": 0.25,
+	"WOODS": 0.25,
+	"PINE_CRAG": 0.05,
+	"RIVERLAND": 0.05,
+	"FISHING_COAST": 0.15
+  },
+  "preferredDirections": ["FRUIT_PLANTATIONS", "MERCHANTS_REACH", "FISHING_COAST", "CRAFTS_LAND"],
+  "climate": {
+	"EXTRA_WARM": 1
+  },
+  "humidity": {
+	"DRY": 0.2,
+    "NEUTRAL": 0.4,
+	"WET": 0.3,
+	"EXTRA_WET": 0.1
+  },
+  "woodRichness": 14,
+  "resourceRichness": 6,
+  "enchantDistribution": {
+	"NONE": 0.9,
+    "WILDERNESS": 0.01,
+    "CURSED": 0.01,
+    "TWISTED": 0.01,
+    "WARPED": 0.04,
+    "VEIL": 0.01,
+    "ENCHANTED": 0.02,
+    "SACRED": 0
+  },
+  "initialCities": [9],
+  "growthPotential": 0.75,
+  "instability": 0.2,
+  "terrainProfile": {
+    "FLATLANDS": 0.65,
+    "HILLS": 0.1,
+	"HIGHLANDS": 0.1,
+	"MOUNTAINS": 0.05,
+	"BADLANDS": 0.1
+  }
+}
