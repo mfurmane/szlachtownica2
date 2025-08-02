@@ -1,20 +1,22 @@
 package priv.mfurmane.szlachtownica.model.main;
 
-import priv.mfurmane.szlachtownica.model.config.ConfigurationPerson;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
 
 import java.util.*;
 
 public class ModelRegion {
-    public static final Random RANDOM = new Random();
+    public static final Random rand = new Random();
     private Humidity humidity;
     private Climate climate;
     private TerrainShape terrainShape;
     private SoilType soilType;
+//    private final Double naturalReachness;
     private final Map<TerrainResource, Integer> naturalResources = new HashMap<>();
     private RegionType type;
     private EnchantType enchant;
     private final List<ModelPlace> places = new ArrayList<>();
+    private final Map<ProductionType, Integer> production = new HashMap<>();
+    private final Map<ImportNeed, Integer> importNeeded = new HashMap<>();
 
     public ModelRegion(Builder builder) {
         humidity = builder.humidity;
@@ -24,12 +26,26 @@ public class ModelRegion {
         type = builder.type != null ? builder.type : determineType();
         enchant = builder.enchant;
         places.addAll(builder.places);
+//        naturalReachness = builder.naturalReachness;
         naturalResources.putAll(builder.naturalResources);
         Arrays.stream(soilType.getResources()).forEach(resource -> {
-            if (RANDOM.nextDouble() < resource.getAvailability()) {
-                naturalResources.merge(resource, 1000, Integer::sum);
+            if (rand.nextDouble() < resource.getAvailability()) {
+                naturalResources.merge(resource, getAverageTons(resource, calculateProportions(builder.naturalReachness)), Integer::sum);
             }
         });
+    }
+
+    private static Double calculateProportions(Double naturalReachness) {
+        return naturalReachness / 20.0;
+    }
+
+    private static int getAverageTons(TerrainResource resource, Double reachness) {
+        ResourceDeposit[] deposits = resource.getCategory().getDeposits();
+        double bias = Math.pow(rand.nextDouble(), 1.5 - reachness); // reachness ∈ [0.0, 1.0]
+        int index = (int) (bias * deposits.length);
+        index = Math.min(index, deposits.length - 1); // zabezpieczenie
+        return (int) (deposits[index].getAverageTons() * reachness);
+//        return deposits[rand.nextInt()].getAverageTons();
     }
 
     private RegionType determineType() {
@@ -44,7 +60,7 @@ public class ModelRegion {
                 .toList();
 
 //        available.forEach(System.out::println);
-        return available.get(RANDOM.nextInt(available.size()));
+        return available.get(rand.nextInt(available.size()));
     }
 
     public static Builder builder() {
@@ -113,10 +129,16 @@ public class ModelRegion {
         private Humidity humidity = Humidity.NEUTRAL;
         private Climate climate = Climate.NEUTRAL;
 //        private SoilType soilType;
+        private Double naturalReachness = 0.1;
         private Map<TerrainResource, Integer> naturalResources = new HashMap<>();
         private RegionType type;
         private EnchantType enchant = EnchantType.NONE;
         private List<ModelPlace> places = new ArrayList<>();
+
+        public Builder setNaturalReachness(Double naturalReachness) {
+            this.naturalReachness = naturalReachness;
+            return this;
+        }
 
         public Builder setTerrainShape(TerrainShape terrainShape) {
             this.terrainShape = terrainShape;

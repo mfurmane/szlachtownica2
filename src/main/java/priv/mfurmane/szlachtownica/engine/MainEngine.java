@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.events.EventFactory;
 import priv.mfurmane.szlachtownica.engine.registry.PersonRegistry;
 import priv.mfurmane.szlachtownica.model.PersonFactory;
+import priv.mfurmane.szlachtownica.model.ProvinceFactory;
 import priv.mfurmane.szlachtownica.model.Race;
 import priv.mfurmane.szlachtownica.model.naming.NamingProvider;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPerson;
@@ -22,6 +23,8 @@ public class MainEngine {
     private EventFactory eventFactory;
     @Autowired
     private PersonFactory personFactory;
+    @Autowired
+    private ProvinceFactory provinceFactory;
 //    @Autowired
 //    private FamilyFactory familyFactory;
     @Autowired
@@ -43,6 +46,7 @@ public class MainEngine {
         personRegistry.setEngine(this);
         goalEngine.setEngine(this);
         namingProvider.setEngine(this);
+        provinceFactory.setEngine(this);
 
         for (int i = 0; i < 10; i++) {
             SimulationPerson simulationPerson = personFactory.newPerson(Race.HUMAN);
@@ -51,6 +55,10 @@ public class MainEngine {
             simulationPerson.getGoals().entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).forEach((goal) -> System.out.println(goal.getValue() + ": " + goal.getKey().name()));
 
         }
+    }
+
+    public ProvinceFactory getProvinceFactory() {
+        return provinceFactory;
     }
 
     public NamingProvider getNamingProvider() {
