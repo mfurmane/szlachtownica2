@@ -5,13 +5,11 @@ import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationProvince;
 import priv.mfurmane.szlachtownica.model.main.ModelProvince;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
-import priv.mfurmane.szlachtownica.model.simulation.terrain.Climate;
-import priv.mfurmane.szlachtownica.model.simulation.terrain.Humidity;
 
-import java.util.*;
+import java.util.Random;
 
 @Component
-public class ProvinceFactory {
+public class PlaceFactory {
     private static final Random random = new Random();
     private MainEngine engine;
 

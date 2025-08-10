@@ -1,48 +1,102 @@
 {
-  "id": 2,
-  "name": "Nowa Corellia",
-  "regionsCount": 192,
-  "initiallyOccupiedRegions": 42,
-  "subProvinces": 8,
-  "initialProfile": {
-	"MEADOWS": 0.5,
-	"LAKE": 0.05,
-	"RIVERLAND": 0.05,
-	"WOODS": 0.1,
-	"GREENWOODS": 0.15,
-	"FOREST": 0.05	
+  "model": {
+    "id": 2,
+    "name": "Nowa Corellia",
+    "preferredDirections": ["SETTLERS_REACH", "ESTATE_REGION", "TOURISTIC_LAND", "SUPERNATURAL_EXPANSE"]
   },
-  "preferredDirections": ["STUDS", "FARMS", "PILGRIMS_SPAN", "HOLY_EXPANSE", "SHELTER_LANDS"],
-  "climate": {
-    "NEUTRAL": 1
-  },
-  "humidity": {
-    "DRY": 0.1,
-    "NEUTRAL": 0.7,
-    "WET": 0.2
-  },
-  "woodRichness": 7,
-  "resourceRichness": 3,
-  "enchantDistribution": {
-	"NONE": 0.8,
-    "WILDERNESS": 0.06,
-    "CURSED": 0.005,
-    "TWISTED": 0.02,
-    "WARPED": 0.005,
-    "VEIL": 0.03,
-    "ENCHANTED": 0.02,
-    "SACRED": 0.06
-  },
-  "initialCities": [2],
-  "growthPotential": 0.75,
-  "instability": 0.15,
-  "terrainProfile": {
-    "FLATLANDS": 0.4,
-    "HILLS": 0.3,
-    "HIGHLANDS": 0.13,
-    "MOUNTAINS": 0.11,
-    "VALLEY": 0.01,
-    "CANYONS": 0.02,
-    "PLATEAUS": 0.03
+  "conf": {
+    "subProvinces": [
+      {
+        "regionsCount": 25,
+        "initiallyOccupied": 17,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 8,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 4,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 3,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 29,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 24,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 25,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 30,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 23,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      }
+    ],
+    "initialNaturalProfile": {
+	  "FOREST": 0.55,
+	  "MEADOWS": 0.2,
+	  "PINE_CRAG": 0.1,
+	  "SWAMP": 0.15
+    },
+    "initialSettlersProfile": {
+	  "FARMING_LAND": 0.4,
+	  "SETTLERS_REACH": 0.6
+    },
+    "enchantDistribution": {
+	  "NONE": 0.8,
+      "WILDERNESS": 0.06,
+      "CURSED": 0.005,
+      "TWISTED": 0.02,
+      "WARPED": 0.005,
+      "VEIL": 0.03,
+      "ENCHANTED": 0.02,
+      "SACRED": 0.06
+    },
+    "initialCities": [],
+    "terrainProfile": {
+      "FLATLANDS": 0.4,
+      "HILLS": 0.3,
+      "HIGHLANDS": 0.13,
+      "MOUNTAINS": 0.11,
+      "VALLEY": 0.01,
+      "CANYONS": 0.02,
+      "PLATEAUS": 0.03
+    },
+    "woodRichness": 7,
+    "resourceRichness": 3,
+    "lakesRichness":8,
+    "riversRichness": 10,
+    "simulationStart": 942,
+    "growthPotential": 0.75,
+    "instability": 0.15
   }
 }

@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.events.EventFactory;
 import priv.mfurmane.szlachtownica.engine.registry.PersonRegistry;
+import priv.mfurmane.szlachtownica.engine.registry.PlaceRegistry;
 import priv.mfurmane.szlachtownica.model.PersonFactory;
+import priv.mfurmane.szlachtownica.model.PlaceFactory;
 import priv.mfurmane.szlachtownica.model.ProvinceFactory;
 import priv.mfurmane.szlachtownica.model.Race;
 import priv.mfurmane.szlachtownica.model.naming.NamingProvider;
+import priv.mfurmane.szlachtownica.model.naming.PlaceNameProvider;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPerson;
 import priv.mfurmane.szlachtownica.model.simulation.goal.GoalEngine;
 
@@ -17,6 +20,16 @@ import java.util.Map;
 
 @Component
 public class MainEngine {
+    private static MainEngine instance;
+
+    public MainEngine() {
+        instance = this;
+    }
+
+    public static MainEngine getInstance() {
+        return instance;
+    }
+
     @Autowired
     private EventManager eventManager;
     @Autowired
@@ -25,6 +38,8 @@ public class MainEngine {
     private PersonFactory personFactory;
     @Autowired
     private ProvinceFactory provinceFactory;
+    @Autowired
+    private PlaceFactory placeFactory;
 //    @Autowired
 //    private FamilyFactory familyFactory;
     @Autowired
@@ -32,9 +47,13 @@ public class MainEngine {
     @Autowired
     private PersonRegistry personRegistry;
     @Autowired
+    private PlaceRegistry placeRegistry;
+    @Autowired
     private GoalEngine goalEngine;
     @Autowired
     private NamingProvider namingProvider;
+    @Autowired
+    private PlaceNameProvider placeNameProvider;
 
     @PostConstruct
     public void inject() {
@@ -47,6 +66,9 @@ public class MainEngine {
         goalEngine.setEngine(this);
         namingProvider.setEngine(this);
         provinceFactory.setEngine(this);
+        placeFactory.setEngine(this);
+        placeNameProvider.setEngine(this);
+        placeRegistry.setEngine(this);
 
         for (int i = 0; i < 10; i++) {
             SimulationPerson simulationPerson = personFactory.newPerson(Race.HUMAN);
@@ -55,6 +77,14 @@ public class MainEngine {
             simulationPerson.getGoals().entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).forEach((goal) -> System.out.println(goal.getValue() + ": " + goal.getKey().name()));
 
         }
+    }
+
+    public PlaceNameProvider getPlaceNameProvider() {
+        return placeNameProvider;
+    }
+
+    public PlaceFactory getPlaceFactory() {
+        return placeFactory;
     }
 
     public ProvinceFactory getProvinceFactory() {
@@ -91,5 +121,9 @@ public class MainEngine {
 
     public PredefinedDataFiller getDataFiller() {
         return dataFiller;
+    }
+
+    public PlaceRegistry getPlaceRegistry() {
+        return placeRegistry;
     }
 }

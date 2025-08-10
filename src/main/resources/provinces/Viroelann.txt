@@ -1,53 +1,120 @@
 {
-  "id": 6,
-  "name": "Viroelann",
-  "regionsCount": 312,
-  "initiallyOccupiedRegions": 39,
-  "subProvinces": 12,
-  "initialProfile": {
-	"FOREST": 0.1,
-	"GREENWOODS": 0.15,
-	"WOODS": 0.25,
-	"PINE_CRAG": 0.05,
-	"LAKE": 0.05,
-	"RIVERLAND": 0.1,
-	"FISHING_COAST": 0.05,
-	"HUNTING_REGION": 0.05,
-	"GROVE": 0.02,
-	"COMFORT_VALE": 0.08
+  "model": {
+    "id": 6,
+    "name": "Viroelann",
+    "preferredDirections": ["SETTLERS_REACH", "FARMING_LAND", "ESTATE_REGION", "SUPERNATURAL_EXPANSE"]
   },
-  "preferredDirections": ["ORCHARDS", "FARMS", "GARDENS", "BLOOMING_REACH", "PAVILIONS_LANDS", "ARCANE_REACH", "ARCANE_EXPANSE"],
-  "climate": {
-	"WARM": 1
-  },
-  "humidity": {
-	"DRY": 0.15,
-    "NEUTRAL": 0.6,
-	"WET": 0.25
-  },
-  "woodRichness": 8,
-  "resourceRichness": 8,
-  "enchantDistribution": {
-	"NONE": 0.78,
-    "WILDERNESS": 0.02,
-    "CURSED": 0.01,
-    "TWISTED": 0.05,
-    "WARPED": 0.01,
-    "VEIL": 0.02,
-    "ENCHANTED": 0.1,
-    "SACRED": 0.01
-  },
-  "initialCities": [8],
-  "growthPotential": 0.7,
-  "instability": 0.3,
-  "terrainProfile": {
-    "FLATLANDS": 0.3,
-    "HILLS": 0.1,
-	"HIGHLANDS": 0.1,
-	"MOUNTAINS": 0.1,
-	"PLATEAUS":  0.1,
-	"CANYONS": 0.1,
-	"VALLEY": 0.19,
-	"BADLANDS": 0.01
+  "conf": {
+    "subProvinces": [
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 15,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 9,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 24,
+        "initiallyOccupied": 6,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 29,
+        "initiallyOccupied": 5,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 29,
+        "initiallyOccupied": 4,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 22,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 25,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 28,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 24,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "DRY"
+      }
+    ],
+    "initialNaturalProfile": {
+	  "FOREST": 0.55,
+	  "MEADOWS": 0.4,
+	  "PINE_CRAG": 0.05
+	},
+    "initialSettlersProfile": {
+	  "FARMING_LAND": 0.6,
+	  "SETTLERS_REACH": 0.4
+    },
+    "enchantDistribution": {
+	  "NONE": 0.78,
+      "WILDERNESS": 0.02,
+      "CURSED": 0.01,
+      "TWISTED": 0.05,
+      "WARPED": 0.01,
+      "VEIL": 0.02,
+      "ENCHANTED": 0.1,
+      "SACRED": 0.01
+    },
+    "initialCities": [8],
+    "terrainProfile": {
+      "FLATLANDS": 0.3,
+      "HILLS": 0.1,
+	  "HIGHLANDS": 0.1,
+	  "MOUNTAINS": 0.1,
+	  "PLATEAUS":  0.1,
+	  "CANYONS": 0.1,
+	  "VALLEY": 0.19,
+	  "BADLANDS": 0.01
+    },
+    "woodRichness": 8,
+    "resourceRichness": 8,
+    "lakesRichness": 13,
+    "riversRichness": 9,
+    "simulationStart": 1196,
+    "growthPotential": 0.85,
+    "instability": 0.15
   }
 }

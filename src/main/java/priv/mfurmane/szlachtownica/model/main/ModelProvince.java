@@ -11,30 +11,45 @@ public class ModelProvince {
     private String name;
     private final List<ModelSubProvince> areas = new ArrayList<>();
     private final List<RegionType> preferredDirections = new ArrayList<>();
-    private Double growthPotential;
-    private Double instability;
 
     public void initializeSubProvinces(ConfigurationSubProvince subProvinceConf, ConfigurationProvince conf) {
         ModelSubProvince subProvince = new ModelSubProvince(subProvinceConf.getClimate(), subProvinceConf.getHumidity());
         int naturalRegions = subProvinceConf.getRegionsCount() - subProvinceConf.getInitiallyOccupied();
         for (int i = 0; i < subProvinceConf.getInitiallyOccupied(); i++) {
+            List<Long> cities = new ArrayList<>();
+            if (i < conf.getInitialCities().size()) {
+                cities.add(conf.getInitialCities().get(i));
+            }
             subProvince.getRegions().add(ModelRegion.builder()
                     .setClimate(subProvinceConf.getClimate())
                     .setHumidity(subProvinceConf.getHumidity())
+                    .setDevelopmentLevel(1)
                     .setTerrainShape(chooseTerrainShape(conf))
                     .setType(chooseType(conf.getInitialSettlersProfile()))
                     .setEnchant(chooseEnchant(conf))
+                    .setStartCities(cities)
+                    .setLakesRichness(conf.getLakesRichness())
+                    .setRiversRichness(conf.getRiversRichness())
                     .build());
         }
         for (int i = 0; i < naturalRegions; i++) {
             subProvince.getRegions().add(ModelRegion.builder()
                     .setClimate(subProvinceConf.getClimate())
                     .setHumidity(subProvinceConf.getHumidity())
+                    .setDevelopmentLevel(determineNatureStrength(conf))
                     .setTerrainShape(chooseTerrainShape(conf))
                     .setType(chooseType(conf.getInitialNaturalProfile()))
                     .setEnchant(chooseEnchant(conf))
+                    .setLakesRichness(conf.getLakesRichness())
+                    .setRiversRichness(conf.getRiversRichness())
                     .build());
         }
+        //TODO register StartProvinceSettlementEvent
+    }
+
+    private static Integer determineNatureStrength(ConfigurationProvince conf) {
+        int max = (int) Math.ceil(conf.getWoodRichness() / 5.0);
+        return new Random().nextInt(max) + 1;
     }
 
     private static EnchantType chooseEnchant(ConfigurationProvince conf) {
@@ -75,15 +90,11 @@ public class ModelProvince {
     public ModelProvince(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
-        this.growthPotential = builder.growthPotential;
-        this.instability = builder.instability;
     }
 
     public void mergeFrom(ModelProvince other) {
         if (other.id != null) this.id = other.id;
         if (other.name != null) this.name = other.name;
-        if (other.growthPotential != null) this.growthPotential = other.growthPotential;
-        if (other.instability != null) this.instability = other.instability;
 
     }
 
@@ -112,22 +123,12 @@ public class ModelProvince {
         return preferredDirections;
     }
 
-    public Double getGrowthPotential() {
-        return growthPotential;
-    }
-
-    public Double getInstability() {
-        return instability;
-    }
-
     public static class Builder {
         private final List<ModelProvince> areas = new ArrayList<>();
         private final List<ModelRegion> regions = new ArrayList<>();
         private final List<RegionType> preferredDirections = new ArrayList<>();
         private Long id;
         private String name;
-        private Double growthPotential;
-        private Double instability;
 
         public Builder setId(Long id) {
             this.id = id;
@@ -136,16 +137,6 @@ public class ModelProvince {
 
         public Builder setName(String name) {
             this.name = name;
-            return this;
-        }
-
-        public Builder setGrowthPotential(Double growthPotential) {
-            this.growthPotential = growthPotential;
-            return this;
-        }
-
-        public Builder setInstability(Double instability) {
-            this.instability = instability;
             return this;
         }
 

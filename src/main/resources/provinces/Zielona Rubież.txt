@@ -1,47 +1,91 @@
 {
-  "id": 13,
-  "name": "Zielona Rubież",
-  "regionsCount": 1084,
-  "initiallyOccupiedRegions": 120,
-  "subProvinces": 40,
-  "initialProfile": {
-	"FOREST": 0.5,
-	"GREENWOODS": 0.15,
-	"WOODS": 0.05,
-	"LAKE": 0.2,
-	"RIVERLAND": 0.05
+  "model": {
+    "id": 13,
+    "name": "Zielona Rubież",
+    "preferredDirections": ["SETTLERS_REACH", "FARMING_LAND", "TOURISTIC_LAND", "SUPERNATURAL_EXPANSE"]
   },
-  "preferredDirections": ["VINEYARDS", "FRUIT_PLANTATIONS", "ORCHARDS", "GARDENS", "DREAM_GROVE", "HEARTH_LANDS", "BLOOMING_REACH", "FISHING_REGION", "GROVE", "ANCIENT_GROVE"],
-  "climate": {
-	"COLD": 0.15,
-	"NEUTRAL": 0.4,
-	"WARM": 0.45
-  },
-  "humidity": {
-	"WET": 0.7,
-	"EXTRA_WET": 0.3
-  },
-  "woodRichness": 30,
-  "resourceRichness": 10,
-  "enchantDistribution": {
-	"NONE": 0.75,
-    "WILDERNESS": 0.15,
-    "CURSED": 0.005,
-    "TWISTED": 0.05,
-    "WARPED": 0.005,
-    "VEIL": 0.03,
-    "ENCHANTED": 0.01,
-	"SACRED": 0
-  },
-  "initialCities": [19],
-  "growthPotential": 0.5,
-  "instability": 0.1,
-  "terrainProfile": {
-	"FLATLANDS": 0.4,
-	"HIGHLANDS": 0.05,
-	"HILLS": 0.22,
-	"VALLEY": 0.01,
-	"MOUNTAINS": 0.02,
-    "WETBASIN": 0.3
+  "conf": {
+    "subProvinces": [
+      { "regionsCount": 26, "initiallyOccupied": 6, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 25, "initiallyOccupied": 7, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 28, "initiallyOccupied": 5, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 25, "initiallyOccupied": 7, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 26, "initiallyOccupied": 5, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 26, "initiallyOccupied": 4, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 26, "initiallyOccupied": 3, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 26, "initiallyOccupied": 2, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 27, "initiallyOccupied": 3, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 27, "initiallyOccupied": 0, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 27, "initiallyOccupied": 0, "climate": "WARM", "humidity": "WET" },
+      { "regionsCount": 27, "initiallyOccupied": 0, "climate": "WARM", "humidity": "WET" },
+
+      { "regionsCount": 26, "initiallyOccupied": 6, "climate": "WARM", "humidity": "EXTRA_WET" },
+      { "regionsCount": 26, "initiallyOccupied": 4, "climate": "WARM", "humidity": "EXTRA_WET" },
+      { "regionsCount": 26, "initiallyOccupied": 3, "climate": "WARM", "humidity": "EXTRA_WET" },
+      { "regionsCount": 26, "initiallyOccupied": 1, "climate": "WARM", "humidity": "EXTRA_WET" },
+      { "regionsCount": 27, "initiallyOccupied": 0, "climate": "WARM", "humidity": "EXTRA_WET" },
+
+      { "regionsCount": 27, "initiallyOccupied": 0, "climate": "NEUTRAL", "humidity": "WET" },
+      { "regionsCount": 27, "initiallyOccupied": 0, "climate": "NEUTRAL", "humidity": "WET" },
+      { "regionsCount": 27, "initiallyOccupied": 0, "climate": "NEUTRAL", "humidity": "WET" },
+      { "regionsCount": 27, "initiallyOccupied": 0, "climate": "NEUTRAL", "humidity": "WET" },
+      { "regionsCount": 28, "initiallyOccupied": 0, "climate": "NEUTRAL", "humidity": "WET" },
+      { "regionsCount": 28, "initiallyOccupied": 2, "climate": "NEUTRAL", "humidity": "WET" },
+      { "regionsCount": 28, "initiallyOccupied": 3, "climate": "NEUTRAL", "humidity": "WET" },
+      { "regionsCount": 28, "initiallyOccupied": 2, "climate": "NEUTRAL", "humidity": "WET" },
+      { "regionsCount": 28, "initiallyOccupied": 4, "climate": "NEUTRAL", "humidity": "WET" },
+      { "regionsCount": 28, "initiallyOccupied": 5, "climate": "NEUTRAL", "humidity": "WET" },
+      { "regionsCount": 28, "initiallyOccupied": 6, "climate": "NEUTRAL", "humidity": "WET" },
+
+      { "regionsCount": 28, "initiallyOccupied": 0, "climate": "NEUTRAL", "humidity": "EXTRA_WET" },
+      { "regionsCount": 28, "initiallyOccupied": 0, "climate": "NEUTRAL", "humidity": "EXTRA_WET" },
+      { "regionsCount": 28, "initiallyOccupied": 1, "climate": "NEUTRAL", "humidity": "EXTRA_WET" },
+      { "regionsCount": 28, "initiallyOccupied": 2, "climate": "NEUTRAL", "humidity": "EXTRA_WET" },
+      { "regionsCount": 29, "initiallyOccupied": 4, "climate": "NEUTRAL", "humidity": "EXTRA_WET" },
+      { "regionsCount": 29, "initiallyOccupied": 4, "climate": "NEUTRAL", "humidity": "EXTRA_WET" },
+
+      { "regionsCount": 28, "initiallyOccupied": 2, "climate": "COLD", "humidity": "WET" },
+      { "regionsCount": 28, "initiallyOccupied": 1, "climate": "COLD", "humidity": "WET" },
+      { "regionsCount": 29, "initiallyOccupied": 0, "climate": "COLD", "humidity": "WET" },
+      { "regionsCount": 29, "initiallyOccupied": 0, "climate": "COLD", "humidity": "WET" },
+
+      { "regionsCount": 24, "initiallyOccupied": 0, "climate": "COLD", "humidity": "EXTRA_WET" },
+      { "regionsCount": 25, "initiallyOccupied": 1, "climate": "COLD", "humidity": "EXTRA_WET" }
+    ],
+    "initialNaturalProfile": {
+	  "FOREST": 0.6,
+	  "MEADOWS": 0.2,
+	  "SWAMP": 0.2
+    },
+    "initialSettlersProfile": {
+	  "FARMING_LAND": 0.7,
+	  "SETTLERS_REACH": 0.3
+    },
+    "enchantDistribution": {
+	  "NONE": 0.75,
+      "WILDERNESS": 0.15,
+      "CURSED": 0.005,
+      "TWISTED": 0.05,
+      "WARPED": 0.005,
+      "VEIL": 0.03,
+      "ENCHANTED": 0.01,
+	  "SACRED": 0
+    },
+    "initialCities": [19],
+    "terrainProfile": {
+	  "FLATLANDS": 0.4,
+	  "HIGHLANDS": 0.05,
+	  "HILLS": 0.22,
+	  "VALLEY": 0.01,
+	  "MOUNTAINS": 0.02,
+      "WETBASIN": 0.3
+    },
+    "woodRichness": 30,
+    "resourceRichness": 10,
+    "lakesRichness": 14,
+    "riversRichness": 18,
+    "simulationStart": 1268,
+    "growthPotential": 0.5,
+    "instability": 0.1
   }
 }

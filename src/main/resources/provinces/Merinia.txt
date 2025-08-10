@@ -1,45 +1,86 @@
 {
-  "id": 1,
-  "name": "Merinia",
-  "regionsCount": 189,
-  "initiallyOccupiedRegions": 37,
-  "subProvinces": 7,
-  "initialProfile": {
-	"MEADOWS": 0.05,
-	"LAKE": 0.1,
-	"RIVERLAND": 0.05,
-	"WOODS": 0.1,
-	"GREENWOODS": 0.3,
-	"FOREST": 0.2,
-	"HUNTING_REGION": 0.1
+  "model": {
+    "id": 1,
+    "name": "Merinia",
+    "preferredDirections": ["SETTLERS_REACH", "FARMING_LAND", "ESTATE_REGION", "CRAFTS_LAND"]
   },
-  "preferredDirections": ["FIELDS", "ORCHARDS", "MANORS", "SETTLEMENTS"],
-  "climate": {
-    "NEUTRAL": 1
-  },
-  "humidity": {
-    "DRY": 0.2,
-    "NEUTRAL": 0.6,
-    "WET": 0.2
-  },
-  "woodRichness": 10,
-  "resourceRichness": 2,
-  "enchantDistribution": {
-	"NONE": 0.85,
-    "WILDERNESS": 0.06,
-    "CURSED": 0.01,
-    "TWISTED": 0.01,
-    "WARPED": 0,
-    "VEIL": 0.02,
-    "ENCHANTED": 0.02,
-    "SACRED": 0.03
-  },
-  "initialCities": [1],
-  "growthPotential": 0.75,
-  "instability": 0.2,
-  "terrainProfile": {
-    "FLATLANDS": 0.65,
-    "HILLS": 0.3,
-    "WETBASIN": 0.05
+  "conf": {
+    "subProvinces": [
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 14,
+        "climate": "NEUTRAL",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 11,
+        "climate": "NEUTRAL",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 6,
+        "climate": "NEUTRAL",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 28,
+        "initiallyOccupied": 4,
+        "climate": "NEUTRAL",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 28,
+        "initiallyOccupied": 2,
+        "climate": "NEUTRAL",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 0,
+        "climate": "NEUTRAL",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 0,
+        "climate": "NEUTRAL",
+        "humidity": "DRY"
+      }
+    ],
+    "initialNaturalProfile": {
+	  "FOREST": 0.55,
+	  "MEADOWS": 0.2,
+	  "PINE_CRAG": 0.1,
+	  "SWAMP": 0.15
+    },
+    "initialSettlersProfile": {
+	  "FARMING_LAND": 0.4,
+	  "SETTLERS_REACH": 0.6
+    },
+    "enchantDistribution": {
+	  "NONE": 0.85,
+      "WILDERNESS": 0.06,
+      "CURSED": 0.01,
+      "TWISTED": 0.01,
+      "WARPED": 0,
+      "VEIL": 0.02,
+      "ENCHANTED": 0.02,
+      "SACRED": 0.03
+    },
+    "initialCities": [1],
+    "terrainProfile": {
+      "FLATLANDS": 0.65,
+      "HILLS": 0.3,
+      "WETBASIN": 0.05
+    },
+    "woodRichness": 10,
+    "resourceRichness": 2,
+    "lakesRichness": 7,
+    "riversRichness": 13,
+    "simulationStart": 1072,
+    "growthPotential": 0.75,
+    "instability": 0.2
   }
 }

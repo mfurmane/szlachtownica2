@@ -1,5 +1,6 @@
 package priv.mfurmane.szlachtownica.model.main;
 
+import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
 
 import java.util.*;
@@ -8,13 +9,15 @@ public class ModelRegion {
     public static final Random rand = new Random();
     private Humidity humidity;
     private Climate climate;
-    private TerrainShape terrainShape;
+    private final TerrainShape terrainShape;
     private SoilType soilType;
 //    private final Double naturalReachness;
     private final Map<TerrainResource, Integer> naturalResources = new HashMap<>();
     private RegionType type;
+    private Integer developmentLevel;
     private EnchantType enchant;
-    private final List<ModelPlace> places = new ArrayList<>();
+    private Integer enchantmentLevel;
+    private final List<Long> places = new ArrayList<>();
     private final Map<ProductionType, Integer> production = new HashMap<>();
     private final Map<ImportNeed, Integer> importNeeded = new HashMap<>();
 
@@ -24,8 +27,12 @@ public class ModelRegion {
         terrainShape = builder.terrainShape;
         soilType = determineSoilType();
         type = builder.type != null ? builder.type : determineType();
+        developmentLevel = builder.developmentLevel;
         enchant = builder.enchant;
-        places.addAll(builder.places);
+        if (enchant == null) {
+            enchant = EnchantType.NONE;
+        }
+        enchantmentLevel = builder.enchantmentLevel != null ? builder.enchantmentLevel : chooseEnchantmentLevel(builder.enchant);
 //        naturalReachness = builder.naturalReachness;
         naturalResources.putAll(builder.naturalResources);
         Arrays.stream(soilType.getResources()).forEach(resource -> {
@@ -33,6 +40,44 @@ public class ModelRegion {
                 naturalResources.merge(resource, getAverageTons(resource, calculateProportions(builder.naturalReachness)), Integer::sum);
             }
         });
+        places.addAll(builder.startCities);
+        for (int i = 0; i < builder.lakesRichness; i++) {
+            if (rand.nextDouble() < builder.lakesRichness / 20.0) {
+                places.add(ModelPlace.newLake());
+            }
+        }
+        for (int i = 0; i < builder.riversRichness; i++) {
+            if (rand.nextDouble() < builder.riversRichness / 20.0) {
+                places.add(ModelPlace.newRiver());
+            }
+        }
+        defineVillages();
+    }
+
+    private void defineVillages() {
+
+    }
+
+    public void startSimulation() {
+        places.forEach(place -> {
+            ModelPlace mp = MainEngine.getInstance().getPlaceRegistry().get(place);
+            if (mp.getCharacteristics().contains(PlaceCharacteristic.WILDERNESS_ENCHANT)) {
+                enchant = EnchantType.WILDERNESS;
+                enchantmentLevel = 3;
+            }
+        });
+        //TODO run simulation
+    }
+
+    private Integer chooseEnchantmentLevel(EnchantType enchant) {
+        if (enchant == null || enchant == EnchantType.NONE) {
+            return 0;
+        }
+        int level = 1;
+        while (level < 5 && rand.nextDouble() < 0.15) {
+            level++;
+        }
+        return level;
     }
 
     private static Double calculateProportions(Double naturalReachness) {
@@ -67,8 +112,34 @@ public class ModelRegion {
         return new Builder();
     }
 
+    public ModelRegion setDevelopmentLevel(Integer developmentLevel) {
+        this.developmentLevel = developmentLevel;
+        return this;
+    }
+
+    public ModelRegion setEnchantmentLevel(Integer enchantmentLevel) {
+        this.enchantmentLevel = enchantmentLevel;
+        return this;
+    }
+
     public TerrainShape getTerrainShape() {
         return terrainShape;
+    }
+
+    public Integer getDevelopmentLevel() {
+        return developmentLevel;
+    }
+
+    public Integer getEnchantmentLevel() {
+        return enchantmentLevel;
+    }
+
+    public Map<ProductionType, Integer> getProduction() {
+        return production;
+    }
+
+    public Map<ImportNeed, Integer> getImportNeeded() {
+        return importNeeded;
     }
 
     public Humidity getHumidity() {
@@ -120,7 +191,7 @@ public class ModelRegion {
         return this;
     }
 
-    public List<ModelPlace> getPlaces() {
+    public List<Long> getPlaces() {
         return places;
     }
 
@@ -132,8 +203,37 @@ public class ModelRegion {
         private Double naturalReachness = 0.1;
         private Map<TerrainResource, Integer> naturalResources = new HashMap<>();
         private RegionType type;
+        private Integer developmentLevel;
         private EnchantType enchant = EnchantType.NONE;
-        private List<ModelPlace> places = new ArrayList<>();
+        private Integer enchantmentLevel;
+        private Integer lakesRichness;
+        private Integer riversRichness;
+        private List<Long> startCities = new ArrayList<>();
+
+        public Builder setStartCities(List<Long> startCities) {
+            this.startCities = startCities;
+            return this;
+        }
+
+        public Builder setLakesRichness(Integer lakesRichness) {
+            this.lakesRichness = lakesRichness;
+            return this;
+        }
+
+        public Builder setRiversRichness(Integer riversRichness) {
+            this.riversRichness = riversRichness;
+            return this;
+        }
+
+        public Builder setEnchantmentLevel(Integer enchantmentLevel) {
+            this.enchantmentLevel = enchantmentLevel;
+            return this;
+        }
+
+        public Builder setDevelopmentLevel(Integer developmentLevel) {
+            this.developmentLevel = developmentLevel;
+            return this;
+        }
 
         public Builder setNaturalReachness(Double naturalReachness) {
             this.naturalReachness = naturalReachness;
@@ -147,11 +247,6 @@ public class ModelRegion {
 
         public Builder setNaturalResources(Map<TerrainResource, Integer> naturalResources) {
             this.naturalResources = naturalResources;
-            return this;
-        }
-
-        public Builder setPlaces(List<ModelPlace> places) {
-            this.places = places;
             return this;
         }
 

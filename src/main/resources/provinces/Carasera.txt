@@ -1,48 +1,88 @@
 {
-  "id": 9,
-  "name": "Carasera",
-  "regionsCount": 191,
-  "initiallyOccupiedRegions": 42,
-  "subProvinces": 7,
-  "initialProfile": {
-	"FOREST": 0.05,
-	"GREENWOODS": 0.15,
-	"WOODS": 0.15,
-	"MEADOWS": 0.25,
-	"DUST_PLAINS": 0.2,
-	"PINE_CRAG": 0.05,
-	"RIVERLAND": 0.05,
+  "model": {
+    "id": 9,
+    "name": "Carasera",
+    "preferredDirections": ["CRAFTS_LAND", "SETTLERS_REACH"]
   },
-  "preferredDirections": ["TIMBERLAND", "FRUIT_PLANTATIONS", "FARMS", "BLOOMING_REACH", "VERDANT_REACH"],
-  "climate": {
-	"NEUTRAL": 1
-  },
-  "humidity": {
-	"EXTRA_DRY": 0.1,
-	"DRY": 0.2,
-    "NEUTRAL": 0.5,
-	"WET": 0.2
-  },
-  "woodRichness": 14,
-  "resourceRichness": 6,
-  "enchantDistribution": {
-	"NONE": 0.86,
-    "WILDERNESS": 0.02,
-    "CURSED": 0.02,
-    "TWISTED": 0.02,
-    "WARPED": 0.02,
-    "VEIL": 0.02,
-    "ENCHANTED": 0.02,
-	"SACRED": 0.02
-  },
-  "initialCities": [11],
-  "growthPotential": 0.65,
-  "instability": 0.2,
-  "terrainProfile": {
-    "FLATLANDS": 0.30,
-	"HIGHLANDS": 0.23,
-	"HILLS": 0.40,
-	"MOUNTAINS": 0.05,
-	"CANYONS": 0.02
+  "conf": {
+    "subProvinces": [
+      {
+        "regionsCount": 29,
+        "initiallyOccupied": 12,
+        "climate": "NEUTRAL",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 25,
+        "initiallyOccupied": 8,
+        "climate": "NEUTRAL",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 6,
+        "climate": "NEUTRAL",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 5,
+        "climate": "NEUTRAL",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 4,
+        "climate": "NEUTRAL",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 25,
+        "initiallyOccupied": 3,
+        "climate": "NEUTRAL",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 33,
+        "initiallyOccupied": 0,
+        "climate": "NEUTRAL",
+        "humidity": "EXTRA_DRY"
+      }
+    ],
+    "initialNaturalProfile": {
+      "FOREST": 0.58,
+      "MEADOWS": 0.25,
+      "DUST_PLAINS": 0.2,
+      "PINE_CRAG": 0.05
+    },
+    "initialSettlersProfile": {
+      "SETTLERS_REACH": 0.8,
+      "FARMING_LAND": 0.2
+    },
+    "enchantDistribution": {
+      "NONE": 0.86,
+      "WILDERNESS": 0.02,
+      "CURSED": 0.02,
+      "TWISTED": 0.02,
+      "WARPED": 0.02,
+      "VEIL": 0.02,
+      "ENCHANTED": 0.02,
+      "SACRED": 0.02
+    },
+    "initialCities": [],
+    "terrainProfile": {
+      "FLATLANDS": 0.30,
+	  "HIGHLANDS": 0.23,
+	  "HILLS": 0.40,
+	  "MOUNTAINS": 0.05,
+	  "CANYONS": 0.02
+    },
+    "woodRichness": 14,
+    "resourceRichness": 6,
+    "lakesRichness": 2,
+    "riversRichness": 7,
+    "simulationStart": 1045,
+    "growthPotential": 0.65,
+    "instability": 0.2
   }
 }
