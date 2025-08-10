@@ -1,47 +1,114 @@
 {
-  "id": 11,
-  "name": "Międzygórze",
-  "regionsCount": 318,
-  "initiallyOccupiedRegions": 38,
-  "subProvinces": 11,
-  "initialProfile": {
-	"GREENWOODS": 0.02,
-	"WOODS": 0.08,
-	"PINE_CRAG": 0.2,
-	"DUST_PLAINS": 0.05,
-	"ROCK_LANDS": 0.4,
-	"ORE_LANDS": 0.25
+  "model": {
+    "id": 11,
+    "name": "Międzygórze",
+    "preferredDirections": ["CRAFTS_LAND", "IRON_MARCHES", "SETTLERS_REACH"]
   },
-  "preferredDirections": ["MINING_LANDS", "SMELT_LANDS", "IRON_MARCHES", "CRAFTS_LAND", "MANUFACTURING_REGION", "MERCHANTS_REACH", "GOLDEN_MARCH"],
-  "climate": {
-	"COLD": 1
-  },
-  "humidity": {
-	"EXTRA_DRY": 1,
-	"DRY": 0.6,
-    "NEUTRAL": 0.3
-  },
-  "woodRichness": 3,
-  "resourceRichness": 30,
-  "enchantDistribution": {
-	"NONE": 0.9,
-    "WILDERNESS": 0.01,
-    "CURSED": 0.01,
-    "TWISTED": 0.01,
-    "WARPED": 0.01,
-    "VEIL": 0.04,
-    "ENCHANTED": 0.01,
-	"SACRED": 0.01
-  },
-  "initialCities": [12],
-  "growthPotential": 0.75,
-  "instability": 0.25,
-  "terrainProfile": {
-	"HIGHLANDS": 0.35,
-	"MOUNTAINS": 0.25,
-	"VALLEY": 0.05,
-	"PLATEAUS": 0.2,
-	"CANYONS": 0.05,
-	"BADLANDS": 0.1
+  "conf": {
+    "subProvinces": [
+      {
+        "regionsCount": 29,
+        "initiallyOccupied": 12,
+        "climate": "COLD",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 31,
+        "initiallyOccupied": 7,
+        "climate": "COLD",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 5,
+        "climate": "COLD",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 28,
+        "initiallyOccupied": 4,
+        "climate": "COLD",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 28,
+        "initiallyOccupied": 4,
+        "climate": "COLD",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 3,
+        "climate": "COLD",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 29,
+        "initiallyOccupied": 3,
+        "climate": "COLD",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 29,
+        "initiallyOccupied": 0,
+        "climate": "COLD",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 31,
+        "initiallyOccupied": 0,
+        "climate": "COLD",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 28,
+        "initiallyOccupied": 0,
+        "climate": "COLD",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 31,
+        "initiallyOccupied": 0,
+        "climate": "COLD",
+        "humidity": "EXTRA_DRY"
+      }
+    ],
+    "initialNaturalProfile": {
+      "FOREST": 0.1,
+      "PINE_CRAG": 0.25,
+      "DUST_PLAIN": 0.05,
+      "ROCK_LAND": 0.6
+    },
+    "initialSettlersProfile": {
+      "IRON_MARCHES": 0.4,
+      "CRAFTS_LAND": 0.4,
+      "SETTLERS_REACH": 0.2
+    },
+    "enchantDistribution": {
+      "NONE": 0.9,
+      "WILDERNESS": 0.01,
+      "CURSED": 0.01,
+      "TWISTED": 0.01,
+      "WARPED": 0.01,
+      "VEIL": 0.04,
+      "ENCHANTED": 0.01,
+      "SACRED": 0.01
+    },
+    "initialCities": [12],
+    "terrainProfile": {
+      "HIGHLANDS": 0.35,
+      "MOUNTAINS": 0.25,
+      "VALLEY": 0.05,
+      "PLATEAUS": 0.2,
+      "CANYONS": 0.05,
+      "BADLANDS": 0.1
+    },
+    "woodRichness": 3,
+    "resourceRichness": 30,
+    "lakesRichness": 1,
+    "riversRichness": 2,
+    "simulationStart": 575,
+    "growthPotential": 0.75,
+    "instability": 0.25
   }
 }

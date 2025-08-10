@@ -2,16 +2,14 @@
   "model": {
     "id": 5,
     "name": "Alstederia",
-    "preferredDirections": ["SETTLERS_REACH", "FISHING_COAST", "FISHING_REGION", "ORCHARDS", "CRAFTS_LAND", "MERCHANTS_REACH", "RESORT_BELT"],
-    "growthPotential": 0.85,
-    "instability": 0.3
+    "preferredDirections": ["SETTLERS_REACH", "FARMING_LAND", "TOURISTIC_LAND"]
   },
   "conf": {
     "subProvinces": [
       {
         "regionsCount": 25,
         "initiallyOccupied": 17,
-        "climate": "EXTRA_WARM",
+        "climate": "HOT",
         "humidity": "WET"
       },
       {
@@ -23,7 +21,7 @@
       {
         "regionsCount": 27,
         "initiallyOccupied": 4,
-        "climate": "EXTRA_WARM",
+        "climate": "HOT",
         "humidity": "WET"
       },
       {
@@ -35,47 +33,43 @@
       {
         "regionsCount": 29,
         "initiallyOccupied": 0,
-        "climate": "EXTRA_WARM",
+        "climate": "HOT",
         "humidity": "NEUTRAL"
       },
       {
         "regionsCount": 24,
         "initiallyOccupied": 0,
-        "climate": "EXTRA_WARM",
+        "climate": "HOT",
         "humidity": "NEUTRAL"
       },
       {
         "regionsCount": 25,
         "initiallyOccupied": 0,
-        "climate": "EXTRA_WARM",
+        "climate": "HOT",
         "humidity": "NEUTRAL"
       },
       {
         "regionsCount": 30,
         "initiallyOccupied": 0,
-        "climate": "EXTRA_WARM",
+        "climate": "HOT",
         "humidity": "NEUTRAL"
       },
       {
         "regionsCount": 23,
         "initiallyOccupied": 0,
-        "climate": "EXTRA_WARM",
+        "climate": "HOT",
         "humidity": "NEUTRAL"
       }
     ],
     "initialNaturalProfile": {
-	  "FOREST": 0.0690,
-	  "GREENWOODS": 0.1552,
-	  "WOODS": 0.1552,
-	  "PINE_CRAG": 0.0690,
-	  "LAKE": 0.1552,
-	  "RIVERLAND": 0.2414,
-	  "SWAMP": 0.1552
+	  "FOREST": 0.55,
+	  "MEADOWS": 0.2,
+	  "PINE_CRAG": 0.1,
+	  "SWAMP": 0.15
     },
     "initialSettlersProfile": {
-	  "FISHING_COAST": 0.4091,
-	  "FISHING_REGION": 0.4091,
-	  "HUNTING_REGION": 0.1818
+	  "FARMING_LAND": 0.4,
+	  "SETTLERS_REACH": 0.6
     },
     "enchantDistribution": {
 	  "NONE": 0.9,
@@ -95,7 +89,12 @@
 	  "BADLANDS": 0.01,
       "WETBASIN": 0.1
     },
-    "woodRichness": 10,
-    "resourceRichness": 4
+    "woodRichness": 14,
+    "resourceRichness": 4,
+    "lakesRichness": 11,
+    "riversRichness": 14,
+    "simulationStart": 968,
+    "growthPotential": 0.85,
+    "instability": 0.15
   }
 }

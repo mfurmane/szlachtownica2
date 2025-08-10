@@ -1,49 +1,88 @@
 {
-  "id": 8,
-  "name": "Zaviles",
-  "regionsCount": 188,
-  "initiallyOccupiedRegions": 17,
-  "subProvinces": 7,
-  "initialProfile": {
-	"DUST_PLAINS": 0.3,
-	"ROCK_LANDS": 0.2,
-	"PINE_CRAG": 0.1,
-	"WOODS": 0.1,
-	"FISHING_COAST": 0.05,
-	"RIVERLAND": 0.01,
-	"ORE_LANDS": 0.14
+  "model": {
+    "id": 8,
+    "name": "Zaviles",
+    "preferredDirections": ["SETTLERS_REACH", "CRAFTS_LAND"]
   },
-  "preferredDirections": ["FISHING_COAST", "FARMS", "FIELDS", "FRUIT_PLANTATIONS", "MINING_LANDS", "SETTLERS_REACH"],
-  "climate": {
-	"EXTRA_WARM": 0.2,
-	"WARM": 0.8
-  },
-  "humidity": {
-	"EXTRA_DRY": 0.1,
-	"DRY": 0.6,
-    "NEUTRAL": 0.2,
-	"WET": 0.1
-  },
-  "woodRichness": 4,
-  "resourceRichness": 12,
-  "enchantDistribution": {
-	"NONE": 0.90,
-    "WILDERNESS": 0,
-    "CURSED": 0.02,
-    "TWISTED": 0.01,
-    "WARPED": 0.02,
-    "VEIL": 0.01,
-    "ENCHANTED": 0.035,
-	"SACRED": 0.005
-  },
-  "initialCities": [10],
-  "growthPotential": 0.5,
-  "instability": 0.15,
-  "terrainProfile": {
-    "FLATLANDS": 0.5,
-    "HILLS": 0.1,
-	"HIGHLANDS": 0.1,
-	"MOUNTAINS": 0.1,
-	"BADLANDS": 0.2
+  "conf": {
+    "subProvinces": [
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 8,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 6,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 24,
+        "initiallyOccupied": 3,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 29,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 30,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 0,
+        "climate": "HOT",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 0,
+        "climate": "HOT",
+        "humidity": "EXTRA_DRY"
+      }
+    ],
+    "initialNaturalProfile": {
+	  "FOREST": 0.1,
+	  "PINE_CRAG": 0.1,
+	  "DUST_PLAIN": 0.5,
+	  "ROCK_LAND": 0.3
+    },
+    "initialSettlersProfile": {
+	  "FARMING_LAND": 0.2,
+	  "SETTLERS_REACH": 0.8
+    },
+    "enchantDistribution": {
+	  "NONE": 0.90,
+      "WILDERNESS": 0,
+      "CURSED": 0.02,
+      "TWISTED": 0.01,
+      "WARPED": 0.02,
+      "VEIL": 0.01,
+      "ENCHANTED": 0.035,
+	  "SACRED": 0.005
+    },
+    "initialCities": [10],
+    "terrainProfile": {
+      "FLATLANDS": 0.5,
+      "HILLS": 0.1,
+	  "HIGHLANDS": 0.1,
+	  "MOUNTAINS": 0.1,
+	  "BADLANDS": 0.2
+    },
+    "woodRichness": 4,
+    "resourceRichness": 12,
+    "lakesRichness": 1,
+    "riversRichness": 2,
+    "simulationStart": 1189,
+    "growthPotential": 0.5,
+    "instability": 0.2
   }
 }

@@ -21,13 +21,12 @@ public class RegionFactory {
         this.engine = mainEngine;
     }
 
-    private ModelRegion getModel(Humidity[] humidityRange, Climate[] climateRange, List<ModelPlace> places) {
+    private ModelRegion getModel(Humidity[] humidityRange, Climate[] climateRange) {
 
         return ModelRegion.builder()
                 .setClimate(climateRange[rand.nextInt(climateRange.length)])
                 .setHumidity(humidityRange[rand.nextInt(humidityRange.length)])
                 .setEnchant(rand.nextDouble() < 0.01 ? EnchantType.values()[EnchantType.values().length] : EnchantType.NONE)
-                .setPlaces(places)
 //                .setType()
 //                .setNaturalResources()
                 .build();

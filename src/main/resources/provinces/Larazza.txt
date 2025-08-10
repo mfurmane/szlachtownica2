@@ -1,47 +1,100 @@
 {
-  "id": 7,
-  "name": "Larazza",
-  "regionsCount": 231,
-  "initiallyOccupiedRegions": 21,
-  "subProvinces": 7,
-  "initialProfile": {
-	"FOREST": 0.15,
-	"GREENWOODS": 0.25,
-	"WOODS": 0.25,
-	"PINE_CRAG": 0.05,
-	"RIVERLAND": 0.05,
-	"FISHING_COAST": 0.15
+  "model": {
+    "id": 7,
+    "name": "Larazza",
+    "preferredDirections": ["SETTLERS_REACH", "FARMING_LAND", "SUPERNATURAL_EXPANSE", "TOURISTIC_LAND"]
   },
-  "preferredDirections": ["FRUIT_PLANTATIONS", "MERCHANTS_REACH", "FISHING_COAST", "CRAFTS_LAND"],
-  "climate": {
-	"EXTRA_WARM": 1
-  },
-  "humidity": {
-	"DRY": 0.2,
-    "NEUTRAL": 0.4,
-	"WET": 0.3,
-	"EXTRA_WET": 0.1
-  },
-  "woodRichness": 14,
-  "resourceRichness": 6,
-  "enchantDistribution": {
-	"NONE": 0.9,
-    "WILDERNESS": 0.01,
-    "CURSED": 0.01,
-    "TWISTED": 0.01,
-    "WARPED": 0.04,
-    "VEIL": 0.01,
-    "ENCHANTED": 0.02,
-    "SACRED": 0
-  },
-  "initialCities": [9],
-  "growthPotential": 0.75,
-  "instability": 0.2,
-  "terrainProfile": {
-    "FLATLANDS": 0.65,
-    "HILLS": 0.1,
-	"HIGHLANDS": 0.1,
-	"MOUNTAINS": 0.05,
-	"BADLANDS": 0.1
+  "conf": {
+    "subProvinces": [
+      {
+        "regionsCount": 24,
+        "initiallyOccupied": 7,
+        "climate": "HOT",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 6,
+        "climate": "HOT",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 5,
+        "climate": "HOT",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 25,
+        "initiallyOccupied": 3,
+        "climate": "HOT",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 25,
+        "initiallyOccupied": 0,
+        "climate": "HOT",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 0,
+        "climate": "HOT",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 0,
+        "climate": "HOT",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 0,
+        "climate": "HOT",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 25,
+        "initiallyOccupied": 0,
+        "climate": "HOT",
+        "humidity": "EXTRA_WET"
+      }
+    ],
+    "initialNaturalProfile": {
+      "FOREST": 0.50,
+      "MEADOWS": 0.25,
+      "ROCK_LAND": 0.1,
+      "SWAMP": 0.05,
+      "DUST_PLAIN": 0.1
+    },
+    "initialSettlersProfile": {
+      "SETTLERS_REACH": 0
+    },
+    "enchantDistribution": {
+      "NONE": 0.9,
+      "WILDERNESS": 0.01,
+      "CURSED": 0.01,
+      "TWISTED": 0.01,
+      "WARPED": 0.04,
+      "VEIL": 0.01,
+      "ENCHANTED": 0.02,
+      "SACRED": 0.0
+    },
+    "initialCities": [9],
+    "terrainProfile": {
+      "FLATLANDS": 0.65,
+      "HILLS": 0.1,
+      "HIGHLANDS": 0.1,
+      "MOUNTAINS": 0.05,
+      "BADLANDS": 0.1
+    },
+    "woodRichness": 13,
+    "resourceRichness": 6,
+    "lakesRichness": 3,
+    "riversRichness": 8,
+    "simulationStart": 1200,
+    "growthPotential": 0.75,
+    "instability": 0.2
   }
 }

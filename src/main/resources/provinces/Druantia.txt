@@ -1,47 +1,118 @@
 {
-  "id": 4,
-  "name": "Druantia",
-  "regionsCount": 315,
-  "initiallyOccupiedRegions": 39,
-  "subProvinces": 8,
-  "initialProfile": {
-	"FOREST": 0.15,
-	"GREENWOODS": 0.25,
-	"WOODS": 0.2,
-	"LAKE": 0.1,
-	"RIVERLAND": 0.1,
-	"GROVE": 0.05,
-	"COMFORT_VALE": 0.05
+  "model": {
+    "id": 4,
+    "name": "Druantia",
+    "preferredDirections": ["SETTLERS_REACH", "FARMING_LAND", "TOURISTIC_LAND", "SUPERNATURAL_EXPANSE"]
   },
-  "preferredDirections": ["ORCHARDS", "FRUIT_PLANTATIONS", "VINEYARDS", "VERDANT_REACH", "BLOOMING_REACH", "COMFORT_VALE", "RESORT_BELT", "PAVILIONS_LANDS", "GROVE"],
-  "climate": {
-	"WARM": 1
-  },
-  "humidity": {
-	"DRY": 0.1,
-    "NEUTRAL": 0.45,
-	"WET": 0.45
-  },
-  "woodRichness": 16,
-  "resourceRichness": 6,
-  "enchantDistribution": {
-	"NONE": 0.8,
-    "WILDERNESS": 0.08,
-    "CURSED": 0.01,
-    "TWISTED": 0.02,
-    "WARPED": 0.02,
-    "VEIL": 0.01,
-    "ENCHANTED": 0.04,
-    "SACRED": 0.01
-  },
-  "initialCities": [5, 6],
-  "growthPotential": 0.7,
-  "instability": 0.2,
-  "terrainProfile": {
-    "FLATLANDS": 0.4,
-	"VALLEY": 0.2,
-    "HILLS": 0.2,
-	"HIGHLANDS": 0.19,
-	"BADLANDS": 0.01
+  "conf": {
+    "subProvinces": [
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 9,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 25,
+        "initiallyOccupied": 8,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 6,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 28,
+        "initiallyOccupied": 5,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 28,
+        "initiallyOccupied": 5,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 4,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 2,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 28,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 27,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "WET"
+      },
+      {
+        "regionsCount": 26,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "NEUTRAL"
+      },
+      {
+        "regionsCount": 24,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "DRY"
+      },
+      {
+        "regionsCount": 22,
+        "initiallyOccupied": 0,
+        "climate": "WARM",
+        "humidity": "DRY"
+      }
+    ],
+    "initialNaturalProfile": {
+	  "FOREST": 0.65,
+	  "MEADOWS": 0.2,
+	  "SWAMP": 0.15
+    },
+    "initialSettlersProfile": {
+	  "FARMING_LAND": 0.3,
+	  "SETTLERS_REACH": 0.6,
+	  "ABANDONED_REACH": 0,1
+    },
+    "enchantDistribution": {
+	  "NONE": 0.8,
+      "WILDERNESS": 0.08,
+      "CURSED": 0.01,
+      "TWISTED": 0.02,
+      "WARPED": 0.02,
+      "VEIL": 0.01,
+      "ENCHANTED": 0.04,
+      "SACRED": 0.01
+    },
+    "initialCities": [5, 6],
+    "terrainProfile": {
+      "FLATLANDS": 0.4,
+	  "VALLEY": 0.2,
+      "HILLS": 0.2,
+	  "HIGHLANDS": 0.19,
+	  "BADLANDS": 0.01
+    },
+    "woodRichness": 17,
+    "resourceRichness": 6,
+    "lakesRichness": 12,
+    "riversRichness": 16,
+    "simulationStart": 265,
+    "growthPotential": 0.85,
+    "instability": 0.15
   }
 }
