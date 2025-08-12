@@ -1,6 +1,6 @@
         package priv.mfurmane.szlachtownica.model.simulation.terrain;
 
-public enum ProductionType {
+public enum ProductionType implements Material {
     WOOD(ImportNeed.BUILDING_MATERIALS, -700, 5),
     STONE(ImportNeed.BUILDING_MATERIALS, -700, 4),
     SAND(ImportNeed.BUILDING_MATERIALS, -700, 2),
