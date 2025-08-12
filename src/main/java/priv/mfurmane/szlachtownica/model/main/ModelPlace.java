@@ -12,6 +12,8 @@ public class ModelPlace {
     private PlaceType type;
     private Integer level;
     private final List<PlaceCharacteristic> characteristics = new ArrayList<>();
+    //budynki z konkretnego materiału, oroentacyjnie
+    private Map<Material, Double> buildingsWithMaterials = new HashMap<>();
 
     public long getId() {
         return id;
