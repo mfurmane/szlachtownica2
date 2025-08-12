@@ -2,7 +2,7 @@ package priv.mfurmane.szlachtownica.model.simulation.terrain;
 
 import java.util.*;
 
-public enum TerrainResource {
+public enum TerrainResource implements Material {
     ROCK(0.95, ResourceCategory.STONE), //kamień
     ALABASTER(0.3, ResourceCategory.STONE),
     SAND(0.95, ResourceCategory.STONE), //piasek
