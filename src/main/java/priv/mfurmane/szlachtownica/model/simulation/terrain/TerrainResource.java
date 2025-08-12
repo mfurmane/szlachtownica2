@@ -4,6 +4,7 @@ import java.util.*;
 
 public enum TerrainResource {
     ROCK(0.95, ResourceCategory.STONE), //kamień
+    ALABASTER(0.3, ResourceCategory.STONE),
     SAND(0.95, ResourceCategory.STONE), //piasek
     CLAY(0.95, ResourceCategory.STONE), //glina
     LIMESTONE(0.95, ResourceCategory.STONE), //wapień
