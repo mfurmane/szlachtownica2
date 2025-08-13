@@ -81,6 +81,7 @@ public enum ProductionType implements Material {
     private final ImportNeed importCategory;
     private final int availableFrom;
     private final int value;
+    private MaterialStats stats;
 
     public int getAvailableFrom() {
         return availableFrom;
@@ -98,5 +99,20 @@ public enum ProductionType implements Material {
         this.importCategory = importCategory;
         this.availableFrom = availableFrom;
         this.value = value;
+    }
+
+    @Override
+    public MaterialStats getStats() {
+        return stats;
+    }
+
+    @Override
+    public void setStats(MaterialStats stats) {
+        this.stats = stats;
+    }
+
+    @Override
+    public void initializeAsMaterial() {
+
     }
 }

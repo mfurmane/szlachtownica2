@@ -1,11 +1,14 @@
 package priv.mfurmane.szlachtownica.model.main;
 
 import priv.mfurmane.szlachtownica.engine.MainEngine;
+import priv.mfurmane.szlachtownica.model.simulation.terrain.Material;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.PlaceCharacteristic;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.PlaceType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ModelPlace {
     private long id;
@@ -13,7 +16,7 @@ public class ModelPlace {
     private Integer level;
     private final List<PlaceCharacteristic> characteristics = new ArrayList<>();
     //budynki z konkretnego materiału, oroentacyjnie
-    private Map<Material, Double> buildingsWithMaterials = new HashMap<>();
+    private final Map<Material, Double> buildingsWithMaterials = new HashMap<>();
 
     public long getId() {
         return id;

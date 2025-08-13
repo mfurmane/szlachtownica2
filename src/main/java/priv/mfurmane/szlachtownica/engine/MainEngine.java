@@ -13,8 +13,12 @@ import priv.mfurmane.szlachtownica.model.naming.NamingProvider;
 import priv.mfurmane.szlachtownica.model.naming.PlaceNameProvider;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPerson;
 import priv.mfurmane.szlachtownica.model.simulation.goal.GoalEngine;
+import priv.mfurmane.szlachtownica.model.simulation.terrain.MaterialStats;
+import priv.mfurmane.szlachtownica.model.simulation.terrain.ProductionType;
+import priv.mfurmane.szlachtownica.model.simulation.terrain.TerrainResource;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 
@@ -77,6 +81,18 @@ public class MainEngine {
             simulationPerson.getGoals().entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).forEach((goal) -> System.out.println(goal.getValue() + ": " + goal.getKey().name()));
 
         }
+        ProductionType.WOOD.initializeAsMaterial();
+        ProductionType.BRICKS.initializeAsMaterial();
+        TerrainResource.ROCK.initializeAsMaterial();
+        TerrainResource.LIMESTONE.initializeAsMaterial();
+        TerrainResource.GRANITE.initializeAsMaterial();
+        TerrainResource.BASALT.initializeAsMaterial();
+        TerrainResource.SLATE.initializeAsMaterial();
+        TerrainResource.ALABASTER.initializeAsMaterial();
+        TerrainResource.MARBLE.initializeAsMaterial();
+        TerrainResource.OBSIDIAN.initializeAsMaterial();
+        TerrainResource.OLD_BONES.initializeAsMaterial();
+        TerrainResource.DRAGON_BONES.initializeAsMaterial();
     }
 
     public PlaceNameProvider getPlaceNameProvider() {
