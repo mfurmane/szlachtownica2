@@ -3,18 +3,24 @@ package priv.mfurmane.szlachtownica.model.simulation.terrain;
 import java.util.*;
 
 public enum TerrainResource implements Material {
-    ROCK(0.95, ResourceCategory.STONE), //kamień
-    ALABASTER(0.3, ResourceCategory.STONE),
     SAND(0.95, ResourceCategory.STONE), //piasek
+    OLD_BONES(0.5, ResourceCategory.STONE), //stare kości
+    DRAGON_BONES(0.1, ResourceCategory.STONE), //smocze kości
+    COAL(0.8, ResourceCategory.STONE), //węgiel
     CLAY(0.95, ResourceCategory.STONE), //glina
-    LIMESTONE(0.95, ResourceCategory.STONE), //wapień
+    SALT(0.75, ResourceCategory.STONE), //sól
+    SULFUR(0.5, ResourceCategory.STONE), //siarka
     CHALK(0.8, ResourceCategory.STONE), //kreda
+
+    LIMESTONE(0.95, ResourceCategory.STONE), //wapień
+    ROCK(0.95, ResourceCategory.STONE), //kamień,
     GRANITE(0.95, ResourceCategory.STONE), //twarda budowlana
     BASALT(0.75, ResourceCategory.STONE), //wulkaniczna ciemna
     SLATE(0.75, ResourceCategory.STONE), //łupek, cienki warstwowy
+    ALABASTER(0.3, ResourceCategory.STONE),
     MARBLE(0.3, ResourceCategory.STONE), //marmur
-    SALT(0.75, ResourceCategory.STONE), //sól
-    SULFUR(0.5, ResourceCategory.STONE), //siarka
+    OBSIDIAN(0.1, ResourceCategory.STONE), //obsydian
+
     TIN(0.75, ResourceCategory.ORE), //cyna
     LEAD(0.7, ResourceCategory.ORE), //ołów
     ZINC(0.75, ResourceCategory.ORE), //cynk
@@ -24,9 +30,7 @@ public enum TerrainResource implements Material {
     MERCURY(0.2, ResourceCategory.FLUID), //rtęć
     LERANIT(0.5, ResourceCategory.ORE), //leranit
     COPPER(0.75, ResourceCategory.ORE), //miedź
-    OLD_BONES(0.5, ResourceCategory.STONE), //stare kości
     IRON(0.8, ResourceCategory.ORE), //żelazo
-    COAL(0.8, ResourceCategory.STONE), //węgiel
     BARNIZYT(0.35, ResourceCategory.ORE), //barnizyt
     KASALIT(0.3, ResourceCategory.ORE), //kasalit
     VEALITIUM(0.3, ResourceCategory.ORE), //vealitium
@@ -37,22 +41,21 @@ public enum TerrainResource implements Material {
     KUPARIN(0.25, ResourceCategory.ORE), //kuparin
     CELENIT(0.2, ResourceCategory.ORE), //celenit
     TURANIT(0.15, ResourceCategory.STONE), //turanit
-    DRAGON_BONES(0.1, ResourceCategory.STONE), //smocze kości
     IRINTAL(0.06, ResourceCategory.ORE), //irintal
-    OBSIDIAN(0.1, ResourceCategory.STONE), //obsydian
     GOLD(0.2, ResourceCategory.ORE), //złoto
     SILVER(0.25, ResourceCategory.ORE), //srebro
     PLATINUM(0.1, ResourceCategory.ORE), //platyna
     VOID_ORE(0.001, ResourceCategory.ORE), //bardzo, bardzo żadka, mało kto o niej wie, nikt normalny nie wydobywa
+    MOON_METAL(0.03, ResourceCategory.ORE), //srebrzysty metal bijący delikatnym, księżycowym światłem
+    SUM_METAL(0.03, ResourceCategory.ORE), //żółtawo-srebrzysty metal bijący delikatnym, słonecznym blaskiem
+    NIGHT_METAL(0.03, ResourceCategory.ORE), //nocny chrom, bardzo twardy, idealnie czarny i błyszczący metal
+    BLOODSTONE(0.03, ResourceCategory.GEM), //kwawy kamień, kopalna skamieniała krew
     STAR_SHARD(0.01, ResourceCategory.GEM), //odłamki dawno temu przybyłe z kosmosu
     SOUL_STONE(0.01, ResourceCategory.GEM), //dusznik, materiał jakoś powiązany z wymiarem duchów, na przykład soczewka z dusznika pozwala zerknąć do niego
     FLAME_STONE(0.03, ResourceCategory.GEM), //ognisty kamień, bardzo ciepły kamień, który świeci, jakby był w nim zaklęty płomień
     FROST_VEIN(0.03, ResourceCategory.GEM), //żyła lodu, bardzo zimny kamień bijący chłodnym, błękitno-białym blaskiem
     ECHO_SHARDS(0.01, ResourceCategory.GEM), //odłamki przeszłości, w niewyjaśniony sposób przechowują pamięć i przekazują wizje
-    BLOODSTONE(0.03, ResourceCategory.GEM), //kwawy kamień, kopalna skamieniała krew
-    MOON_METAL(0.03, ResourceCategory.ORE), //srebrzysty metal bijący delikatnym, księżycowym światłem
-    SUM_METAL(0.03, ResourceCategory.ORE), //żółtawo-srebrzysty metal bijący delikatnym, słonecznym blaskiem
-    NIGHT_METAL(0.03, ResourceCategory.ORE), //nocny chrom, bardzo twardy, idealnie czarny i błyszczący metal
+
     AGATE(0.1, ResourceCategory.GEM), //Agat
     AQUAMARINE(0.02, ResourceCategory.GEM), //Akwamaryn
     ALEXANDRITE(0.004, ResourceCategory.GEM), //Aleksandryt
@@ -112,6 +115,7 @@ public enum TerrainResource implements Material {
 
     private final double availability;
     private final ResourceCategory category;
+    private MaterialStats stats;
 //    private final double quantityScale;
 
     TerrainResource(double availability, ResourceCategory category) {
@@ -133,6 +137,18 @@ public enum TerrainResource implements Material {
         });
     }
 
+    @Override
+    public MaterialStats getStats() {
+        return stats;
+    }
 
+    @Override
+    public void setStats(MaterialStats stats) {
+        this.stats = stats;
+    }
 
+    @Override
+    public void initializeAsMaterial() {
+
+    }
 }
