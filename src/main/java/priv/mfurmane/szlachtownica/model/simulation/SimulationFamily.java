@@ -12,4 +12,22 @@ public class SimulationFamily {
 
     private final List<Long> aliveMembers = new ArrayList<>();
     private final List<Long> deadMembers = new ArrayList<>();
+
+    public ModelFamily getModel() {
+        return model;
+    }
+
+    public SimulationFamily setModel(ModelFamily model) {
+        this.model = model;
+        return this;
+    }
+
+    public ConfigurationFamily getConf() {
+        return conf;
+    }
+
+    public SimulationFamily setConf(ConfigurationFamily conf) {
+        this.conf = conf;
+        return this;
+    }
 }

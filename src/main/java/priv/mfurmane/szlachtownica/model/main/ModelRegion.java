@@ -1,27 +1,46 @@
 package priv.mfurmane.szlachtownica.model.main;
 
 import priv.mfurmane.szlachtownica.engine.MainEngine;
+import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
+import priv.mfurmane.szlachtownica.model.simulation.SimulationSubProvince;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
 
 import java.util.*;
 
 public class ModelRegion {
     public static final Random rand = new Random();
+    private Long id;
+    private Long subProvinceId;
+    private final List<Long> places = new ArrayList<>();
     private Humidity humidity;
     private Climate climate;
+    private Boolean coast;
     private final TerrainShape terrainShape;
     private SoilType soilType;
-//    private final Double naturalReachness;
+    //    private final Double naturalReachness;
     private final Map<TerrainResource, Integer> naturalResources = new HashMap<>();
     private RegionType type;
     private Integer developmentLevel;
     private EnchantType enchant;
     private Integer enchantmentLevel;
-    private final List<Long> places = new ArrayList<>();
+    private final List<TerrainCharacteristic> characteristics = new ArrayList<>();
     private final Map<ProductionType, Integer> production = new HashMap<>();
     private final Map<ImportNeed, Integer> importNeeded = new HashMap<>();
 
+    public SimulationSubProvince getSubProvinceId() {
+        return MainEngine.getInstance().getSubProvinceRegistry().get(subProvinceId);
+    }
+
+    public List<SimulationPlace> places() {
+        return places.stream().map(MainEngine.getInstance().getPlaceRegistry()::get).toList();
+    }
+
+    public List<Long> getPlaces() {
+        return places;
+    }
+
     public ModelRegion(Builder builder) {
+        coast = builder.coast;
         humidity = builder.humidity;
         climate = builder.climate;
         terrainShape = builder.terrainShape;
@@ -41,16 +60,22 @@ public class ModelRegion {
             }
         });
         places.addAll(builder.startCities);
+        boolean hasLake = false;
+        boolean hasRiver = false;
         for (int i = 0; i < builder.lakesRichness; i++) {
             if (rand.nextDouble() < builder.lakesRichness / 20.0) {
                 places.add(ModelPlace.newLake());
+                hasLake = true;
             }
         }
         for (int i = 0; i < builder.riversRichness; i++) {
             if (rand.nextDouble() < builder.riversRichness / 20.0) {
                 places.add(ModelPlace.newRiver());
+                hasRiver = true;
             }
         }
+        if (hasLake) characteristics.add(TerrainCharacteristic.LAKES);
+        if (hasRiver) characteristics.add(TerrainCharacteristic.RIVERS);
         defineVillages();
     }
 
@@ -60,8 +85,8 @@ public class ModelRegion {
 
     public void startSimulation() {
         places.forEach(place -> {
-            ModelPlace mp = MainEngine.getInstance().getPlaceRegistry().get(place);
-            if (mp.getCharacteristics().contains(PlaceCharacteristic.WILDERNESS_ENCHANT)) {
+            SimulationPlace sp = MainEngine.getInstance().getPlaceRegistry().get(place);
+            if (sp.getModel().getCharacteristics().contains(PlaceCharacteristic.WILDERNESS_ENCHANT)) {
                 enchant = EnchantType.WILDERNESS;
                 enchantmentLevel = 3;
             }
@@ -110,6 +135,14 @@ public class ModelRegion {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public List<TerrainCharacteristic> getCharacteristics() {
+        return characteristics;
     }
 
     public ModelRegion setDevelopmentLevel(Integer developmentLevel) {
@@ -191,14 +224,11 @@ public class ModelRegion {
         return this;
     }
 
-    public List<Long> getPlaces() {
-        return places;
-    }
-
     public static class Builder {
         public TerrainShape terrainShape;
         private Humidity humidity = Humidity.NEUTRAL;
         private Climate climate = Climate.NEUTRAL;
+        private Boolean coast = false;
 //        private SoilType soilType;
         private Double naturalReachness = 0.1;
         private Map<TerrainResource, Integer> naturalResources = new HashMap<>();
@@ -209,6 +239,11 @@ public class ModelRegion {
         private Integer lakesRichness;
         private Integer riversRichness;
         private List<Long> startCities = new ArrayList<>();
+
+        public Builder setCoast(Boolean coast) {
+            this.coast = coast;
+            return this;
+        }
 
         public Builder setStartCities(List<Long> startCities) {
             this.startCities = startCities;
