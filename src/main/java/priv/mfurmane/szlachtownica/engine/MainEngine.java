@@ -3,8 +3,7 @@ package priv.mfurmane.szlachtownica.engine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.events.EventFactory;
-import priv.mfurmane.szlachtownica.engine.registry.PersonRegistry;
-import priv.mfurmane.szlachtownica.engine.registry.PlaceRegistry;
+import priv.mfurmane.szlachtownica.engine.registry.*;
 import priv.mfurmane.szlachtownica.model.PersonFactory;
 import priv.mfurmane.szlachtownica.model.PlaceFactory;
 import priv.mfurmane.szlachtownica.model.ProvinceFactory;
@@ -51,7 +50,15 @@ public class MainEngine {
     @Autowired
     private PersonRegistry personRegistry;
     @Autowired
+    private FamilyRegistry familyRegistry;
+    @Autowired
     private PlaceRegistry placeRegistry;
+    @Autowired
+    private RegionRegistry regionRegistry;
+    @Autowired
+    private SubProvinceRegistry subProvinceRegistry;
+    @Autowired
+    private ProvinceRegistry provinceRegistry;
     @Autowired
     private GoalEngine goalEngine;
     @Autowired
@@ -66,13 +73,17 @@ public class MainEngine {
         personFactory.setEngine(this);
 //        familyFactory.setEngine(this);
         dataFiller.setEngine(this);
-        personRegistry.setEngine(this);
         goalEngine.setEngine(this);
         namingProvider.setEngine(this);
         provinceFactory.setEngine(this);
         placeFactory.setEngine(this);
         placeNameProvider.setEngine(this);
+        personRegistry.setEngine(this);
+        familyRegistry.setEngine(this);
         placeRegistry.setEngine(this);
+        regionRegistry.setEngine(this);
+        subProvinceRegistry.setEngine(this);
+        provinceRegistry.setEngine(this);
 
         for (int i = 0; i < 10; i++) {
             SimulationPerson simulationPerson = personFactory.newPerson(Race.HUMAN);
@@ -119,12 +130,28 @@ public class MainEngine {
         return personRegistry;
     }
 
+    public RegionRegistry getRegionRegistry() {
+        return regionRegistry;
+    }
+
     public EventManager getEventManager() {
         return eventManager;
     }
 
     public EventFactory getEventFactory() {
         return eventFactory;
+    }
+
+    public FamilyRegistry getFamilyRegistry() {
+        return familyRegistry;
+    }
+
+    public SubProvinceRegistry getSubProvinceRegistry() {
+        return subProvinceRegistry;
+    }
+
+    public ProvinceRegistry getProvinceRegistry() {
+        return provinceRegistry;
     }
 
     public PersonFactory getPersonFactory() {

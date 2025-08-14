@@ -30,6 +30,10 @@ public class ModelFamily {
 
     }
 
+    public long getId() {
+        return id;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
