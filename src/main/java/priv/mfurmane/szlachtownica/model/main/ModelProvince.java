@@ -8,7 +8,6 @@ import priv.mfurmane.szlachtownica.model.simulation.SimulationSubProvince;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
 
 import java.util.*;
-import java.util.function.Function;
 
 public class ModelProvince {
     private Long id;
@@ -17,15 +16,19 @@ public class ModelProvince {
     private final List<RegionType> preferredDirections = new ArrayList<>();
 
     public void initializeSubProvinces(ConfigurationSubProvince subProvinceConf, ConfigurationProvince conf) {
-        ModelSubProvince subProvince = new ModelSubProvince(subProvinceConf.getClimate(), subProvinceConf.getHumidity());
+        ModelSubProvince subProvinceModel = new ModelSubProvince(subProvinceConf.getClimate(), subProvinceConf.getHumidity());
+        SimulationSubProvince subProvince = new SimulationSubProvince();
+        subProvince.setModel(subProvinceModel);
+        subProvince.setConf(subProvinceConf);
+        MainEngine.getInstance().getSubProvinceRegistry().register(subProvince);
         int naturalRegions = subProvinceConf.getRegionsCount() - subProvinceConf.getInitiallyOccupied();
         for (int i = 0; i < subProvinceConf.getInitiallyOccupied(); i++) {
             List<Long> cities = new ArrayList<>();
             if (i < conf.getInitialCities().size()) {
                 cities.add(conf.getInitialCities().get(i));
             }
-            subProvinces.add(subProvince.getId());
-            subProvince.getRegions().add(ModelRegion.builder()
+            subProvinces.add(subProvinceModel.getId());
+            subProvinceModel.getRegions().add(ModelRegion.builder()
                     .setCoast(subProvinceConf.isCoast() && new Random().nextDouble() < 0.7)
                     .setClimate(subProvinceConf.getClimate())
                     .setHumidity(subProvinceConf.getHumidity())
@@ -36,10 +39,11 @@ public class ModelProvince {
                     .setStartCities(cities)
                     .setLakesRichness(conf.getLakesRichness())
                     .setRiversRichness(conf.getRiversRichness())
-                    .build().getId());
+                    .setWoodRichness(conf.getWoodRichness())
+                    .build().getModelRegion().getId());
         }
         for (int i = 0; i < naturalRegions; i++) {
-            subProvince.getRegions().add(ModelRegion.builder()
+            subProvinceModel.getRegions().add(ModelRegion.builder()
                     .setCoast(subProvinceConf.isCoast() && new Random().nextDouble() < 0.7)
                     .setClimate(subProvinceConf.getClimate())
                     .setHumidity(subProvinceConf.getHumidity())
@@ -49,7 +53,8 @@ public class ModelProvince {
                     .setEnchant(chooseEnchant(conf))
                     .setLakesRichness(conf.getLakesRichness())
                     .setRiversRichness(conf.getRiversRichness())
-                    .build().getId());
+                    .setWoodRichness(conf.getWoodRichness())
+                    .build().getModelRegion().getId());
         }
         //TODO register StartProvinceSettlementEvent
     }

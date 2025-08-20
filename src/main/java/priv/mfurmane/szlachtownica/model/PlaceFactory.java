@@ -2,9 +2,9 @@ package priv.mfurmane.szlachtownica.model;
 
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
-import priv.mfurmane.szlachtownica.model.config.ConfigurationProvince;
-import priv.mfurmane.szlachtownica.model.main.ModelProvince;
-import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
+import priv.mfurmane.szlachtownica.model.config.ConfigurationPlace;
+import priv.mfurmane.szlachtownica.model.main.ModelPlace;
+import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
 
 import java.util.Random;
 
@@ -17,29 +17,29 @@ public class PlaceFactory {
         this.engine = mainEngine;
     }
 
-    public SimulationProvince newProvince() {
-        return createProvince(0.0,0.0);
+    public SimulationPlace newPlace() {
+        return createPlace(0.0,0.0);
     }
 
-    public SimulationProvince newProvince(Double instability, Double growthPotential) {
-        return createProvince(instability, growthPotential);
+    public SimulationPlace newPlace(Double instability, Double growthPotential) {
+        return createPlace(instability, growthPotential);
     }
 
-    private SimulationProvince createProvince(Double instability, Double growthPotential) {
-        SimulationProvince province = new SimulationProvince();
-        ModelProvince model = getModel(instability, growthPotential);
-        ConfigurationProvince conf = getConf();
-        province.setModel(model);
-        province.setConf(conf);
-        return province;
+    private SimulationPlace createPlace(Double instability, Double growthPotential) {
+        SimulationPlace place = new SimulationPlace();
+        ModelPlace model = getModel(instability, growthPotential);
+        ConfigurationPlace conf = getConf();
+        place.setModel(model);
+        place.setConf(conf);
+        return place;
     }
 
-    private ConfigurationProvince getConf() {
-        return ConfigurationProvince.builder().build();
+    private ConfigurationPlace getConf() {
+        return ConfigurationPlace.builder().build();
     }
 
-    private ModelProvince getModel(Double instability, Double growthPotential) {
-        return ModelProvince.builder()
+    private ModelPlace getModel(Double instability, Double growthPotential) {
+        return ModelPlace.builder()
 //                .setGrowthPotential(varyAboutStat(growthPotential))
 //                .setInstability(varyAboutStat(instability))
                 .build();

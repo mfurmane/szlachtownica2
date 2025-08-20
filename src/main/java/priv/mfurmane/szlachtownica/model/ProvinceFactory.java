@@ -33,6 +33,7 @@ public class ProvinceFactory {
         ConfigurationProvince conf = getConf();
         province.setModel(model);
         province.setConf(conf);
+        engine.getProvinceRegistry().register(province);
         return province;
     }
 
