@@ -1,7 +1,9 @@
 package priv.mfurmane.szlachtownica.model.main;
 
 import priv.mfurmane.szlachtownica.engine.MainEngine;
+import priv.mfurmane.szlachtownica.model.config.ConfigurationRegion;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
+import priv.mfurmane.szlachtownica.model.simulation.SimulationRegion;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationSubProvince;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
 
@@ -14,6 +16,16 @@ public class ModelRegion {
     private final List<Long> places = new ArrayList<>();
     private Humidity humidity;
     private Climate climate;
+    private Double fertility;
+    private Double efficiency;
+    private Double plantingEasiness;
+    private Double farmingEasiness;
+    private Double health;
+    private Double windOfChange;
+    private Double expansion;
+    private Double attitude;
+    private Double stability;
+    private Integer woodRichness;
     private Boolean coast;
     private final TerrainShape terrainShape;
     private SoilType soilType;
@@ -26,6 +38,62 @@ public class ModelRegion {
     private final List<TerrainCharacteristic> characteristics = new ArrayList<>();
     private final Map<ProductionType, Integer> production = new HashMap<>();
     private final Map<ImportNeed, Integer> importNeeded = new HashMap<>();
+
+    public Integer getWoodRichness() {
+        return woodRichness;
+    }
+
+    public Double getFertility() {
+        return fertility;
+    }
+
+    public Double getEfficiency() {
+        return efficiency;
+    }
+
+    public Double getPlantingEasiness() {
+        return plantingEasiness;
+    }
+
+    public Double getFarmingEasiness() {
+        return farmingEasiness;
+    }
+
+    public Double getHealth() {
+        return health;
+    }
+
+    public Double getWindOfChange() {
+        return windOfChange;
+    }
+
+    public Double getExpansion() {
+        return expansion;
+    }
+
+    public Double getAttitude() {
+        return attitude;
+    }
+
+    public Double getStability() {
+        return stability;
+    }
+
+    public void updateMods() {
+        fertility = soilType.getFertility() * humidity.getFertility() * climate.getFertility() * terrainShape.getFertility() * enchant.getFertility(enchantmentLevel);
+        plantingEasiness = soilType.getPlantingEasiness() * enchant.getPlantingEasiness(enchantmentLevel);
+        farmingEasiness = enchant.getFarmingEasiness(enchantmentLevel); //TODO
+        efficiency = enchant.getEfficiency(enchantmentLevel); //TODO
+        health = enchant.getHealth(enchantmentLevel); //TODO
+        windOfChange = enchant.getWindOfChange(enchantmentLevel); //TODO
+        expansion = enchant.getExpansion(enchantmentLevel); //TODO
+        attitude = enchant.getAttitude(enchantmentLevel); //TODO
+        stability = enchant.getStability(enchantmentLevel); //TODO
+    }
+
+    public Boolean getCoast() {
+        return coast;
+    }
 
     public SimulationSubProvince getSubProvinceId() {
         return MainEngine.getInstance().getSubProvinceRegistry().get(subProvinceId);
@@ -45,13 +113,15 @@ public class ModelRegion {
         climate = builder.climate;
         terrainShape = builder.terrainShape;
         soilType = determineSoilType();
-        type = builder.type != null ? builder.type : determineType();
-        developmentLevel = builder.developmentLevel;
         enchant = builder.enchant;
         if (enchant == null) {
             enchant = EnchantType.NONE;
         }
         enchantmentLevel = builder.enchantmentLevel != null ? builder.enchantmentLevel : chooseEnchantmentLevel(builder.enchant);
+        updateMods();
+        woodRichness = builder.woodRichness;
+        type = builder.type != null ? builder.type : determineType();
+        developmentLevel = builder.developmentLevel;
 //        naturalReachness = builder.naturalReachness;
         naturalResources.putAll(builder.naturalResources);
         Arrays.stream(soilType.getResources()).forEach(resource -> {
@@ -238,6 +308,7 @@ public class ModelRegion {
         private Integer enchantmentLevel;
         private Integer lakesRichness;
         private Integer riversRichness;
+        private Integer woodRichness;
         private List<Long> startCities = new ArrayList<>();
 
         public Builder setCoast(Boolean coast) {
@@ -305,8 +376,17 @@ public class ModelRegion {
             return this;
         }
 
-        public ModelRegion build() {
-            return new ModelRegion(this);
+        public Builder setWoodRichness(int woodRichness) {
+            this.woodRichness = woodRichness;
+            return this;
+        }
+
+        public SimulationRegion build() {
+            SimulationRegion region = new SimulationRegion();
+            region.setModelRegion(new ModelRegion(this));
+            region.setConfigurationRegion(new ConfigurationRegion());
+            MainEngine.getInstance().getRegionRegistry().register(region);
+            return region;
         }
     }
 }
