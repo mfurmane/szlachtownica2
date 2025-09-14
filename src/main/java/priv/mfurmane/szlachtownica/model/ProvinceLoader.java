@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
+import priv.mfurmane.szlachtownica.engine.utils.GeoUtils;
 import priv.mfurmane.szlachtownica.model.config.FromFileProvince;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
 
@@ -31,6 +32,7 @@ public class ProvinceLoader {
         province.getConf().mergeFrom(fromFile.getConf());
         province.getModel().mergeFrom(fromFile.getModel());
         province.getConf().getSubProvinces().forEach(subProvince -> {
+            province.getModel().setArea(GeoUtils.readProvince(province.getModel().getName()));
             province.getModel().initializeSubProvinces(subProvince, province.getConf());
         });
 //        engine.getEventManager().registerEventsFor(fromFile);

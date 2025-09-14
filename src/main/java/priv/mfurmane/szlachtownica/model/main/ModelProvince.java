@@ -1,5 +1,6 @@
 package priv.mfurmane.szlachtownica.model.main;
 
+import org.locationtech.jts.geom.Polygon;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationProvince;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationSubProvince;
@@ -14,6 +15,16 @@ public class ModelProvince {
     private String name;
     private final List<Long> subProvinces = new ArrayList<>();
     private final List<RegionType> preferredDirections = new ArrayList<>();
+    private Polygon area; //not null
+
+    public Polygon getArea() {
+        return area;
+    }
+
+    public ModelProvince setArea(Polygon area) {
+        this.area = area;
+        return this;
+    }
 
     public void initializeSubProvinces(ConfigurationSubProvince subProvinceConf, ConfigurationProvince conf) {
         ModelSubProvince subProvinceModel = new ModelSubProvince(subProvinceConf.getClimate(), subProvinceConf.getHumidity());

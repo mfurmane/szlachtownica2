@@ -1,10 +1,14 @@
 package priv.mfurmane.szlachtownica.model.main;
 
+import org.locationtech.jts.geom.Polygon;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationRegion;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationRegion;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationSubProvince;
+import priv.mfurmane.szlachtownica.model.simulation.population.AffiliationType;
+import priv.mfurmane.szlachtownica.model.simulation.population.Population;
+import priv.mfurmane.szlachtownica.model.simulation.population.PopulationType;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
 
 import java.util.*;
@@ -38,6 +42,21 @@ public class ModelRegion {
     private final List<TerrainCharacteristic> characteristics = new ArrayList<>();
     private final Map<ProductionType, Integer> production = new HashMap<>();
     private final Map<ImportNeed, Integer> importNeeded = new HashMap<>();
+    private final List<Population> populations = new ArrayList<>();
+    private Polygon area; //not null
+
+    public Polygon getArea() {
+        return area;
+    }
+
+    public ModelRegion setArea(Polygon area) {
+        this.area = area;
+        return this;
+    }
+
+    public List<Population> getPopulations() {
+        return populations;
+    }
 
     public Integer getWoodRichness() {
         return woodRichness;
@@ -134,13 +153,13 @@ public class ModelRegion {
         boolean hasRiver = false;
         for (int i = 0; i < builder.lakesRichness; i++) {
             if (rand.nextDouble() < builder.lakesRichness / 20.0) {
-                places.add(ModelPlace.newLake());
+//                places.add(ModelPlace.newLake());
                 hasLake = true;
             }
         }
         for (int i = 0; i < builder.riversRichness; i++) {
             if (rand.nextDouble() < builder.riversRichness / 20.0) {
-                places.add(ModelPlace.newRiver());
+//                places.add(ModelPlace.newRiver());
                 hasRiver = true;
             }
         }
@@ -150,16 +169,23 @@ public class ModelRegion {
     }
 
     private void defineVillages() {
-
+        //TODO zrobić w pętli
+//        places.add(ModelPlace.newVillage());
+        //TODO czy robić ewentualne osady dedykowane rodzinom i koronie?
+        Long groupId = null;
+//        places.add(ModelPlace.newVillage(PopulationType.SETTLERS, AffiliationType.FAMILY, groupId));
+//        places.add(ModelPlace.newVillage(PopulationType.SETTLERS, AffiliationType.CROWN, groupId));
+        //TODO uwarunkować barbarzyńców
+//        places.add(ModelPlace.newVillage(PopulationType.BARBARIANS, AffiliationType.NONE, null));
     }
 
     public void startSimulation() {
         places.forEach(place -> {
             SimulationPlace sp = MainEngine.getInstance().getPlaceRegistry().get(place);
-            if (sp.getModel().getCharacteristics().contains(PlaceCharacteristic.WILDERNESS_ENCHANT)) {
-                enchant = EnchantType.WILDERNESS;
-                enchantmentLevel = 3;
-            }
+//            if (sp.getModel().getCharacteristics().contains(PlaceCharacteristic.WILDERNESS_ENCHANT)) {
+//                enchant = EnchantType.WILDERNESS;
+//                enchantmentLevel = 3;
+//            }
         });
         //TODO run simulation
     }
