@@ -15,7 +15,7 @@ public class PlaceRegistry {
     private MainEngine engine;
 
     public void register(SimulationPlace place) {
-        registry.put(place.getModel().getId(), place);
+//        registry.put(place.getModel().getId(), place);
     }
 
     public SimulationPlace get(Long id) {

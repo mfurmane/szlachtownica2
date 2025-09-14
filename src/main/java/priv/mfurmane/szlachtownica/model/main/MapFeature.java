@@ -17,40 +17,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ModelPlace {
-    private PlaceType type;
-    private final Populatable populatable = new Populatable();
-    private Integer populationLimit;
-    private Point location;
+public abstract class MapFeature {
+    protected Long id;
+    protected Long regionId;
 
-    public Point getLocation() {
-        return location;
+    private final List<PlaceCharacteristic> characteristics = new ArrayList<>();
+    protected Geometry mainGeometry;
+
+    public Long getId() {
+        return id;
     }
 
-    public ModelPlace setLocation(Point location) {
-        this.location = location;
+    public SimulationRegion region() {
+        return MainEngine.getInstance().getRegionRegistry().get(regionId);
+    }
+    public Long getRegion() {
+        return regionId;
+    }
+
+    public MapFeature setRegionId(Long regionId) {
+        this.regionId = regionId;
         return this;
     }
 
-    public PlaceType getType() {
-        return type;
+    public List<PlaceCharacteristic> getCharacteristics() {
+        return characteristics;
     }
 
-    public ModelPlace setType(PlaceType type) {
-        this.type = type;
-        return this;
+    public Geometry getMainGeometry() {
+        return mainGeometry;
     }
 
-    public Populatable getPopulatable() {
-        return populatable;
-    }
-
-    public Integer getPopulationLimit() {
-        return populationLimit;
-    }
-
-    public ModelPlace setPopulationLimit(Integer populationLimit) {
-        this.populationLimit = populationLimit;
+    public MapFeature setMainGeometry(Geometry mainGeometry) {
+        this.mainGeometry = mainGeometry;
         return this;
     }
 }

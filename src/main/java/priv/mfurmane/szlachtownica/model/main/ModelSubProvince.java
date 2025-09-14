@@ -1,5 +1,6 @@
 package priv.mfurmane.szlachtownica.model.main;
 
+import org.locationtech.jts.geom.Polygon;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationRegion;
@@ -15,6 +16,16 @@ public class ModelSubProvince {
     private final List<Long> regions = new ArrayList<>();
     private final Climate climate;
     private final Humidity humidity;
+    private Polygon area; //not null
+
+    public Polygon getArea() {
+        return area;
+    }
+
+    public ModelSubProvince setArea(Polygon area) {
+        this.area = area;
+        return this;
+    }
 
     public ModelSubProvince(Climate climate, Humidity humidity) {
         this.climate = climate;

@@ -1,18 +1,19 @@
 package priv.mfurmane.szlachtownica.model.simulation.terrain;
 
 public enum PlaceType {
-    SETTLEMENT,         // zwykła osada
+    SETTLEMENT,         // zwykła osada, point + range or area
 
-    NOBLE_MANOR,        // posiadłość ziemska
+    NOBLE_MANOR,        // posiadłość ziemska, point + area
 
-    NOBLE_RESIDENCE,    // siedziba szlachecka
-    COURT,              // ośrodek władzy prowincji lub kraju
-    MONASTERY,          // klasztor / zakon,
-    FORTRESS,           // fort, twierdza
-    ENCHANT_CENTER,
+    NOBLE_RESIDENCE,    // siedziba szlachecka, point
+    COURT,              // ośrodek władzy prowincji lub kraju, point
+    MONASTERY,          // klasztor / zakon, point
+    FORTRESS,           // fort, twierdza, point
+    ENCHANT_CENTER, // miejsce o silnym znaczeniu magicznym, point
 
-    LAKE,
-    RIVER
+    LAKE, // area
+    RIVER, //linestring
+    ROAD //linestring
 
 
 

@@ -27,9 +27,9 @@ public class PlaceFactory {
 
     private SimulationPlace createPlace(Double instability, Double growthPotential) {
         SimulationPlace place = new SimulationPlace();
-        ModelPlace model = getModel(instability, growthPotential);
+//        ModelPlace model = getModel(instability, growthPotential);
         ConfigurationPlace conf = getConf();
-        place.setModel(model);
+//        place.setModel(model);
         place.setConf(conf);
         return place;
     }
@@ -38,12 +38,12 @@ public class PlaceFactory {
         return ConfigurationPlace.builder().build();
     }
 
-    private ModelPlace getModel(Double instability, Double growthPotential) {
-        return ModelPlace.builder()
-//                .setGrowthPotential(varyAboutStat(growthPotential))
-//                .setInstability(varyAboutStat(instability))
-                .build();
-    }
+//    private ModelPlace getModel(Double instability, Double growthPotential) {
+//        return ModelPlace.builder()
+////                .setGrowthPotential(varyAboutStat(growthPotential))
+////                .setInstability(varyAboutStat(instability))
+//                .build();
+//    }
 
     private Double varyAboutStat(Double value) {
         return Math.min(value * random.nextDouble(0.4,1.6), 0.8);
