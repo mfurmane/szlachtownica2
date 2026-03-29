@@ -2,15 +2,23 @@ package priv.mfurmane.szlachtownica.engine.utils;
 
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.geom.impl.CoordinateArraySequence;
+import org.locationtech.jts.geom.prep.PreparedGeometry;
+import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 import java.io.*;
 import java.util.*;
 
 public class GeoUtils {
     public static final int WIDTH = 1499;
     public static final int HEIGHT = 1090;
-    public static final double LON_MIN = 68.79;
-    public static final double LON_MAX = 81.21;
+//    public static final double LON_MIN = 124.79;
+//    public static final double LON_MAX = 127.21;
+//    public static final double LON_MIN = 74.79;76
+    public static final double LON_MIN = 69.9;
+    public static final double LON_MAX = 82.3;
     public static final double LAT_MIN = -46.5;
     public static final double LAT_MAX = -39.9;
     private static final GeometryFactory gf = new GeometryFactory(new PrecisionModel(), 4326);
@@ -30,7 +38,9 @@ public class GeoUtils {
         if (WIDTH <= 1 || HEIGHT <= 1) throw new IllegalArgumentException("width/height must be > 1");
         double lon = LON_MIN + (double) x / (WIDTH - 1) * (LON_MAX - LON_MIN);
         double lat = LAT_MAX - (double) y / (HEIGHT - 1) * (LAT_MAX - LAT_MIN);
-        return new Coordinate(lat, lon);
+//        double lon = LON_MIN + (double) x / (HEIGHT - 1) * (LON_MAX - LON_MIN);
+//        double lat = LAT_MAX - (double) y / (WIDTH - 1) * (LAT_MAX - LAT_MIN);
+        return new Coordinate(lon, lat);
     }
 
     /**
@@ -107,12 +117,44 @@ public class GeoUtils {
 
     public static void main(String[] args) {
         GeoUtils utils = new GeoUtils();
+        List<Geometry> list = new ArrayList<>();
         File file = new File("src/main/resources/provinces/");
         Arrays.stream(Objects.requireNonNull(file.listFiles())).forEach(file1 -> {
             if (!file1.isDirectory()) {
                 Polygon polygon = readProvince(file1.getName().replace(".txt", ""));
+                list.add(polygon);
                 System.out.println(file1.getName().replace(".txt", "")+"\n"+polygon.toText());
             }
         });
+        MapPrinterUtils.preparedGeometryStream = list.stream().map(val -> {
+            Geometry geometry = HighMapUtils.mapToMetric(val);
+            PreparedGeometry prep = PreparedGeometryFactory.prepare(geometry);
+            return prep;
+        }).toList();
+        List<Geometry> mapped = list.stream().map(HighMapUtils::mapToMetric).toList();
+        MapPrinterUtils.env = HighMapUtils.getEnvelope(mapped);
+        MapPrinterUtils.emptyMap = HighMapUtils.getEmptyMap(MapPrinterUtils.env);
+
+        try {
+            ImageIO.write(getBufferedImage(), "png", new File("dem.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
+    public static BufferedImage getBufferedImage() {
+        int height = MapPrinterUtils.emptyMap.length;
+        int width = MapPrinterUtils.emptyMap[0].length;
+        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_USHORT_GRAY);
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                WritableRaster raster = img.getRaster();
+//                raster.setSample(col, height - row - 1, 0, MapPrinterUtils.emptyMap[row][col]);
+                raster.setSample(col, height - row - 1, 0, (int) MapPrinterUtils.emptyMap[row][col]);
+            }
+        }
+        return img;
+    }
+
 }

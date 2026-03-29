@@ -1,23 +1,18 @@
 package priv.mfurmane.szlachtownica.engine;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.events.EventFactory;
 import priv.mfurmane.szlachtownica.engine.registry.*;
-import priv.mfurmane.szlachtownica.model.PersonFactory;
-import priv.mfurmane.szlachtownica.model.PlaceFactory;
-import priv.mfurmane.szlachtownica.model.ProvinceFactory;
-import priv.mfurmane.szlachtownica.model.Race;
+import priv.mfurmane.szlachtownica.model.*;
 import priv.mfurmane.szlachtownica.model.naming.NamingProvider;
 import priv.mfurmane.szlachtownica.model.naming.PlaceNameProvider;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPerson;
 import priv.mfurmane.szlachtownica.model.simulation.goal.GoalEngine;
-import priv.mfurmane.szlachtownica.model.simulation.terrain.MaterialStats;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.ProductionType;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.TerrainResource;
 
-import javax.annotation.PostConstruct;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 
@@ -60,6 +55,10 @@ public class MainEngine {
     @Autowired
     private ProvinceRegistry provinceRegistry;
     @Autowired
+    private ProvinceInitializer provinceInitializer;
+    @Autowired
+    private PlaceInitializer cityInitializer;
+    @Autowired
     private GoalEngine goalEngine;
     @Autowired
     private NamingProvider namingProvider;
@@ -84,6 +83,8 @@ public class MainEngine {
         regionRegistry.setEngine(this);
         subProvinceRegistry.setEngine(this);
         provinceRegistry.setEngine(this);
+        provinceInitializer.setEngine(this);
+        cityInitializer.setEngine(this);
 
         for (int i = 0; i < 10; i++) {
             SimulationPerson simulationPerson = personFactory.newPerson(Race.HUMAN);
@@ -92,6 +93,7 @@ public class MainEngine {
             simulationPerson.getGoals().entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).forEach((goal) -> System.out.println(goal.getValue() + ": " + goal.getKey().name()));
 
         }
+
         ProductionType.WOOD.initializeAsMaterial();
         ProductionType.BRICKS.initializeAsMaterial();
         TerrainResource.ROCK.initializeAsMaterial();
@@ -104,6 +106,11 @@ public class MainEngine {
         TerrainResource.OBSIDIAN.initializeAsMaterial();
         TerrainResource.OLD_BONES.initializeAsMaterial();
         TerrainResource.DRAGON_BONES.initializeAsMaterial();
+
+//        provinceInitializer.readProvinces();
+        cityInitializer.initializePlaces();
+        provinceInitializer.initializeProvinces();
+
     }
 
     public PlaceNameProvider getPlaceNameProvider() {

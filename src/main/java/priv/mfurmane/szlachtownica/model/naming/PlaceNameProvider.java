@@ -4,6 +4,7 @@ import morfologik.stemming.Dictionary;
 import morfologik.stemming.DictionaryLookup;
 import morfologik.stemming.WordData;
 import morfologik.stemming.polish.PolishStemmer;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@Component
 public class PlaceNameProvider {
     private MainEngine engine;
     public void setEngine(MainEngine engine) {

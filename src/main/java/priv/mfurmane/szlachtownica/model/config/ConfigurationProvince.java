@@ -23,6 +23,9 @@ public class ConfigurationProvince {
     private Integer simulationStart;
     private Double growthPotential;
     private Double instability;
+    private Integer averageHeight;
+
+    public ConfigurationProvince() { }
 
     public ConfigurationProvince(Builder builder) {
         this.subProvinces = builder.subProvinces;
@@ -38,6 +41,7 @@ public class ConfigurationProvince {
         this.simulationStart = builder.simulationStart;
         this.growthPotential = builder.growthPotential;
         this.instability = builder.instability;
+        this.averageHeight = builder.averageHeight;
     }
 
     public void mergeFrom(ConfigurationProvince other) {
@@ -54,11 +58,14 @@ public class ConfigurationProvince {
         if (other.simulationStart != null) this.simulationStart = other.simulationStart;
         if (other.growthPotential != null) this.growthPotential = other.growthPotential;
         if (other.instability != null) this.instability = other.instability;
+        if (other.averageHeight != null) this.averageHeight = other.averageHeight;
     }
 
     public static Builder builder() {
         return new Builder();
     }
+
+    public Integer getAverageHeight() { return averageHeight; }
 
     public Double getGrowthPotential() {
         return growthPotential;
@@ -126,6 +133,7 @@ public class ConfigurationProvince {
         private Map<TerrainShape, Double> terrainProfile = new HashMap<>();
         private Double growthPotential;
         private Double instability;
+        private Integer averageHeight;
 
         public Builder setGrowthPotential(Double growthPotential) {
             this.growthPotential = growthPotential;
@@ -189,6 +197,11 @@ public class ConfigurationProvince {
 
         public Builder setTerrainProfile(Map<TerrainShape, Double> terrainProfile) {
             this.terrainProfile = terrainProfile;
+            return this;
+        }
+
+        public Builder setAverageHeight(Integer averageHeight) {
+            this.averageHeight = averageHeight;
             return this;
         }
 

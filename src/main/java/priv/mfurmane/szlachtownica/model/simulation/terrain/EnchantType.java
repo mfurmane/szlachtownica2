@@ -6,13 +6,16 @@ public enum EnchantType {
 
     //TODO change values
     NONE(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
-    WILDERNESS(1.2, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren dotknięty Nereneth
-    CURSED(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren z pewnym wpływem Caithaloonu lub Pustki
-    TWISTED(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren dotknięty dziką magią
-    WARPED(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren dotknięty przez otchłań
+    NERENETH(1.2, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren dotknięty Nereneth
+    GHALAGAAR(1.2, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren dotknięty Nereneth
+    VOID(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren z pewnym wpływem Pustki
+    CAITHALOON(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren z pewnym wpływem Caithaloonu
+    TAELIA(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren dotknięty dziką magią
+    LIMBO(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren dotknięty przez otchłań
+    ABYSS(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //teren dotknięty przez czeluść
     VEIL(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0),  //teren przebijania wymiaru duchowego
-    ENCHANTED(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), //ziemie generalnie magiczne
-    SACRED(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0); //ziemie dotknięte Corellią
+    CORELLIA(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0); //ziemie dotknięte Corellią
+//    ENCHANTED(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0); //ziemie generalnie magiczne?
 
     private final Double fertility;
     private final Double efficiency;

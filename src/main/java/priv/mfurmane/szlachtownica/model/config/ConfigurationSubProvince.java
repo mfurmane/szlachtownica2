@@ -4,11 +4,13 @@ import priv.mfurmane.szlachtownica.model.simulation.terrain.Climate;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.Humidity;
 
 public class ConfigurationSubProvince {
-    private final int regionsCount;
-    private final int initiallyOccupied;
-    private final boolean coast;
-    private final Climate climate;
-    private final Humidity humidity;
+    private int regionsCount;
+    private int initiallyOccupied;
+    private boolean coast;
+    private Climate climate;
+    private Humidity humidity;
+
+    public ConfigurationSubProvince() { }
 
     public ConfigurationSubProvince(int regionsCount, int initiallyOccupied, Climate climate, Humidity humidity, Boolean coast) {
         this.regionsCount = regionsCount;

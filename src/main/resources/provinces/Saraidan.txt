@@ -130,6 +130,7 @@
     "riversRichness": 20,
     "simulationStart": 798,
     "growthPotential": 0.6,
-    "instability": 0.1
+    "instability": 0.1,
+    "averageHeight": 100
   }
 }
