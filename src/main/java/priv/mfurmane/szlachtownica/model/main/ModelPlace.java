@@ -18,10 +18,40 @@ import java.util.List;
 import java.util.Map;
 
 public class ModelPlace {
+    private Long id;
     private PlaceType type;
+    private String name;
     private final Populatable populatable = new Populatable();
     private Integer populationLimit;
     private Point location;
+    private Polygon area;
+
+    public Long getId() {
+        return id;
+    }
+
+    public ModelPlace setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ModelPlace setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Polygon getArea() {
+        return area;
+    }
+
+    public ModelPlace setArea(Polygon area) {
+        this.area = area;
+        return this;
+    }
 
     public Point getLocation() {
         return location;

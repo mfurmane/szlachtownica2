@@ -1,5 +1,6 @@
 package priv.mfurmane.szlachtownica.engine.registry;
 
+import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.main.ModelSubProvince;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationSubProvince;
@@ -7,6 +8,7 @@ import priv.mfurmane.szlachtownica.model.simulation.SimulationSubProvince;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class SubProvinceRegistry {
     private final Map<Long, SimulationSubProvince> registry = new HashMap<>();
     private MainEngine engine;

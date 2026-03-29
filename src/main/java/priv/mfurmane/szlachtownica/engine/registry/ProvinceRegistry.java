@@ -1,12 +1,15 @@
 package priv.mfurmane.szlachtownica.engine.registry;
 
+import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.main.ModelProvince;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@Component
 public class ProvinceRegistry {
     private final Map<Long, SimulationProvince> registry = new HashMap<>();
     private MainEngine engine;
@@ -17,6 +20,10 @@ public class ProvinceRegistry {
 
     public SimulationProvince get(Long id) {
         return registry.get(id);
+    }
+
+    public List<SimulationProvince> getAll() {
+        return registry.values().stream().toList();
     }
 
     public void setEngine(MainEngine mainEngine) {

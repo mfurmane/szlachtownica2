@@ -52,7 +52,7 @@
     "initialNaturalProfile": {
       "FOREST": 0.58,
       "MEADOWS": 0.25,
-      "DUST_PLAINS": 0.2,
+      "DUST_PLAIN": 0.2,
       "PINE_CRAG": 0.05
     },
     "initialSettlersProfile": {
@@ -83,6 +83,7 @@
     "riversRichness": 7,
     "simulationStart": 1045,
     "growthPotential": 0.65,
-    "instability": 0.2
+    "instability": 0.2,
+    "averageHeight": 350
   }
 }

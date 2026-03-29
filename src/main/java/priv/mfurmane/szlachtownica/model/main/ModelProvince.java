@@ -4,18 +4,27 @@ import org.locationtech.jts.geom.Polygon;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationProvince;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationSubProvince;
+import priv.mfurmane.szlachtownica.model.main.entities.EntityProvince;
+import priv.mfurmane.szlachtownica.model.main.entities.EntitySubProvince;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationRegion;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationSubProvince;
-import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
+import priv.mfurmane.szlachtownica.model.simulation.terrain.EnchantType;
+import priv.mfurmane.szlachtownica.model.simulation.terrain.RegionType;
+import priv.mfurmane.szlachtownica.model.simulation.terrain.TerrainShape;
 
 import java.util.*;
 
 public class ModelProvince {
+
     private Long id;
+
     private String name;
-    private final List<Long> subProvinces = new ArrayList<>();
-    private final List<RegionType> preferredDirections = new ArrayList<>();
+
     private Polygon area; //not null
+
+    private final List<ModelSubProvince> subProvinces = new ArrayList<>();
+
+    private final List<RegionType> preferredDirections = new ArrayList<>();
 
     public Polygon getArea() {
         return area;
@@ -26,11 +35,13 @@ public class ModelProvince {
         return this;
     }
 
-    public void initializeSubProvinces(ConfigurationSubProvince subProvinceConf, ConfigurationProvince conf) {
-        ModelSubProvince subProvinceModel = new ModelSubProvince(subProvinceConf.getClimate(), subProvinceConf.getHumidity());
+    public ModelSubProvince initializeSubProvinces(ConfigurationSubProvince subProvinceConf, ConfigurationProvince conf, EntitySubProvince sub) {
+        ModelSubProvince subProvinceModel = new ModelSubProvince(subProvinceConf.getClimate(), subProvinceConf.getHumidity(), sub);
+        subProvinceModel.setArea(sub.getArea());
         SimulationSubProvince subProvince = new SimulationSubProvince();
         subProvince.setModel(subProvinceModel);
         subProvince.setConf(subProvinceConf);
+        subProvinces.add(subProvinceModel);
         MainEngine.getInstance().getSubProvinceRegistry().register(subProvince);
         int naturalRegions = subProvinceConf.getRegionsCount() - subProvinceConf.getInitiallyOccupied();
         for (int i = 0; i < subProvinceConf.getInitiallyOccupied(); i++) {
@@ -38,7 +49,6 @@ public class ModelProvince {
             if (i < conf.getInitialCities().size()) {
                 cities.add(conf.getInitialCities().get(i));
             }
-            subProvinces.add(subProvinceModel.getId());
             subProvinceModel.getRegions().add(ModelRegion.builder()
                     .setCoast(subProvinceConf.isCoast() && new Random().nextDouble() < 0.7)
                     .setClimate(subProvinceConf.getClimate())
@@ -51,7 +61,7 @@ public class ModelProvince {
                     .setLakesRichness(conf.getLakesRichness())
                     .setRiversRichness(conf.getRiversRichness())
                     .setWoodRichness(conf.getWoodRichness())
-                    .build().getModelRegion().getId());
+                    .build().getModelRegion());
         }
         for (int i = 0; i < naturalRegions; i++) {
             subProvinceModel.getRegions().add(ModelRegion.builder()
@@ -65,8 +75,9 @@ public class ModelProvince {
                     .setLakesRichness(conf.getLakesRichness())
                     .setRiversRichness(conf.getRiversRichness())
                     .setWoodRichness(conf.getWoodRichness())
-                    .build().getModelRegion().getId());
+                    .build().getModelRegion());
         }
+        return subProvinceModel;
         //TODO register StartProvinceSettlementEvent
     }
 
@@ -111,9 +122,11 @@ public class ModelProvince {
     }
 
     public ModelProvince(Builder builder) {
-        this.id = builder.id;
+        this.id = builder.id != null ? builder.id : this.id;
         this.name = builder.name;
     }
+
+    public ModelProvince() {}
 
     public void mergeFrom(ModelProvince other) {
         if (other.id != null) this.id = other.id;
@@ -124,7 +137,7 @@ public class ModelProvince {
     public List<SimulationRegion> getRegions() {
         List<SimulationRegion> result = new ArrayList<>();
         subProvinces.forEach(subProvinceId -> {
-            result.addAll(MainEngine.getInstance().getSubProvinceRegistry().get(subProvinceId).getModel().regions());
+            result.addAll(MainEngine.getInstance().getSubProvinceRegistry().get(subProvinceId.getId()).getModel().regions());
         });
         return result;
     }
@@ -134,7 +147,7 @@ public class ModelProvince {
     }
 
     public List<SimulationSubProvince> getSubProvinces() {
-        return subProvinces.stream().map(MainEngine.getInstance().getSubProvinceRegistry()::get).toList();
+        return subProvinces.stream().map(sp -> MainEngine.getInstance().getSubProvinceRegistry().get(sp.getId())).toList();
     }
 
     public String getName() {
@@ -146,10 +159,18 @@ public class ModelProvince {
         return preferredDirections;
     }
 
+    public EntityProvince toEntity() {
+        EntityProvince province = new EntityProvince();
+        province.setId(id);
+        province.setName(name);
+        province.setArea(area);
+        return province;
+    }
+
     public static class Builder {
-        private final List<ModelProvince> areas = new ArrayList<>();
-        private final List<ModelRegion> regions = new ArrayList<>();
-        private final List<RegionType> preferredDirections = new ArrayList<>();
+        private List<ModelProvince> areas = new ArrayList<>();
+        private List<ModelRegion> regions = new ArrayList<>();
+        private List<RegionType> preferredDirections = new ArrayList<>();
         private Long id;
         private String name;
 
@@ -160,6 +181,21 @@ public class ModelProvince {
 
         public Builder setName(String name) {
             this.name = name;
+            return this;
+        }
+
+        public Builder setAreas(List<ModelProvince> areas) {
+            this.areas = areas;
+            return this;
+        }
+
+        public Builder setRegions(List<ModelRegion> regions) {
+            this.regions = regions;
+            return this;
+        }
+
+        public Builder setPreferredDirections(List<RegionType> preferredDirections) {
+            this.preferredDirections = preferredDirections;
             return this;
         }
 

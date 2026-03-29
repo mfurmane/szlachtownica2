@@ -87,7 +87,7 @@
     "initialSettlersProfile": {
 	  "FARMING_LAND": 0.3,
 	  "SETTLERS_REACH": 0.6,
-	  "ABANDONED_REACH": 0,1
+	  "ABANDONED_REACH": 0.1
     },
     "enchantDistribution": {
 	  "NONE": 0.8,
@@ -113,6 +113,7 @@
     "riversRichness": 16,
     "simulationStart": 265,
     "growthPotential": 0.85,
-    "instability": 0.15
+    "instability": 0.15,
+    "averageHeight": 200
   }
 }

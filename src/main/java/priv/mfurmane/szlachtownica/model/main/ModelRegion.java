@@ -31,7 +31,7 @@ public class ModelRegion {
     private Double stability;
     private Integer woodRichness;
     private Boolean coast;
-    private final TerrainShape terrainShape;
+    private TerrainShape terrainShape;
     private SoilType soilType;
     //    private final Double naturalReachness;
     private final Map<TerrainResource, Integer> naturalResources = new HashMap<>();
@@ -125,6 +125,8 @@ public class ModelRegion {
     public List<Long> getPlaces() {
         return places;
     }
+
+    public ModelRegion() {}
 
     public ModelRegion(Builder builder) {
         coast = builder.coast;
@@ -226,7 +228,8 @@ public class ModelRegion {
                 .toList();
 
 //        available.forEach(System.out::println);
-        return available.get(rand.nextInt(available.size()));
+        int size = available.size();
+        return size > 0 ? available.get(rand.nextInt(size)) : SoilType.SANDY;
     }
 
     public static Builder builder() {
@@ -235,6 +238,11 @@ public class ModelRegion {
 
     public Long getId() {
         return id;
+    }
+
+    public ModelRegion setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public List<TerrainCharacteristic> getCharacteristics() {
