@@ -15,11 +15,14 @@ public class PlaceRegistry {
     private MainEngine engine;
 
     public void register(SimulationPlace place) {
-//        registry.put(place.getModel().getId(), place);
+        registry.put(place.getModel().getId(), place);
     }
 
     public SimulationPlace get(Long id) {
-        return registry.get(id);
+        if (registry.containsKey(id)) {
+            return registry.get(id);
+        }
+        return null;
     }
 
     public void setEngine(MainEngine mainEngine) {

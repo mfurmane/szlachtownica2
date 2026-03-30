@@ -43,42 +43,46 @@ public class ModelProvince {
         subProvince.setConf(subProvinceConf);
         subProvinces.add(subProvinceModel);
         MainEngine.getInstance().getSubProvinceRegistry().register(subProvince);
+        createRegions(subProvinceConf, conf, subProvinceModel);
+        return subProvinceModel;
+        //TODO register StartProvinceSettlementEvent
+    }
+
+    private static void createRegions(ConfigurationSubProvince subProvinceConf, ConfigurationProvince conf, ModelSubProvince subProvinceModel) {
         int naturalRegions = subProvinceConf.getRegionsCount() - subProvinceConf.getInitiallyOccupied();
         for (int i = 0; i < subProvinceConf.getInitiallyOccupied(); i++) {
-            List<Long> cities = new ArrayList<>();
-            if (i < conf.getInitialCities().size()) {
-                cities.add(conf.getInitialCities().get(i));
-            }
+//            List<Long> cities = new ArrayList<>();
+//            if (i < conf.getInitialCities().size()) {
+//                cities.add(conf.getInitialCities().get(i));
+//            }
             subProvinceModel.getRegions().add(ModelRegion.builder()
-                    .setCoast(subProvinceConf.isCoast() && new Random().nextDouble() < 0.7)
-                    .setClimate(subProvinceConf.getClimate())
-                    .setHumidity(subProvinceConf.getHumidity())
-                    .setDevelopmentLevel(1)
-                    .setTerrainShape(chooseTerrainShape(conf))
-                    .setType(chooseType(conf.getInitialSettlersProfile()))
-                    .setEnchant(chooseEnchant(conf))
-                    .setStartCities(cities)
-                    .setLakesRichness(conf.getLakesRichness())
-                    .setRiversRichness(conf.getRiversRichness())
-                    .setWoodRichness(conf.getWoodRichness())
+//                    .setCoast(subProvinceConf.isCoast() && new Random().nextDouble() < 0.7)
+//                    .setClimate(subProvinceConf.getClimate())
+//                    .setHumidity(subProvinceConf.getHumidity())
+//                    .setDevelopmentLevel(1)
+//                    .setTerrainShape(chooseTerrainShape(conf))
+//                    .setType(chooseType(conf.getInitialSettlersProfile()))
+//                    .setEnchant(chooseEnchant(conf))
+//                    .setStartCities(cities)
+//                    .setLakesRichness(conf.getLakesRichness())
+//                    .setRiversRichness(conf.getRiversRichness())
+//                    .setWoodRichness(conf.getWoodRichness())
                     .build().getModelRegion());
         }
         for (int i = 0; i < naturalRegions; i++) {
             subProvinceModel.getRegions().add(ModelRegion.builder()
-                    .setCoast(subProvinceConf.isCoast() && new Random().nextDouble() < 0.7)
-                    .setClimate(subProvinceConf.getClimate())
-                    .setHumidity(subProvinceConf.getHumidity())
-                    .setDevelopmentLevel(determineNatureStrength(conf))
-                    .setTerrainShape(chooseTerrainShape(conf))
-                    .setType(chooseType(conf.getInitialNaturalProfile()))
-                    .setEnchant(chooseEnchant(conf))
-                    .setLakesRichness(conf.getLakesRichness())
-                    .setRiversRichness(conf.getRiversRichness())
-                    .setWoodRichness(conf.getWoodRichness())
+//                    .setCoast(subProvinceConf.isCoast() && new Random().nextDouble() < 0.7)
+//                    .setClimate(subProvinceConf.getClimate())
+//                    .setHumidity(subProvinceConf.getHumidity())
+//                    .setDevelopmentLevel(determineNatureStrength(conf))
+//                    .setTerrainShape(chooseTerrainShape(conf))
+//                    .setType(chooseType(conf.getInitialNaturalProfile()))
+//                    .setEnchant(chooseEnchant(conf))
+//                    .setLakesRichness(conf.getLakesRichness())
+//                    .setRiversRichness(conf.getRiversRichness())
+//                    .setWoodRichness(conf.getWoodRichness())
                     .build().getModelRegion());
         }
-        return subProvinceModel;
-        //TODO register StartProvinceSettlementEvent
     }
 
     private static Integer determineNatureStrength(ConfigurationProvince conf) {
