@@ -12,9 +12,7 @@ import priv.mfurmane.szlachtownica.engine.utils.HighMapUtils;
 import priv.mfurmane.szlachtownica.engine.utils.MapPrinterUtils;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationProvince;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationSubProvince;
-import priv.mfurmane.szlachtownica.model.main.ModelProvince;
-import priv.mfurmane.szlachtownica.model.main.ModelRegion;
-import priv.mfurmane.szlachtownica.model.main.ModelSubProvince;
+import priv.mfurmane.szlachtownica.model.main.*;
 import priv.mfurmane.szlachtownica.model.main.entities.EntityRegion;
 import priv.mfurmane.szlachtownica.model.main.entities.EntitySubProvince;
 import priv.mfurmane.szlachtownica.model.main.repositories.ProvinceRepository;
@@ -49,7 +47,7 @@ public class ProvinceInitializer {
         this.engine = mainEngine;
     }
 
-    public void initializeProvinces() {
+    public void initializeProvinces(List<Polygon> seaShapes, List<ModelRiver> rivers, List<ModelLake> lakes) {
         SimulationProvince merinia = initializeMerinia();
         SimulationProvince nowacorellia = initializeCorellia();
         SimulationProvince orvanor = initializeOrvanor();
@@ -73,16 +71,16 @@ public class ProvinceInitializer {
             return prep;
         }).toList();
         provinces.forEach(province -> {
-            List<Coordinate> cities = new ArrayList<>();
+            List<Coordinate> cityCoordinates = new ArrayList<>();
+            List<SimulationPlace> cities = new ArrayList<>();
             province.getConf().getInitialCities().forEach(cityId -> {
-                if (cityId == 1) {
-                    SimulationPlace place = MainEngine.getInstance().getPlaceRegistry().get(cityId);
-                    if (place != null) {
-                        cities.add(place.getModel().getLocation().getCoordinate());
-                    }
+                SimulationPlace place = MainEngine.getInstance().getPlaceRegistry().get(cityId);
+                if (place != null && place.getModel().getLocation() != null) {
+                    cities.add(place);
+                    cityCoordinates.add(place.getModel().getLocation().getCoordinate());
                 }
             });
-            List<Polygon> polygons = generateSubGeometries(province.getModel().getArea(), province.getConf().getSubProvinces().size(), cities);
+            List<Polygon> polygons = generateSubGeometries(province.getModel().getArea(), province.getConf().getSubProvinces().size(), cityCoordinates);
             for (int i = 0; i < province.getConf().getSubProvinces().size(); i++) {
                 ConfigurationSubProvince subProvince = province.getConf().getSubProvinces().get(i);
                 EntitySubProvince sub = new EntitySubProvince();
@@ -91,6 +89,31 @@ public class ProvinceInitializer {
                 sub = subProvinceRepository.save(sub);
                 ModelSubProvince model = province.getModel().initializeSubProvinces(subProvince, province.getConf(), sub);
                 initializeRegions(sub, model, subProvince);
+                List<ModelRegion> regions = model.getRegions();
+                regions.forEach(region -> {
+                    cities.forEach(city -> {
+                        Point location = city.getModel().getLocation();
+                        if (region.getArea().contains(location)) {
+                            //Mamy miasto
+                            region.setType(RegionType.SETTLERS_REACH);
+                        }
+                    });
+                    seaShapes.forEach(shape -> {
+                        if (shape.intersects(region.getArea())) {
+                            region.setCoast(true);
+                        }
+                    });
+                    lakes.forEach(lake -> {
+                        if (lake.getPolygon().intersects(region.getArea())) {
+                            //lake
+                        }
+                    });
+                    rivers.forEach(river -> {
+                        //big_river
+                    });
+                    //uzależnić typy, klimat i resztę od rzeczy
+                });
+
 // TODO Powiązać odpowiednie numerowo regiony z miastami i poligonami na mapie
 
 //                province.getModel().getSubProvinces().get(0).getModel().getRegions().get(0).getPlaces().add(cityId);
@@ -121,6 +144,7 @@ public class ProvinceInitializer {
             entity = regionRepository.save(entity);
             modelRegion.setId(entity.getId());
             modelRegion.setArea(polygon);
+//            if ()
         }
     }
 

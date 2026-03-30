@@ -6,9 +6,7 @@ import priv.mfurmane.szlachtownica.model.config.ConfigurationRegion;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationRegion;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationSubProvince;
-import priv.mfurmane.szlachtownica.model.simulation.population.AffiliationType;
 import priv.mfurmane.szlachtownica.model.simulation.population.Population;
-import priv.mfurmane.szlachtownica.model.simulation.population.PopulationType;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
 
 import java.util.*;
@@ -40,8 +38,13 @@ public class ModelRegion {
     private EnchantType enchant;
     private Integer enchantmentLevel;
     private final List<TerrainCharacteristic> characteristics = new ArrayList<>();
+    //Sumaryczny, wyciągany z miejsc
     private final Map<ProductionType, Integer> production = new HashMap<>();
+    //Sumaryczny, wyciągany z miejsc
+    private final Map<ExploitationType, Integer> exploitation = new HashMap<>();
+    //Sumaryczny, wyciągany z miejsc
     private final Map<ImportNeed, Integer> importNeeded = new HashMap<>();
+    //Populacje nieprzywiązane do konkretnych miejsc
     private final List<Population> populations = new ArrayList<>();
     private Polygon area; //not null
 
@@ -275,6 +278,10 @@ public class ModelRegion {
         return production;
     }
 
+    public Map<ExploitationType, Integer> getExploitation() {
+        return exploitation;
+    }
+
     public Map<ImportNeed, Integer> getImportNeeded() {
         return importNeeded;
     }
@@ -325,6 +332,11 @@ public class ModelRegion {
 
     public ModelRegion setEnchant(EnchantType enchant) {
         this.enchant = enchant;
+        return this;
+    }
+
+    public ModelRegion setCoast(boolean coast) {
+        this.coast = coast;
         return this;
     }
 
