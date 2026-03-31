@@ -1,20 +1,44 @@
 package priv.mfurmane.szlachtownica.model.simulation.terrain;
 
+import java.util.List;
+
 public enum RegionType {
-    FOREST,
-    SWAMP,
-    DUST_PLAIN,
-    ROCK_LAND,
-    PINE_CRAG,
-    MEADOWS,
-    FARMING_LAND,
-    SETTLERS_REACH,
-    TOURISTIC_LAND,
-    ESTATE_REGION,
-    CRAFTS_LAND,
-    ABANDONED_REACH,
-    IRON_MARCHES,
-    SUPERNATURAL_EXPANSE
+    FOREST(false),
+    SWAMP(false),
+    DUST_PLAIN(false),
+    ROCK_LAND(false),
+    PINE_CRAG(false),
+    MEADOWS(false),
+    FARMING_LAND(true),
+    SETTLERS_REACH(true),
+    TOURISTIC_LAND(true),
+    ESTATE_REGION(true),
+    CRAFTS_LAND(true),
+    ABANDONED_REACH(false),
+    IRON_MARCHES(true),
+    SUPERNATURAL_EXPANSE(true);
+
+    public static List<RegionType> getNatural() {
+        return List.of(FOREST, SWAMP, DUST_PLAIN, ROCK_LAND, PINE_CRAG, MEADOWS);
+    }
+
+    public static List<RegionType> getSettled() {
+        return List.of(FARMING_LAND, SETTLERS_REACH, CRAFTS_LAND, SUPERNATURAL_EXPANSE);
+    }
+
+    public static List<RegionType> getEmpty() {
+        return List.of(FOREST, SWAMP, DUST_PLAIN, ROCK_LAND, PINE_CRAG, MEADOWS, ABANDONED_REACH);
+    }
+
+    public static List<RegionType> getAllSettled() {
+        return List.of(FARMING_LAND, SETTLERS_REACH, TOURISTIC_LAND, ESTATE_REGION, CRAFTS_LAND, IRON_MARCHES, SUPERNATURAL_EXPANSE);
+    }
+
+    private boolean settled;
+
+    private RegionType(boolean settled) {
+        this.settled = settled;
+    }
 
 //    FOREST, // puszcza bez enchantu
 //    GREENWOODS, //porządny las
