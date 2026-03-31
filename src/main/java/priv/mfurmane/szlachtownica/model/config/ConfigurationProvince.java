@@ -1,5 +1,6 @@
 package priv.mfurmane.szlachtownica.model.config;
 
+import priv.mfurmane.szlachtownica.model.main.ModelRegion;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class ConfigurationProvince {
     private Double growthPotential;
     private Double instability;
     private Integer averageHeight;
+    private ModelRegion.GeneralProfile capitalProfile;
 
     public ConfigurationProvince() { }
 
@@ -42,6 +44,7 @@ public class ConfigurationProvince {
         this.growthPotential = builder.growthPotential;
         this.instability = builder.instability;
         this.averageHeight = builder.averageHeight;
+        this.capitalProfile = builder.capitalProfile;
     }
 
     public void mergeFrom(ConfigurationProvince other) {
@@ -59,6 +62,16 @@ public class ConfigurationProvince {
         if (other.growthPotential != null) this.growthPotential = other.growthPotential;
         if (other.instability != null) this.instability = other.instability;
         if (other.averageHeight != null) this.averageHeight = other.averageHeight;
+        if (other.capitalProfile != null) this.capitalProfile = other.capitalProfile;
+    }
+
+    public ModelRegion.GeneralProfile getCapitalProfile() {
+        return capitalProfile;
+    }
+
+    public ConfigurationProvince setCapitalProfile(ModelRegion.GeneralProfile capitalProfile) {
+        this.capitalProfile = capitalProfile;
+        return this;
     }
 
     public static Builder builder() {
@@ -134,6 +147,12 @@ public class ConfigurationProvince {
         private Double growthPotential;
         private Double instability;
         private Integer averageHeight;
+        private ModelRegion.GeneralProfile capitalProfile;
+
+        public Builder setCapitalProfile(ModelRegion.GeneralProfile capitalProfile) {
+            this.capitalProfile = capitalProfile;
+            return this;
+        }
 
         public Builder setGrowthPotential(Double growthPotential) {
             this.growthPotential = growthPotential;

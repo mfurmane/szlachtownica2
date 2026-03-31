@@ -11,11 +11,11 @@ import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
 
 import java.util.*;
 
-public class ModelRegion {
+public class ModelRegion implements Comparable<ModelRegion> {
     public static final Random rand = new Random();
     private Long id;
     private Long subProvinceId;
-    private final List<Long> places = new ArrayList<>();
+    private final List<ModelPlace> places = new ArrayList<>();
     private Humidity humidity;
     private Climate climate;
     private Double fertility;
@@ -29,6 +29,8 @@ public class ModelRegion {
     private Double stability;
     private Integer woodRichness;
     private Boolean coast;
+    private Boolean river;
+    private Boolean lake;
     private TerrainShape terrainShape;
     private SoilType soilType;
     //    private final Double naturalReachness;
@@ -113,6 +115,24 @@ public class ModelRegion {
         stability = enchant.getStability(enchantmentLevel); //TODO
     }
 
+    public Boolean getRiver() {
+        return river;
+    }
+
+    public ModelRegion setRiver(Boolean river) {
+        this.river = river;
+        return this;
+    }
+
+    public Boolean getLake() {
+        return lake;
+    }
+
+    public ModelRegion setLake(Boolean lake) {
+        this.lake = lake;
+        return this;
+    }
+
     public Boolean getCoast() {
         return coast;
     }
@@ -121,28 +141,14 @@ public class ModelRegion {
         return MainEngine.getInstance().getSubProvinceRegistry().get(subProvinceId);
     }
 
-    public List<SimulationPlace> places() {
-        return places.stream().map(MainEngine.getInstance().getPlaceRegistry()::get).toList();
-    }
-
-    public List<Long> getPlaces() {
+    public List<ModelPlace> getPlaces() {
         return places;
     }
 
     public ModelRegion() {}
 
     public ModelRegion(Builder builder) {
-        coast = builder.coast;
-        humidity = builder.humidity;
-        climate = builder.climate;
-        terrainShape = builder.terrainShape;
-        soilType = determineSoilType();
-        enchant = builder.enchant;
-        if (enchant == null) {
-            enchant = EnchantType.NONE;
-        }
-        enchantmentLevel = builder.enchantmentLevel != null ? builder.enchantmentLevel : chooseEnchantmentLevel(builder.enchant);
-        updateMods();
+        setGeneralProfile(new GeneralProfile(builder.humidity, builder.climate, builder.terrainShape, builder.enchant));
         woodRichness = builder.woodRichness;
         type = builder.type != null ? builder.type : determineType();
         developmentLevel = builder.developmentLevel;
@@ -153,7 +159,7 @@ public class ModelRegion {
                 naturalResources.merge(resource, getAverageTons(resource, calculateProportions(builder.naturalReachness)), Integer::sum);
             }
         });
-        places.addAll(builder.startCities);
+//        places.addAll(builder.startCities);
         boolean hasLake = false;
         boolean hasRiver = false;
         for (int i = 0; i < builder.lakesRichness; i++) {
@@ -173,6 +179,22 @@ public class ModelRegion {
         defineVillages();
     }
 
+    public record GeneralProfile(Humidity humidity, Climate climate, TerrainShape terrainShape, EnchantType enchant) {}
+
+    public ModelRegion setGeneralProfile(GeneralProfile profile) {
+        this.humidity = profile.humidity;
+        this.climate = profile.climate;
+        this.terrainShape = profile.terrainShape;
+        this.soilType = determineSoilType();
+        this.enchant = profile.enchant;
+        if (this.enchant == null) {
+            this.enchant = EnchantType.NONE;
+        }
+        this.enchantmentLevel = chooseEnchantmentLevel(this.enchant);
+        updateMods();
+        return this;
+    }
+
     private void defineVillages() {
         //TODO zrobić w pętli
 //        places.add(ModelPlace.newVillage());
@@ -186,7 +208,7 @@ public class ModelRegion {
 
     public void startSimulation() {
         places.forEach(place -> {
-            SimulationPlace sp = MainEngine.getInstance().getPlaceRegistry().get(place);
+//            SimulationPlace sp = MainEngine.getInstance().getPlaceRegistry().get(place);
 //            if (sp.getModel().getCharacteristics().contains(PlaceCharacteristic.WILDERNESS_ENCHANT)) {
 //                enchant = EnchantType.WILDERNESS;
 //                enchantmentLevel = 3;
@@ -199,8 +221,9 @@ public class ModelRegion {
         if (enchant == null || enchant == EnchantType.NONE) {
             return 0;
         }
+        //TODO może od czegoś to jakoś sensownie uzależnić?
         int level = 1;
-        while (level < 5 && rand.nextDouble() < 0.15) {
+        while (level < 5 && rand.nextDouble() < 0.02) {
             level++;
         }
         return level;
@@ -229,8 +252,6 @@ public class ModelRegion {
                 .filter(type -> Arrays.asList(climate.getSoilTypes()).contains(type))
                 .filter(type -> Arrays.asList(terrainShape.getSoilTypes()).contains(type))
                 .toList();
-
-//        available.forEach(System.out::println);
         int size = available.size();
         return size > 0 ? available.get(rand.nextInt(size)) : SoilType.SANDY;
     }
@@ -337,6 +358,49 @@ public class ModelRegion {
 
     public ModelRegion setCoast(boolean coast) {
         this.coast = coast;
+        return this;
+    }
+
+    private Double attractiveness() {
+        double base = 1.0;
+        if (coast && river) {
+            base *= 1.5;
+        } else {
+            if (coast) {
+                base *= 1.2;
+            }
+            if (river) {
+                base *= 1.3;
+            }
+        }
+        if (lake) {
+            if (!coast && !river) {
+                base *= 1.3;
+            } else {
+                base *= 1.1;
+            }
+        }
+        if (base < 1.01) {
+            base *= 0.7;
+        }
+        double foodAccess = 0.4 * fertility + 0.3 * plantingEasiness + 0.2 * farmingEasiness + 0.1 * efficiency;
+        if (foodAccess < 1) {
+            foodAccess *= 0.6;
+        }
+        double livingQuality = 0.4 * stability + 0.3 * health + 0.3 * attitude;
+        if (livingQuality < 1) {
+            livingQuality *= 0.85;
+        }
+        return (0.35 * base + 0.5 * foodAccess + 0.15 * livingQuality) * foodAccess * livingQuality;
+    }
+
+    @Override
+    public int compareTo(ModelRegion other) {
+        return attractiveness().compareTo(other.attractiveness());
+    }
+
+    public ModelRegion setWoodRichness(Integer woodRichness) {
+        this.woodRichness = woodRichness;
         return this;
     }
 

@@ -1,11 +1,15 @@
 package priv.mfurmane.szlachtownica.engine;
 
 import jakarta.annotation.PostConstruct;
+import org.locationtech.jts.geom.Polygon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.events.EventFactory;
 import priv.mfurmane.szlachtownica.engine.registry.*;
 import priv.mfurmane.szlachtownica.model.*;
+import priv.mfurmane.szlachtownica.model.main.ModelLake;
+import priv.mfurmane.szlachtownica.model.main.ModelRiver;
+import priv.mfurmane.szlachtownica.model.main.ModelSeaPart;
 import priv.mfurmane.szlachtownica.model.naming.NamingProvider;
 import priv.mfurmane.szlachtownica.model.naming.PlaceNameProvider;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPerson;
@@ -14,6 +18,7 @@ import priv.mfurmane.szlachtownica.model.simulation.terrain.ProductionType;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.TerrainResource;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -49,6 +54,12 @@ public class MainEngine {
     @Autowired
     private PlaceRegistry placeRegistry;
     @Autowired
+    private RiverRegistry riverRegistry;
+    @Autowired
+    private LakeRegistry lakeRegistry;
+    @Autowired
+    private SeaPartRegistry seaPartRegistry;
+    @Autowired
     private RegionRegistry regionRegistry;
     @Autowired
     private SubProvinceRegistry subProvinceRegistry;
@@ -58,6 +69,8 @@ public class MainEngine {
     private ProvinceInitializer provinceInitializer;
     @Autowired
     private PlaceInitializer cityInitializer;
+    @Autowired
+    private NatureInitializer natureInitializer;
     @Autowired
     private GoalEngine goalEngine;
     @Autowired
@@ -85,6 +98,9 @@ public class MainEngine {
         provinceRegistry.setEngine(this);
         provinceInitializer.setEngine(this);
         cityInitializer.setEngine(this);
+        riverRegistry.setEngine(this);
+        lakeRegistry.setEngine(this);
+        seaPartRegistry.setEngine(this);
 
         for (int i = 0; i < 10; i++) {
             SimulationPerson simulationPerson = personFactory.newPerson(Race.HUMAN);
@@ -109,8 +125,35 @@ public class MainEngine {
 
 //        provinceInitializer.readProvinces();
         cityInitializer.initializePlaces();
-        provinceInitializer.initializeProvinces();
+        List<ModelSeaPart> seaPoligons = natureInitializer.initializeSea();
+        List<ModelRiver> rivers = natureInitializer.initializeRivers();
+        List<ModelLake> lakes = natureInitializer.initializeLakes();
+        provinceInitializer.initializeProvinces(seaPoligons, rivers, lakes);
 
+    }
+
+    public RiverRegistry getRiverRegistry() {
+        return riverRegistry;
+    }
+
+    public LakeRegistry getLakeRegistry() {
+        return lakeRegistry;
+    }
+
+    public SeaPartRegistry getSeaPartRegistry() {
+        return seaPartRegistry;
+    }
+
+    public ProvinceInitializer getProvinceInitializer() {
+        return provinceInitializer;
+    }
+
+    public PlaceInitializer getCityInitializer() {
+        return cityInitializer;
+    }
+
+    public NatureInitializer getNatureInitializer() {
+        return natureInitializer;
     }
 
     public PlaceNameProvider getPlaceNameProvider() {
