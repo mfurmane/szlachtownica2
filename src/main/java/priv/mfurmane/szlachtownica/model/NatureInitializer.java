@@ -7,11 +7,9 @@ import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.engine.utils.GeoUtils;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationProvince;
-import priv.mfurmane.szlachtownica.model.main.ModelLake;
-import priv.mfurmane.szlachtownica.model.main.ModelProvince;
-import priv.mfurmane.szlachtownica.model.main.ModelRiver;
-import priv.mfurmane.szlachtownica.model.main.ModelSeaPart;
+import priv.mfurmane.szlachtownica.model.main.*;
 import priv.mfurmane.szlachtownica.model.main.repositories.LakeRepository;
+import priv.mfurmane.szlachtownica.model.main.repositories.MountainsRepository;
 import priv.mfurmane.szlachtownica.model.main.repositories.RiverRepository;
 import priv.mfurmane.szlachtownica.model.main.repositories.SeaPartRepository;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
@@ -26,6 +24,7 @@ public class NatureInitializer {
     private LakeRepository lakeRepository;
     private RiverRepository riverRepository;
     private SeaPartRepository seaPartRepository;
+    private MountainsRepository mountainsRepository;
 
     public void setEngine(MainEngine mainEngine) {
         this.engine = mainEngine;
@@ -73,6 +72,14 @@ public class NatureInitializer {
         return rivers;
     }
 
+    public List<ModelMountains> initializeMountains() {
+        List<ModelMountains> mountains = new ArrayList<>();
+        mountains.add(initializeMountain("1"));
+//        mountains.add(initializeMountain("2"));
+//        mountains.add(initializeMountain("3"));
+        return mountains;
+    }
+
     private ModelLake initializeLake(String name) {
         ModelLake lake = new ModelLake(name);
         lake.setArea(GeoUtils.readLake(name));
@@ -87,5 +94,15 @@ public class NatureInitializer {
         riverRepository.save(river.toEntity());
         engine.getRiverRegistry().register(river);
         return river;
+    }
+
+    private ModelMountains initializeMountain(String name) {
+        ModelMountains mountains = new ModelMountains(name);
+        GeoUtils.MountainsGeometry mountainsGeometry = GeoUtils.readMountains(name);
+        mountains.setArea(mountainsGeometry.area());
+        mountains.setLine(mountainsGeometry.line());
+        mountainsRepository.save(mountains.toEntity());
+        engine.getMountainsRegistry().register(mountains);
+        return mountains;
     }
 }

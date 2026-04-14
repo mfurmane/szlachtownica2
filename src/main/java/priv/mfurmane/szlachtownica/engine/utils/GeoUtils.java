@@ -26,6 +26,8 @@ public class GeoUtils {
     public static final String RIVERS_PATH = "src/main/resources/rivers/";
     public static final String ROADS_PATH = "src/main/resources/roads/";
     private static final String LAKES_PATH = "src/main/resources/lakes/";
+    private static final String MOUNTAINS_AREA_PATH = "src/main/resources/mountains/shapes";
+    private static final String MOUNTAINS_LINE_PATH = "src/main/resources/mountains/lines";
 
     /**
      * Mapuje piksel (x,y) do współrzędnych geograficznych (lat, lon) w stopniach.
@@ -76,6 +78,10 @@ public class GeoUtils {
 
     public static LineString readRoad(String arg) {
         return readLine(arg, ROADS_PATH);
+    }
+
+    public static MountainsGeometry readMountains(String arg) {
+        return new MountainsGeometry(readPolygon(arg, MOUNTAINS_AREA_PATH), readLine(arg, MOUNTAINS_LINE_PATH));
     }
 
     private static Polygon readPolygon(String arg, String path) {
@@ -157,4 +163,5 @@ public class GeoUtils {
         return img;
     }
 
+    public record MountainsGeometry(Polygon area, LineString line);
 }
