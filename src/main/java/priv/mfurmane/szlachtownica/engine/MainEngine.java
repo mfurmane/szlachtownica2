@@ -8,6 +8,7 @@ import priv.mfurmane.szlachtownica.engine.events.EventFactory;
 import priv.mfurmane.szlachtownica.engine.registry.*;
 import priv.mfurmane.szlachtownica.model.*;
 import priv.mfurmane.szlachtownica.model.main.ModelLake;
+import priv.mfurmane.szlachtownica.model.main.ModelMountains;
 import priv.mfurmane.szlachtownica.model.main.ModelRiver;
 import priv.mfurmane.szlachtownica.model.main.ModelSeaPart;
 import priv.mfurmane.szlachtownica.model.naming.NamingProvider;
@@ -59,6 +60,8 @@ public class MainEngine {
     private LakeRegistry lakeRegistry;
     @Autowired
     private SeaPartRegistry seaPartRegistry;
+    @Autowired
+    private MountainsRegistry mountainsRegistry;
     @Autowired
     private RegionRegistry regionRegistry;
     @Autowired
@@ -128,7 +131,8 @@ public class MainEngine {
         List<ModelSeaPart> seaPoligons = natureInitializer.initializeSea();
         List<ModelRiver> rivers = natureInitializer.initializeRivers();
         List<ModelLake> lakes = natureInitializer.initializeLakes();
-        provinceInitializer.initializeProvinces(seaPoligons, rivers, lakes);
+        List<ModelMountains> mountains = natureInitializer.initializeMountains();
+        provinceInitializer.initializeProvinces(seaPoligons, rivers, lakes, mountains);
 
     }
 
@@ -218,5 +222,9 @@ public class MainEngine {
 
     public PlaceRegistry getPlaceRegistry() {
         return placeRegistry;
+    }
+
+    public MountainsRegistry getMountainsRegistry() {
+        return mountainsRegistry;
     }
 }

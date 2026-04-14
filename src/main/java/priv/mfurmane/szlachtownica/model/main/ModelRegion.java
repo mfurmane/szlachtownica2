@@ -31,6 +31,7 @@ public class ModelRegion implements Comparable<ModelRegion> {
     private Boolean coast;
     private Boolean river;
     private Boolean lake;
+    private ModelMountains mountains;
     private TerrainShape terrainShape;
     private SoilType soilType;
     //    private final Double naturalReachness;
@@ -177,6 +178,15 @@ public class ModelRegion implements Comparable<ModelRegion> {
         if (hasLake) characteristics.add(TerrainCharacteristic.LAKES);
         if (hasRiver) characteristics.add(TerrainCharacteristic.RIVERS);
         defineVillages();
+    }
+
+    public ModelRegion setMountains(ModelMountains mountains) {
+        this.mountains = mountains;
+        return this;
+    }
+
+    public ModelMountains getMountains() {
+        return mountains;
     }
 
     public record GeneralProfile(Humidity humidity, Climate climate, TerrainShape terrainShape, EnchantType enchant) {}

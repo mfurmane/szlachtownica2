@@ -37,6 +37,7 @@ public class ProvinceInitializer {
     private final SubProvinceRepository subProvinceRepository;
     private final RegionRepository regionRepository;
     private MainEngine engine;
+    private final List<ModelRegion> allRegions = new ArrayList<>();
 
     @Autowired
     public ProvinceInitializer(ProvinceRepository provinceRepository, SubProvinceRepository subProvinceRepository, RegionRepository regionRepository) {
@@ -49,7 +50,7 @@ public class ProvinceInitializer {
         this.engine = mainEngine;
     }
 
-    public void initializeProvinces(List<ModelSeaPart> seaShapes, List<ModelRiver> rivers, List<ModelLake> lakes) {
+    public void initializeProvinces(List<ModelSeaPart> seaShapes, List<ModelRiver> rivers, List<ModelLake> lakes, List<ModelMountains> mountains) {
         SimulationProvince merinia = initializeMerinia();
         SimulationProvince nowacorellia = initializeCorellia();
         SimulationProvince orvanor = initializeOrvanor();
@@ -121,6 +122,13 @@ public class ProvinceInitializer {
                             //      chyba, że to się ogarnęło samo przez punkty podawane do generateSubGeometries
                         }
                     }
+                    mountains.forEach(mountain -> {
+                        if (mountain.getArea().intersects(region.getArea()) && mountain.getArea().intersection(region.getArea()).getDimension() != 0) {
+                            if (region.getMountains() == null || mountain.getHeight() > region.getMountains().getHeight()) {
+                                region.setMountains(mountain);
+                            }
+                        }
+                    });
                     seaShapes.forEach(shape -> {
                         if (shape.getArea().intersects(region.getArea()) && shape.getArea().intersection(region.getArea()).getDimension() != 0) {
                             region.setCoast(true);
@@ -138,11 +146,13 @@ public class ProvinceInitializer {
                     });
                     //uzależnić typy, klimat i resztę od rzeczy
                     if (region.getPlaces().size() == 0) {
+                        TerrainShape terrainShape = determineTerrainShape(region, model, province.getConf().getTerrainProfile());
+                        EnchantType enchant = determineEnchant(region, model, province.getConf().getEnchantDistribution());
                         region.setGeneralProfile(new ModelRegion.GeneralProfile(
-                                        determineHumidity(region, model),
-                                        determineClimate(region, model),
-                                        determineTerrainShape(region, model),
-                                        determineEnchant(region, model)))
+                                        determineHumidity(region, model, terrainShape, enchant),
+                                        determineClimate(region, model, terrainShape, enchant),
+                                        terrainShape,
+                                        enchant))
                                 .setWoodRichness(determineWoodRichness(region, model, province.getConf().getWoodRichness()));
                     }
                 }
@@ -175,55 +185,77 @@ public class ProvinceInitializer {
     }
 
     private Integer determineWoodRichness(ModelRegion region, ModelSubProvince model, int woodRichness) {
-        if (region.getPlaces().size() > 0) {
-            //przycięte solidnie przez miasto
+        double modifier = 1;
+        if (!region.getPlaces().isEmpty()) {
+            modifier = 0.3;
         }
-        int base = woodRichness;
+        double base = woodRichness;
         switch (region.getType()) {
-            case FOREST -> {
-                base = (int) (1.3 * base);
-            }
-            case PINE_CRAG -> {
-                base = (int) (0.6 * base);
-            }
-            case ABANDONED_REACH -> {
-                base = (int) (0.3 * base);
-            }
-            case DUST_PLAIN, IRON_MARCHES -> {
-                base = 0;
-            }
+            case FOREST -> base *= 1.3;
+            case SWAMP -> base *= 0.8;
+            case TOURISTIC_LAND, PINE_CRAG -> base *= 0.6;
+            case SETTLERS_REACH, FARMING_LAND, ESTATE_REGION -> base *= 0.5;
+            case CRAFTS_LAND, ABANDONED_REACH -> base *= 0.3;
+            case MEADOWS -> base *= 0.2;
+            case ROCK_LAND -> base *= 0.1;
+            case DUST_PLAIN, IRON_MARCHES -> base = 0;
+            case SUPERNATURAL_EXPANSE -> base *= region.getEnchant().getFertility(region.getEnchantmentLevel());
         }
-        switch (region.getEnchant()) {
-            case NERENETH -> base = (int) (base * 1.2 * );
-        }
-        return woodRichness;
+        return (int) (base * region.getFertility() * modifier);
     }
 
-    private EnchantType determineEnchant(ModelRegion region, ModelSubProvince model) {
-        if (region.getPlaces().size() > 0) {
-            //raczej NONE
+    private EnchantType determineEnchant(ModelRegion region, ModelSubProvince model, Map<EnchantType, Double> enchantDistribution) {
+        if (!region.getPlaces().isEmpty()) {
+            return EnchantType.NONE;
         }
-        return null;
+        Optional<EnchantType> possible = randomFromMap(enchantDistribution);
+        return possible.orElse(EnchantType.NONE);
     }
 
-    private TerrainShape determineTerrainShape(ModelRegion region, ModelSubProvince model) {
-        if (region.getPlaces().size() > 0) {
+    private TerrainShape determineTerrainShape(ModelRegion region, ModelSubProvince model, Map<TerrainShape, Double> terrainProfile) {
+        if (!region.getPlaces().isEmpty()) {
+            List<TerrainShape> list = terrainProfile.keySet().stream().toList();
+            list.sort((o1, o2) -> o2.getFertility().compareTo(o1.getFertility()));
+            Double best = list.get(0).getFertility();
+            int firstWorse = 0;
+            for (firstWorse = 0; firstWorse < list.size(); firstWorse++) {
+                if (list.get(firstWorse).getFertility() < best) break;
+            }
+            return list.get(ThreadLocalRandom.current().nextInt(firstWorse));
+        }
+        Optional<TerrainShape> possible = randomFromMap(terrainProfile);
+        return possible.orElse(TerrainShape.FLATLANDS);
+    }
+
+    private Climate determineClimate(ModelRegion region, ModelSubProvince model, TerrainShape terrainShape, EnchantType enchant) {
+        if (!region.getPlaces().isEmpty()) {
             //najlepsze dostępne
         }
-        return null;
+        double baseValue = model.getClimate().getTemperature();
+        switch (terrainShape) {
+            case FLATLANDS -> baseValue *= 1;
+            case VALLEY -> baseValue *= 1.2;
+        }
+        switch (enchant) {
+            case VOID -> baseValue -= 0.1;
+            case CAITHALOON, ABYSS, VEIL -> baseValue -= 0.05;
+            case LIMBO, CORELLIA -> baseValue += 0.05;
+            case NERENETH -> baseValue += 0.1;
+        }
+        baseValue *= 4;
+        if (Math.round(baseValue) < 1) return Climate.VERY_COLD;
+        if (Math.round(baseValue) < 2) return Climate.COLD;
+        if (Math.round(baseValue) < 3) return Climate.NEUTRAL;
+        if (Math.round(baseValue) < 4) return Climate.WARM;
+        return Climate.HOT;
     }
 
-    private Climate determineClimate(ModelRegion region, ModelSubProvince model) {
-        if (region.getPlaces().size() > 0) {
+    private Humidity determineHumidity(ModelRegion region, ModelSubProvince model, TerrainShape terrainShape, EnchantType enchant) {
+        if (!region.getPlaces().isEmpty()) {
             //najlepsze dostępne
         }
-        return null;
-    }
+        double baseValue = model.getHumidity().getLevel();
 
-    private Humidity determineHumidity(ModelRegion region, ModelSubProvince model) {
-        if (region.getPlaces().size() > 0) {
-            //najlepsze dostępne
-        }
         return null;
     }
 
@@ -326,6 +358,7 @@ public class ProvinceInitializer {
         for (int i = 0; i < polygons.size(); i++) {
             Polygon polygon = polygons.get(i);
             ModelRegion modelRegion = model.getRegions().get(i);
+            allRegions.add(modelRegion);
             EntityRegion entity = new EntityRegion(modelRegion);
             entity.setArea(polygon);
             entity.setSubProvince(sub);
