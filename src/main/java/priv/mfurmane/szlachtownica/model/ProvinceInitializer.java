@@ -132,20 +132,26 @@ public class ProvinceInitializer {
                     seaShapes.forEach(shape -> {
                         if (shape.getArea().intersects(region.getArea()) && shape.getArea().intersection(region.getArea()).getDimension() != 0) {
                             region.setCoast(true);
+                            shape.getRegions().add(region);
+                            region.getMapFeatures().add(shape);
                         }
                     });
                     allLakes.forEach(lake -> {
                         if (lake.getArea().intersects(region.getArea()) && lake.getArea().intersection(region.getArea()).getDimension() != 0) {
                             region.setLake(true);
+                            lake.getRegions().add(region);
+                            region.getMapFeatures().add(lake);
                         }
                     });
                     rivers.forEach(river -> {
                         if (river.getLine().intersects(region.getArea()) && river.getLine().intersection(region.getArea()).getDimension() != 0) {
                             region.setRiver(true);
+                            river.getRegions().add(region);
+                            region.getMapFeatures().add(river);
                         }
                     });
                     //uzależnić typy, klimat i resztę od rzeczy
-                    if (region.getPlaces().size() == 0) {
+                    if (region.getPlaces().isEmpty()) {
                         TerrainShape terrainShape = determineTerrainShape(region, model, province.getConf().getTerrainProfile());
                         EnchantType enchant = determineEnchant(region, model, province.getConf().getEnchantDistribution());
                         region.setGeneralProfile(new ModelRegion.GeneralProfile(
@@ -156,6 +162,7 @@ public class ProvinceInitializer {
                                 .setWoodRichness(determineWoodRichness(region, model, province.getConf().getWoodRichness()));
                     }
                 }
+                determineNeighbourhood(regions);
                 settleBestRegions(regions, regionsToSettle, province.getConf().getInitialSettlersProfile());
                 fillParameterBasedRegionTypes(regions, subProvince.getRegionsCount() - subProvince.getInitiallyOccupied());
 //                determineOtherRegions(regions, subProvince.getRegionsCount() - subProvince.getInitiallyOccupied(), province.getConf().getInitialNaturalProfile());
@@ -182,6 +189,61 @@ public class ProvinceInitializer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void determineNeighbourhood(List<ModelRegion> regions) {
+        for (int i = 0; i < regions.size(); i++) {
+            ModelRegion region = regions.get(i);
+            for (int j = i + 1; j < regions.size(); j++) {
+                ModelRegion otherRegion = regions.get(j);
+                region.getMapFeatures().forEach(feature -> {
+                    if (feature.getRegions().contains(otherRegion)) {
+                        if (feature instanceof ModelRiver) {
+                            addConnections(region, otherRegion, RegionConnectionType.RIVER, 0.8, 1.2);
+                        } else {
+                            addConnections(region, otherRegion, connectionTypeFor(feature), 1.0);
+                        }
+                    }
+                });
+                if (!region.getArea().getEnvelopeInternal()
+                        .intersects(otherRegion.getArea().getEnvelopeInternal())) {
+                    continue;
+                }
+                if (otherRegion != region && otherRegion.getArea().intersects(region.getArea()) && otherRegion.getArea().intersection(region.getArea()).getDimension() != 0) {
+                    Geometry intersection = region.getArea().intersection(otherRegion.getArea());
+                    for (MapFeature feature : region.getMapFeatures()) {
+                        if (intersection.intersects(feature.getMainGeometry()) && intersection.intersection(feature.getMainGeometry()).getDimension() == 1) {
+                            if (feature instanceof ModelRiver && ((ModelRiver)feature).isVeryBig()) {
+                                addConnections(region, otherRegion, RegionConnectionType.FERRYBOAT, 2.5);
+                            } else {
+                                addConnections(region, otherRegion, RegionConnectionType.BRIDGE, 1.5);
+                            }
+
+                        }
+                    }
+                    addConnections(region, otherRegion, RegionConnectionType.BORDER, 0.0);
+                }
+            }
+        }
+    }
+
+    private void addConnections(ModelRegion region, ModelRegion otherRegion, RegionConnectionType mapFeature, Double travelDifficulty) {
+        addConnections(region, otherRegion, mapFeature, travelDifficulty, travelDifficulty);
+    }
+
+    private void addConnections(ModelRegion region, ModelRegion otherRegion, RegionConnectionType mapFeature, Double travelDifficulty, Double otherTravelDifficulty) {
+        Point centroid = region.getArea().getCentroid();
+        Point otherCentroid = otherRegion.getArea().getCentroid();
+        Double distance = centroid.distance(otherCentroid);
+        RegionConnection connection = new RegionConnection(otherRegion, distance, mapFeature, travelDifficulty);
+        connection.setTarget(otherRegion);
+        RegionConnection otherConnection = new RegionConnection(region, distance, mapFeature, otherTravelDifficulty);
+        region.getNeighbourhood().put(otherRegion, connection);
+        otherRegion.getNeighbourhood().put(region, otherConnection);
+    }
+
+    private RegionConnectionType connectionTypeFor(MapFeature mapFeature) {
+        return null;
     }
 
     private Integer determineWoodRichness(ModelRegion region, ModelSubProvince model, int woodRichness) {
@@ -233,14 +295,19 @@ public class ProvinceInitializer {
         }
         double baseValue = model.getClimate().getTemperature();
         switch (terrainShape) {
-            case FLATLANDS -> baseValue *= 1;
             case VALLEY -> baseValue *= 1.2;
+            case FLATLANDS -> baseValue *= 1;
+            case HILLS, HIGHLANDS, WETBASIN -> baseValue *= 0.95;
+            case BADLANDS, CANYONS -> baseValue *= 0.9;
+            case MOUNTAINS -> baseValue *= 0.8;
+            case PLATEAUS -> baseValue *= 0.7;
         }
         switch (enchant) {
-            case VOID -> baseValue -= 0.1;
-            case CAITHALOON, ABYSS, VEIL -> baseValue -= 0.05;
-            case LIMBO, CORELLIA -> baseValue += 0.05;
-            case NERENETH -> baseValue += 0.1;
+            case VOID -> baseValue -= 0.1 * (double) region.getEnchantmentLevel();
+            case CAITHALOON, ABYSS, VEIL -> baseValue -= 0.05 * (double) region.getEnchantmentLevel();
+            case CORELLIA -> baseValue += 0.05 * (double) region.getEnchantmentLevel();
+            case NERENETH -> baseValue += 0.1 * (double) region.getEnchantmentLevel();
+            case LIMBO -> baseValue += 0.2 * (double) region.getEnchantmentLevel();
         }
         baseValue *= 4;
         if (Math.round(baseValue) < 1) return Climate.VERY_COLD;
@@ -255,8 +322,25 @@ public class ProvinceInitializer {
             //najlepsze dostępne
         }
         double baseValue = model.getHumidity().getLevel();
-
-        return null;
+        switch (terrainShape) {
+            case WETBASIN -> baseValue += 0.25;
+            case VALLEY, CANYONS -> baseValue *= 1.1;
+            case FLATLANDS, HILLS -> baseValue *= 1;
+            case HIGHLANDS, BADLANDS -> baseValue *= 0.9;
+            case MOUNTAINS, PLATEAUS -> baseValue *= 0.7;
+        }
+        switch (enchant) {
+            case LIMBO -> baseValue -= 0.1 * (double) region.getEnchantmentLevel();
+            case CORELLIA, VEIL -> baseValue *= 1;
+            case VOID, NERENETH -> baseValue += 0.05 * (double) region.getEnchantmentLevel();
+            case ABYSS, CAITHALOON -> baseValue += 0.1 * (double) region.getEnchantmentLevel();
+        }
+        baseValue *= 4;
+        if (Math.round(baseValue) < 1) return Humidity.EXTRA_DRY;
+        if (Math.round(baseValue) < 2) return Humidity.DRY;
+        if (Math.round(baseValue) < 3) return Humidity.NEUTRAL;
+        if (Math.round(baseValue) < 4) return Humidity.WET;
+        return Humidity.EXTRA_WET;
     }
 
     private void settleBestRegions(List<ModelRegion> regions, int regionsToSettle, Map<RegionType, Double> initialSettlersProfile) {
@@ -373,8 +457,11 @@ public class ProvinceInitializer {
 //        List<Coordinate> points = new ArrayList<>();
         Envelope env = area.getEnvelopeInternal();
         int attempts = 0;
+        int voronoiIterations = 1;
         int maxAttempts = 10000;
-        double minDist = smallDist ? env.getHeight() * 0.05 / 20 : env.getHeight() * 0.05;
+        double minDistModifier = 0.06;
+        double tmpMinDist = env.getHeight() * minDistModifier;
+        double minDist = smallDist ? tmpMinDist / 20 : tmpMinDist;
         //province.getConf().getSubProvinces().size()
 
         while (points.size() < partsCount && attempts < maxAttempts) {
@@ -394,7 +481,7 @@ public class ProvinceInitializer {
             throw new RuntimeException("Nie udało się wygenerować punktów");
         }
         List<Polygon> subGeoms = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < voronoiIterations; i++) {
             subGeoms = voronoiThisShit(partsCount, points, area);
             points = subGeoms.stream()
                     .map(p -> p.getCentroid().getCoordinate())
@@ -449,7 +536,7 @@ public class ProvinceInitializer {
             }
         }
         double amplitude = area.getEnvelopeInternal().getWidth() * 0.015;
-        VoronoiPerlinNaturalizer naturalizer = new VoronoiPerlinNaturalizer(gf, 10, 0.1, 2.0, 10); //new VoronoiNaturalizer(gf, 5, 2.0); // 5 segmentów, max przesunięcie 2
+        VoronoiPerlinNaturalizer naturalizer = new VoronoiPerlinNaturalizer(gf, determineSegmentsCount(area), 0.1, 2.0, 10); //new VoronoiNaturalizer(gf, 5, 2.0); // 5 segmentów, max przesunięcie 2
 //        return naturalizer.generateNaturalVoronoi(points, clip);
 //        return naturalizer.naturalizeVoronoi(subGeoms);
         subGeoms = naturalizer.naturalizeVoronoi(subGeoms);
@@ -457,6 +544,11 @@ public class ProvinceInitializer {
             throw new IllegalStateException("Mismatch: " + subGeoms.size() + " vs " + partsSize);
         }
         return subGeoms;
+    }
+
+    private static int determineSegmentsCount(Polygon area) {
+        //TODO na podstawie area.getLength(), gdy sprawdzę skalę wartości
+        return 10;
     }
 
     private SimulationProvince initializeProvince(ConfigurationProvince configuration, ModelProvince model) {
