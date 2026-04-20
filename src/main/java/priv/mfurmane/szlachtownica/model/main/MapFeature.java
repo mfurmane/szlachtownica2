@@ -20,6 +20,7 @@ import java.util.Map;
 public abstract class MapFeature {
     protected Long id;
     protected Long regionId;
+    protected final List<ModelRegion> regions = new ArrayList<>();
 
     private final List<PlaceCharacteristic> characteristics = new ArrayList<>();
     protected Geometry mainGeometry;
@@ -51,5 +52,9 @@ public abstract class MapFeature {
     public MapFeature setMainGeometry(Geometry mainGeometry) {
         this.mainGeometry = mainGeometry;
         return this;
+    }
+
+    public List<ModelRegion> getRegions() {
+        return regions;
     }
 }

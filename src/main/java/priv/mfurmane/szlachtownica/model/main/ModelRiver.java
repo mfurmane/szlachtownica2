@@ -62,4 +62,7 @@ public class ModelRiver extends MapFeature {
         return river;
     }
 
+    public boolean isVeryBig() {
+        return false;
+    }
 }
