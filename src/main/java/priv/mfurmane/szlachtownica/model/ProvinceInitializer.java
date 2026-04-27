@@ -3,6 +3,7 @@ package priv.mfurmane.szlachtownica.model;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
+import org.locationtech.jts.linearref.LengthIndexedLine;
 import org.locationtech.jts.triangulate.VoronoiDiagramBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,12 @@ public class ProvinceInitializer {
     public static final GeometryFactory gf = new GeometryFactory();
     public static final Random rand = new Random();
     public static final int GREAT_FERTILITY_LEVEL = 2;
+    static final double RIVER_DOWN_COST = 0.8;
+    static final double RIVER_UP_COST = 1.2;
+    static final double LAKE_COST = 1.0;
+    static final double SEA_COST = 1.1;
+    static final double BRIDGE_COST = 1.5;
+    static final double FERRY_COST = 2.5;
     private final ProvinceRepository provinceRepository;
     private final SubProvinceRepository subProvinceRepository;
     private final RegionRepository regionRepository;
@@ -199,9 +206,9 @@ public class ProvinceInitializer {
                 region.getMapFeatures().forEach(feature -> {
                     if (feature.getRegions().contains(otherRegion)) {
                         if (feature instanceof ModelRiver) {
-                            addConnections(region, otherRegion, RegionConnectionType.RIVER, 0.8, 1.2);
+                            addConnections(region, otherRegion, connectionTypeFor(feature), feature.getMainGeometry(), RIVER_DOWN_COST, RIVER_UP_COST);
                         } else {
-                            addConnections(region, otherRegion, connectionTypeFor(feature), 1.0);
+                            addConnections(region, otherRegion, connectionTypeFor(feature), feature.getMainGeometry(),  determineTravelDifficulty(feature));
                         }
                     }
                 });
@@ -209,41 +216,104 @@ public class ProvinceInitializer {
                         .intersects(otherRegion.getArea().getEnvelopeInternal())) {
                     continue;
                 }
-                if (otherRegion != region && otherRegion.getArea().intersects(region.getArea()) && otherRegion.getArea().intersection(region.getArea()).getDimension() != 0) {
-                    Geometry intersection = region.getArea().intersection(otherRegion.getArea());
-                    for (MapFeature feature : region.getMapFeatures()) {
-                        if (intersection.intersects(feature.getMainGeometry()) && intersection.intersection(feature.getMainGeometry()).getDimension() == 1) {
-                            if (feature instanceof ModelRiver && ((ModelRiver)feature).isVeryBig()) {
-                                addConnections(region, otherRegion, RegionConnectionType.FERRYBOAT, 2.5);
-                            } else {
-                                addConnections(region, otherRegion, RegionConnectionType.BRIDGE, 1.5);
+                Geometry intersection = otherRegion.getArea().intersection(region.getArea());
+                if (!intersection.isEmpty()) {
+                    if (intersection.getDimension() == 1) {
+                        boolean openPass = true;
+                        for (MapFeature feature : region.getMapFeatures()) {
+//                            if ()
+//                            Geometry riverIntersection = intersection.intersection(feature.getMainGeometry());
+//                            if (!riverIntersection.isEmpty() && riverIntersection.getDimension() == 1) {
+                            if (feature.getRegions().contains(otherRegion)) {
+                                openPass = false;
+                                if (feature instanceof ModelRiver && ((ModelRiver) feature).isVeryBig()) {
+                                    addConnections(region, otherRegion, RegionConnectionType.FERRYBOAT, null, FERRY_COST);
+                                } else {
+                                    addConnections(region, otherRegion, RegionConnectionType.BRIDGE, null, BRIDGE_COST);
+                                }
                             }
-
                         }
-                    }
-                    addConnections(region, otherRegion, RegionConnectionType.BORDER, 0.0);
+                        if (openPass) {
+                            addConnections(region, otherRegion, RegionConnectionType.BORDER, null, 0.0);
+                        }
+                    } else if (intersection.getDimension() == 2) {
+                        throw new IllegalStateException("Regions overlap: " + region.getId() + " & " + otherRegion.getId());                    }
                 }
             }
         }
     }
 
-    private void addConnections(ModelRegion region, ModelRegion otherRegion, RegionConnectionType mapFeature, Double travelDifficulty) {
-        addConnections(region, otherRegion, mapFeature, travelDifficulty, travelDifficulty);
+    private Double determineTravelDifficulty(MapFeature feature) {
+        if (feature instanceof ModelLake) {
+            return LAKE_COST;
+        } else if (feature instanceof ModelSeaPart) {
+            return SEA_COST;
+        }
+        return Double.POSITIVE_INFINITY;
     }
 
-    private void addConnections(ModelRegion region, ModelRegion otherRegion, RegionConnectionType mapFeature, Double travelDifficulty, Double otherTravelDifficulty) {
+    private void addConnections(ModelRegion region, ModelRegion otherRegion, RegionConnectionType connectionType, Geometry connectionGeometry, Double travelDifficulty) {
+        addConnections(region, otherRegion, connectionType, connectionGeometry, travelDifficulty, travelDifficulty);
+    }
+
+    private void addConnections(ModelRegion region, ModelRegion otherRegion, RegionConnectionType connectionType, Geometry connectionGeometry, Double travelDifficulty, Double otherTravelDifficulty) {
         Point centroid = region.getArea().getCentroid();
         Point otherCentroid = otherRegion.getArea().getCentroid();
-        Double distance = centroid.distance(otherCentroid);
-        RegionConnection connection = new RegionConnection(otherRegion, distance, mapFeature, travelDifficulty);
+        double distance = 0.0;
+        if (connectionType == RegionConnectionType.BORDER) {
+            distance = centroid.distance(otherCentroid);
+        } else {
+            distance = calculateDistance(centroid, otherCentroid, connectionGeometry);
+        }
+        RegionConnection connection = new RegionConnection(otherRegion, distance, connectionType, travelDifficulty);
         connection.setTarget(otherRegion);
-        RegionConnection otherConnection = new RegionConnection(region, distance, mapFeature, otherTravelDifficulty);
-        region.getNeighbourhood().put(otherRegion, connection);
-        otherRegion.getNeighbourhood().put(region, otherConnection);
+        RegionConnection otherConnection = new RegionConnection(region, distance, connectionType, otherTravelDifficulty);
+        if (!region.getNeighbourhood().containsKey(otherRegion)) {
+            region.getNeighbourhood().put(otherRegion, new EnumMap<>(RegionConnectionType.class));
+        }
+        if (!otherRegion.getNeighbourhood().containsKey(region)) {
+            otherRegion.getNeighbourhood().put(region, new EnumMap<>(RegionConnectionType.class));
+        }
+        region.getNeighbourhood().get(otherRegion).put(connection.getConnectionType(), connection);
+        otherRegion.getNeighbourhood().get(region).put(otherConnection.getConnectionType(), otherConnection);
+    }
+
+    private Double calculateDistance(Point centroid, Point otherCentroid, Geometry connectionGeometry) {
+        if (connectionGeometry != null) {
+            if (connectionGeometry instanceof LineString line) {
+                LengthIndexedLine lil = new LengthIndexedLine(line);
+                double i1 = lil.project(centroid.getCoordinate());
+                double i2 = lil.project(otherCentroid.getCoordinate());
+                Coordinate p1 = lil.extractPoint(i1);
+                Coordinate p2 = lil.extractPoint(i2);
+                double toLine = centroid.getCoordinate().distance(p1);
+                double alongLine = lil.extractLine(i1, i2).getLength();
+                double fromLine = otherCentroid.getCoordinate().distance(p2);
+                return toLine + alongLine + fromLine;
+            }
+
+            if (connectionGeometry.getDimension() == 1) {
+                //są na wspólnej linii
+            } else if (connectionGeometry.getDimension() == 2) {
+                //są przy wspólnym poligonie
+            } else {
+                //stykają się, co byłoby głupie i bez sensu
+            }
+        }
+        //TODO connectionGeometry
+        System.out.println(connectionGeometry);
+        return centroid.distance(otherCentroid);
     }
 
     private RegionConnectionType connectionTypeFor(MapFeature mapFeature) {
-        return null;
+        if (mapFeature instanceof ModelRiver) {
+            return RegionConnectionType.RIVER;
+        } else if (mapFeature instanceof ModelLake) {
+            return RegionConnectionType.LAKE;
+        } else if (mapFeature instanceof ModelSeaPart) {
+            return RegionConnectionType.SEA;
+        }
+        throw new IllegalStateException("Unknown feature: " + mapFeature);
     }
 
     private Integer determineWoodRichness(ModelRegion region, ModelSubProvince model, int woodRichness) {
