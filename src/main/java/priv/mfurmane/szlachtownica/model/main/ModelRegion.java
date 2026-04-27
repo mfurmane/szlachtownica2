@@ -50,7 +50,7 @@ public class ModelRegion implements Comparable<ModelRegion> {
     //Populacje nieprzywiązane do konkretnych miejsc
     private final List<Population> populations = new ArrayList<>();
     private Polygon area; //not null
-    private final Map<ModelRegion, RegionConnection> neighbourhood = new HashMap<>();
+    private final Map<ModelRegion, EnumMap<RegionConnectionType, RegionConnection>> neighbourhood = new HashMap<>();
     private final List<MapFeature> mapFeatures = new ArrayList<>();
 
     public List<MapFeature> getMapFeatures() {
@@ -195,7 +195,7 @@ public class ModelRegion implements Comparable<ModelRegion> {
         return mountains;
     }
 
-    public Map<ModelRegion, RegionConnection> getNeighbourhood() {
+    public Map<ModelRegion, EnumMap<RegionConnectionType, RegionConnection>> getNeighbourhood() {
         return neighbourhood;
     }
 

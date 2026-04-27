@@ -65,8 +65,9 @@ public class ModelPlace {
         return state;
     }
 
-    public void setState(PlaceState state) {
+    public ModelPlace setState(PlaceState state) {
         this.state = state;
+        return this;
     }
 
     public List<PlaceCharacteristic> getPlaceCharacteristics() {
