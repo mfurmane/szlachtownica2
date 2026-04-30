@@ -44,13 +44,13 @@ public class ProvinceService {
                 model.getRegions().forEach(reg -> {
                     Region region = new Region(reg);
                     reg.getPlaces().forEach(placeId -> {
-                        if (placeId == 1) {
+//                        if (placeId == 1) {
 //                            SimulationPlace place = MainEngine.getInstance().getPlaceRegistry().get(placeId);
 //                            Place newPlace = new Place();
 //                            newPlace.setName(place.getModel().getName());
 //                            newPlace.setLocation(writer.write(place.getModel().getLocation()));
 //                            region.getPlaces().add(newPlace);
-                        }
+//                        }
                     });
                     region.setArea(writer.write(reg.getArea()));
                     result.getRegions().add(region);

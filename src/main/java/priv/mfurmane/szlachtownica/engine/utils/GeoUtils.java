@@ -163,5 +163,5 @@ public class GeoUtils {
         return img;
     }
 
-    public record MountainsGeometry(Polygon area, LineString line);
+    public record MountainsGeometry(Polygon area, LineString line) {};
 }

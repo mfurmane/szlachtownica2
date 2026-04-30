@@ -1,33 +1,38 @@
 package priv.mfurmane.szlachtownica.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
+import priv.mfurmane.szlachtownica.engine.naming.ernizjum.ErnizjumPhonotactic;
+import priv.mfurmane.szlachtownica.engine.naming.model.*;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationPlace;
-import priv.mfurmane.szlachtownica.model.config.ConfigurationSubProvince;
 import priv.mfurmane.szlachtownica.model.main.ModelPlace;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
-import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.PlaceCharacteristic;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.PlaceState;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.PlaceType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class PlaceInitializer {
+    public static final Map<Integer, Double> citySyllablesCountMap = Map.of(1, 2.5, 2, 7.0, 3, 0.5);
     private MainEngine engine;
     public static final GeometryFactory gf = new GeometryFactory();
+    Set<String> usedNames = new HashSet<>();
 
-//    private final ObjectMapper mapper = new ObjectMapper();
+    private Phonotactic ernizjumPhonotactic = new ErnizjumPhonotactic();
 
-//    public CityInitializer() {
-//        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-//    }
+    private final ObjectMapper mapper = new ObjectMapper();
+
+    public PlaceInitializer() {
+        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+    }
 
     public void setEngine(MainEngine mainEngine) {
         this.engine = mainEngine;
@@ -76,15 +81,73 @@ public class PlaceInitializer {
         List<SimulationPlace> cities = new ArrayList<>(List.of(gilgamore, lertavore, egerenna, verdalon, astaria, ergondol, sartama, wornimore, korsana, zelderin, caravista, uvarra, jirdenal, xalivore, pernagol, isvellin,
                 tantanor, durnatel, repenvore, vizarna, hasirel, naderia, quvelmore, bellenau, residel, qurena, sardena, mirnadel, nadarvel, vangodar, lutnaran, felarna, tirnugal, nonusta, anverna, golveran, ostivore));
 
-        String[] names = {"Dupna Wólka"};
-        Arrays.stream(names).forEach(name -> {
-            cities.add(initializeNamedCity(name, null, new Coordinate(0, 0)));
-        });
-
         cities.forEach(city -> {
-            System.out.println(city.getModel().getName());
+            int before = usedNames.size();
+            usedNames.add(city.getModel().getName());
+            System.out.println("Before " + city.getModel().getName() + " was " + before + ", after was " + usedNames.size());
         });
 
+    }
+
+    public SimulationPlace initializeUnnamedSettlement(Coordinate coordinate, boolean town, int builtYear) {
+        return initializeNamedSettlement(determineName(town), coordinate, builtYear);
+    }
+
+    public SimulationPlace initializeNamedSettlement(String name, Coordinate coordinate, int builtYear) {
+        SimulationPlace settlement = new SimulationPlace();
+        ConfigurationPlace conf = ConfigurationPlace.builder()
+                .setBuiltYear(builtYear)
+                .setDestroyedYear(null)
+                .build();
+        ModelPlace model = new ModelPlace();
+        model.setType(PlaceType.SETTLEMENT)
+                .setId(null)
+                .setName(name)
+                .setState(PlaceState.ALRIGHT)
+                .setLocation( gf.createPoint(coordinate));
+        return mergeAndRegister(settlement, conf, model);
+    }
+
+    private String determineName(boolean town) {
+        if (town) {
+            return generateTownName();
+        }
+        return generateVillageName();
+    }
+
+    private String generateVillageName() {
+        return VillageNameGenerator.generate();
+    }
+
+    public static void main(String[] args) {
+        PlaceInitializer initializer = new PlaceInitializer();
+//        WordCore dupa = new WordCore("dup", WordGender.FEMININE, NounForms.createAy("dup"), List.of(AdjectiveForms.createNy("dup"), AdjectiveForms.createOwy("dup")));
+//        WordCore wola = new WordCore("kobie", WordGender.FEMININE, NounForms.createTa("kobie"), List.of(AdjectiveForms.createCy("kobie")));
+//        WordCore poldupek = new WordCore("półdup", WordGender.MASCULINE, NounForms.createEk("półdup"), List.of(AdjectiveForms.createOwy("półdupk")));
+//        System.out.println(dupa.getNoun(WordCount.SINGULAR) + " - " + wola.getNoun(WordCount.SINGULAR));
+//        System.out.println(dupa.getNoun(WordCount.PLURAL));
+//        System.out.println(dupa.getAdjectiveForms(WordCount.SINGULAR, WordGender.MASCULINE, 0) + " " + poldupek.getNoun(WordCount.SINGULAR));
+//        System.out.println(dupa.getAdjectiveForms(WordCount.SINGULAR, WordGender.FEMININE, 0) + " " + wola.getNoun(WordCount.SINGULAR));
+//        System.out.println(dupa.getAdjectiveForms(WordCount.SINGULAR, WordGender.NEUTRAL, 0));
+//        System.out.println(dupa.getAdjectiveForms(WordCount.PLURAL, WordGender.MASCULINE, 0) + " " + poldupek.getNoun(WordCount.PLURAL));
+//        System.out.println(dupa.getAdjectiveForms(WordCount.PLURAL, WordGender.FEMININE, 0) + " " + wola.getNoun(WordCount.PLURAL));
+//        System.out.println(dupa.getAdjectiveForms(WordCount.PLURAL, WordGender.NEUTRAL, 0));
+        for (int i = 0; i < 500; i++) {
+            System.out.println(initializer.determineName(false));
+        }
+    }
+
+    private String generateTownName() {
+        for (int i = 0; i < 100; i++) {
+            String generated = ernizjumPhonotactic.generateCapitalizedWord(
+                    WordType.CITY,
+                    citySyllablesCountMap
+            );
+            if (usedNames.add(generated)) {
+                return generated;
+            }
+        }
+        throw new IllegalStateException("Cannot generate unique town name");
     }
 
     private SimulationPlace initializeGilgamore() {
@@ -104,9 +167,15 @@ public class PlaceInitializer {
         model.getPlaceCharacteristics().add(PlaceCharacteristic.CAPITAL);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
+        return mergeAndRegister(city, conf, model);
+    }
+
+    private static SimulationPlace mergeAndRegister(SimulationPlace city, ConfigurationPlace conf, ModelPlace model) {
         city.setConf(conf);
         city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
+        if (MainEngine.getInstance() != null) {
+            MainEngine.getInstance().getPlaceRegistry().register(city);
+        }
         return city;
     }
 
@@ -126,10 +195,7 @@ public class PlaceInitializer {
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeEgerenna() {
@@ -147,10 +213,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeVerdalon() {
@@ -168,10 +231,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.TRADING);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeAstaria() {
@@ -189,10 +249,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeErgondol() {
@@ -210,10 +267,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeSartama() {
@@ -234,10 +288,7 @@ public class PlaceInitializer {
         model.getPlaceCharacteristics().add(PlaceCharacteristic.TRADING);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.SEA_PORT);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeWornimore() {
@@ -257,10 +308,7 @@ public class PlaceInitializer {
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.ENCHANTED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeKorsana() {
@@ -279,10 +327,7 @@ public class PlaceInitializer {
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeZelderin() {
@@ -302,10 +347,7 @@ public class PlaceInitializer {
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.SEA_PORT);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeCaravista() {
@@ -325,10 +367,7 @@ public class PlaceInitializer {
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.RIVER_PORT);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeUvarra() {
@@ -349,10 +388,7 @@ public class PlaceInitializer {
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.ARTISAN);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.MINING);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeJirdenal() {
@@ -373,10 +409,7 @@ public class PlaceInitializer {
         model.getPlaceCharacteristics().add(PlaceCharacteristic.SEA_PORT);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.TRADING);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FISHING);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeXalivore() {
@@ -396,10 +429,7 @@ public class PlaceInitializer {
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.ARTISAN);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializePernagol() {
@@ -419,10 +449,7 @@ public class PlaceInitializer {
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
         model.getPlaceCharacteristics().add(PlaceCharacteristic.ARTISAN);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeIsvellin() {
@@ -440,10 +467,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.TRADING);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeRepenvore() {
@@ -460,10 +484,7 @@ public class PlaceInitializer {
                 .setName("Repenvore")
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeTantanor() {
@@ -481,10 +502,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeDurnatel() {
@@ -502,10 +520,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.LOCAL_CAPITAL);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeVizarna() {
@@ -523,10 +538,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
 //        model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeHasirel() {
@@ -544,10 +556,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeNaderia() {
@@ -565,10 +574,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeQuvelmore() {
@@ -586,28 +592,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
-    }
-
-    private SimulationPlace initializeNamedCity(String name, Long id, Coordinate coordinate) {
-        SimulationPlace city = new SimulationPlace();
-        ConfigurationPlace conf = ConfigurationPlace.builder()
-                .setBuiltYear(determineBuiltYearAfter(1194))
-                .setDestroyedYear(null)
-                .build();
-        ModelPlace model = new ModelPlace();
-        model.setType(PlaceType.SETTLEMENT)
-                .setId(id)
-                .setName(name)
-                .setState(PlaceState.ALRIGHT)
-                .setLocation( gf.createPoint(coordinate));
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeResidel() {
@@ -625,10 +610,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeQurena() {
@@ -646,10 +628,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeSardena() {
@@ -667,10 +646,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeMirnadel() {
@@ -688,10 +664,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeNadarvel() {
@@ -709,10 +682,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeVangodar() {
@@ -730,10 +700,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeLutnaran() {
@@ -751,10 +718,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeFelarna() {
@@ -772,10 +736,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeTirnugal() {
@@ -793,10 +754,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeNonusta() {
@@ -814,10 +772,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeAnverna() {
@@ -835,10 +790,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeGolveran() {
@@ -856,10 +808,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeOstivore() {
@@ -877,10 +826,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private SimulationPlace initializeBellenau() {
@@ -898,10 +844,7 @@ public class PlaceInitializer {
                 .setState(PlaceState.ALRIGHT)
                 .setLocation( gf.createPoint(coordinate));
         model.getPlaceCharacteristics().add(PlaceCharacteristic.FORTIFIED);
-        city.setConf(conf);
-        city.setModel(model);
-        MainEngine.getInstance().getPlaceRegistry().register(city);
-        return city;
+        return mergeAndRegister(city, conf, model);
     }
 
     private Integer determineBuiltYearAfter(int year) {

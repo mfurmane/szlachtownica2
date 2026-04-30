@@ -64,20 +64,20 @@ public class ModelSettlement extends MapFeature {
     public ModelSettlement(Builder builder) {
         this.id = builder.id;
         this.regionId = builder.regionId;
-        this.populatable.setLevel(builder.level);
+//        this.populatable.setLevel(builder.level);
         this.getCharacteristics().addAll(builder.characteristics);
 
-        this.populatable.setMinLevel(builder.minLevel);
-        this.populatable.setMaxLevel(builder.maxLevel);
-        this.populatable.setCulturalEvolution(builder.culturalEvolution);
-        this.populatable.setTechnologyAdoption(builder.technologyAdoption);
-        this.populatable.setMigrationAttractiveness(builder.migrationAttractiveness);
-        this.populatable.setTradeAttractiveness(builder.tradeAttractiveness);
+//        this.populatable.setMinLevel(builder.minLevel);
+//        this.populatable.setMaxLevel(builder.maxLevel);
+//        this.populatable.setCulturalEvolution(builder.culturalEvolution);
+//        this.populatable.setTechnologyAdoption(builder.technologyAdoption);
+//        this.populatable.setMigrationAttractiveness(builder.migrationAttractiveness);
+//        this.populatable.setTradeAttractiveness(builder.tradeAttractiveness);
         this.expanse = builder.expanse;
         this.populatable.setInstability(builder.instability);
-        this.populatable.setComfort(builder.comfort);
-        this.populatable.setOrder(builder.order);
-        this.populatable.setSafety(builder.safety);
+//        this.populatable.setComfort(builder.comfort);
+//        this.populatable.setOrder(builder.order);
+//        this.populatable.setSafety(builder.safety);
     }
 
     public static Builder builder() {
@@ -131,9 +131,9 @@ public class ModelSettlement extends MapFeature {
     public boolean hasProminentEnchant() {
         return region().getModelRegion().getEnchantmentLevel() >= 3;
     }
-    public boolean hasProperLevel(int min, int max) {
-        return populatable.getLevel() >= min && populatable.getLevel() <= max;
-    }
+//    public boolean hasProperLevel(int min, int max) {
+//        return populatable.getLevel() >= min && populatable.getLevel() <= max;
+//    }
     public boolean hasLumberingPotential() {
         return region().getModelRegion().getWoodRichness() > 8;
     //woodRichness

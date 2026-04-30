@@ -7,7 +7,7 @@ import priv.mfurmane.szlachtownica.model.main.entities.EntityMountains;
 
 public class ModelMountains extends MapFeature {
     private String name;
-    private Double height = 1000;
+    private Double height = 1000D;
     private Polygon area;
     private LineString line;
 
