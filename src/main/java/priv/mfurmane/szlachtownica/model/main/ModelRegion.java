@@ -28,9 +28,9 @@ public class ModelRegion implements Comparable<ModelRegion> {
     private Double attitude;
     private Double stability;
     private Integer woodRichness;
-    private Boolean coast;
-    private Boolean river;
-    private Boolean lake;
+    private Boolean coast = false;
+    private Boolean river = false;
+    private Boolean lake = false;
     private ModelMountains mountains;
     private TerrainShape terrainShape;
     private SoilType soilType;
@@ -155,7 +155,7 @@ public class ModelRegion implements Comparable<ModelRegion> {
     public ModelRegion() {}
 
     public ModelRegion(Builder builder) {
-        setGeneralProfile(new GeneralProfile(builder.humidity, builder.climate, builder.terrainShape, builder.enchant));
+        setGeneralProfile(new GeneralProfile(builder.humidity != null ? builder.humidity : Humidity.NEUTRAL, builder.climate != null ? builder.climate : Climate.NEUTRAL, builder.terrainShape != null ? builder.terrainShape : TerrainShape.FLATLANDS, builder.enchant != null ? builder.enchant : EnchantType.NONE));
         woodRichness = builder.woodRichness;
         type = builder.type != null ? builder.type : determineType();
         developmentLevel = builder.developmentLevel;
@@ -169,14 +169,16 @@ public class ModelRegion implements Comparable<ModelRegion> {
 //        places.addAll(builder.startCities);
         boolean hasLake = false;
         boolean hasRiver = false;
-        for (int i = 0; i < builder.lakesRichness; i++) {
-            if (rand.nextDouble() < builder.lakesRichness / 20.0) {
+        int lakesRichness = builder.lakesRichness != null ? builder.lakesRichness : 1;
+        for (int i = 0; i < lakesRichness; i++) {
+            if (rand.nextDouble() < lakesRichness / 20.0) {
 //                places.add(ModelPlace.newLake());
                 hasLake = true;
             }
         }
-        for (int i = 0; i < builder.riversRichness; i++) {
-            if (rand.nextDouble() < builder.riversRichness / 20.0) {
+        int riversRichness = builder.riversRichness != null ? builder.riversRichness : 1;
+        for (int i = 0; i < riversRichness; i++) {
+            if (rand.nextDouble() < riversRichness / 20.0) {
 //                places.add(ModelPlace.newRiver());
                 hasRiver = true;
             }

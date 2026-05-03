@@ -26,8 +26,8 @@ public class GeoUtils {
     public static final String RIVERS_PATH = "src/main/resources/rivers/";
     public static final String ROADS_PATH = "src/main/resources/roads/";
     private static final String LAKES_PATH = "src/main/resources/lakes/";
-    private static final String MOUNTAINS_AREA_PATH = "src/main/resources/mountains/shapes";
-    private static final String MOUNTAINS_LINE_PATH = "src/main/resources/mountains/lines";
+    private static final String MOUNTAINS_AREA_PATH = "src/main/resources/mountains/shapes/";
+    private static final String MOUNTAINS_LINE_PATH = "src/main/resources/mountains/lines/";
 
     /**
      * Mapuje piksel (x,y) do współrzędnych geograficznych (lat, lon) w stopniach.
@@ -102,6 +102,10 @@ public class GeoUtils {
                     used.add(value);
                 }
             });
+            if (polygons.isEmpty()) {
+                System.out.println("No polygon for " + arg);
+                return null;
+            }
             return polygons.get(0);
         } catch (IOException e) {
             throw new RuntimeException(e);

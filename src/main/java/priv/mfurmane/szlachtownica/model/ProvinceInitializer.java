@@ -26,6 +26,7 @@ import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -237,6 +238,7 @@ public class ProvinceInitializer {
                             addConnections(region, otherRegion, RegionConnectionType.BORDER, null, 0.0);
                         }
                     } else if (intersection.getDimension() == 2) {
+//                        System.out.println("Regions overlap: " + region.getId() + " & " + otherRegion.getId());
                         throw new IllegalStateException("Regions overlap: " + region.getId() + " & " + otherRegion.getId());                    }
                 }
             }
@@ -523,16 +525,154 @@ public class ProvinceInitializer {
         }
     }
 
-    private List<Polygon> generateSubGeometries(Polygon area, int partsCount, List<Coordinate> points, boolean smallDist) {
-//        List<Coordinate> points = new ArrayList<>();
+//    private List<Polygon> generateSubGeometries(Polygon area, int partsCount, List<Coordinate> points, boolean smallDist) {
+////        List<Coordinate> points = new ArrayList<>();
+////        int attempts = 0;
+////        int voronoiIterations = 2;
+////        int maxAttempts = 10000;
+//        Envelope env = area.getEnvelopeInternal();
+////        double minDistModifier = 0.06;
+////        double tmpMinDist = env.getHeight() * minDistModifier;
+////        double minDist = smallDist ? tmpMinDist / 20 : tmpMinDist;
+//
+//        double areaSize = area.getArea();
+//// zakładamy upakowanie ~50% (luźniejsze niż teoretyczne maksimum)
+//        double minDist = Math.sqrt(areaSize / partsCount) * 0.5;
+//// opcjonalnie ogranicz z góry żeby punkty nie były zbyt blisko siebie
+//        double minDistCap = env.getHeight() * 0.03;
+//        minDist = Math.min(minDist, minDistCap);
+//
+////        generatePoints(area, partsCount, minDist);
+//        //province.getConf().getSubProvinces().size()
+//        List<Polygon> subGeoms;
+//        int retries = 0;
+//        do {
+//            try {
+//                subGeoms = voronoiThisShit(partsCount, new ArrayList<>(points), area);
+//                break;
+//            } catch (RuntimeException e) {
+//                if (++retries > 5) throw e;
+//                // Losuj punkty od nowa
+//                points = generatePoints(area, partsCount, minDist);
+//            }
+//        } while (true);
+////        while (points.size() < partsCount && attempts < maxAttempts) {
+////            attempts++;
+////            double x = env.getMinX() + rand.nextDouble() * env.getWidth();
+////            double y = env.getMinY() + rand.nextDouble() * env.getHeight();
+////            Coordinate coordinate = new Coordinate(x, y);
+////            Point p = gf.createPoint(coordinate);
+////            boolean tooClose = points.stream()
+////                    .anyMatch(c -> c.distance(coordinate) < minDist);
+////            Geometry safeArea = area.buffer(-minDist);
+////            if (!tooClose && safeArea.contains(p)) {
+////                points.add(coordinate);
+////            }
+////        }
+////        if (attempts >= maxAttempts) {
+////            throw new RuntimeException("Nie udało się wygenerować punktów");
+////        }
+////        List<Polygon> subGeoms = new ArrayList<>();
+////        for (int i = 0; i < voronoiIterations; i++) {
+////            subGeoms = voronoiThisShit(partsCount, points, area);
+////            points = subGeoms.stream()
+////                    .map(p -> p.getCentroid().getCoordinate())
+////                    .toList();
+////        }
+////        Envelope clip = new Envelope(0, 100, 0, 100);
+////        VoronoiPerlinNaturalizer naturalizer = new VoronoiPerlinNaturalizer(gf, 24, 0.002, 1.0, 10); //new VoronoiNaturalizer(gf, 5, 2.0); // 5 segmentów, max przesunięcie 2
+////        return naturalizer.generateNaturalVoronoi(points, clip);
+////        return naturalizer.naturalizeVoronoi(subGeoms);
+//        return subGeoms;
+//
+////        result.get
+////        for (int i = 0; i < province.getModel().getSubProvinces().size(); i++) {
+////            SimulationSubProvince s = province.getModel().getSubProvinces().get(i);
+////            s.getModel().setArea(subGeoms.get(i));
+////        }
+//    }
+
+    private List<Polygon> generateSubGeometries(Polygon area, int partsCount, List<Coordinate> initialPoints, boolean smallDist) {
+        System.out.println("generateSubGeometries START: partsCount=" + partsCount
+                + " area vertices=" + area.getNumPoints());
         Envelope env = area.getEnvelopeInternal();
+        double areaSize = area.getArea();
+        double minDist = Math.sqrt(areaSize / partsCount) * 0.5;
+        double minDistCap = env.getHeight() * 0.03;
+        minDist = Math.min(minDist, minDistCap);
+
+        List<Coordinate> points = initialPoints.isEmpty()
+                ? generatePoints(area, partsCount, minDist)
+                : new ArrayList<>(initialPoints);
+
+        int retries = 0;
+        while (true) {
+            try {
+                // Lloyd's relaxation PRZED naturalizacją
+                int lloydIterations = 4; // więcej iteracji = równiejsze rozmiary
+                List<Polygon> rawGeoms = Collections.emptyList();
+                for (int i = 0; i < lloydIterations; i++) {
+                    System.out.println("Lloyd iteration " + i);
+                    rawGeoms = voronoiRaw(partsCount, points, area); // tylko Voronoi, bez naturalizacji
+                    points = rawGeoms.stream()
+                            .map(p -> p.getCentroid().getCoordinate())
+                            .toList();
+                }
+                // Naturalizacja tylko raz, na końcu
+                System.out.println("naturalize START");
+                List<Polygon> result = naturalize(rawGeoms, area);
+                System.out.println("naturalize DONE: " + result.size() + " polygons");
+                return result;
+//                return naturalize(rawGeoms, area);
+            } catch (RuntimeException e) {
+                if (++retries > 5) throw e;
+                points = generatePoints(area, partsCount, minDist);
+            }
+        }
+    }
+
+    private static List<Polygon> voronoiRaw(int partsSize, List<Coordinate> points, Polygon area) {
+        VoronoiDiagramBuilder voronoi = new VoronoiDiagramBuilder();
+        voronoi.setTolerance(0.0001);
+        voronoi.setSites(points);
+        Geometry diagram = voronoi.getDiagram(gf);
+
+        List<Polygon> subGeoms = new ArrayList<>();
+        for (int i = 0; i < diagram.getNumGeometries(); i++) {
+            Geometry cell = diagram.getGeometryN(i);
+            Geometry clipped = cell.intersection(area);
+            if (clipped.isEmpty()) continue;
+            if (clipped instanceof Polygon p) {
+                subGeoms.add(p);
+            } else if (clipped instanceof GeometryCollection gc) {
+                Polygon largest = getLargest(gc);
+                if (largest != null) subGeoms.add(largest);
+            }
+        }
+        if (subGeoms.size() != partsSize) {
+            throw new RuntimeException("Za mało poligonów — retry");
+        }
+        return subGeoms;
+    }
+
+    private static List<Polygon> naturalize(List<Polygon> rawGeoms, Polygon area) {
+        double amplitude = area.getEnvelopeInternal().getWidth() * 0.04;
+        VoronoiPerlinNaturalizer naturalizer = new VoronoiPerlinNaturalizer(
+                gf, determineSegmentsCount(area), amplitude, 0.3, 10);
+        return naturalizer.naturalizeVoronoi(rawGeoms);
+    }
+
+    private List<Coordinate> generatePoints(Polygon area, int partsCount, double minDist) {
+        Envelope env = area.getEnvelopeInternal();
+        List<Coordinate> points = new ArrayList<>();
         int attempts = 0;
-        int voronoiIterations = 1;
         int maxAttempts = 10000;
-        double minDistModifier = 0.06;
-        double tmpMinDist = env.getHeight() * minDistModifier;
-        double minDist = smallDist ? tmpMinDist / 20 : tmpMinDist;
-        //province.getConf().getSubProvinces().size()
+//        Geometry safeArea = area.buffer(-minDist);
+
+        System.out.println("Generuję safeArea... ");
+        long t0 = System.currentTimeMillis();
+        Geometry safeArea = area.buffer(-minDist);
+        System.out.println("safeArea gotowe, area=" + safeArea.getArea() + ", buffer took " + (System.currentTimeMillis() - t0) + "ms");
 
         while (points.size() < partsCount && attempts < maxAttempts) {
             attempts++;
@@ -542,32 +682,19 @@ public class ProvinceInitializer {
             Point p = gf.createPoint(coordinate);
             boolean tooClose = points.stream()
                     .anyMatch(c -> c.distance(coordinate) < minDist);
-            Geometry safeArea = area.buffer(-minDist);
             if (!tooClose && safeArea.contains(p)) {
                 points.add(coordinate);
             }
         }
         if (attempts >= maxAttempts) {
-            throw new RuntimeException("Nie udało się wygenerować punktów");
-        }
-        List<Polygon> subGeoms = new ArrayList<>();
-        for (int i = 0; i < voronoiIterations; i++) {
-            subGeoms = voronoiThisShit(partsCount, points, area);
-            points = subGeoms.stream()
-                    .map(p -> p.getCentroid().getCoordinate())
-                    .toList();
-        }
-//        Envelope clip = new Envelope(0, 100, 0, 100);
-//        VoronoiPerlinNaturalizer naturalizer = new VoronoiPerlinNaturalizer(gf, 24, 0.002, 1.0, 10); //new VoronoiNaturalizer(gf, 5, 2.0); // 5 segmentów, max przesunięcie 2
-//        return naturalizer.generateNaturalVoronoi(points, clip);
-//        return naturalizer.naturalizeVoronoi(subGeoms);
-        return subGeoms;
+            double areaSize = area.getArea();
+            double usableArea = safeArea.getArea();
+            System.out.printf("Nie udało się: partsCount=%d, minDist=%.2f, area=%.2f, usable=%.2f, punktów zebranych: %d%n",
+                    partsCount, minDist, areaSize, usableArea, points.size());
 
-//        result.get
-//        for (int i = 0; i < province.getModel().getSubProvinces().size(); i++) {
-//            SimulationSubProvince s = province.getModel().getSubProvinces().get(i);
-//            s.getModel().setArea(subGeoms.get(i));
-//        }
+            throw new RuntimeException("Nie udało się wygenerować punktów Voronoi");
+        }
+        return points;
     }
 
     private static List<Polygon> voronoiThisShit(int partsSize, List<Coordinate> points, Polygon area) {
@@ -583,37 +710,87 @@ public class ProvinceInitializer {
             Geometry cell = diagram.getGeometryN(i);
             Geometry clipped = cell.intersection(area);
             if (clipped.isEmpty()) continue;
+
             if (clipped instanceof Polygon p) {
                 subGeoms.add(p);
             } else if (clipped instanceof MultiPolygon mp) {
-                // wybierz największy kawałek
-                Polygon biggest = null;
+                subGeoms.add(getLargest(mp));
+            } else if (clipped instanceof GeometryCollection gc) {
+                // Zbierz wszystkie Polygon z kolekcji i weź największy
+                Polygon best = null;
                 double maxArea = -1;
-                for (int j = 0; j < mp.getNumGeometries(); j++) {
-                    Polygon candidate = (Polygon) mp.getGeometryN(j);
-                    double areaSize = candidate.getArea();
-                    if (areaSize > maxArea) {
-                        maxArea = areaSize;
-                        biggest = candidate;
+                for (int j = 0; j < gc.getNumGeometries(); j++) {
+                    Geometry g = gc.getGeometryN(j);
+                    if (g instanceof Polygon p && p.getArea() > maxArea) {
+                        maxArea = p.getArea();
+                        best = p;
                     }
                 }
-                if (biggest != null) {
-                    subGeoms.add(biggest);
-                }
-//                for (int j = 0; j < mp.getNumGeometries(); j++) {
-//                    subGeoms.add((Polygon) mp.getGeometryN(j));
-//                }
+                if (best != null) subGeoms.add(best);
+                // jeśli best == null, komórka była zdegenerowana — pomijamy
             }
+
+//            if (clipped instanceof Polygon p) {
+//                subGeoms.add(p);
+//            } else if (clipped instanceof MultiPolygon mp) {
+//                // wybierz największy kawałek
+//                Polygon biggest = null;
+//                double maxArea = -1;
+//                for (int j = 0; j < mp.getNumGeometries(); j++) {
+//                    Polygon candidate = (Polygon) mp.getGeometryN(j);
+//                    double areaSize = candidate.getArea();
+//                    if (areaSize > maxArea) {
+//                        maxArea = areaSize;
+//                        biggest = candidate;
+//                    }
+//                }
+//                if (biggest != null) {
+//                    subGeoms.add(biggest);
+//                }
+////                for (int j = 0; j < mp.getNumGeometries(); j++) {
+////                    subGeoms.add((Polygon) mp.getGeometryN(j));
+////                }
+//            }
         }
-        double amplitude = area.getEnvelopeInternal().getWidth() * 0.015;
-        VoronoiPerlinNaturalizer naturalizer = new VoronoiPerlinNaturalizer(gf, determineSegmentsCount(area), 0.1, 2.0, 10); //new VoronoiNaturalizer(gf, 5, 2.0); // 5 segmentów, max przesunięcie 2
+//        double amplitude = area.getEnvelopeInternal().getWidth() * 0.015;
+//        VoronoiPerlinNaturalizer naturalizer = new VoronoiPerlinNaturalizer(gf, determineSegmentsCount(area), amplitude, 2.0, 10); //new VoronoiNaturalizer(gf, 5, 2.0); // 5 segmentów, max przesunięcie 2
+        double amplitude = area.getEnvelopeInternal().getWidth() * 0.04; // więcej wychylenia
+        VoronoiPerlinNaturalizer naturalizer = new VoronoiPerlinNaturalizer(
+                gf, determineSegmentsCount(area), amplitude, 0.3, 10);
 //        return naturalizer.generateNaturalVoronoi(points, clip);
 //        return naturalizer.naturalizeVoronoi(subGeoms);
+
+
         subGeoms = naturalizer.naturalizeVoronoi(subGeoms);
-        if (subGeoms.size() != partsSize) {
-            throw new IllegalStateException("Mismatch: " + subGeoms.size() + " vs " + partsSize);
+// Zamiast throw — przytnij lub zignoruj nadmiarowe
+        if (subGeoms.size() > partsSize) {
+            // Posortuj rosnąco po powierzchni, odrzuć najmniejsze nadmiarowe
+            subGeoms.sort(Comparator.comparingDouble(Polygon::getArea).reversed());
+            subGeoms = subGeoms.subList(0, partsSize);
+        } else if (subGeoms.size() < partsSize) {
+            // Podziel największy polygon na dwa przez jego centroid
+            // albo po prostu ponów całą generację z innym seedem
+            throw new RuntimeException("Za mało poligonów — retry");
         }
+
+//        subGeoms = naturalizer.naturalizeVoronoi(subGeoms);
+//        if (subGeoms.size() != partsSize) {
+//            throw new IllegalStateException("Mismatch: " + subGeoms.size() + " vs " + partsSize);
+//        }
         return subGeoms;
+    }
+
+    private static Polygon getLargest(GeometryCollection gc) {
+        Polygon best = null;
+        double maxArea = -1;
+        for (int i = 0; i < gc.getNumGeometries(); i++) {
+            Geometry g = gc.getGeometryN(i);
+            if (g instanceof Polygon p && p.getArea() > maxArea) {
+                maxArea = p.getArea();
+                best = p;
+            }
+        }
+        return best; // może być null jeśli kolekcja nie zawiera żadnego Polygon
     }
 
     private static int determineSegmentsCount(Polygon area) {
