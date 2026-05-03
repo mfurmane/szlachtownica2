@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.engine.naming.ernizjum.ErnizjumPhonotactic;
 import priv.mfurmane.szlachtownica.engine.naming.model.*;
+import priv.mfurmane.szlachtownica.engine.naming.nereneth.NerenethPhonotactic;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationPlace;
 import priv.mfurmane.szlachtownica.model.main.ModelPlace;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
@@ -26,7 +27,8 @@ public class PlaceInitializer {
     public static final GeometryFactory gf = new GeometryFactory();
     Set<String> usedNames = new HashSet<>();
 
-    private Phonotactic ernizjumPhonotactic = new ErnizjumPhonotactic();
+    private final Phonotactic ernizjumPhonotactic = new ErnizjumPhonotactic();
+    private final Phonotactic nerenethPhonotactic = new NerenethPhonotactic();
 
     private final ObjectMapper mapper = new ObjectMapper();
 
@@ -116,6 +118,17 @@ public class PlaceInitializer {
     }
 
     private String generateVillageName() {
+
+        for (int i = 0; i < 100; i++) {
+            String generated = nerenethPhonotactic.generateCapitalizedWord(
+                    WordType.CITY,
+                    citySyllablesCountMap
+            );
+            if (usedNames.add(generated)) {
+                return generated;
+            }
+        }
+
         return VillageNameGenerator.generate();
     }
 

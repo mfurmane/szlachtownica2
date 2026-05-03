@@ -35,7 +35,7 @@ public class NatureInitializer {
         lakes.add(initializeLake("dibert"));
         lakes.add(initializeLake("gilgam"));
         lakes.add(initializeLake("rozlewisko"));
-        lakes.add(initializeLake("vostin"));
+//        lakes.add(initializeLake("vostin"));
         return lakes;
     }
 
@@ -83,16 +83,16 @@ public class NatureInitializer {
     private ModelLake initializeLake(String name) {
         ModelLake lake = new ModelLake(name);
         lake.setArea(GeoUtils.readLake(name));
-        lakeRepository.save(lake.toEntity());
-        engine.getLakeRegistry().register(lake);
+//        lakeRepository.save(lake.toEntity());
+//        engine.getLakeRegistry().register(lake);
         return lake;
     }
 
     private ModelRiver initializeRiver(String name) {
         ModelRiver river = new ModelRiver(name);
         river.setLine(GeoUtils.readRiver(name));
-        riverRepository.save(river.toEntity());
-        engine.getRiverRegistry().register(river);
+//        riverRepository.save(river.toEntity());
+//        engine.getRiverRegistry().register(river);
         return river;
     }
 
@@ -101,8 +101,8 @@ public class NatureInitializer {
         GeoUtils.MountainsGeometry mountainsGeometry = GeoUtils.readMountains(name);
         mountains.setArea(mountainsGeometry.area());
         mountains.setLine(mountainsGeometry.line());
-        mountainsRepository.save(mountains.toEntity());
-        engine.getMountainsRegistry().register(mountains);
+//        mountainsRepository.save(mountains.toEntity());
+//        engine.getMountainsRegistry().register(mountains);
         return mountains;
     }
 }

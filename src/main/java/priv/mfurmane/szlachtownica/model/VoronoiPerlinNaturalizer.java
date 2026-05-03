@@ -246,6 +246,27 @@ public class VoronoiPerlinNaturalizer {
         return largest;
     }
 
+//    private LinearRing rebuildRing(LineString ring, Map<String, Coordinate[]> transformedEdges) {
+//        List<Coordinate> coords = new ArrayList<>();
+//        for (int i = 0; i < ring.getNumPoints() - 1; i++) {
+//            Coordinate c1 = ring.getCoordinateN(i);
+//            Coordinate c2 = ring.getCoordinateN(i + 1);
+//            String key = makeEdgeKey(c1, c2);
+//            Coordinate[] edge = transformedEdges.get(key);
+//            // dopasowanie kierunku
+//            if (!edge[0].equals2D(c1)) {
+//                for (int j = edge.length - 1; j >= 0; j--) {
+//                    coords.add(edge[j]);
+//                }
+//            } else {
+//                Collections.addAll(coords, edge);
+//            }
+//        }
+//        // zamknięcie pierścienia
+//        coords.add(coords.get(0));
+//        return gf.createLinearRing(coords.toArray(new Coordinate[0]));
+//    }
+
     private LinearRing rebuildRing(LineString ring, Map<String, Coordinate[]> transformedEdges) {
         List<Coordinate> coords = new ArrayList<>();
         for (int i = 0; i < ring.getNumPoints() - 1; i++) {
@@ -253,17 +274,21 @@ public class VoronoiPerlinNaturalizer {
             Coordinate c2 = ring.getCoordinateN(i + 1);
             String key = makeEdgeKey(c1, c2);
             Coordinate[] edge = transformedEdges.get(key);
-            // dopasowanie kierunku
+
             if (!edge[0].equals2D(c1)) {
-                for (int j = edge.length - 1; j >= 0; j--) {
+                // odwrócony kierunek — dodaj wszystko OPRÓCZ ostatniego (bo to c1,
+                // który był już ostatnim punktem poprzedniej krawędzi)
+                for (int j = edge.length - 1; j >= 1; j--) {
                     coords.add(edge[j]);
                 }
             } else {
-                Collections.addAll(coords, edge);
+                // normalny kierunek — dodaj wszystko OPRÓCZ ostatniego punktu
+                for (int j = 0; j < edge.length - 1; j++) {
+                    coords.add(edge[j]);
+                }
             }
         }
-        // zamknięcie pierścienia
-        coords.add(coords.get(0));
+        coords.add(coords.get(0)); // zamknięcie
         return gf.createLinearRing(coords.toArray(new Coordinate[0]));
     }
 }
