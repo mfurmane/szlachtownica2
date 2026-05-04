@@ -17,6 +17,11 @@ public class NerenethMorphology implements Morphology {
                     .add(1.0, "")
 //                    .add(0.75, "o")
 //                    .add(0.25, "u")
+                    .build(),
+            WordType.PERSON, new WeightMapBuilder()
+                    .add(1.0, "")
+//                    .add(0.75, "o")
+//                    .add(0.25, "u")
                     .build()
             );
 
