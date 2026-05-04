@@ -1,9 +1,6 @@
 package priv.mfurmane.szlachtownica.engine.naming.nereneth;
 
-import priv.mfurmane.szlachtownica.engine.naming.model.Morphology;
-import priv.mfurmane.szlachtownica.engine.naming.model.Phonotactic;
-import priv.mfurmane.szlachtownica.engine.naming.model.Syllable;
-import priv.mfurmane.szlachtownica.engine.naming.model.WeightMapBuilder;
+import priv.mfurmane.szlachtownica.engine.naming.model.*;
 
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
@@ -14,15 +11,15 @@ public class NerenethPhonotactic implements Phonotactic {
 
     private final Map<String, Double> onsets = new WeightMapBuilder()
             .add(3.0, "", "s")
-            .add(2.0, "qu", "v")
-            .add(1.0, "l", "r")
+            .add(2.0, "v")
+            .add(1.0, "l", "r", "qu")
             .add(0.5, "n", "g", "th")
             .add(0.2, "c", "t")
             .add(0.05, "b", "m", "f", "d", "k")
             .build();
     private final Map<String, Double> nuclei = new WeightMapBuilder()
-            .add(4.0, "a", "e", "ae", "ea", "i")
-            .add(1.5, "oe", "eo", "oa", "ao")
+            .add(6.0, "a", "e", "ae", "ea", "i")
+//            .add(1.5, "oe", "eo", "oa", "ao")
             .add(0.6, "oe", "eo", "oa", "ao")
             .add(0.2, "ua", "ue", "au", "eu")
             .add(0.05, "ia", "ie")
@@ -32,6 +29,7 @@ public class NerenethPhonotactic implements Phonotactic {
             .add(1.0, "r", "l")
             .add(0.3, "n")
             .build();
+    private final String[] mainCodas = {"r", "l", "n", "s"};
 
     @Override
     public boolean isValid(String word) {
@@ -68,7 +66,15 @@ public class NerenethPhonotactic implements Phonotactic {
                         && next.onset().length() == 1
                         && prev.coda().equals(next.onset()));
         boolean noEmptyTransitions = !(prevEndsEmpty && nextStartsEmpty);
-        return noEmptyTransitions && avoidSandwich;
+        return noEmptyTransitions && avoidSandwich
+                && noReturningOnset("r", prev, next)
+                && noReturningOnset("qu", prev, next);
+    }
+
+    private boolean noReturningOnset(String onset, Syllable prev, Syllable next) {
+        boolean prevROnset = prev.onset().equals(onset);
+        boolean nextROnset = next.onset().equals(onset);
+        return !(prevROnset && nextROnset);
     }
 
     @Override
@@ -127,6 +133,13 @@ public class NerenethPhonotactic implements Phonotactic {
         return 4;
     }
 
+    public String generateCapitalizedWordWithHardCoda(WordType wordType, Map<Integer, Double> syllabes) {
+        String generated = generateCapitalizedWord(wordType, syllabes);
+        if (!codas.containsKey(generated.substring(generated.length() - 1, generated.length() - 0))) {
+            generated += mainCodas[ThreadLocalRandom.current().nextInt(mainCodas.length)];
+        }
+        return generated;
+    }
 }
 
 

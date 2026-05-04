@@ -23,6 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @Component
 public class PlaceInitializer {
     public static final Map<Integer, Double> citySyllablesCountMap = Map.of(1, 2.5, 2, 7.0, 3, 0.5);
+    public static final Map<Integer, Double> nerenethSyllablesCountMap = Map.of(2, 2.5, 3, 7.0, 4, 0.5);
     private MainEngine engine;
     public static final GeometryFactory gf = new GeometryFactory();
     Set<String> usedNames = new HashSet<>();
@@ -122,7 +123,8 @@ public class PlaceInitializer {
         for (int i = 0; i < 100; i++) {
             String generated = nerenethPhonotactic.generateCapitalizedWord(
                     WordType.CITY,
-                    citySyllablesCountMap
+//                    citySyllablesCountMap
+                    nerenethSyllablesCountMap
             );
             if (usedNames.add(generated)) {
                 return generated;
@@ -146,7 +148,8 @@ public class PlaceInitializer {
 //        System.out.println(dupa.getAdjectiveForms(WordCount.PLURAL, WordGender.FEMININE, 0) + " " + wola.getNoun(WordCount.PLURAL));
 //        System.out.println(dupa.getAdjectiveForms(WordCount.PLURAL, WordGender.NEUTRAL, 0));
         for (int i = 0; i < 500; i++) {
-            System.out.println(initializer.determineName(false));
+            System.out.println(ElvenNameGenerator.getMaleName() + " " + ElvenNameGenerator.getFemaleName() + " " + ElvenNameGenerator.getSurname());
+//            System.out.println(initializer.determineName(false));
         }
     }
 
