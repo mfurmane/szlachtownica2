@@ -120,36 +120,30 @@ public class PlaceInitializer {
 
     private String generateVillageName() {
 
-        for (int i = 0; i < 100; i++) {
-            String generated = nerenethPhonotactic.generateCapitalizedWord(
-                    WordType.CITY,
-//                    citySyllablesCountMap
-                    nerenethSyllablesCountMap
-            );
-            if (usedNames.add(generated)) {
-                return generated;
-            }
-        }
+//        for (int i = 0; i < 100; i++) {
+//            String generated = nerenethPhonotactic.generateCapitalizedWord(
+//                    WordType.CITY,
+////                    citySyllablesCountMap
+//                    nerenethSyllablesCountMap
+//            );
+//            if (usedNames.add(generated)) {
+//                return generated;
+//            }
+//        }
 
         return VillageNameGenerator.generate();
     }
 
     public static void main(String[] args) {
         PlaceInitializer initializer = new PlaceInitializer();
-//        WordCore dupa = new WordCore("dup", WordGender.FEMININE, NounForms.createAy("dup"), List.of(AdjectiveForms.createNy("dup"), AdjectiveForms.createOwy("dup")));
-//        WordCore wola = new WordCore("kobie", WordGender.FEMININE, NounForms.createTa("kobie"), List.of(AdjectiveForms.createCy("kobie")));
-//        WordCore poldupek = new WordCore("półdup", WordGender.MASCULINE, NounForms.createEk("półdup"), List.of(AdjectiveForms.createOwy("półdupk")));
-//        System.out.println(dupa.getNoun(WordCount.SINGULAR) + " - " + wola.getNoun(WordCount.SINGULAR));
-//        System.out.println(dupa.getNoun(WordCount.PLURAL));
-//        System.out.println(dupa.getAdjectiveForms(WordCount.SINGULAR, WordGender.MASCULINE, 0) + " " + poldupek.getNoun(WordCount.SINGULAR));
-//        System.out.println(dupa.getAdjectiveForms(WordCount.SINGULAR, WordGender.FEMININE, 0) + " " + wola.getNoun(WordCount.SINGULAR));
-//        System.out.println(dupa.getAdjectiveForms(WordCount.SINGULAR, WordGender.NEUTRAL, 0));
-//        System.out.println(dupa.getAdjectiveForms(WordCount.PLURAL, WordGender.MASCULINE, 0) + " " + poldupek.getNoun(WordCount.PLURAL));
-//        System.out.println(dupa.getAdjectiveForms(WordCount.PLURAL, WordGender.FEMININE, 0) + " " + wola.getNoun(WordCount.PLURAL));
-//        System.out.println(dupa.getAdjectiveForms(WordCount.PLURAL, WordGender.NEUTRAL, 0));
+
         for (int i = 0; i < 500; i++) {
-            System.out.println(ElvenNameGenerator.getMaleName() + " " + ElvenNameGenerator.getFemaleName() + " " + ElvenNameGenerator.getSurname());
-//            System.out.println(initializer.determineName(false));
+//            System.out.println(ElvenNameGenerator.getMaleName() + " " + ElvenNameGenerator.getInnername(CharacterTrait.getRandom()) + " " + ElvenNameGenerator.getSurname());
+//            System.out.println(ElvenNameGenerator.getFemaleName() + " " + ElvenNameGenerator.getInnername(CharacterTrait.getRandom()) + " " + ElvenNameGenerator.getSurname());
+//            System.out.println(DwarvenNameGenerator.getMaleName() + " " + DwarvenNameGenerator.getMaleFather(CharacterTrait.getRandom()) + " " + DwarvenNameGenerator.getSurname());
+//            System.out.println(DwarvenNameGenerator.getFemaleName() + " " + DwarvenNameGenerator.getFemaleFather(CharacterTrait.getRandom()) + " " + DwarvenNameGenerator.getSurname());
+
+            System.out.println(initializer.determineName(false));
         }
     }
 

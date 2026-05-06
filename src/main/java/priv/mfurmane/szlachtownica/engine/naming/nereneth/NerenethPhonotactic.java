@@ -4,6 +4,7 @@ import priv.mfurmane.szlachtownica.engine.naming.model.*;
 
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class NerenethPhonotactic implements Phonotactic {
 
@@ -13,12 +14,21 @@ public class NerenethPhonotactic implements Phonotactic {
             .add(3.0, "", "s")
             .add(2.0, "v")
             .add(1.0, "l", "r", "qu")
-            .add(0.5, "n", "g", "th")
-            .add(0.2, "c", "t")
-            .add(0.05, "b", "m", "f", "d", "k")
+            .add(0.7, "n")
+            .add(0.5, "g", "th")
+            .add(0.2, "c", "t", "m")
+            .add(0.05, "b", "f", "d", "k")
             .build();
+
+    private final Map<String, Double> nonEmptyOnsets = onsets.entrySet().stream()
+            .filter(e -> !e.getKey().isEmpty())
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
     private final Map<String, Double> nuclei = new WeightMapBuilder()
-            .add(6.0, "a", "e", "ae", "ea", "i")
+            .add(6.0, "a", "e", "i")
+            .build();
+    private final Map<String, Double> coreNuclei = new WeightMapBuilder()
+            .add(6.0, "ae", "ea")
 //            .add(1.5, "oe", "eo", "oa", "ao")
             .add(0.6, "oe", "eo", "oa", "ao")
             .add(0.2, "ua", "ue", "au", "eu")
@@ -27,7 +37,7 @@ public class NerenethPhonotactic implements Phonotactic {
     private final Map<String, Double> codas = new WeightMapBuilder()
             .add(4.0, "")
             .add(1.0, "r", "l")
-            .add(0.3, "n")
+            .add(0.4, "n")
             .build();
     private final String[] mainCodas = {"r", "l", "n", "s"};
 
@@ -41,55 +51,32 @@ public class NerenethPhonotactic implements Phonotactic {
 
     @Override
     public boolean isValidSyllable(Syllable s) {
-        return onsets.containsKey(s.onset()) && nuclei.containsKey(s.nucleus()) && codas.containsKey(s.coda());
+        return onsets.containsKey(s.onset()) && (nuclei.containsKey(s.nucleus()) || coreNuclei.containsKey(s.nucleus())) && codas.containsKey(s.coda());
     }
 
     @Override
     public boolean canFollow(Syllable prev, Syllable next) {
         boolean prevEndsEmpty = prev.coda().isEmpty();
         boolean nextStartsEmpty = next.onset().isEmpty();
-//        boolean nextStartsWithA = next.onset().startsWith("a");
-//        boolean nextStartsWithE = next.onset().startsWith("e");
-//        boolean nextStartsWithI = next.onset().startsWith("i");
-//        boolean nextStartsWithO = next.onset().startsWith("o");
-//        boolean nextStartsWithU = next.onset().startsWith("u");
-////        boolean prevEndsWithL = prev.coda().equals("l");
-////        boolean nextStartsWithL = next.onset().equals("l");
-////        boolean nextOnsetContainsL = next.onset().contains("l");
-//        boolean nextStartsWithVocal = nextStartsWithA || nextStartsWithE || nextStartsWithI || nextStartsWithO || nextStartsWithU;
-//
-//        boolean nextAndPreviousTooSimilar = !next.onset().equals(prev.onset()) || ThreadLocalRandom.current().nextDouble() < 0.2;
-//        boolean preventDoubleVocals = !(prevEndsEmpty && nextStartsWithVocal);
-////        boolean noIlElAfterL = !prevEndsWithL || nextStartsWithL || !nextOnsetContainsL;
         boolean avoidSandwich =
                 !(prev.coda().length() == 1
                         && next.onset().length() == 1
                         && prev.coda().equals(next.onset()));
         boolean noEmptyTransitions = !(prevEndsEmpty && nextStartsEmpty);
         return noEmptyTransitions && avoidSandwich
-                && noReturningOnset("r", prev, next)
-                && noReturningOnset("qu", prev, next);
+                && noReturningOnset("r", prev, next, 0.1)
+                && noReturningOnset("qu", prev, next, 0.2);
     }
 
-    private boolean noReturningOnset(String onset, Syllable prev, Syllable next) {
+    private boolean noReturningOnset(String onset, Syllable prev, Syllable next, double allowChance) {
         boolean prevROnset = prev.onset().equals(onset);
         boolean nextROnset = next.onset().equals(onset);
-        return !(prevROnset && nextROnset);
+        boolean nextRCoda = next.coda().equals(onset);
+        return !(prevROnset && (nextROnset || nextRCoda)) || ThreadLocalRandom.current().nextDouble() < allowChance;
     }
 
     @Override
     public boolean canFollowInSyllable(String previous, String next) {
-//        boolean previousIsQ = previous.equals("qu");
-//        boolean previousStartsWithL = previous.startsWith("l");
-//        boolean nextIsU = next.equals("u");
-//        boolean previousContainsR = previous.contains("r");
-//        boolean nextIsR = next.equals("r");
-//        boolean nextIsL = next.equals("l");
-//
-//        boolean noLol = !previousStartsWithL || !nextIsL;
-//        boolean noUAfterQu = !previousIsQ || !nextIsU;
-//        boolean noRAfterPreviousR = !(previousContainsR && nextIsR);
-//        return noUAfterQu && noRAfterPreviousR && noLol;
         return true;
     }
 
@@ -106,6 +93,56 @@ public class NerenethPhonotactic implements Phonotactic {
     @Override
     public Map<String, Double> nuclei() {
         return nuclei;
+    }
+
+    public Syllable randomSyllable(boolean core, Syllable prev) {
+        String onset;
+        if (prev != null && prev.coda().isEmpty()) {
+            onset = pickNonEmptyOnset();
+        } else {
+            onset = pickAnyOnset();
+        }
+        String nucleus = core ? pickRandom(coreNuclei, onset) : pickRandom(nuclei(), onset);
+        String coda = pickRandom(codas(), onset + nucleus);
+        return new Syllable(
+                onset,
+                nucleus,
+                coda
+        );
+    }
+
+    private String pickAnyOnset() {
+        return pickRandom(onsets());
+    }
+
+    private String pickNonEmptyOnset() {
+        return pickRandom(nonEmptyOnsets);
+    }
+
+    @Override
+    public String generateWord(WordType type, Map<Integer, Double> syllables) {
+
+        StringBuilder stem = new StringBuilder();
+        int syllablesValue = WeightedPicker.pick(syllables);
+        Integer coreId = syllablesValue < 3 && ThreadLocalRandom.current().nextDouble() < 0.15 ? null : ThreadLocalRandom.current().nextInt(syllablesValue);
+        Syllable prev = null;
+
+        for (int i = 0; i < syllablesValue; i++) {
+            Syllable next;
+
+            int safety = 0;
+            do {
+                next = randomSyllable(coreId != null && i == coreId, prev);
+                safety++;
+            } while (prev != null && !canFollow(prev, next) && safety < 20);
+
+            stem.append(next.render());
+            prev = next;
+        }
+
+        String finalWord = getMorphology().applyEnding(stem.toString(), prev, type);
+
+        return finalWord;
     }
 
     @Override

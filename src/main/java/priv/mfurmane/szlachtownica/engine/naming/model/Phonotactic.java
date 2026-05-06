@@ -98,6 +98,10 @@ public interface Phonotactic {
         if (s == null || s.isEmpty()) return s;
         return s.substring(0, 1).toUpperCase(Locale.ROOT) + s.substring(1);
     }
+
+    default String generateCapitalizedWordWithHardCoda(WordType wordType, Map<Integer, Double> syllables) {
+        return generateCapitalizedWord(wordType, syllables);
+    }
 }
 
 

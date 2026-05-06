@@ -27,6 +27,14 @@ public class AdjectiveForms {
         return new AdjectiveForms(base + "cy", base + "ca", base + "ce", base + "cy", base + "ce");
     }
 
+    public static AdjectiveForms createY(String base) {
+        return new AdjectiveForms(base + "y", base + "a", base + "e", base + "y", base + "e");
+    }
+
+    public static AdjectiveForms createKiCy(String base) {
+        return new AdjectiveForms(base + "ki", base + "ka", base + "kie", base + "cy", base + "kie");
+    }
+
     public static AdjectiveForms createI(String base) {
         return new AdjectiveForms(base + "i", base + "ia", base + "ie", base + "i", base + "ie");
     }
@@ -45,5 +53,21 @@ public class AdjectiveForms {
 
     public static AdjectiveForms createEcki(String base) {
         return new AdjectiveForms(base + "ecki", base + "ecka", base + "eckie", base + "eccy", base + "eckie");
+    }
+
+    public static AdjectiveForms createCzny(String base) {
+        return new AdjectiveForms(base + "czny", base + "czna", base + "czne", base + "czni", base + "czne");
+    }
+
+    public static AdjectiveForms createNi(String base) {
+        return new AdjectiveForms(base + "ni", base + "nia", base + "nie", base + "ni", base + "nie");
+    }
+
+    public static AdjectiveForms createCi(String base) {
+        return new AdjectiveForms(base + "ci", base + "cia", base + "cie", base + "ci", base + "cie");
+    }
+
+    public static AdjectiveForms createKi(String base) {
+        return new AdjectiveForms(base + "ki", base + "ka", base + "kie", base + "cy", base + "kie");
     }
 }

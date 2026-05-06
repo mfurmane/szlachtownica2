@@ -46,7 +46,31 @@ public class NounForms {
         return new NounForms(base, base + "y");
     }
 
-    public static NounForms createEc(String base) {
-        return new NounForms(base + "ec", base + "cy");
+    public static NounForms createEmptyI(String base) {
+        return new NounForms(base, base + "i");
+    }
+
+    public static NounForms createEmptyE(String base) {
+        return new NounForms(base, base + "e");
+    }
+
+    public static NounForms createIec(String base) {
+        return new NounForms(base + "iec", base + "cy");
+    }
+
+    public static NounForms createAe(String base) {
+        return new NounForms(base + "a", base + "e");
+    }
+
+    public static NounForms createZZie(String base) {
+        return new NounForms(base + "ź", base + "zie");
+    }
+
+    public static NounForms createKCy(String base) {
+        return new NounForms(base + "k", base + "cy");
+    }
+
+    public static NounForms createYi(String base) {
+        return new NounForms(base + "y", base + "i");
     }
 }
