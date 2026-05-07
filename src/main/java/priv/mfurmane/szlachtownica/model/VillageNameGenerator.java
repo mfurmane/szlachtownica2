@@ -17,6 +17,11 @@ public class VillageNameGenerator {
             //NEUTRAL
             new WordCore("wzgórz", WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("wzgórz"), List.of(AdjectiveForms.createOwy("wzgórz"))),
             new WordCore("sioł", WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("sioł"), List.of(new AdjectiveForms("sielski", "sielska", "sielskie", "sielscy", "sielskie"))),
+            new WordCore("grodzisk", WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("grodzisk"), List.of(AdjectiveForms.createOwy("grodzisk"))),
+            new WordCore("błot", WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("błot"), List.of(AdjectiveForms.createY("błotn"), AdjectiveForms.createY("błotnist"))),
+            new WordCore("pol", WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("pol"), List.of(AdjectiveForms.createY("poln"))),
+            new WordCore("zacisz", WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("zacisz"), List.of(AdjectiveForms.createY("zaciszn"))),
+            new WordCore("słońc", WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("słońc"), List.of(AdjectiveForms.createY("słoneczn"))),
             //FEMININE
             new WordCore("brzoz", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("brzoz"), List.of(AdjectiveForms.createOwy("brzoz"))),
             new WordCore("wierzb", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("wierzb"), List.of(AdjectiveForms.createOwy("wierzb"))),
@@ -33,6 +38,29 @@ public class VillageNameGenerator {
             new WordCore("kaczk", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("kaczk"), List.of(AdjectiveForms.createY("kacz"))),
             new WordCore("samic", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("samic"), List.of(AdjectiveForms.createY("samicz"))),
             new WordCore("ryb", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("ryb"), List.of(AdjectiveForms.createI("ryb"))),
+            new WordCore("stodoł", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("stodoł"), List.of(AdjectiveForms.createNy("stodol"))),
+            new WordCore("obor", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("obor"), List.of(AdjectiveForms.createNy("obor"))),
+            new WordCore("kuźni", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("kuźni"), List.of(AdjectiveForms.createNy("kuźnia"))),
+            new WordCore("karczm", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("karczm"), List.of(AdjectiveForms.createNy("karczem"))),
+            new WordCore("przysta", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("przysta"), List.of(AdjectiveForms.createNy("przystan"))),
+            new WordCore("staroś", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createCi("staroś"), List.of(AdjectiveForms.createY("star"))),
+            new WordCore("nowoś", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createCi("nowoś"), List.of(AdjectiveForms.createY("now"))),
+            new WordCore("wielko", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createCi("wielko"), List.of(AdjectiveForms.createI("wielk"))),
+            new WordCore("łąk", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("łąk"), List.of(AdjectiveForms.createOwy("łąk"), AdjectiveForms.createNy("łącz"))),
+            new WordCore("gór", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("gór"), List.of(AdjectiveForms.createKi("górs"), AdjectiveForms.createNy("gór"))),
+            new WordCore("wysokoś", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createCi("wysokoś"), List.of(AdjectiveForms.createKi("wyso"), AdjectiveForms.createOwy("wysokości"))),
+            new WordCore("głębi", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("głębi"), List.of(AdjectiveForms.createKi("głębo"), AdjectiveForms.createOwy("głębin"))),
+            new WordCore("płycizn", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("płycizn"), List.of(AdjectiveForms.createKi("płyt"))),
+            //NO PLURAL
+            new WordCore("małoś", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("małość", null), List.of(AdjectiveForms.createY("mał"))),
+            new WordCore("ziele", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("zieleń", null), List.of(AdjectiveForms.createY("zielon"))),
+            new WordCore("suchoś", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("suchość", null), List.of(AdjectiveForms.createY("such"))),
+            new WordCore("mokroś", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("mokrość", null), List.of(AdjectiveForms.createY("mokry"), AdjectiveForms.createNy("przemoczo"))),
+            new WordCore("susz", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("susza", null), List.of(AdjectiveForms.createNy("przesuszo"))),
+            new WordCore("cisz", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("cisza", null), List.of(AdjectiveForms.createY("cich"))),
+            new WordCore("dzicz", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("dzicz", null), List.of(AdjectiveForms.createY("dziki"))),
+            new WordCore("gęstwa", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("gęstwa", null), List.of(AdjectiveForms.createY("gęst"))),
+            new WordCore("rzadkość", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("rzadkość", null), List.of(AdjectiveForms.createI("rzadk"))),
             //SAME ADJECTIVE AS MALE
             new WordCore("handlark", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("handlark"), List.of(AdjectiveForms.createKi("handlars"))),
             new WordCore("rybaczk", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi ("rybaczk"), List.of(AdjectiveForms.createKi("rybac"))),
@@ -45,14 +73,14 @@ public class VillageNameGenerator {
 
             //MASCULINE NON MASC
             new WordCore("smo", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createK("smo"), List.of(AdjectiveForms.createCzy("smo"))),
-            new WordCore("las", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("las"), List.of(new AdjectiveForms("leśny", "leśna", "leśne", "leśni", "leśne"))),
+            new WordCore("las", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("las"), List.of(AdjectiveForms.createY("leśn"))),    // new AdjectiveForms("leśny", "leśna", "leśne", "leśni", "leśne")
             new WordCore("wil", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createK("wil"), List.of(AdjectiveForms.createCzy("wil"))),
             new WordCore("korze", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("korze"), List.of(AdjectiveForms.createNy("korzen"), AdjectiveForms.createOwy("korzeni"))),
             new WordCore("poto", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createK("poto"), List.of(AdjectiveForms.createCzny("poto"), AdjectiveForms.createOwy("potok"), AdjectiveForms.createNy("potocza"))),
             new WordCore("lis", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("lis"), List.of(AdjectiveForms.createI("lis"), AdjectiveForms.createNy("lisia"))),
             new WordCore("niedźwied", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createZZie("niedźwied"), List.of(AdjectiveForms.createI("niedźwiedz"))),
             new WordCore("jele", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("jele"), List.of(AdjectiveForms.createI("jelen"))),
-            new WordCore("dzik", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyI("dzik"), List.of(AdjectiveForms.createI("dzik"), AdjectiveForms.createCzy("dzi"))),
+            new WordCore("dzik", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyI("dzik"), List.of(AdjectiveForms.createCzy("dzi"))),
             new WordCore("zając", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyE("zając"), List.of(AdjectiveForms.createY("zajęcz"))),
             new WordCore("bóbr", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("bóbr",   "bobry"), List.of(AdjectiveForms.createY("bobrz"), AdjectiveForms.createOwy("bobr"))),
             new WordCore("bober", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("bober"), List.of(AdjectiveForms.createOwy("bober"))),
@@ -63,6 +91,16 @@ public class VillageNameGenerator {
             new WordCore("elf", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("elf"), List.of(AdjectiveForms.createI("elf"), AdjectiveForms.createI("elfick"))),
             new WordCore("krasnolud", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("krasnolud"), List.of(AdjectiveForms.createI("krasnoludz"), AdjectiveForms.createKiCy("krasnoludz"))),
             new WordCore("dąb", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("dąb", "dęby"), List.of(AdjectiveForms.createOwy("dęb"))),
+            new WordCore("młyn", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("młyn"), List.of(AdjectiveForms.createKi("młyńs"))),
+            new WordCore("dwór", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("dwór", "dwory"), List.of(AdjectiveForms.createKi("dwors"))),
+            new WordCore("gród", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("gród", "grody"), List.of(AdjectiveForms.createKi("grodz"))),
+            new WordCore("kamie", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("kamie"), List.of(AdjectiveForms.createNy("kamien"))),
+            new WordCore("pias", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEk("pias"), List.of(AdjectiveForms.createOwy("piask"), AdjectiveForms.createY("piaszczyst"))),
+            new WordCore("dół", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("dół", "doły"), List.of(AdjectiveForms.createNy("dol"))),
+            new WordCore("niż", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyE("niż"), List.of(AdjectiveForms.createKi("nis"), AdjectiveForms.createOwy("niż"))),
+            new WordCore("wiatr", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("wiatr"), List.of(AdjectiveForms.createY("wietrzn"), AdjectiveForms.createOwy("wiatr"))),
+            new WordCore("mrok", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyI("mrok"), List.of(AdjectiveForms.createY("mroczn"))),
+            new WordCore("cie", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("cie"), List.of(AdjectiveForms.createY("cienist"))),
             //MASCULINE MASC
 //            new WordCore("dra", WordGender.MASCULINE, PluralType.MASC_PERSONAL, NounForms.createNie("dra"), List.of(AdjectiveForms.createNski("dra"), AdjectiveForms.createNny("dra"))),
             new WordCore("kupi", WordGender.MASCULINE, PluralType.MASC_PERSONAL, NounForms.createIec("kup"), List.of(AdjectiveForms.createNski("dra"), AdjectiveForms.createEcki("kupi"))),
@@ -79,6 +117,11 @@ public class VillageNameGenerator {
             new WordCore("trakt", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("trakt"), List.of()),
             new WordCore("siedlisk", WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("siedlisk"), List.of()),
             new WordCore("siedliszcz", WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("siedliszcz"), List.of()),
+            new WordCore("wież", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("wież"), List.of()),
+            new WordCore("wieżyc", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("wieżyc"), List.of()),
+            new WordCore("most", WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("most"), List.of()),
+            new WordCore("chat", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("chat"), List.of()),
+            new WordCore("doł", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createEk("doł"), List.of()),
             //NON PLURAL, NON ADJECTIVE
             new WordCore("wieś", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("wieś", null), List.of()),
             new WordCore("wola", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("wola", null), List.of()),
@@ -149,235 +192,6 @@ Strażnik
 Kmiec
 Sołtys
 
-Młyn
-Dwór
-Zamek
-Gród
-Grodzisko
-Fort
-Forteca
-Wieża
-Most
-Chata
-Stodoła
-Obora
-Kuźnia
-Karczma
-Targ
-Port
-Przystań
-
-
-
-
-
-
-
-Stary
-Nowy
-Mały
-Wielki
-Zielony
-Suchy
-Mokry
-Cichy
-Dziki
-Gęsty
-Rzadki
-Kamienny
-Piaszczysty
-Błotnisty
-Leśny
-Polny
-Łąkowy
-Górny
-Dolny
-Nizinny
-Wysoki
-Niski
-Głęboki
-Płytki
-Zaciszny
-Wietrzny
-Słoneczny
-Mroczny
-Cienisty
-Jasny
-Zarosły
-Kręty
-Prosty
-Szeroki
-Wąski
-Otwarty
-Zamknięty
-Rozległy
-Ukryty
-Zalesiony
-Nagły
-Stromy
-Łagodny
-Pusty
-Żyzny
-Urodzajny
-Kamienisty
-Bagienny
-Równinny
-Pagórkowaty
-
-Spokojny
-Cichy
-Senny
-Leniwy
-Pracowity
-Stary
-Nowy
-Zadbany
-Opuszczony
-Zamieszkały
-Ludny
-Pusty
-Rolniczy
-Gospodarczy
-Zagrodowy
-Wiejski
-Swojski
-Prosty
-Skromny
-Dostatni
-Bogaty
-Ubogi
-Boczny
-Biedny
-Gościnny
-Zamknięty
-Otwarty
-Rodzinny
-Ciepły
-Chłodny
-Przyjazny
-Obcy
-Dawny
-Historyczny
-Tradycyjny
-Zwyczajny
-Znany
-Zapomniany
-Ukryty
-Daleki
-Bliski
-
-Złoty
-Srebrny
-Żelazny
-Miedziany
-Kamienny
-Szklany
-Czarny
-Biały
-Czerwony
-Szary
-Popielaty
-Krwawy
-Święty
-Przeklęty
-Błogosławiony
-Zaklęty
-Magiczny
-Dziwny
-Obcy
-Starożytny
-Zapomniany
-Zaginiony
-Ukryty
-Widmowy
-Martwy
-Żywy
-Wieczny
-Nietrwały
-Złamany
-Spalony
-Zrujnowany
-Porzucony
-Zdradziecki
-Mroczny
-Jasny
-Ponury
-Groźny
-Cichy
-Nawiedzony
-Zatracony
-
-Dobry
-Zły
-Stary
-Młody
-Silny
-Słaby
-Dumny
-Pokorny
-Wesoły
-Smutny
-Uparty
-Mądry
-Głupi
-Sprytny
-Uczciwy
-Zdradliwy
-Twardy
-Miękki
-Odważny
-Strachliwy
-Cichy
-Głośny
-Zamyślony
-Rozbity
-Zgubiony
-Odnaleziony
-Zaginiony
-Znany
-Nieznany
-Zapomniany
-
-Zamknięty
-Otwarty
-Złamany
-Zbudowany
-Spalony
-Zniszczony
-Porzucony
-Zgubiony
-Odnaleziony
-Zaginiony
-Zapomniany
-Nazwany
-Ukryty
-Odsłonięty
-Zakopany
-Wzniesiony
-Zburzony
-Zalany
-Osuszony
-Zasiany
-Zebrany
-Uprawiany
-Zamieszkały
-Opuszczony
-Zarośnięty
-Wypalony
-Zatracony
-Ocalony
-Zatrzymany
-Rozlany
-Złączony
-Rozdzielony
-Zamglony
-Zacieniony
-Oświetlony
-Przebity
-Związany
-Rozwiązany
-Zamrożony
-Ocieplony
 
 
     * */
