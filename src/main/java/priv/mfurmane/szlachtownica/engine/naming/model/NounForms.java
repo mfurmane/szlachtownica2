@@ -73,4 +73,8 @@ public class NounForms {
     public static NounForms createYi(String base) {
         return new NounForms(base + "y", base + "i");
     }
+
+    public static NounForms createCi(String base) {
+        return new NounForms(base + "ć", base + "ci");
+    }
 }
