@@ -1,4 +1,4 @@
-package priv.mfurmane.szlachtownica.model;
+package priv.mfurmane.szlachtownica.model.initializers;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -10,6 +10,7 @@ import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.engine.naming.ernizjum.ErnizjumPhonotactic;
 import priv.mfurmane.szlachtownica.engine.naming.model.*;
 import priv.mfurmane.szlachtownica.engine.naming.nereneth.NerenethPhonotactic;
+import priv.mfurmane.szlachtownica.model.VillageNameGenerator;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationPlace;
 import priv.mfurmane.szlachtownica.model.main.ModelPlace;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;

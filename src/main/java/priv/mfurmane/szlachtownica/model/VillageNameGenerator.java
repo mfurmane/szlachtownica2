@@ -128,12 +128,6 @@ public class VillageNameGenerator {
             new WordCore("wólka", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("wólka", null), List.of())
     );
 
-//    private static String[] femaleFirstWords = {"Dupna", "Żabia"};
-//    private static String[] femaleSecondWords = {"Wola", "Wólka"};
-//    private static String[] maleFirstWords = {"Dupny", "Żabi"};
-//    private static String[] maleSecondWords = {"Wola", "Wólka"};
-//    private static String[] neutralFirstWords = {"Dupne", "Żabie", "Stare"};
-//    private static String[] neutralSecondWords = {"Wzgórza", "Zarowie", "Pupy"};
 //    private static String[] single = {"Dupice", "Dupianka", "Zadupie", "Zarowie"};
 
     private static SaraveraPhonotactic phonotactic = new SaraveraPhonotactic();

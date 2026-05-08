@@ -1,12 +1,10 @@
-package priv.mfurmane.szlachtownica.model;
+package priv.mfurmane.szlachtownica.model.factories;
 
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationProvince;
 import priv.mfurmane.szlachtownica.model.main.ModelProvince;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
-import priv.mfurmane.szlachtownica.model.simulation.terrain.Climate;
-import priv.mfurmane.szlachtownica.model.simulation.terrain.Humidity;
 
 import java.util.*;
 

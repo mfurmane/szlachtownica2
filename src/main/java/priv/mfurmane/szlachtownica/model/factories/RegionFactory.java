@@ -1,16 +1,14 @@
-package priv.mfurmane.szlachtownica.model;
+package priv.mfurmane.szlachtownica.model.factories;
 
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationRegion;
-import priv.mfurmane.szlachtownica.model.main.ModelPlace;
 import priv.mfurmane.szlachtownica.model.main.ModelRegion;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationRegion;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.Climate;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.EnchantType;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.Humidity;
 
-import java.util.List;
 import java.util.Random;
 
 @Component

@@ -1,4 +1,4 @@
-package priv.mfurmane.szlachtownica.model;
+package priv.mfurmane.szlachtownica.model.factories;
 
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;

@@ -2,7 +2,6 @@ package priv.mfurmane.szlachtownica.model.main;
 
 import priv.mfurmane.szlachtownica.model.Race;
 import priv.mfurmane.szlachtownica.model.Sex;
-import priv.mfurmane.szlachtownica.model.config.ConfigurationPerson;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class ModelPerson {
     private LocalDate died;
     private String name;
     private String middleName;
-    private Long familyId;
+    private ModelFamily family;
     private Long motherId;
     private Long fatherId;
     private Long officialFatherId;
@@ -55,8 +54,8 @@ public class ModelPerson {
         return middleName;
     }
 
-    public Long getFamilyId() {
-        return familyId;
+    public ModelFamily getFamily() {
+        return family;
     }
 
     public Long getMotherId() {
@@ -92,13 +91,16 @@ public class ModelPerson {
     }
 
     private ModelPerson(Builder builder) {
+        if (builder.id != null) {
+            this.id = builder.id;
+        }
         this.race = builder.race;
         this.sex = builder.sex;
         this.born = builder.born;
         this.died = builder.died;
         this.name = builder.name;
         this.middleName = builder.middleName;
-        this.familyId = builder.familyId;
+        this.family = builder.family;
         this.motherId = builder.motherId;
         this.fatherId = builder.fatherId;
     }
@@ -143,7 +145,7 @@ public class ModelPerson {
         if (other.died != null) died = other.died;
         if (other.name != null) name = other.name;
         if (other.middleName != null) middleName = other.middleName;
-        if (other.familyId != null) familyId = other.familyId;
+        if (other.family != null) family = other.family;
         if (other.motherId != null) motherId = other.motherId;
         if (other.fatherId != null) fatherId = other.fatherId;
         if (other.officialFatherId != null) officialFatherId = other.officialFatherId;
@@ -155,15 +157,16 @@ public class ModelPerson {
     }
 
     public static class Builder {
+        private Long id = null;
         private Race race;
         private Sex sex;
         private LocalDate born;
         private LocalDate died;
         private String name;
         private String middleName;
-        private Long familyId;
         private Long motherId;
         private Long fatherId;
+        private ModelFamily family;
 
         public Builder setRace(Race race) {
             this.race = race;
@@ -195,11 +198,6 @@ public class ModelPerson {
             return this;
         }
 
-        public Builder setFamilyId(Long familyId) {
-            this.familyId = familyId;
-            return this;
-        }
-
         public Builder setMotherId(Long motherId) {
             this.motherId = motherId;
             return this;
@@ -212,6 +210,16 @@ public class ModelPerson {
 
         public ModelPerson build() {
             return new ModelPerson(this);
+        }
+
+        public Builder setId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setFamily(ModelFamily family) {
+            this.family = family;
+            return this;
         }
         //        private Long officialFatherId;
 //        private Double importance;

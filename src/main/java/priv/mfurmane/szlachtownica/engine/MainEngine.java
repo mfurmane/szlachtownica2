@@ -1,12 +1,17 @@
 package priv.mfurmane.szlachtownica.engine;
 
 import jakarta.annotation.PostConstruct;
-import org.locationtech.jts.geom.Polygon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.events.EventFactory;
 import priv.mfurmane.szlachtownica.engine.registry.*;
 import priv.mfurmane.szlachtownica.model.*;
+import priv.mfurmane.szlachtownica.model.factories.PersonFactory;
+import priv.mfurmane.szlachtownica.model.factories.PlaceFactory;
+import priv.mfurmane.szlachtownica.model.factories.ProvinceFactory;
+import priv.mfurmane.szlachtownica.model.initializers.NatureInitializer;
+import priv.mfurmane.szlachtownica.model.initializers.PlaceInitializer;
+import priv.mfurmane.szlachtownica.model.initializers.ProvinceInitializer;
 import priv.mfurmane.szlachtownica.model.main.ModelLake;
 import priv.mfurmane.szlachtownica.model.main.ModelMountains;
 import priv.mfurmane.szlachtownica.model.main.ModelRiver;
