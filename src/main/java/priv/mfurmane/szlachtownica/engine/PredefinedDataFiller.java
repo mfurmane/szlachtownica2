@@ -3,10 +3,6 @@ package priv.mfurmane.szlachtownica.engine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import priv.mfurmane.szlachtownica.exceptions.PersonNotCreatedException;
-import priv.mfurmane.szlachtownica.model.PersonFactory;
-
-import java.io.File;
 
 @Component
 public class PredefinedDataFiller {

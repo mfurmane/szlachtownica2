@@ -1,18 +1,14 @@
-package priv.mfurmane.szlachtownica.model;
+package priv.mfurmane.szlachtownica.model.initializers;
 
-import org.eclipse.emf.ecore.resource.Resource;
 import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Polygon;
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.engine.utils.GeoUtils;
-import priv.mfurmane.szlachtownica.model.config.ConfigurationProvince;
 import priv.mfurmane.szlachtownica.model.main.*;
 import priv.mfurmane.szlachtownica.model.main.repositories.LakeRepository;
 import priv.mfurmane.szlachtownica.model.main.repositories.MountainsRepository;
 import priv.mfurmane.szlachtownica.model.main.repositories.RiverRepository;
 import priv.mfurmane.szlachtownica.model.main.repositories.SeaPartRepository;
-import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
 
 import java.util.ArrayList;
 import java.util.List;

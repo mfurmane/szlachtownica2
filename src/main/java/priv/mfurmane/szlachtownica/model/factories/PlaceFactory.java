@@ -1,9 +1,8 @@
-package priv.mfurmane.szlachtownica.model;
+package priv.mfurmane.szlachtownica.model.factories;
 
 import org.springframework.stereotype.Component;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationPlace;
-import priv.mfurmane.szlachtownica.model.main.ModelPlace;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
 
 import java.util.Random;
