@@ -75,9 +75,9 @@ public class PersonFactory {
                 .setSex(sex)
                 .setName(engine.getNamingProvider().get(race).getName(sex))
 // TODO                .setMiddleName()
-                .setFamilyId(family)
-                .setFatherId(father)
-                .setMotherId(mother)
+//                .setFamilyId(family)
+//                .setFatherId(father)
+//                .setMotherId(mother)
                 .build();
     }
 
