@@ -115,7 +115,35 @@ public class NobleInitializer {
 
 
         List<SimulationPerson> persons = new ArrayList<>();
+        SimulationPerson riana = personsConfiguration.initializeRiana(persons, preTagaraPlaceholder);
+        SimulationPerson urg = personsConfiguration.initializeUrg(persons, preTagaraPlaceholder);
+        SimulationPerson merinaI = personsConfiguration.initializeMerinaI(persons, preTagaraPlaceholder);
+        SimulationPerson orsa = personsConfiguration.initializeOrsa(persons, preTagaraPlaceholder);
+        SimulationPerson fallonI = personsConfiguration.initializeFallonI(persons, preTagaraPlaceholder);
+        SimulationPerson merinaII = personsConfiguration.initializeMerinaII(persons, preTagaraPlaceholder);
+
         SimulationPerson tagara = personsConfiguration.initializeTagara(persons, tagar);
+        SimulationPerson erwinI = personsConfiguration.initializeErwinI(persons, tagar);
+        SimulationPerson eolI = personsConfiguration.initializeEolI(persons, tagar);
+        SimulationPerson merinaIII = personsConfiguration.initializeMerinaIII(persons, tagar);
+        SimulationPerson erwinII = personsConfiguration.initializeErwinII(persons, tagar);
+        SimulationPerson eolII = personsConfiguration.initializeEolII(persons, tagar);
+        SimulationPerson ranalI = personsConfiguration.initializeRanalI(persons, tagar);
+        SimulationPerson erwinIII = personsConfiguration.initializeErwinIII(persons, tagar);
+        SimulationPerson roelekI = personsConfiguration.initializeRoelekI(persons, tagar);
+        SimulationPerson aleraI = personsConfiguration.initializeAleraI(persons, tagar);
+        SimulationPerson garvonI = personsConfiguration.initializeGarvonI(persons, tagar);
+
+        SimulationPerson garvonII = personsConfiguration.initializeGarvonII(persons, holzer);
+        SimulationPerson osaraI = personsConfiguration.initializeOsaraI(persons, holzer);
+        SimulationPerson lasteraI = personsConfiguration.initializeLasteraI(persons, holzer);
+        SimulationPerson garvonIII = personsConfiguration.initializeGarvonIII(persons, holzer);
+        SimulationPerson galinaI = personsConfiguration.initializeGalinaI(persons, holzer);
+        SimulationPerson ranalII = personsConfiguration.initializeRanalII(persons, holzer);
+        SimulationPerson mereinaI = personsConfiguration.initializeMereinaI(persons, holzer);
+        SimulationPerson aleraII = personsConfiguration.initializeAleraII(persons, holzer);
+        SimulationPerson lasteraII = personsConfiguration.initializeLasteraII(persons, holzer);
+        SimulationPerson fallonII = personsConfiguration.initializeFallonII(persons, holzer);
 
         persons.forEach(person -> {
             System.out.println("# " + person.getModel().getName());
