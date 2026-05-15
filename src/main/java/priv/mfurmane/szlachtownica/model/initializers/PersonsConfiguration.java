@@ -34,7 +34,7 @@ public class PersonsConfiguration {
         return PersonsConfiguration.mergeAndRegisterPerson(person, conf, model, persons);
     }
 
-    SimulationPerson initializeTagara(List<SimulationPerson> persons, SimulationFamily tagar) {
+    SimulationPerson initializeTagara(List<SimulationPerson> persons, SimulationFamily family) {
         SimulationPerson person = new SimulationPerson();
         ConfigurationPerson conf = ConfigurationPerson.builder()
                 //AGE PHASES
@@ -80,9 +80,113 @@ public class PersonsConfiguration {
                 .setBorn(LocalDate.parse("1168-03-17"))
                 .setDied(LocalDate.parse("1226-09-02"))
                 .setMiddleName("I Budownicza")
-                .setFamily(tagar.getModel())
+                .setFamily(family.getModel())
                 .setSex(Sex.FEMALE)
                 .build();
         return mergeAndRegisterPerson(person, conf, model, persons);
+    }
+
+    public SimulationPerson initializeRiana(List<SimulationPerson> persons, SimulationFamily family) {
+        return null;
+    }
+
+    public SimulationPerson initializeUrg(List<SimulationPerson> persons, SimulationFamily family) {
+        return null;
+    }
+
+    public SimulationPerson initializeMerinaI(List<SimulationPerson> persons, SimulationFamily family) {
+        return null;
+    }
+
+    public SimulationPerson initializeOrsa(List<SimulationPerson> persons, SimulationFamily family) {
+        return null;
+    }
+
+    public SimulationPerson initializeFallonI(List<SimulationPerson> persons, SimulationFamily family) {
+        return null;
+    }
+
+    public SimulationPerson initializeMerinaII(List<SimulationPerson> persons, SimulationFamily family) {
+        return null;
+    }
+
+    public SimulationPerson initializeErwinI(List<SimulationPerson> persons, SimulationFamily tagar) {
+        return null;
+    }
+
+    public SimulationPerson initializeEolI(List<SimulationPerson> persons, SimulationFamily tagar) {
+        return null;
+    }
+
+    public SimulationPerson initializeMerinaIII(List<SimulationPerson> persons, SimulationFamily tagar) {
+        return null;
+    }
+
+    public SimulationPerson initializeErwinII(List<SimulationPerson> persons, SimulationFamily tagar) {
+        return null;
+    }
+
+    public SimulationPerson initializeEolII(List<SimulationPerson> persons, SimulationFamily tagar) {
+        return null;
+    }
+
+    public SimulationPerson initializeRanalI(List<SimulationPerson> persons, SimulationFamily tagar) {
+        return null;
+    }
+
+    public SimulationPerson initializeErwinIII(List<SimulationPerson> persons, SimulationFamily tagar) {
+        return null;
+    }
+
+    public SimulationPerson initializeRoelekI(List<SimulationPerson> persons, SimulationFamily tagar) {
+        return null;
+    }
+
+    public SimulationPerson initializeAleraI(List<SimulationPerson> persons, SimulationFamily tagar) {
+        return null;
+    }
+
+    public SimulationPerson initializeGarvonI(List<SimulationPerson> persons, SimulationFamily tagar) {
+        return null;
+    }
+
+    public SimulationPerson initializeGarvonII(List<SimulationPerson> persons, SimulationFamily holzer) {
+        return null;
+    }
+
+    public SimulationPerson initializeOsaraI(List<SimulationPerson> persons, SimulationFamily holzer) {
+        return null;
+    }
+
+    public SimulationPerson initializeLasteraI(List<SimulationPerson> persons, SimulationFamily holzer) {
+        return null;
+    }
+
+    public SimulationPerson initializeGarvonIII(List<SimulationPerson> persons, SimulationFamily holzer) {
+        return null;
+    }
+
+    public SimulationPerson initializeGalinaI(List<SimulationPerson> persons, SimulationFamily holzer) {
+        return null;
+    }
+
+    public SimulationPerson initializeRanalII(List<SimulationPerson> persons, SimulationFamily holzer) {
+        return null;
+    }
+
+    public SimulationPerson initializeMereinaI(List<SimulationPerson> persons, SimulationFamily holzer) {
+        return null;
+    }
+
+    public SimulationPerson initializeAleraII(List<SimulationPerson> persons, SimulationFamily holzer) {
+        return null;
+    }
+
+    public SimulationPerson initializeLasteraII(List<SimulationPerson> persons, SimulationFamily holzer) {
+        return null;
+    }
+
+    public SimulationPerson initializeFallonII(List<SimulationPerson> persons, SimulationFamily holzer) {
+        return null;
     }
 }
