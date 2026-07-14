@@ -163,6 +163,15 @@ public class WordCore {
         return singleEnder;
     }
 
+    // Gotowe, jednowyrazowe formy ludowe (nazwy typu Żabianka, Zażabie),
+    // zapisane w singleEnder jako lista rozdzielona średnikami. Puste -> brak.
+    public List<String> getSingleForms() {
+        if (singleEnder == null || singleEnder.isBlank()) {
+            return List.of();
+        }
+        return List.of(singleEnder.split(";"));
+    }
+
     public void setSingleEnder(String singleEnder) {
         this.singleEnder = singleEnder;
     }
