@@ -35,6 +35,26 @@ public class AdjectiveForms {
         return new AdjectiveForms(base + "y", base + "a", base + "e", base + "i", base + "e");
     }
 
+    // -sty: piaszczysty -> piaszczyści (st -> ści w formie męskoosobowej)
+    public static AdjectiveForms createSty(String base) {
+        return new AdjectiveForms(base + "sty", base + "sta", base + "ste", base + "ści", base + "ste");
+    }
+
+    // -chy: suchy -> susi (ch -> si w formie męskoosobowej)
+    public static AdjectiveForms createChy(String base) {
+        return new AdjectiveForms(base + "chy", base + "cha", base + "che", base + "si", base + "che");
+    }
+
+    // -ry: stary -> starzy (r -> rzy w formie męskoosobowej)
+    public static AdjectiveForms createRy(String base) {
+        return new AdjectiveForms(base + "ry", base + "ra", base + "re", base + "rzy", base + "re");
+    }
+
+    // -ony: przemoczony -> przemoczeni (o -> e w formie męskoosobowej)
+    public static AdjectiveForms createOny(String base) {
+        return new AdjectiveForms(base + "ony", base + "ona", base + "one", base + "eni", base + "one");
+    }
+
     public static AdjectiveForms createKiCy(String base) {
         return new AdjectiveForms(base + "ki", base + "ka", base + "kie", base + "cy", base + "kie");
     }
