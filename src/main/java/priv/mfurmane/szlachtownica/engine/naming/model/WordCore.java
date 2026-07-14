@@ -10,6 +10,7 @@ public class WordCore {
 //    String stem;
 
     String base; // debug / identyfikator
+    String singleEnder;
     WordGender selfGender;
     PluralType pluralType;
 
@@ -17,12 +18,13 @@ public class WordCore {
     List<AdjectiveForms> adjective = new ArrayList<>();
     Map<Phonotactic, String> meanings = new HashMap<>();
 
-    public WordCore(String base, WordGender selfGender, PluralType pluralType, NounForms noun, List<AdjectiveForms> adjective) {
+    public WordCore(String base, WordGender selfGender, PluralType pluralType, NounForms noun, List<AdjectiveForms> adjective, String singleEnder) {
         this.base = base;
         this.selfGender = selfGender;
         this.pluralType = pluralType;
         this.noun = noun;
         this.adjective = adjective;
+        this.singleEnder = singleEnder;
     }
 
     public String getNoun(WordCount count) {
@@ -155,6 +157,14 @@ public class WordCore {
 
     public List<AdjectiveForms> getAdjectiveForms() {
         return adjective;
+    }
+
+    public String getSingleEnder() {
+        return singleEnder;
+    }
+
+    public void setSingleEnder(String singleEnder) {
+        this.singleEnder = singleEnder;
     }
 
     //    public String getNoun(WordCount wordCount) {
