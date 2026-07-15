@@ -32,6 +32,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class ProvinceInitializer {
+    static {
+        // Zabezpieczenie na wypadek, gdyby ta klasa załadowała się przed App.main
+        // (np. w testach) — włącz robustny OverlayNG, zanim padnie pierwszy overlay.
+        System.setProperty("jts.overlay", "ng");
+    }
+
     public static final GeometryFactory gf = new GeometryFactory();
     public static final Random rand = new Random();
     public static final int GREAT_FERTILITY_LEVEL = 2;
@@ -220,7 +226,16 @@ public class ProvinceInitializer {
                         .intersects(otherRegion.getArea().getEnvelopeInternal())) {
                     continue;
                 }
-                Geometry intersection = otherRegion.getArea().intersection(region.getArea());
+                Geometry intersection;
+                try {
+                    intersection = otherRegion.getArea().intersection(region.getArea());
+                } catch (RuntimeException e) {
+                    // Ostateczny bezpiecznik: gdyby nawet OverlayNG się wyłożył na
+                    // patologicznej geometrii, pomiń tę parę zamiast przerywać całość.
+                    System.out.println("WARN: nie udało się policzyć części wspólnej regionów "
+                            + region.getId() + " i " + otherRegion.getId() + ": " + e.getMessage());
+                    continue;
+                }
                 // Wymiar 1 = wspólna granica (linia), 2 = nakładka powierzchniowa.
                 // Oba przypadki oznaczają sąsiedztwo; nakładka to zwykle drobny
                 // artefakt naturalizacji (buffer(0) na niepoprawnym pierścieniu),
