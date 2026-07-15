@@ -122,6 +122,11 @@ public class VoronoiPerlinNaturalizer {
         double nx = -dy / length; // wektor prostopadły (jednostkowy)
         double ny = dx / length;
 
+        // Ogranicznik: na krótkiej krawędzi zbyt duże wychylenie zapętliłoby ją
+        // lub wepchnęło w sąsiednią komórkę (skąd biorą się nakładki regionów).
+        // Tniemy wychylenie do ułamka długości krawędzi.
+        double maxOffset = 0.4 * length;
+
         Coordinate[] coords = new Coordinate[segments + 2];
         coords[0] = c1;
         coords[segments + 1] = c2;
@@ -131,6 +136,7 @@ public class VoronoiPerlinNaturalizer {
             double baseY = c1.y + t * dy;
             double window = Math.sin(Math.PI * t);          // 0 na końcach, 1 w środku
             double offset = window * amplitude * fbm(t * frequency, edgeSeed);
+            offset = Math.max(-maxOffset, Math.min(maxOffset, offset));
             coords[i] = new Coordinate(baseX + nx * offset, baseY + ny * offset);
         }
         return coords;
