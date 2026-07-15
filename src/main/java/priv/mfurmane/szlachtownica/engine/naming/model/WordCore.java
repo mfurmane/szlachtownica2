@@ -1,9 +1,11 @@
 package priv.mfurmane.szlachtownica.engine.naming.model;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class WordCore {
 //    String debugName;
@@ -14,6 +16,8 @@ public class WordCore {
     WordCategory category; // kategoria znaczeniowa (istota, roślina, teren...)
     WordGender selfGender;
     PluralType pluralType;
+    Set<EnvFeature> requires = EnumSet.noneOf(EnvFeature.class); // cechy otoczenia wymagane, by rdzeń mógł wystąpić
+    Landmark landmark; // obiekt zapowiadany przez rdzeń jako głowę nazwy (null = brak)
 
     NounForms noun;
     List<AdjectiveForms> adjective = new ArrayList<>();
@@ -167,6 +171,28 @@ public class WordCore {
 
     public WordCategory getCategory() {
         return category;
+    }
+
+    // Fluent: deklaruje cechy otoczenia wymagane, by rdzeń mógł pojawić się w nazwie.
+    public WordCore requires(EnvFeature... features) {
+        this.requires = features.length == 0
+                ? EnumSet.noneOf(EnvFeature.class)
+                : EnumSet.copyOf(java.util.Arrays.asList(features));
+        return this;
+    }
+
+    // Fluent: deklaruje obiekt, który ten rdzeń (jako głowa nazwy) stawia w wiosce.
+    public WordCore places(Landmark landmark) {
+        this.landmark = landmark;
+        return this;
+    }
+
+    public Set<EnvFeature> getRequires() {
+        return requires;
+    }
+
+    public Landmark getLandmark() {
+        return landmark;
     }
 
     // Gotowe, jednowyrazowe formy ludowe (nazwy typu Żabianka, Zażabie),
