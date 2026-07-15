@@ -13,6 +13,7 @@ public class WordCore {
     String singleEnder;
     WordGender selfGender;
     PluralType pluralType;
+    WordCategory category = WordCategory.TERRAIN; // domyślnie, nadpisywane przy inicjalizacji
 
     NounForms noun;
     List<AdjectiveForms> adjective = new ArrayList<>();
@@ -161,6 +162,14 @@ public class WordCore {
 
     public String getSingleEnder() {
         return singleEnder;
+    }
+
+    public WordCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(WordCategory category) {
+        this.category = category;
     }
 
     // Gotowe, jednowyrazowe formy ludowe (nazwy typu Żabianka, Zażabie),

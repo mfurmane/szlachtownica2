@@ -4,8 +4,11 @@ import org.apache.commons.text.WordUtils;
 import priv.mfurmane.szlachtownica.engine.naming.model.*;
 import priv.mfurmane.szlachtownica.engine.naming.saravera.SaraveraPhonotactic;
 
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class VillageNameGenerator {
@@ -138,6 +141,56 @@ public class VillageNameGenerator {
             new WordCore("wólka", WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("wólka", null), List.of(), "Wólka")
     );
 
+    // --- Kategorie znaczeniowe rdzeni -------------------------------------
+    // Przypisanie rdzeni (WordCore.base) do kategorii. Kategorie nie wymienione
+    // niżej (głównie krajobraz naturalny) trafiają do TERRAIN (wartość domyślna).
+    // Dodając nowe słowo warto dopisać jego rdzeń tutaj — inaczej dostanie TERRAIN.
+    private static final Map<WordCategory, Set<String>> CATEGORY_MEMBERS = Map.of(
+            WordCategory.ANIMAL, Set.of("żab", "sarn", "kun", "krow", "koz", "owc", "kaczk", "samic", "ryb",
+                    "wil", "lis", "niedźwied", "jele", "dzik", "zając", "bóbr", "bober", "ko", "kogu", "sam", "osi"),
+            WordCategory.BEING, Set.of("smo", "elf", "elfk", "krasnolud", "krasnoludk", "człowiek"),
+            WordCategory.PROFESSION, Set.of("handlark", "rybaczk", "myśliw", "paster", "kowalk", "młynark",
+                    "kupi", "rybak", "kowal", "młyna", "wędrow"),
+            WordCategory.PLANT, Set.of("brzoz", "wierzb", "sosn", "topol", "zarośl", "ziele", "korze", "dąb", "gęstwa"),
+            WordCategory.STRUCTURE, Set.of("sioł", "grodzisk", "stodoł", "obor", "kuźni", "karczm", "przysta",
+                    "młyn", "dwór", "gród", "uroczysk", "trakt", "siedlisk", "siedliszcz", "wież", "wieżyc",
+                    "most", "chat", "wieś", "wola", "wólka"),
+            WordCategory.QUALITY, Set.of("staroś", "nowoś", "wielko", "wysokoś", "małoś", "suchoś", "mokroś",
+                    "susz", "cisz", "dzicz", "rzadkość", "dum"),
+            WordCategory.VULGAR, Set.of("dup", "kurw")
+    );
+
+    // --- Reguły łączenia przymiotnik (modyfikator) + rzeczownik (głowa) ----
+    // Rdzenie "miejscowe" (teren/budowle/wulgaryzmy) jako głowa przyjmują dowolny
+    // przymiotnik — stąd zostają "Żabie Błoto", "Wilczy Gród", "Sarni Las".
+    // Rdzenie "bytowe" (zwierzę, roślina, zawód, istota, cecha) jako głowa
+    // przyjmują tylko przymiotniki terenowe i jakościowe — to eliminuje bezsensy
+    // typu "Kuni Jeleń" czy "Zajęczy Lis", zostawiając np. "Leśny Jeleń".
+    private static final Set<WordCategory> PLACE_MODIFIERS = Set.of(WordCategory.TERRAIN, WordCategory.QUALITY);
+    private static final Set<WordCategory> ALL_MODIFIERS = EnumSet.allOf(WordCategory.class);
+    private static final Map<WordCategory, Set<WordCategory>> ALLOWED_MODIFIERS = Map.of(
+            WordCategory.ANIMAL, PLACE_MODIFIERS,
+            WordCategory.PLANT, PLACE_MODIFIERS,
+            WordCategory.PROFESSION, PLACE_MODIFIERS,
+            WordCategory.BEING, PLACE_MODIFIERS,
+            WordCategory.QUALITY, PLACE_MODIFIERS,
+            WordCategory.TERRAIN, ALL_MODIFIERS,
+            WordCategory.STRUCTURE, ALL_MODIFIERS,
+            WordCategory.VULGAR, ALL_MODIFIERS
+    );
+
+    static {
+        Map<String, WordCategory> byBase = new HashMap<>();
+        for (Map.Entry<WordCategory, Set<String>> entry : CATEGORY_MEMBERS.entrySet()) {
+            for (String base : entry.getValue()) {
+                byBase.put(base, entry.getKey());
+            }
+        }
+        for (WordCore wordCore : areas) {
+            wordCore.setCategory(byBase.getOrDefault(wordCore.getBase(), WordCategory.TERRAIN));
+        }
+    }
+
     private static SaraveraPhonotactic phonotactic = new SaraveraPhonotactic();
 
     public static String generate() {
@@ -158,6 +211,19 @@ public class VillageNameGenerator {
         throw new IllegalStateException("Brak właściwych przymiotników dla nazw wiosek");
     }
 
+    // Losuje rdzeń dostarczający przymiotnik, którego kategoria pasuje do rdzenia
+    // będącego głową nazwy. Po wyczerpaniu prób oddaje dowolny (bezpiecznik).
+    private static WordCore getCompatibleAdjectiveCore(WordCore nameCore) {
+        Set<WordCategory> allowed = ALLOWED_MODIFIERS.getOrDefault(nameCore.getCategory(), ALL_MODIFIERS);
+        for (int i = 0; i < 200; i++) {
+            WordCore candidate = areas.get(rng.nextInt(areas.size()));
+            if (!candidate.getAdjectiveForms().isEmpty() && allowed.contains(candidate.getCategory())) {
+                return candidate;
+            }
+        }
+        return getAdjectiveCore();
+    }
+
     private static String folkName() {
         WordCore nameCore = areas.get(rng.nextInt(areas.size()));
         // Ścieżka jednowyrazowa: gotowe formy ludowe (Żabianka, Zażabie...).
@@ -167,7 +233,7 @@ public class VillageNameGenerator {
         if (!singleForms.isEmpty() && rng.nextDouble() < 0.4) {
             return singleForms.get(rng.nextInt(singleForms.size()));
         }
-        WordCore adjCore = getAdjectiveCore();
+        WordCore adjCore = getCompatibleAdjectiveCore(nameCore);
         WordCount count = rng.nextDouble() < 0.2 && nameCore.hasPlural() ? WordCount.PLURAL : WordCount.SINGULAR;
         boolean adjFirst = rng.nextDouble() > 0.25;
         String nameCoreFormatted = nameCore.getNoun(count);
