@@ -41,6 +41,9 @@ public class ProvinceInitializer {
     static final double SEA_COST = 1.1;
     static final double BRIDGE_COST = 1.5;
     static final double FERRY_COST = 2.5;
+    // Powyżej tego udziału (w powierzchni mniejszego regionu) nakładka jest
+    // logowana jako ostrzeżenie — mniejsze traktujemy jak zwykły szum numeryczny.
+    static final double OVERLAP_WARN_FRACTION = 0.02;
     private final ProvinceRepository provinceRepository;
     private final SubProvinceRepository subProvinceRepository;
     private final RegionRepository regionRepository;
@@ -218,28 +221,34 @@ public class ProvinceInitializer {
                     continue;
                 }
                 Geometry intersection = otherRegion.getArea().intersection(region.getArea());
-                if (!intersection.isEmpty()) {
-                    if (intersection.getDimension() == 1) {
-                        boolean openPass = true;
-                        for (MapFeature feature : region.getMapFeatures()) {
-//                            if ()
-//                            Geometry riverIntersection = intersection.intersection(feature.getMainGeometry());
-//                            if (!riverIntersection.isEmpty() && riverIntersection.getDimension() == 1) {
-                            if (feature.getRegions().contains(otherRegion)) {
-                                openPass = false;
-                                if (feature instanceof ModelRiver && ((ModelRiver) feature).isVeryBig()) {
-                                    addConnections(region, otherRegion, RegionConnectionType.FERRYBOAT, null, FERRY_COST);
-                                } else {
-                                    addConnections(region, otherRegion, RegionConnectionType.BRIDGE, null, BRIDGE_COST);
-                                }
+                // Wymiar 1 = wspólna granica (linia), 2 = nakładka powierzchniowa.
+                // Oba przypadki oznaczają sąsiedztwo; nakładka to zwykle drobny
+                // artefakt naturalizacji (buffer(0) na niepoprawnym pierścieniu),
+                // więc zamiast przerywać generację — łączymy regiony i ewentualnie
+                // ostrzegamy, gdy nachodzenie jest duże (sygnał do zmniejszenia amplitudy).
+                if (!intersection.isEmpty() && intersection.getDimension() >= 1) {
+                    if (intersection.getDimension() == 2) {
+                        double overlap = intersection.getArea();
+                        double smaller = Math.min(region.getArea().getArea(), otherRegion.getArea().getArea());
+                        if (smaller > 0 && overlap > smaller * OVERLAP_WARN_FRACTION) {
+                            System.out.printf("WARN: regiony %s i %s nachodzą się na %.1f%% mniejszego regionu%n",
+                                    region.getId(), otherRegion.getId(), 100.0 * overlap / smaller);
+                        }
+                    }
+                    boolean openPass = true;
+                    for (MapFeature feature : region.getMapFeatures()) {
+                        if (feature.getRegions().contains(otherRegion)) {
+                            openPass = false;
+                            if (feature instanceof ModelRiver && ((ModelRiver) feature).isVeryBig()) {
+                                addConnections(region, otherRegion, RegionConnectionType.FERRYBOAT, null, FERRY_COST);
+                            } else {
+                                addConnections(region, otherRegion, RegionConnectionType.BRIDGE, null, BRIDGE_COST);
                             }
                         }
-                        if (openPass) {
-                            addConnections(region, otherRegion, RegionConnectionType.BORDER, null, 0.0);
-                        }
-                    } else if (intersection.getDimension() == 2) {
-//                        System.out.println("Regions overlap: " + region.getId() + " & " + otherRegion.getId());
-                        throw new IllegalStateException("Regions overlap: " + region.getId() + " & " + otherRegion.getId());                    }
+                    }
+                    if (openPass) {
+                        addConnections(region, otherRegion, RegionConnectionType.BORDER, null, 0.0);
+                    }
                 }
             }
         }
