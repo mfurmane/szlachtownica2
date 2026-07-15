@@ -1,166 +1,233 @@
 package priv.mfurmane.szlachtownica.model;
 
 import org.locationtech.jts.geom.*;
-import org.locationtech.jts.triangulate.VoronoiDiagramBuilder;
 
 import java.util.*;
 
+/**
+ * Zamienia proste, "geometryczne" krawędzie diagramu Voronoi na naturalnie
+ * wyglądające granice. Trzy zabiegi działające razem:
+ *
+ * 1. JITTER WIERZCHOŁKÓW — potrójne styki komórek (wierzchołki Voronoi) są
+ *    przesuwane o deterministyczny wektor zależny od pozycji. To rozbija
+ *    regularny szkielet diagramu, który inaczej prześwituje spod falowania.
+ *    Wierzchołki leżące na zewnętrznej granicy obszaru pozostają nieruchome,
+ *    dzięki czemu kontur prowincji nie zmienia kształtu.
+ *
+ * 2. FRAKTALNA PERTURBACJA KRAWĘDZI — każda wspólna (wewnętrzna) krawędź jest
+ *    zaginana wielooktawowym szumem (fBm), co daje meandry w wielu skalach
+ *    naraz zamiast pojedynczego gładkiego łuku. Okno sin(pi*t) zeruje wychylenie
+ *    na końcach, więc krawędzie schodzą się w (przesuniętych) wierzchołkach bez
+ *    rozejść i nakładek.
+ *
+ * 3. Amplituda jest BEZWZGLĘDNA (ułamek rozmiaru mapy), a nie proporcjonalna do
+ *    długości krawędzi — dzięki temu krótkie i długie granice falują spójnie.
+ *
+ * Każda krawędź i każdy wierzchołek są transformowane dokładnie raz i współdzielone
+ * przez sąsiednie komórki, więc podział pozostaje szczelny (bez luk i nakładek).
+ */
 public class VoronoiPerlinNaturalizer {
 
+    private static final int OCTAVES = 4;              // liczba oktaw fBm (detal fraktalny)
+    private static final double VERTEX_JITTER_FACTOR = 1.2; // przesunięcie styków ~ amplitude * factor
+
     private final GeometryFactory gf;
-    private final double amplitude;
-    private final int segments;
-    private final double noiseScale;
+    private final double amplitude;   // maks. bezwzględne wychylenie krawędzi (w jednostkach mapy)
+    private final int segments;       // liczba punktów pośrednich wstawianych na krawędź
+    private final double frequency;   // bazowa częstotliwość falowania wzdłuż krawędzi
     private final long seed;
 
-    public VoronoiPerlinNaturalizer(GeometryFactory gf, int segments, double amplitude, double noiseScale, long seed) {
+    public VoronoiPerlinNaturalizer(GeometryFactory gf, int segments, double amplitude, double frequency, long seed) {
         this.gf = gf;
         this.segments = segments;
         this.amplitude = amplitude;
-        this.noiseScale = noiseScale;
+        this.frequency = frequency;
         this.seed = seed;
     }
 
-//    public MultiPolygon generateNaturalVoronoi(Collection<Coordinate> points, Envelope clipEnvelope) {
-//        VoronoiDiagramBuilder vdb = new VoronoiDiagramBuilder();
-//        vdb.setSites(points);
-//        vdb.setClipEnvelope(clipEnvelope);
-//        Geometry voronoi = vdb.getDiagram(gf);
-//
-//        List<Polygon> polygons = new ArrayList<>();
-//        for (int i = 0; i < voronoi.getNumGeometries(); i++) {
-//            polygons.add((Polygon) voronoi.getGeometryN(i));
-//        }
-//
-//        Map<String, Coordinate[]> edgeMap = new HashMap<>();
-//        for (Polygon p : polygons) {
-//            addEdgesToMap(p.getExteriorRing(), edgeMap);
-//            for (int j = 0; j < p.getNumInteriorRing(); j++) {
-//                addEdgesToMap(p.getInteriorRingN(j), edgeMap);
-//            }
-//        }
-//
-//        // Transformacja każdej krawędzi tylko raz
-//        Map<String, Coordinate[]> transformedEdges = new HashMap<>();
-//        for (Map.Entry<String, Coordinate[]> entry : edgeMap.entrySet()) {
-//            String key = entry.getKey();
-//            Coordinate c1 = entry.getValue()[0];
-//            Coordinate c2 = entry.getValue()[1];
-//            transformedEdges.put(key, perturbEdge(c1, c2, key.hashCode()));
-//        }
-//
-//        List<Polygon> newPolygons = new ArrayList<>();
-//        for (Polygon p : polygons) {
-//            List<Coordinate> newCoords = new ArrayList<>();
-//
-//            collectTransformedCoordinates(p.getExteriorRing(), transformedEdges, newCoords);
-//
-//            newCoords.add(newCoords.get(0));
-//            LinearRing shell = gf.createLinearRing(newCoords.toArray(new Coordinate[0]));
-//            Polygon newPoly = gf.createPolygon(shell, null);
-//
-//            if (!newPoly.isValid()) {
-//                newPoly = (Polygon) newPoly.buffer(0);
-//            }
-//
-//            newPolygons.add(newPoly);
-//        }
-//
-//        return gf.createMultiPolygon(newPolygons.toArray(new Polygon[0]));
-//    }
+    public List<Polygon> naturalizeVoronoi(List<Polygon> polygons) {
+        // 1) Zbierz wszystkie krawędzie; krawędź wewnętrzna wystąpi 2x, zewnętrzna 1x.
+        Map<String, List<Coordinate[]>> edgeMap = new HashMap<>();
+        for (Polygon p : polygons) {
+            addEdgesToMap(p.getExteriorRing(), edgeMap);
+            for (int j = 0; j < p.getNumInteriorRing(); j++) {
+                addEdgesToMap(p.getInteriorRingN(j), edgeMap);
+            }
+        }
+
+        // 2) Wierzchołki na zewnętrznej granicy (należące do krawędzi występującej raz)
+        //    zostawiamy nieruchome, żeby kontur obszaru się nie zmienił.
+        Set<String> boundaryVerts = new HashSet<>();
+        for (List<Coordinate[]> edges : edgeMap.values()) {
+            if (edges.size() == 1) {
+                boundaryVerts.add(vKey(edges.get(0)[0]));
+                boundaryVerts.add(vKey(edges.get(0)[1]));
+            }
+        }
+
+        // 3) Przesunięcie każdego unikalnego wierzchołka (spójne dla wszystkich komórek).
+        Map<String, Coordinate> vertexShift = new HashMap<>();
+        for (List<Coordinate[]> edges : edgeMap.values()) {
+            for (Coordinate c : new Coordinate[]{edges.get(0)[0], edges.get(0)[1]}) {
+                vertexShift.computeIfAbsent(vKey(c),
+                        k -> boundaryVerts.contains(k) ? c : jitterVertex(c));
+            }
+        }
+
+        // 4) Transformacja każdej krawędzi dokładnie raz.
+        Map<String, Coordinate[]> transformed = new HashMap<>();
+        Map<String, Coordinate> edgeStart = new HashMap<>(); // oryginalny początek — do ustalania kierunku
+        for (Map.Entry<String, List<Coordinate[]>> entry : edgeMap.entrySet()) {
+            String key = entry.getKey();
+            Coordinate c1 = entry.getValue().get(0)[0];
+            Coordinate c2 = entry.getValue().get(0)[1];
+            edgeStart.put(key, c1);
+            Coordinate s1 = vertexShift.get(vKey(c1));
+            Coordinate s2 = vertexShift.get(vKey(c2));
+            if (entry.getValue().size() == 2) {
+                transformed.put(key, perturbEdge(s1, s2, key.hashCode())); // wewnętrzna → zaginamy
+            } else {
+                transformed.put(key, new Coordinate[]{s1, s2});            // zewnętrzna → prosta
+            }
+        }
+
+        // 5) Odbuduj poligony z przetransformowanych krawędzi.
+        List<Polygon> result = new ArrayList<>();
+        for (Polygon p : polygons) {
+            LinearRing shell = rebuildRing(p.getExteriorRing(), transformed, edgeStart);
+            LinearRing[] holes = new LinearRing[p.getNumInteriorRing()];
+            for (int i = 0; i < holes.length; i++) {
+                holes[i] = rebuildRing(p.getInteriorRingN(i), transformed, edgeStart);
+            }
+            Polygon newPoly = gf.createPolygon(shell, holes);
+            if (!newPoly.isValid()) {
+                Geometry fixed = newPoly.buffer(0);
+                newPoly = (fixed instanceof Polygon poly)
+                        ? poly
+                        : getLargestPolygon((MultiPolygon) fixed);
+            }
+            result.add(newPoly);
+        }
+        return result;
+    }
+
+    // Zagina krawędź między (przesuniętymi) wierzchołkami c1..c2 wielooktawowym szumem.
+    private Coordinate[] perturbEdge(Coordinate c1, Coordinate c2, int edgeSeed) {
+        double dx = c2.x - c1.x;
+        double dy = c2.y - c1.y;
+        double length = Math.sqrt(dx * dx + dy * dy);
+        if (length == 0) {
+            return new Coordinate[]{c1, c2};
+        }
+        double nx = -dy / length; // wektor prostopadły (jednostkowy)
+        double ny = dx / length;
+
+        Coordinate[] coords = new Coordinate[segments + 2];
+        coords[0] = c1;
+        coords[segments + 1] = c2;
+        for (int i = 1; i <= segments; i++) {
+            double t = (double) i / (segments + 1);
+            double baseX = c1.x + t * dx;
+            double baseY = c1.y + t * dy;
+            double window = Math.sin(Math.PI * t);          // 0 na końcach, 1 w środku
+            double offset = window * amplitude * fbm(t * frequency, edgeSeed);
+            coords[i] = new Coordinate(baseX + nx * offset, baseY + ny * offset);
+        }
+        return coords;
+    }
+
+    // Wielooktawowy szum (fractional Brownian motion) w [-1, 1].
+    private double fbm(double x, int edgeSeed) {
+        double sum = 0, amp = 1, total = 0, freq = 1;
+        for (int o = 0; o < OCTAVES; o++) {
+            sum += amp * noise1D(x * freq, edgeSeed + o * 101);
+            total += amp;
+            amp *= 0.5;
+            freq *= 2.0;
+        }
+        return sum / total;
+    }
+
+    // Deterministyczne przesunięcie wierzchołka zależne od jego pozycji.
+    private Coordinate jitterVertex(Coordinate c) {
+        double angle = (hash(c, 7) * 0.5 + 0.5) * 2 * Math.PI;
+        double radius = (0.4 + 0.6 * (hash(c, 13) * 0.5 + 0.5)) * amplitude * VERTEX_JITTER_FACTOR;
+        return new Coordinate(c.x + Math.cos(angle) * radius, c.y + Math.sin(angle) * radius);
+    }
 
     private void addEdgesToMap(LineString ring, Map<String, List<Coordinate[]>> edgeMap) {
         for (int i = 0; i < ring.getNumPoints() - 1; i++) {
             Coordinate c1 = ring.getCoordinateN(i);
             Coordinate c2 = ring.getCoordinateN(i + 1);
-            String key = makeEdgeKey(c1, c2);
-
-            edgeMap.computeIfAbsent(key, k -> new ArrayList<>())
+            edgeMap.computeIfAbsent(makeEdgeKey(c1, c2), k -> new ArrayList<>())
                     .add(new Coordinate[]{c1, c2});
         }
     }
 
+    private LinearRing rebuildRing(LineString ring, Map<String, Coordinate[]> transformed,
+                                   Map<String, Coordinate> edgeStart) {
+        List<Coordinate> coords = new ArrayList<>();
+        for (int i = 0; i < ring.getNumPoints() - 1; i++) {
+            Coordinate c1 = ring.getCoordinateN(i);
+            Coordinate c2 = ring.getCoordinateN(i + 1);
+            String key = makeEdgeKey(c1, c2);
+            Coordinate[] edge = transformed.get(key);
+            boolean forward = edgeStart.get(key).equals2D(c1);
+            if (forward) {
+                for (int j = 0; j < edge.length - 1; j++) coords.add(edge[j]);
+            } else {
+                for (int j = edge.length - 1; j >= 1; j--) coords.add(edge[j]);
+            }
+        }
+        coords.add(coords.get(0)); // zamknięcie pierścienia
+        return gf.createLinearRing(coords.toArray(new Coordinate[0]));
+    }
+
+    private Polygon getLargestPolygon(MultiPolygon mp) {
+        Polygon largest = null;
+        double maxArea = -1;
+        for (int i = 0; i < mp.getNumGeometries(); i++) {
+            Polygon p = (Polygon) mp.getGeometryN(i);
+            if (p.getArea() > maxArea) {
+                maxArea = p.getArea();
+                largest = p;
+            }
+        }
+        return largest;
+    }
+
     private String makeEdgeKey(Coordinate c1, Coordinate c2) {
-        if (c1.compareTo(c2) <= 0) {
-            return c1.toString() + "_" + c2.toString();
-        } else {
-            return c2.toString() + "_" + c1.toString();
-        }
+        return c1.compareTo(c2) <= 0
+                ? vKey(c1) + "_" + vKey(c2)
+                : vKey(c2) + "_" + vKey(c1);
     }
 
-    // 🔥 GŁÓWNA RÓŻNICA – Perlin/value noise
-    private Coordinate[] perturbEdge(Coordinate c1, Coordinate c2, int edgeSeed) {
-        Coordinate[] coords = new Coordinate[segments + 2];
-        coords[0] = c1;
-        coords[segments + 1] = c2;
-
-        // wektor prostopadły do krawędzi (żeby odchylenia były "na boki")
-        double dx = c2.x - c1.x;
-        double dy = c2.y - c1.y;
-        double length = Math.sqrt(dx * dx + dy * dy);
-
-        double nx = -dy / length;
-        double ny = dx / length;
-
-        for (int i = 1; i <= segments; i++) {
-            double t = (double) i / (segments + 1);
-
-            double baseX = c1.x + t * dx;
-            double baseY = c1.y + t * dy;
-
-            // próbkujemy noise wzdłuż krawędzi
-            double noise = noise1D(t * noiseScale, edgeSeed);
-
-            double offset = noise * amplitude * length;
-
-            double x = baseX + nx * offset;
-            double y = baseY + ny * offset;
-
-            coords[i] = new Coordinate(x, y);
-        }
-
-        return coords;
+    private String vKey(Coordinate c) {
+        return c.x + ":" + c.y;
     }
-
-//    private void collectTransformedCoordinates(LineString ring, Map<String, Coordinate[]> transformedEdges, List<Coordinate> out) {
-//        for (int i = 0; i < ring.getNumPoints() - 1; i++) {
-//            Coordinate c1 = ring.getCoordinateN(i);
-//            Coordinate c2 = ring.getCoordinateN(i + 1);
-//            String key = makeEdgeKey(c1, c2);
-//
-//            Coordinate[] transformed = transformedEdges.get(key);
-//
-//            if (!transformed[0].equals2D(c1)) {
-//                for (int j = transformed.length - 1; j >= 0; j--) {
-//                    out.add(transformed[j]);
-//                }
-//            } else {
-//                Collections.addAll(out, transformed);
-//            }
-//        }
-//    }
 
     // =========================
-    // 🎲 VALUE NOISE (Perlin-like)
+    // Szum wartościowy (value noise), interpolowany smoothstepem.
     // =========================
 
     private double noise1D(double x, int edgeSeed) {
         int x0 = (int) Math.floor(x);
-        int x1 = x0 + 1;
-
         double t = x - x0;
-
         double v0 = randomFromInt(x0 + edgeSeed);
-        double v1 = randomFromInt(x1 + edgeSeed);
-
-        double smoothT = fade(t);
-
-        return lerp(v0, v1, smoothT);
+        double v1 = randomFromInt(x0 + 1 + edgeSeed);
+        return lerp(v0, v1, fade(t));
     }
 
     private double randomFromInt(int x) {
         x = (x << 13) ^ x;
-        return 1.0 - ((x * (x * x * 15731 + 789221) + 1376312589 + (int)seed) & 0x7fffffff) / 1073741824.0;
+        return 1.0 - ((x * (x * x * 15731 + 789221) + 1376312589 + (int) seed) & 0x7fffffff) / 1073741824.0;
+    }
+
+    // Skalarny hash pozycji w [-1, 1] — deterministyczny dla danego wierzchołka.
+    private double hash(Coordinate c, int salt) {
+        int hx = Double.hashCode(c.x);
+        int hy = Double.hashCode(c.y);
+        return randomFromInt(hx * 73856093 ^ hy * 19349663 ^ salt * 83492791);
     }
 
     private double fade(double t) {
@@ -169,126 +236,5 @@ public class VoronoiPerlinNaturalizer {
 
     private double lerp(double a, double b, double t) {
         return a + t * (b - a);
-    }
-
-
-
-    public List<Polygon> naturalizeVoronoi(List<Polygon> polygons) {
-        Map<String, List<Coordinate[]>> edgeMap = new HashMap<>();
-        // 1️⃣ Zbieramy wszystkie krawędzie
-        for (Polygon p : polygons) {
-            addEdgesToMap(p.getExteriorRing(), edgeMap);
-            for (int j = 0; j < p.getNumInteriorRing(); j++) {
-                addEdgesToMap(p.getInteriorRingN(j), edgeMap);
-            }
-        }
-        // 2️⃣ Transformujemy każdą krawędź tylko raz
-//        Map<String, Coordinate[]> transformedEdges = new HashMap<>();
-//        for (Map.Entry<String, List<Coordinate[]>> entry : edgeMap.entrySet()) {
-//            String key = entry.getKey();
-//            Coordinate c1 = entry.getValue()[0];
-//            Coordinate c2 = entry.getValue()[1];
-//            transformedEdges.put(key, perturbEdge(c1, c2, key.hashCode()));
-//        }
-        Map<String, Coordinate[]> transformedEdges = new HashMap<>();
-
-        for (Map.Entry<String, List<Coordinate[]>> entry : edgeMap.entrySet()) {
-            String key = entry.getKey();
-            List<Coordinate[]> edges = entry.getValue();
-            Coordinate c1 = edges.get(0)[0];
-            Coordinate c2 = edges.get(0)[1];
-            if (edges.size() == 2) {
-                // 🔥 WEWNĘTRZNA krawędź → deformujemy
-                transformedEdges.put(key, perturbEdge(c1, c2, key.hashCode()));
-            } else {
-                // 🔥 ZEWNĘTRZNA → zostawiamy prostą
-                transformedEdges.put(key, new Coordinate[]{c1, c2});
-            }
-        }
-        // 3️⃣ Budujemy nowe poligony
-        List<Polygon> result = new ArrayList<>();
-        for (Polygon p : polygons) {
-            LinearRing shell = rebuildRing(p.getExteriorRing(), transformedEdges);
-            LinearRing[] holes = new LinearRing[p.getNumInteriorRing()];
-            for (int i = 0; i < holes.length; i++) {
-                holes[i] = rebuildRing(p.getInteriorRingN(i), transformedEdges);
-            }
-            Polygon newPoly = gf.createPolygon(shell, holes);
-            if (!newPoly.isValid()) {
-//                newPoly = (Polygon) newPoly.buffer(0);
-                Geometry fixed = newPoly.buffer(0);
-                if (fixed instanceof Polygon) {
-                    newPoly = (Polygon) fixed;
-                } else {//if (fixed instanceof MultiPolygon) {
-                    // wybieramy największy kawałek (najczęściej to właściwy region)
-                    newPoly = getLargestPolygon((MultiPolygon) fixed);
-                } //else {
-                    // fallback – rzadkie przypadki
-                    //continue;
-                //}
-            }
-            result.add(newPoly);
-        }
-        return result;
-    }
-
-    private Polygon getLargestPolygon(MultiPolygon mp) {
-        Polygon largest = null;
-        double maxArea = -1;
-        for (int i = 0; i < mp.getNumGeometries(); i++) {
-            Polygon p = (Polygon) mp.getGeometryN(i);
-            double area = p.getArea();
-            if (area > maxArea) {
-                maxArea = area;
-                largest = p;
-            }
-        }
-        return largest;
-    }
-
-//    private LinearRing rebuildRing(LineString ring, Map<String, Coordinate[]> transformedEdges) {
-//        List<Coordinate> coords = new ArrayList<>();
-//        for (int i = 0; i < ring.getNumPoints() - 1; i++) {
-//            Coordinate c1 = ring.getCoordinateN(i);
-//            Coordinate c2 = ring.getCoordinateN(i + 1);
-//            String key = makeEdgeKey(c1, c2);
-//            Coordinate[] edge = transformedEdges.get(key);
-//            // dopasowanie kierunku
-//            if (!edge[0].equals2D(c1)) {
-//                for (int j = edge.length - 1; j >= 0; j--) {
-//                    coords.add(edge[j]);
-//                }
-//            } else {
-//                Collections.addAll(coords, edge);
-//            }
-//        }
-//        // zamknięcie pierścienia
-//        coords.add(coords.get(0));
-//        return gf.createLinearRing(coords.toArray(new Coordinate[0]));
-//    }
-
-    private LinearRing rebuildRing(LineString ring, Map<String, Coordinate[]> transformedEdges) {
-        List<Coordinate> coords = new ArrayList<>();
-        for (int i = 0; i < ring.getNumPoints() - 1; i++) {
-            Coordinate c1 = ring.getCoordinateN(i);
-            Coordinate c2 = ring.getCoordinateN(i + 1);
-            String key = makeEdgeKey(c1, c2);
-            Coordinate[] edge = transformedEdges.get(key);
-
-            if (!edge[0].equals2D(c1)) {
-                // odwrócony kierunek — dodaj wszystko OPRÓCZ ostatniego (bo to c1,
-                // który był już ostatnim punktem poprzedniej krawędzi)
-                for (int j = edge.length - 1; j >= 1; j--) {
-                    coords.add(edge[j]);
-                }
-            } else {
-                // normalny kierunek — dodaj wszystko OPRÓCZ ostatniego punktu
-                for (int j = 0; j < edge.length - 1; j++) {
-                    coords.add(edge[j]);
-                }
-            }
-        }
-        coords.add(coords.get(0)); // zamknięcie
-        return gf.createLinearRing(coords.toArray(new Coordinate[0]));
     }
 }

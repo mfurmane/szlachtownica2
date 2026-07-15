@@ -608,8 +608,11 @@ public class ProvinceInitializer {
         int retries = 0;
         while (true) {
             try {
-                // Lloyd's relaxation PRZED naturalizacją
-                int lloydIterations = 4; // więcej iteracji = równiejsze rozmiary
+                // Lloyd's relaxation PRZED naturalizacją.
+                // Mało iteracji: 0 = surowe (nierówne) komórki, dużo = regularne,
+                // "heksagonalne". 2 to kompromis — usuwa najgorsze drzazgi, ale
+                // zostawia naturalną nierównomierność rozmiarów.
+                int lloydIterations = 2;
                 List<Polygon> rawGeoms = Collections.emptyList();
                 for (int i = 0; i < lloydIterations; i++) {
                     System.out.println("Lloyd iteration " + i);
@@ -656,9 +659,11 @@ public class ProvinceInitializer {
     }
 
     private static List<Polygon> naturalize(List<Polygon> rawGeoms, Polygon area) {
-        double amplitude = area.getEnvelopeInternal().getWidth() * 0.04;
+        // amplitude — bezwzględne maks. wychylenie granicy (ułamek szerokości mapy);
+        // frequency — gęstość meandrów wzdłuż krawędzi (fBm dokłada drobniejsze oktawy).
+        double amplitude = area.getEnvelopeInternal().getWidth() * 0.03;
         VoronoiPerlinNaturalizer naturalizer = new VoronoiPerlinNaturalizer(
-                gf, determineSegmentsCount(area), amplitude, 0.3, 10);
+                gf, determineSegmentsCount(area), amplitude, 7.0, 10);
         return naturalizer.naturalizeVoronoi(rawGeoms);
     }
 
@@ -795,7 +800,8 @@ public class ProvinceInitializer {
 
     private static int determineSegmentsCount(Polygon area) {
         //TODO na podstawie area.getLength(), gdy sprawdzę skalę wartości
-        return 10;
+        // Więcej segmentów = gładsza krzywa granicy (fBm ma gdzie się rozwinąć).
+        return 24;
     }
 
     private SimulationProvince initializeProvince(ConfigurationProvince configuration, ModelProvince model) {
