@@ -21,42 +21,42 @@ public class VillageNameGenerator {
             //NEUTRAL
             new WordCore("wzgórz", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("wzgórz"), List.of(AdjectiveForms.createOwy("wzgórz")), "Wzgórzyca;Wzgórek"),
             new WordCore("sioł", WordCategory.STRUCTURE, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("sioł"), List.of(new AdjectiveForms("sielski", "sielska", "sielskie", "sielscy", "sielskie")), "Sielanka"),
-            new WordCore("grodzisk", WordCategory.STRUCTURE, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("grodzisk"), List.of(AdjectiveForms.createOwy("grodzisk")), "Grodzisk"),
+            new WordCore("grodzisk", WordCategory.STRUCTURE, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("grodzisk"), List.of(AdjectiveForms.createOwy("grodzisk")), "Grodzisk").places(Landmark.STRONGHOLD),
             new WordCore("błot", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("błot"), List.of(AdjectiveForms.createYI("błotn"), AdjectiveForms.createSty("błotni")), "Zabłocie;Błotnica;Podbłocie"),
             new WordCore("pol", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("pol"), List.of(AdjectiveForms.createYI("poln")), "Zapole;Podpole;Zapolice"),
             new WordCore("zacisz", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("zacisz"), List.of(AdjectiveForms.createYI("zaciszn")), "Zacisze"),
             new WordCore("słońc", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("słońc"), List.of(AdjectiveForms.createYI("słoneczn")), ""),
-            new WordCore("zarośl", WordCategory.PLANT, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("zarośl"), List.of(new AdjectiveForms("zarośnięty", "zarośnięta", "zarośnięte", "zarośnięci", "zarośnięte"), new AdjectiveForms("zarosły", "zarosła", "zarosłe", "zarośli", "zarosłe")), "Zarośle"),
+            new WordCore("zarośl", WordCategory.PLANT, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("zarośl"), List.of(new AdjectiveForms("zarośnięty", "zarośnięta", "zarośnięte", "zarośnięci", "zarośnięte"), new AdjectiveForms("zarosły", "zarosła", "zarosłe", "zarośli", "zarosłe")), "Zarośle").requires(EnvFeature.FOREST),
             //FEMININE
             new WordCore("brzoz", WordCategory.PLANT, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("brzoz"), List.of(AdjectiveForms.createOwy("brzoz")), "Zabrzozie;Podbrzozie;Brzózki;Brzozów;Brzozówka"),
             new WordCore("wierzb", WordCategory.PLANT, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("wierzb"), List.of(AdjectiveForms.createOwy("wierzb")), "Wierzbie;Zawierzbie;Wierzbica;Wierzbianka"),
-            new WordCore("rzek", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("rzek"), List.of(AdjectiveForms.createCzny("rze")), "Zarzecze;Nadrzecze;Podrzecze;Międzyrzecze"),
+            new WordCore("rzek", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("rzek"), List.of(AdjectiveForms.createCzny("rze")), "Zarzecze;Nadrzecze;Podrzecze;Międzyrzecze").requires(EnvFeature.WATER),
             new WordCore("sosn", WordCategory.PLANT, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("sosn"), List.of(AdjectiveForms.createOwy("sosn")), "Sośnica;Sosnowica;Sosnówka;Podsośnie;Zasośnie"),
             new WordCore("topol", WordCategory.PLANT, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("topol"), List.of(AdjectiveForms.createOwy("topol"), AdjectiveForms.createNy("topol")), "Topolno;Topolany;Topólka"),
-            new WordCore("żab", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("żab"), List.of(AdjectiveForms.createI("żab")), "Żabno;Żabnica;Żabice;Żabianka;Zażabie"),
-            new WordCore("skał", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("skał"), List.of(AdjectiveForms.createNy("skal")), "Zaskale;Podskale;Skałka"),
+            new WordCore("żab", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("żab"), List.of(AdjectiveForms.createI("żab")), "Żabno;Żabnica;Żabice;Żabianka;Zażabie").requires(EnvFeature.WATER),
+            new WordCore("skał", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("skał"), List.of(AdjectiveForms.createNy("skal")), "Zaskale;Podskale;Skałka").requires(EnvFeature.MOUNTAINS),
             new WordCore("sarn", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("sarn"), List.of(AdjectiveForms.createNi("sar")), "Sarnów;Sarnowa;Sarnówka"),
             new WordCore("kun", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("kun"), List.of(AdjectiveForms.createNi("ku")), "Kunów;Kunice"),
             new WordCore("krow", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("krow"), List.of(AdjectiveForms.createI("krow")), "Krowica;Krowianki"),
             new WordCore("koz", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("koz"), List.of(AdjectiveForms.createI("koz")), "Kozy;Koźle;Kozice;Koźlanka"),
             new WordCore("owc", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("owc"), List.of(AdjectiveForms.createCzy("ow")), "Owczary;Owczarnia"),
-            new WordCore("kaczk", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("kaczk"), List.of(AdjectiveForms.createYY("kacz")), "Kaczory;Kaczanica"),
+            new WordCore("kaczk", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("kaczk"), List.of(AdjectiveForms.createYY("kacz")), "Kaczory;Kaczanica").requires(EnvFeature.WATER),
             new WordCore("samic", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("samic"), List.of(AdjectiveForms.createYY("samicz")), "Samiczki;Samica"),
-            new WordCore("ryb", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("ryb"), List.of(AdjectiveForms.createI("ryb")), "Rybno;Rybnica;Zarybie;Międzyrybie"),
-            new WordCore("stodoł", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("stodoł"), List.of(AdjectiveForms.createNy("stodol")), "Stodoły;Zastodole"),
+            new WordCore("ryb", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("ryb"), List.of(AdjectiveForms.createI("ryb")), "Rybno;Rybnica;Zarybie;Międzyrybie").requires(EnvFeature.WATER),
+            new WordCore("stodoł", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("stodoł"), List.of(AdjectiveForms.createNy("stodol")), "Stodoły;Zastodole").places(Landmark.BARN),
             new WordCore("obor", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("obor"), List.of(AdjectiveForms.createNy("obor")), "Obory;Oborki;Oborniki"),
-            new WordCore("kuźni", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("kuźni"), List.of(AdjectiveForms.createNy("kuźnia")), "Kuźnice;Kuźniczka;Kuźnica"),
-            new WordCore("karczm", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("karczm"), List.of(AdjectiveForms.createNy("karczem")), "Karczmiska;Zakarczmie;Karczmianka"),
-            new WordCore("przysta", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("przysta"), List.of(AdjectiveForms.createOwy("przystani")), "Przystań"),
+            new WordCore("kuźni", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("kuźni"), List.of(AdjectiveForms.createNy("kuźnia")), "Kuźnice;Kuźniczka;Kuźnica").places(Landmark.SMITHY),
+            new WordCore("karczm", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("karczm"), List.of(AdjectiveForms.createNy("karczem")), "Karczmiska;Zakarczmie;Karczmianka").places(Landmark.TAVERN),
+            new WordCore("przysta", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("przysta"), List.of(AdjectiveForms.createOwy("przystani")), "Przystań").requires(EnvFeature.WATER).places(Landmark.HARBOR),
             new WordCore("staroś", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createCi("staroś"), List.of(AdjectiveForms.createRy("sta")), "Starość;Starzyzna"),
             new WordCore("nowoś", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createCi("nowoś"), List.of(AdjectiveForms.createYI("now")), "Nowość;Nowina"),
             new WordCore("wielko", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createCi("wielkoś"), List.of(AdjectiveForms.createKi("wiel")), "Wielkość"),
             new WordCore("łąk", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("łąk"), List.of(AdjectiveForms.createOwy("łąk"), AdjectiveForms.createNy("łącz")), "Łąka;Łęki;Łączki;Podłęże"),
-            new WordCore("gór", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("gór"), List.of(AdjectiveForms.createKi("górs"), AdjectiveForms.createNy("gór")), "Zagórze;Podgórze;Górki;Nagórze;Górzyca"),
-            new WordCore("wysokoś", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createCi("wysokoś"), List.of(AdjectiveForms.createKi("wyso"), AdjectiveForms.createOwy("wysokości")), ""),
-            new WordCore("głębi", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("głębi"), List.of(AdjectiveForms.createKi("głębo"), AdjectiveForms.createOwy("głębin")), "Głębia;Zagłębie"),
-            new WordCore("płycizn", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("płycizn"), List.of(AdjectiveForms.createKi("płyt")), "Płycizna"),
-            new WordCore("wod", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("wod"), List.of(AdjectiveForms.createYI("wodn")), "Zawodzie;Zawada;Podwodzie"),
+            new WordCore("gór", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("gór"), List.of(AdjectiveForms.createKi("górs"), AdjectiveForms.createNy("gór")), "Zagórze;Podgórze;Górki;Nagórze;Górzyca").requires(EnvFeature.MOUNTAINS),
+            new WordCore("wysokoś", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createCi("wysokoś"), List.of(AdjectiveForms.createKi("wyso"), AdjectiveForms.createOwy("wysokości")), "").requires(EnvFeature.MOUNTAINS),
+            new WordCore("głębi", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("głębi"), List.of(AdjectiveForms.createKi("głębo"), AdjectiveForms.createOwy("głębin")), "Głębia;Zagłębie").requires(EnvFeature.WATER),
+            new WordCore("płycizn", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("płycizn"), List.of(AdjectiveForms.createKi("płyt")), "Płycizna").requires(EnvFeature.WATER),
+            new WordCore("wod", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("wod"), List.of(AdjectiveForms.createYI("wodn")), "Zawodzie;Zawada;Podwodzie").requires(EnvFeature.WATER),
             new WordCore("dup", WordCategory.VULGAR, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("dup"), List.of(AdjectiveForms.createYI("dupn"), AdjectiveForms.createYI("dupczan"), AdjectiveForms.createSty("dupia")), "Zadupie;Dupice;Dupianka;Dupczyki"),
             new WordCore("kurw", WordCategory.VULGAR, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("kurw"), List.of(AdjectiveForms.createI("kurw"), AdjectiveForms.createYI("kurwiczn"), AdjectiveForms.createSty("wykurwi"), AdjectiveForms.createOny("skurwi")), "Zakurwie;Kurwice"),
 //            new WordCore("wod", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("wod"), List.of(AdjectiveForms.createY("wodn")), ""),
@@ -73,7 +73,7 @@ public class VillageNameGenerator {
             new WordCore("dum", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("duma", null), List.of(AdjectiveForms.createNy("dum")), "Dumka;Duma;Dumki"),
             //SAME ADJECTIVE AS MALE
             new WordCore("handlark", WordCategory.PROFESSION, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("handlark"), List.of(AdjectiveForms.createKi("handlars")), "Handelek;Handlowisko;Handlownica"),
-            new WordCore("rybaczk", WordCategory.PROFESSION, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi ("rybaczk"), List.of(AdjectiveForms.createKi("rybac")), "Rybianka;Rybaczka;Rybownica"),
+            new WordCore("rybaczk", WordCategory.PROFESSION, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi ("rybaczk"), List.of(AdjectiveForms.createKi("rybac")), "Rybianka;Rybaczka;Rybownica").requires(EnvFeature.WATER),
             new WordCore("myśliw", WordCategory.PROFESSION, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe ("myśliw"), List.of(AdjectiveForms.createKi("myśliws")), ""),
             new WordCore("paster", WordCategory.PROFESSION, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi ("pasterk"), List.of(AdjectiveForms.createKi("pasters")), ""),
             new WordCore("kowalk", WordCategory.PROFESSION, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi ("kowalk"), List.of(AdjectiveForms.createKi("kowals")), "Kowalica;Kowalnica;Kowalówka"),
@@ -86,14 +86,14 @@ public class VillageNameGenerator {
             new WordCore("las", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("las"), List.of(AdjectiveForms.createYI("leśn")), "Zalesie;Podlesie;Lasek;Laski;Leśnica;Lesianka;Leśniczówka;Laskownica"),
             new WordCore("wil", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createK("wil"), List.of(AdjectiveForms.createCzy("wil")), "Wilków;Wilcze;Wilkowice;Wilczyca;Wilkownica;Wilczanka;Zawilcze"),
             new WordCore("korze", WordCategory.PLANT, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("korze"), List.of(AdjectiveForms.createNy("korzen"), AdjectiveForms.createOwy("korzeni")), "Korzeniów;"),
-            new WordCore("poto", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createK("poto"), List.of(AdjectiveForms.createCzny("poto"), AdjectiveForms.createOwy("potok")), "Potok;Zapotocze;Potoczek"),
+            new WordCore("poto", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createK("poto"), List.of(AdjectiveForms.createCzny("poto"), AdjectiveForms.createOwy("potok")), "Potok;Zapotocze;Potoczek").requires(EnvFeature.WATER),
             new WordCore("lis", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("lis"), List.of(AdjectiveForms.createI("lis")), "Lisów;Lisie;Liski"),
             new WordCore("niedźwied", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createZZie("niedźwied"), List.of(AdjectiveForms.createI("niedźwiedz")), "Niedźwiedź;Niedźwiada;Niedźwiedzie"),
             new WordCore("jele", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("jele"), List.of(AdjectiveForms.createI("jelen")), "Jeleń;Jelenie;Jeleniów"),
             new WordCore("dzik", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyI("dzik"), List.of(AdjectiveForms.createCzy("dzi")), "Dzików;Dzikowo;Dzikowiec"),
             new WordCore("zając", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyE("zając"), List.of(AdjectiveForms.createYY("zajęcz")), "Zajączki;Zajączków;Zajączkowo"),
-            new WordCore("bóbr", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("bóbr",   "bobry"), List.of(AdjectiveForms.createYY("bobrz"), AdjectiveForms.createOwy("bobr")), "Bobrowniki;Bobrownica;Bobrowo;Bobrzanka"),
-            new WordCore("bober", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("bober"), List.of(AdjectiveForms.createOwy("bober")), ""),
+            new WordCore("bóbr", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("bóbr",   "bobry"), List.of(AdjectiveForms.createYY("bobrz"), AdjectiveForms.createOwy("bobr")), "Bobrowniki;Bobrownica;Bobrowo;Bobrzanka").requires(EnvFeature.WATER),
+            new WordCore("bober", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("bober"), List.of(AdjectiveForms.createOwy("bober")), "").requires(EnvFeature.WATER),
             new WordCore("ko", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("ko"), List.of(AdjectiveForms.createNski("ko")), "Końskie;Koniuszki"),
             new WordCore("ko", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("kot"), List.of(AdjectiveForms.createCi("ko")), "Kotów;Kocie;Kotki"),
             new WordCore("kogu", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("kogut"), List.of(AdjectiveForms.createCi("kogu")), ""),
@@ -101,11 +101,11 @@ public class VillageNameGenerator {
             new WordCore("elf", WordCategory.BEING, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("elf"), List.of(AdjectiveForms.createI("elf"), AdjectiveForms.createKi("elfic")), "Elfowo;Elfów"),
             new WordCore("krasnolud", WordCategory.BEING, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("krasnolud"), List.of(AdjectiveForms.createKiCy("krasnoludz")), "Krasnoludki;Krasnoludów"),
             new WordCore("dąb", WordCategory.PLANT, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("dąb", "dęby"), List.of(AdjectiveForms.createOwy("dęb")), "Dąbrowa;Dąbie;Dębina;Dębno;Dębica"),
-            new WordCore("młyn", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("młyn"), List.of(AdjectiveForms.createKi("młyńs")), "Młyny;Zamłynie;Młynary"),
-            new WordCore("dwór", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("dwór", "dwory"), List.of(AdjectiveForms.createKi("dwors")), "Zadworze;Dwory;Poddworze"),
-            new WordCore("gród", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("gród", "grody"), List.of(AdjectiveForms.createKi("grodz")), "Podgrodzie;Nowogród;Grodziec;Grodzisko"),
+            new WordCore("młyn", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("młyn"), List.of(AdjectiveForms.createKi("młyńs")), "Młyny;Zamłynie;Młynary").places(Landmark.MILL),
+            new WordCore("dwór", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("dwór", "dwory"), List.of(AdjectiveForms.createKi("dwors")), "Zadworze;Dwory;Poddworze").places(Landmark.MANOR),
+            new WordCore("gród", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("gród", "grody"), List.of(AdjectiveForms.createKi("grodz")), "Podgrodzie;Nowogród;Grodziec;Grodzisko").places(Landmark.STRONGHOLD),
             new WordCore("kamie", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("kamie"), List.of(AdjectiveForms.createNy("kamien")), "Kamień;Kamienica;Podkamień"),
-            new WordCore("pias", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEk("pias"), List.of(AdjectiveForms.createOwy("piask"), AdjectiveForms.createSty("piaszczy")), "Piaski;Piaseczno"),
+            new WordCore("pias", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEk("pias"), List.of(AdjectiveForms.createOwy("piask"), AdjectiveForms.createSty("piaszczy")), "Piaski;Piaseczno").requires(EnvFeature.SAND),
             new WordCore("dół", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("dół", "doły"), List.of(AdjectiveForms.createNy("dol")), "Zadole;Podole;Nadole;Doły"),
             new WordCore("niż", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyE("niż"), List.of(AdjectiveForms.createKi("nis"), AdjectiveForms.createOwy("niż")), ""),
             new WordCore("wiatr", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("wiatr"), List.of(AdjectiveForms.createYI("wietrzn"), AdjectiveForms.createOwy("wiatr")), "Wiatrowo;Wietrzno"),
@@ -117,7 +117,7 @@ public class VillageNameGenerator {
 //            new WordCore("dra", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.MASC_PERSONAL, NounForms.createNie("dra"), List.of(AdjectiveForms.createNski("dra"), AdjectiveForms.createNny("dra")), ""),
             new WordCore("kupi", WordCategory.PROFESSION, WordGender.MASCULINE, PluralType.MASC_PERSONAL, NounForms.createIec("kup"), List.of(AdjectiveForms.createNski("dra"), AdjectiveForms.createEcki("kupi")), ""),
             new WordCore("człowiek", WordCategory.BEING, WordGender.MASCULINE, PluralType.MASC_PERSONAL, new NounForms("człowiek", "ludzie"), List.of(AdjectiveForms.createKi("ludz"), AdjectiveForms.createCzy("człowie")), ""),
-            new WordCore("rybak", WordCategory.PROFESSION, WordGender.MASCULINE, PluralType.MASC_PERSONAL, NounForms.createKCy ("ryba"), List.of(AdjectiveForms.createKi("rybac")), "Rybaki;Rybaków"),
+            new WordCore("rybak", WordCategory.PROFESSION, WordGender.MASCULINE, PluralType.MASC_PERSONAL, NounForms.createKCy ("ryba"), List.of(AdjectiveForms.createKi("rybac")), "Rybaki;Rybaków").requires(EnvFeature.WATER),
             new WordCore("myśliw", WordCategory.PROFESSION, WordGender.MASCULINE, PluralType.MASC_PERSONAL, NounForms.createYi ("myśliw"), List.of(AdjectiveForms.createKi("myśliws")), ""),
             new WordCore("paster", WordCategory.PROFESSION, WordGender.MASCULINE, PluralType.MASC_PERSONAL, NounForms.createEmptyE ("pasterz"), List.of(AdjectiveForms.createKi("pasters")), "Pasterka"),
             new WordCore("kowal", WordCategory.PROFESSION, WordGender.MASCULINE, PluralType.MASC_PERSONAL, NounForms.createEmptyE ("kowal"), List.of(AdjectiveForms.createKi("kowals")), "Kowale;Kowalewo;Kowala"),
@@ -129,9 +129,9 @@ public class VillageNameGenerator {
             new WordCore("trakt", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("trakt"), List.of(), ""),
             new WordCore("siedlisk", WordCategory.STRUCTURE, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("siedlisk"), List.of(), "Siedliska"),
             new WordCore("siedliszcz", WordCategory.STRUCTURE, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createE("siedliszcz"), List.of(), ""),
-            new WordCore("wież", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("wież"), List.of(), ""),
-            new WordCore("wieżyc", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("wieżyc"), List.of(), ""),
-            new WordCore("most", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("most"), List.of(), "Mosty;Zamoście;Mościska"),
+            new WordCore("wież", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("wież"), List.of(), "").places(Landmark.TOWER),
+            new WordCore("wieżyc", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("wieżyc"), List.of(), "").places(Landmark.TOWER),
+            new WordCore("most", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("most"), List.of(), "Mosty;Zamoście;Mościska").requires(EnvFeature.WATER).places(Landmark.BRIDGE),
             new WordCore("chat", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("chat"), List.of(), ""),
             new WordCore("doł", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEk("doł"), List.of(), ""),
             //NON PLURAL, NON ADJECTIVE
@@ -141,23 +141,23 @@ public class VillageNameGenerator {
 
             // ===================== NOWE SŁOWA =====================
             // --- TERREN: las/woda/ukształtowanie (kategoria domyślna TERRAIN) ---
-            new WordCore("bór", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("bór", "bory"), List.of(AdjectiveForms.createOwy("bor")), "Bór;Borek;Borowo;Borowina"),
-            new WordCore("gaj", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyE("gaj"), List.of(AdjectiveForms.createOwy("gaj")), "Gaj;Gaje;Gajów;Gajówka;Zagaje"),
-            new WordCore("staw", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("staw"), List.of(AdjectiveForms.createOwy("staw")), "Stawy;Zastawie;Podstawie;Stawiszcze"),
-            new WordCore("jezior", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("jezior"), List.of(AdjectiveForms.createNy("jezior"), AdjectiveForms.createOwy("jezior")), "Jeziorko;Jeziorany;Zajezierze;Jeziorna"),
-            new WordCore("strumie", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("strumie"), List.of(AdjectiveForms.createNy("strumien")), "Strumień;Strumiany;Strumienno"),
-            new WordCore("bagn", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("bagn"), List.of(AdjectiveForms.createNy("bagien"), AdjectiveForms.createSty("bagni")), "Bagno;Bagienko;Zabagnie"),
-            new WordCore("mokradł", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("mokradł"), List.of(), "Mokradła;Zamokradle"),
-            new WordCore("źródł", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("źródł"), List.of(AdjectiveForms.createNy("źródla")), "Źródła;Zaźródle;Źródłowa"),
-            new WordCore("bród", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("bród", "brody"), List.of(AdjectiveForms.createOwy("brod")), "Bród;Brody;Zabrodzie;Podbrodzie"),
+            new WordCore("bór", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("bór", "bory"), List.of(AdjectiveForms.createOwy("bor")), "Bór;Borek;Borowo;Borowina").requires(EnvFeature.FOREST),
+            new WordCore("gaj", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyE("gaj"), List.of(AdjectiveForms.createOwy("gaj")), "Gaj;Gaje;Gajów;Gajówka;Zagaje").places(Landmark.GROVE),
+            new WordCore("staw", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("staw"), List.of(AdjectiveForms.createOwy("staw")), "Stawy;Zastawie;Podstawie;Stawiszcze").requires(EnvFeature.WATER),
+            new WordCore("jezior", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("jezior"), List.of(AdjectiveForms.createNy("jezior"), AdjectiveForms.createOwy("jezior")), "Jeziorko;Jeziorany;Zajezierze;Jeziorna").requires(EnvFeature.WATER),
+            new WordCore("strumie", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createNie("strumie"), List.of(AdjectiveForms.createNy("strumien")), "Strumień;Strumiany;Strumienno").requires(EnvFeature.WATER),
+            new WordCore("bagn", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("bagn"), List.of(AdjectiveForms.createNy("bagien"), AdjectiveForms.createSty("bagni")), "Bagno;Bagienko;Zabagnie").requires(EnvFeature.WETLAND),
+            new WordCore("mokradł", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("mokradł"), List.of(), "Mokradła;Zamokradle").requires(EnvFeature.WETLAND),
+            new WordCore("źródł", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("źródł"), List.of(AdjectiveForms.createNy("źródla")), "Źródła;Zaźródle;Źródłowa").requires(EnvFeature.WATER),
+            new WordCore("bród", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("bród", "brody"), List.of(AdjectiveForms.createOwy("brod")), "Bród;Brody;Zabrodzie;Podbrodzie").requires(EnvFeature.WATER),
             new WordCore("dolin", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("dolin"), List.of(AdjectiveForms.createNy("dolin"), AdjectiveForms.createOwy("dolin")), "Dolina;Doliny;Zadolinie"),
             new WordCore("polan", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("polan"), List.of(), "Polana;Polany;Polanka;Polanica"),
             new WordCore("przesiek", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("przesiek"), List.of(), "Przesieka;Przesieki"),
-            new WordCore("wydm", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("wydm"), List.of(AdjectiveForms.createOwy("wydm")), "Wydmy;Wydminy"),
+            new WordCore("wydm", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("wydm"), List.of(AdjectiveForms.createOwy("wydm")), "Wydmy;Wydminy").requires(EnvFeature.SAND),
             new WordCore("mgł", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("mgł"), List.of(AdjectiveForms.createSty("mgli")), "Mglice;Zamgle"),
-            new WordCore("przełęcz", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("przełęcz", "przełęcze"), List.of(AdjectiveForms.createOwy("przełęcz")), "Przełęcz;Przełęcze"),
-            new WordCore("urwisk", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("urwisk"), List.of(), "Urwisko;Urwiska"),
-            new WordCore("wąwóz", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("wąwóz", "wąwozy"), List.of(), "Wąwóz;Wąwozy"),
+            new WordCore("przełęcz", WordCategory.TERRAIN, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("przełęcz", "przełęcze"), List.of(AdjectiveForms.createOwy("przełęcz")), "Przełęcz;Przełęcze").requires(EnvFeature.MOUNTAINS),
+            new WordCore("urwisk", WordCategory.TERRAIN, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("urwisk"), List.of(), "Urwisko;Urwiska").requires(EnvFeature.MOUNTAINS),
+            new WordCore("wąwóz", WordCategory.TERRAIN, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("wąwóz", "wąwozy"), List.of(), "Wąwóz;Wąwozy").requires(EnvFeature.MOUNTAINS),
             // --- ROŚLINY (PLANT) ---
             new WordCore("drzew", WordCategory.PLANT, WordGender.NEUTRAL, PluralType.NON_MASC_PERSONAL, NounForms.createO("drzew"), List.of(AdjectiveForms.createNy("drzew")), "Drzewce;Zadrzewie"),
             new WordCore("jodł", WordCategory.PLANT, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("jodł"), List.of(AdjectiveForms.createOwy("jodł")), "Jodłowa;Jodłów;Jodłówka;Zajodle"),
@@ -170,7 +170,7 @@ public class VillageNameGenerator {
             new WordCore("wrzos", WordCategory.PLANT, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("wrzos"), List.of(AdjectiveForms.createOwy("wrzos")), "Wrzosowa;Wrzosowo"),
             new WordCore("malin", WordCategory.PLANT, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("malin"), List.of(AdjectiveForms.createOwy("malin")), "Malinowo;Malinów;Malinówka;Maliniec"),
             new WordCore("jagod", WordCategory.PLANT, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("jagod"), List.of(AdjectiveForms.createOwy("jagod")), "Jagodne;Jagodno;Jagodnik"),
-            new WordCore("grzyb", WordCategory.PLANT, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("grzyb"), List.of(AdjectiveForms.createOwy("grzyb")), "Grzybowo;Grzybów;Grzybno"),
+            new WordCore("grzyb", WordCategory.PLANT, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("grzyb"), List.of(AdjectiveForms.createOwy("grzyb")), "Grzybowo;Grzybów;Grzybno").requires(EnvFeature.FOREST),
             new WordCore("paproc", WordCategory.PLANT, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("paproć", "paprocie"), List.of(), "Paprotnia;Paprocany;Paprotki"),
             new WordCore("traw", WordCategory.PLANT, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("traw"), List.of(AdjectiveForms.createSty("trawia")), "Trawniki;Zatrawie"),
             // --- ZWIERZĘTA (ANIMAL) ---
@@ -179,8 +179,8 @@ public class VillageNameGenerator {
             new WordCore("orl", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("orzeł", "orły"), List.of(AdjectiveForms.createIorA("orl")), "Orłowo;Orły;Orlik;Orlica"),
             new WordCore("wron", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("wron"), List.of(AdjectiveForms.createNi("wro")), "Wronki;Wronów;Wronowo"),
             new WordCore("sow", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("sow"), List.of(AdjectiveForms.createI("sow")), "Sowia;Sowin;Sowiniec"),
-            new WordCore("bocian", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("bocian"), List.of(AdjectiveForms.createI("bocian")), "Bocianów;Bociany;Bocianowo"),
-            new WordCore("żuraw", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("żuraw", "żurawie"), List.of(AdjectiveForms.createI("żuraw")), "Żurawie;Żurawica;Żurawno;Żurawiec"),
+            new WordCore("bocian", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("bocian"), List.of(AdjectiveForms.createI("bocian")), "Bocianów;Bociany;Bocianowo").requires(EnvFeature.WETLAND),
+            new WordCore("żuraw", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("żuraw", "żurawie"), List.of(AdjectiveForms.createI("żuraw")), "Żurawie;Żurawica;Żurawno;Żurawiec").requires(EnvFeature.WATER),
             new WordCore("węż", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("wąż", "węże"), List.of(AdjectiveForms.createOwy("węż")), "Węże;Wężowa;Zawężie"),
             new WordCore("jeż", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyE("jeż"), List.of(AdjectiveForms.createOwy("jeż")), "Jeże;Jeżów;Jeżowo"),
             new WordCore("wiewiór", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("wiewiórk"), List.of(AdjectiveForms.createCzy("wiewiór")), "Wiewiórki;Wiewiórów"),
@@ -193,7 +193,7 @@ public class VillageNameGenerator {
             new WordCore("gołęb", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("gołąb", "gołębie"), List.of(AdjectiveForms.createI("gołęb")), "Gołębie;Gołębiew;Gołębiów"),
             new WordCore("słowik", WordCategory.ANIMAL, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyI("słowik"), List.of(AdjectiveForms.createCzy("słowi")), "Słowiki;Słowików;Słowikowo"),
             new WordCore("pszczoł", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("pszczoł"), List.of(AdjectiveForms.createIorA("pszczel")), "Pszczółki;Pszczew;Pszczelnik"),
-            new WordCore("czapl", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("czapl"), List.of(AdjectiveForms.createIorA("czapl")), "Czaple;Czaplinek;Czaplin"),
+            new WordCore("czapl", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("czapl"), List.of(AdjectiveForms.createIorA("czapl")), "Czaple;Czaplinek;Czaplin").requires(EnvFeature.WATER),
             // --- ISTOTY (BEING) ---
             new WordCore("czart", WordCategory.BEING, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("czart"), List.of(AdjectiveForms.createI("czar")), "Czartów;Czartowo;Czartoria"),
             new WordCore("diab", WordCategory.BEING, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("diabeł", "diabły"), List.of(AdjectiveForms.createKi("diabels")), "Diablak;Diabłowo"),
@@ -218,20 +218,20 @@ public class VillageNameGenerator {
             new WordCore("mnich", WordCategory.PROFESSION, WordGender.MASCULINE, PluralType.MASC_PERSONAL, new NounForms("mnich", "mnisi"), List.of(AdjectiveForms.createYY("mnisz")), "Mnichów;Mnichowo;Mniszki;Mniszek"),
             new WordCore("bartnik", WordCategory.PROFESSION, WordGender.MASCULINE, PluralType.MASC_PERSONAL, NounForms.createKCy("bartni"), List.of(AdjectiveForms.createCzy("bartni")), "Bartniki;Bartne;Bartodzieje"),
             // --- BUDOWLE / OSADY (STRUCTURE) ---
-            new WordCore("zamek", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEk("zam"), List.of(AdjectiveForms.createOwy("zamk")), "Zamek;Zamczysko;Podzamcze;Zamkowa"),
-            new WordCore("wał", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("wał"), List.of(AdjectiveForms.createOwy("wał")), "Wały;Zawale;Podwale;Wałowa"),
-            new WordCore("studni", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("studni"), List.of(AdjectiveForms.createNy("studzien")), "Studnia;Studzianna;Studzianki;Studzienice"),
-            new WordCore("warowni", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("warowni"), List.of(AdjectiveForms.createNy("warow")), "Warownia;Warowna"),
+            new WordCore("zamek", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEk("zam"), List.of(AdjectiveForms.createOwy("zamk")), "Zamek;Zamczysko;Podzamcze;Zamkowa").places(Landmark.CASTLE),
+            new WordCore("wał", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("wał"), List.of(AdjectiveForms.createOwy("wał")), "Wały;Zawale;Podwale;Wałowa").places(Landmark.RAMPART),
+            new WordCore("studni", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("studni"), List.of(AdjectiveForms.createNy("studzien")), "Studnia;Studzianna;Studzianki;Studzienice").places(Landmark.WELL),
+            new WordCore("warowni", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("warowni"), List.of(AdjectiveForms.createNy("warow")), "Warownia;Warowna").places(Landmark.STRONGHOLD),
             new WordCore("grobl", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("grobl"), List.of(), "Grobla;Groble"),
-            new WordCore("folwark", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyI("folwark"), List.of(AdjectiveForms.createCzny("folwar")), "Folwark;Folwarki"),
+            new WordCore("folwark", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyI("folwark"), List.of(AdjectiveForms.createCzny("folwar")), "Folwark;Folwarki").places(Landmark.GRANGE),
             new WordCore("zagrod", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("zagrod"), List.of(AdjectiveForms.createOwy("zagrod")), "Zagroda;Zagrody;Zagrodno"),
             new WordCore("bud", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("bud"), List.of(), "Budy;Budki;Budziska"),
             new WordCore("szałas", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("szałas"), List.of(), "Szałas;Szałasy"),
-            new WordCore("rynek", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEk("ryn"), List.of(AdjectiveForms.createOwy("rynk")), "Rynek"),
-            new WordCore("dzwonnic", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("dzwonnic"), List.of(), "Dzwonnica;Dzwonowo"),
+            new WordCore("rynek", WordCategory.STRUCTURE, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEk("ryn"), List.of(AdjectiveForms.createOwy("rynk")), "Rynek").places(Landmark.MARKET),
+            new WordCore("dzwonnic", WordCategory.STRUCTURE, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("dzwonnic"), List.of(), "Dzwonnica;Dzwonowo").places(Landmark.BELFRY),
             // --- CECHY (QUALITY) ---
             new WordCore("pustk", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAi("pustk"), List.of(AdjectiveForms.createSty("pu")), "Pustki;Pustkowo;Pustynia"),
-            new WordCore("głusz", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("głusz"), List.of(AdjectiveForms.createChy("głu")), "Głusza;Głuszyna;Głuchowo"),
+            new WordCore("głusz", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("głusz"), List.of(AdjectiveForms.createChy("głu")), "Głusza;Głuszyna;Głuchowo").requires(EnvFeature.FOREST),
             new WordCore("spokój", WordCategory.QUALITY, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("spokój", null), List.of(AdjectiveForms.createNy("spokoj")), "Spokojna"),
             new WordCore("wolnoś", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("wolność", null), List.of(AdjectiveForms.createYI("woln")), "Wolna;Wolne"),
             new WordCore("świętoś", WordCategory.QUALITY, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, new NounForms("świętość", null), List.of(new AdjectiveForms("święty", "święta", "święte", "święci", "święte")), "Świętno;Święte;Świątniki")
@@ -258,12 +258,16 @@ public class VillageNameGenerator {
 
     private static SaraveraPhonotactic phonotactic = new SaraveraPhonotactic();
 
+    // Wersja bez kontekstu: dowolne otoczenie (wszystkie cechy dostępne), zwraca
+    // samą nazwę. Zgodna wstecz z dotychczasowymi wywołaniami.
     public static String generate() {
-//        if (rng.nextDouble() < 0.3) {
-//            return phonotactic.generateCapitalizedWord(WordType.CITY, villageSylables);
-//        }
+        return generate(EnumSet.allOf(EnvFeature.class)).name();
+    }
 
-        return folkName();
+    // Wersja z kontekstem otoczenia: dobiera tylko rdzenie pasujące do dostępnych
+    // cech terenu i zwraca nazwę wraz z obiektem, który powinien powstać w wiosce.
+    public static VillageName generate(Set<EnvFeature> environment) {
+        return folkName(environment);
     }
 
     private static WordCore getAdjectiveCore() {
@@ -276,38 +280,58 @@ public class VillageNameGenerator {
         throw new IllegalStateException("Brak właściwych przymiotników dla nazw wiosek");
     }
 
-    // Losuje rdzeń dostarczający przymiotnik, którego kategoria pasuje do rdzenia
-    // będącego głową nazwy. Po wyczerpaniu prób oddaje dowolny (bezpiecznik).
-    private static WordCore getCompatibleAdjectiveCore(WordCore nameCore) {
+    // Losuje rdzeń-głowę nazwy, którego wymagania środowiskowe spełnia otoczenie.
+    private static WordCore pickNameCore(Set<EnvFeature> environment) {
+        for (int i = 0; i < 200; i++) {
+            WordCore candidate = areas.get(rng.nextInt(areas.size()));
+            if (environment.containsAll(candidate.getRequires())) {
+                return candidate;
+            }
+        }
+        for (WordCore candidate : areas) {
+            if (candidate.getRequires().isEmpty()) {
+                return candidate;
+            }
+        }
+        return areas.get(0);
+    }
+
+    // Losuje rdzeń dostarczający przymiotnik: kategoria musi pasować do głowy
+    // nazwy, a wymagania środowiskowe — do otoczenia. Bezpiecznik na końcu.
+    private static WordCore getCompatibleAdjectiveCore(WordCore nameCore, Set<EnvFeature> environment) {
         Set<WordCategory> allowed = ALLOWED_MODIFIERS.getOrDefault(nameCore.getCategory(), ALL_MODIFIERS);
         for (int i = 0; i < 200; i++) {
             WordCore candidate = areas.get(rng.nextInt(areas.size()));
-            if (!candidate.getAdjectiveForms().isEmpty() && allowed.contains(candidate.getCategory())) {
+            if (!candidate.getAdjectiveForms().isEmpty()
+                    && allowed.contains(candidate.getCategory())
+                    && environment.containsAll(candidate.getRequires())) {
                 return candidate;
             }
         }
         return getAdjectiveCore();
     }
 
-    private static String folkName() {
-        WordCore nameCore = areas.get(rng.nextInt(areas.size()));
+    private static VillageName folkName(Set<EnvFeature> environment) {
+        WordCore nameCore = pickNameCore(environment);
+        // Landmark bierze się z głowy nazwy (rzeczownika): "Turza Wieża" -> wieża,
+        // "Młyn Wilkołaczy" -> młyn. Dotyczy też formy jednowyrazowej.
+        Landmark landmark = nameCore.getLandmark();
         // Ścieżka jednowyrazowa: gotowe formy ludowe (Żabianka, Zażabie...).
         // Trzymane per-WordCore w polu singleEnder, bo derywacja wymaga alternacji
         // rdzenia, których nie da się rzetelnie wyliczyć z samego tematu.
         List<String> singleForms = nameCore.getSingleForms();
         if (!singleForms.isEmpty() && rng.nextDouble() < 0.4) {
-            return singleForms.get(rng.nextInt(singleForms.size()));
+            return new VillageName(singleForms.get(rng.nextInt(singleForms.size())), landmark);
         }
-        WordCore adjCore = getCompatibleAdjectiveCore(nameCore);
+        WordCore adjCore = getCompatibleAdjectiveCore(nameCore, environment);
         WordCount count = rng.nextDouble() < 0.2 && nameCore.hasPlural() ? WordCount.PLURAL : WordCount.SINGULAR;
         boolean adjFirst = rng.nextDouble() > 0.25;
         String nameCoreFormatted = nameCore.getNoun(count);
         String adjective = adjCore.getAdjective(count, nameCore.getSelfGender(), nameCore.getPluralType(), rng.nextInt(adjCore.getAdjectiveForms().size()));
-        if (adjFirst) {
-            return WordUtils.capitalizeFully(adjective + " " + nameCoreFormatted);
-        } else {
-            return WordUtils.capitalizeFully(nameCoreFormatted + " " + adjective);
-        }
+        String full = adjFirst
+                ? WordUtils.capitalizeFully(adjective + " " + nameCoreFormatted)
+                : WordUtils.capitalizeFully(nameCoreFormatted + " " + adjective);
+        return new VillageName(full, landmark);
     }
 
     /* TODO potencjalne pomysły
