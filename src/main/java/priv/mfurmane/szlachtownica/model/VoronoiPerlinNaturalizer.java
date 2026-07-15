@@ -28,8 +28,11 @@ import java.util.*;
  */
 public class VoronoiPerlinNaturalizer {
 
-    private static final int OCTAVES = 4;              // liczba oktaw fBm (detal fraktalny)
-    private static final double VERTEX_JITTER_FACTOR = 1.2; // przesunięcie styków ~ amplitude * factor
+    private static final int OCTAVES = 5;              // liczba oktaw fBm (detal fraktalny)
+    // Przesunięcie potrójnych styków trzymamy małe: większy jitter rozjeżdżałby
+    // POLA sąsiednich komórek (jeden róg = wspólny), a zależy nam na podobnych
+    // rozmiarach. Nierówność kształtu bierze się głównie z falowania krawędzi.
+    private static final double VERTEX_JITTER_FACTOR = 0.35;
 
     private final GeometryFactory gf;
     private final double amplitude;   // maks. bezwzględne wychylenie krawędzi (w jednostkach mapy)

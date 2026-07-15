@@ -633,10 +633,10 @@ public class ProvinceInitializer {
         while (true) {
             try {
                 // Lloyd's relaxation PRZED naturalizacją.
-                // Mało iteracji: 0 = surowe (nierówne) komórki, dużo = regularne,
-                // "heksagonalne". 2 to kompromis — usuwa najgorsze drzazgi, ale
-                // zostawia naturalną nierównomierność rozmiarów.
-                int lloydIterations = 2;
+                // Wyrównuje POLA komórek (centroidalne Voronoi) — o to nam chodzi:
+                // podobne rozmiary. Za nierówne KSZTAŁTY i poszarpane krawędzie
+                // odpowiada dopiero naturalizacja, nie brak relaksacji.
+                int lloydIterations = 6;
                 List<Polygon> rawGeoms = Collections.emptyList();
                 for (int i = 0; i < lloydIterations; i++) {
                     System.out.println("Lloyd iteration " + i);
