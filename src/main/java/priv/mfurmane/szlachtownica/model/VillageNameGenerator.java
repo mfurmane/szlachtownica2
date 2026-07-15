@@ -195,7 +195,7 @@ public class VillageNameGenerator {
             new WordCore("pszczoł", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAy("pszczoł"), List.of(AdjectiveForms.createIorA("pszczel")), "Pszczółki;Pszczew;Pszczelnik"),
             new WordCore("czapl", WordCategory.ANIMAL, WordGender.FEMININE, PluralType.NON_MASC_PERSONAL, NounForms.createAe("czapl"), List.of(AdjectiveForms.createIorA("czapl")), "Czaple;Czaplinek;Czaplin"),
             // --- ISTOTY (BEING) ---
-            new WordCore("czart", WordCategory.BEING, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("czart"), List.of(AdjectiveForms.createI("czar")), "Czartów;Czartowo;Czartoria"),
+            new WordCore("czart", WordCategory.BEING, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("czart"), List.of(AdjectiveForms.createI("czarc")), "Czartów;Czartowo;Czartoria"),
             new WordCore("diab", WordCategory.BEING, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, new NounForms("diabeł", "diabły"), List.of(AdjectiveForms.createKi("diabels")), "Diablak;Diabłowo"),
             new WordCore("duch", WordCategory.BEING, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("duch"), List.of(AdjectiveForms.createOwy("duch")), "Duchowo;Duchów;Duchnów"),
             new WordCore("olbrzym", WordCategory.BEING, WordGender.MASCULINE, PluralType.NON_MASC_PERSONAL, NounForms.createEmptyY("olbrzym"), List.of(AdjectiveForms.createI("olbrzym")), "Olbrzymowo"),
