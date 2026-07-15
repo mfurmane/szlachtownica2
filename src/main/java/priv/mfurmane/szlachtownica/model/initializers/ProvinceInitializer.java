@@ -633,6 +633,12 @@ public class ProvinceInitializer {
                 // Naturalizacja tylko raz, na końcu
                 System.out.println("naturalize START");
                 List<Polygon> result = naturalize(rawGeoms, area);
+                // Dla właściwych podziałów (regiony/subprowincje) usuwamy drobne
+                // nakładki, żeby były ściśle rozłączne. Chmury kandydatów na jeziora
+                // (smallDist) nie ruszamy — nakładki tam nie szkodzą, a jest ich dużo.
+                if (!smallDist) {
+                    result = removeOverlaps(result);
+                }
                 System.out.println("naturalize DONE: " + result.size() + " polygons");
                 return result;
 //                return naturalize(rawGeoms, area);
@@ -805,6 +811,58 @@ public class ProvinceInitializer {
             }
         }
         return best; // może być null jeśli kolekcja nie zawiera żadnego Polygon
+    }
+
+    /**
+     * Czyni podział ściśle rozłącznym: przechodzi po poligonach kolejno i od
+     * każdego odejmuje sumę już rozstrzygniętych. Dzięki temu drobne nakładki
+     * (artefakty naturalizacji) znikają — sporny fragment zostaje przy poligonie
+     * wcześniejszym. Liczba poligonów jest zachowana (1:1), więc indeksy u
+     * wywołujących pozostają zgodne. Jeśli poligon zostałby całkowicie pochłonięty
+     * (skrajny przypadek), zachowujemy jego oryginał, by nie zgubić regionu.
+     */
+    private static List<Polygon> removeOverlaps(List<Polygon> polygons) {
+        List<Polygon> result = new ArrayList<>();
+        Geometry accumulated = null;
+        for (Polygon p : polygons) {
+            Polygon clipped = p;
+            if (accumulated != null
+                    && accumulated.getEnvelopeInternal().intersects(p.getEnvelopeInternal())) {
+                Geometry diff;
+                try {
+                    diff = p.difference(accumulated);
+                } catch (RuntimeException e) {
+                    // rzadkie błędy topologiczne — spróbuj po naprawie geometrii
+                    diff = p.buffer(0).difference(accumulated.buffer(0));
+                }
+                Polygon single = toSinglePolygon(diff);
+                if (single != null && !single.isEmpty()) {
+                    clipped = single;
+                }
+                // single == null → poligon w całości pokryty; zostawiamy oryginał p
+            }
+            result.add(clipped);
+            try {
+                accumulated = (accumulated == null) ? clipped : accumulated.union(clipped);
+            } catch (RuntimeException e) {
+                accumulated = (accumulated == null) ? clipped.buffer(0)
+                        : accumulated.buffer(0).union(clipped.buffer(0));
+            }
+        }
+        return result;
+    }
+
+    private static Polygon toSinglePolygon(Geometry g) {
+        if (g == null || g.isEmpty()) {
+            return null;
+        }
+        if (g instanceof Polygon p) {
+            return p;
+        }
+        if (g instanceof GeometryCollection gc) { // obejmuje też MultiPolygon
+            return getLargest(gc);
+        }
+        return null;
     }
 
     private static int determineSegmentsCount(Polygon area) {
