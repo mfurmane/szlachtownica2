@@ -11,16 +11,17 @@ public class WordCore {
 
     String base; // debug / identyfikator
     String singleEnder;
+    WordCategory category; // kategoria znaczeniowa (istota, roślina, teren...)
     WordGender selfGender;
     PluralType pluralType;
-    WordCategory category = WordCategory.TERRAIN; // domyślnie, nadpisywane przy inicjalizacji
 
     NounForms noun;
     List<AdjectiveForms> adjective = new ArrayList<>();
     Map<Phonotactic, String> meanings = new HashMap<>();
 
-    public WordCore(String base, WordGender selfGender, PluralType pluralType, NounForms noun, List<AdjectiveForms> adjective, String singleEnder) {
+    public WordCore(String base, WordCategory category, WordGender selfGender, PluralType pluralType, NounForms noun, List<AdjectiveForms> adjective, String singleEnder) {
         this.base = base;
+        this.category = category;
         this.selfGender = selfGender;
         this.pluralType = pluralType;
         this.noun = noun;
@@ -166,10 +167,6 @@ public class WordCore {
 
     public WordCategory getCategory() {
         return category;
-    }
-
-    public void setCategory(WordCategory category) {
-        this.category = category;
     }
 
     // Gotowe, jednowyrazowe formy ludowe (nazwy typu Żabianka, Zażabie),
