@@ -38,12 +38,20 @@ public class NounForms {
         return new NounForms(base + "ń", base + "nie");
     }
 
+    public static NounForms createSie(String base) {
+        return new NounForms(base + "ś", base + "sie");
+    }
+
     public static NounForms createO(String base) {
         return new NounForms(base + "o", base + "a");
     }
 
     public static NounForms createEmptyY(String base) {
         return new NounForms(base, base + "y");
+    }
+
+    public static NounForms createEmptyEr(String base) {
+        return new NounForms(base + "er", base + "ry");
     }
 
     public static NounForms createEmptyI(String base) {
