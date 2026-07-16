@@ -40,6 +40,10 @@ public enum RegionType {
         this.settled = settled;
     }
 
+    public boolean isSettled() {
+        return settled;
+    }
+
 //    FOREST, // puszcza bez enchantu
 //    GREENWOODS, //porządny las
 //    WOODS, //trochę bieda las
