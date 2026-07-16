@@ -180,7 +180,7 @@ public class ProvinceInitializer {
                     }
                 }
                 determineNeighbourhood(regions);
-                settleBestRegions(regions, regionsToSettle, province.getConf().getInitialSettlersProfile());
+                settleBestRegions(regions, regionsToSettle, province.getConf().getInitialSettlersProfile(), province.getConf().getSimulationStart());
                 fillParameterBasedRegionTypes(regions, subProvince.getRegionsCount() - subProvince.getInitiallyOccupied());
 //                determineOtherRegions(regions, subProvince.getRegionsCount() - subProvince.getInitiallyOccupied(), province.getConf().getInitialNaturalProfile());
 
@@ -439,27 +439,94 @@ public class ProvinceInitializer {
         return Humidity.EXTRA_WET;
     }
 
-    private void settleBestRegions(List<ModelRegion> regions, int regionsToSettle, Map<RegionType, Double> initialSettlersProfile) {
+    private void settleBestRegions(List<ModelRegion> regions, int regionsToSettle, Map<RegionType, Double> initialSettlersProfile, int builtYear) {
         regions.sort(ModelRegion::compareTo);
-        for (int i = 0; i < regionsToSettle; i++) {
+        int settled = 0;
+        // Iterujemy do wyczerpania budżetu osiedleń LUB regionów. Regiony z miastem
+        // stołecznym (SETTLERS_REACH) nie konsumują budżetu — osadzamy zamiast nich
+        // kolejny. (Wcześniej robił to i--, co dawało nieskończoną pętlę.)
+        for (int i = 0; i < regions.size() && settled < regionsToSettle; i++) {
             ModelRegion region = regions.get(i);
             if (region.getType().equals(RegionType.SETTLERS_REACH)) {
-                i--;
-            } else {
-                if (region.getEnchantmentLevel() > 3) {
-                    region.setType(RegionType.SUPERNATURAL_EXPANSE);
-                } else if (region.getFertility() > GREAT_FERTILITY_LEVEL) {
-                    region.setType(RegionType.FARMING_LAND);
-                } else {
-                    region.setType(chooseType(initialSettlersProfile, true));
-                }
+                createPlacesForRegion(region, builtYear); // ma już miasto → no-op
+                continue;
             }
-            createPlacesForRegion(region);
+            if (region.getEnchantmentLevel() > 3) {
+                region.setType(RegionType.SUPERNATURAL_EXPANSE);
+            } else if (region.getFertility() > GREAT_FERTILITY_LEVEL) {
+                region.setType(RegionType.FARMING_LAND);
+            } else {
+                region.setType(chooseType(initialSettlersProfile, true));
+            }
+            createPlacesForRegion(region, builtYear);
+            settled++;
         }
     }
 
-    private void createPlacesForRegion(ModelRegion region) {
-        //TODO na podstawie typu i innych warunków stworzyć miasteczka, wsie, plantacje itp
+    // ETAP 0 osadnictwa: tworzy wsie w osadzonym regionie, z przewagą regionów
+    // przy wodzie (studnie są kosztowne — osady kiełkują nad rzeką/jeziorem/morzem).
+    // Na razie korzysta z ręcznie podanych rzek/jezior/morza (flagi na regionie);
+    // docelowo woda będzie pochodzić z hydrologii wyprowadzonej z terenu, a nazwy
+    // i geometria punktowa (przy konkretnej rzece) dojdą w kolejnych etapach.
+    private void createPlacesForRegion(ModelRegion region, int builtYear) {
+        if (!region.getPlaces().isEmpty()) return;      // stolica już tu jest
+        if (region.getType() == null || !region.getType().isSettled()) return;
+
+        int count = settlementCount(region);
+        if (count <= 0) return;
+
+        if (!nearWater(region)) {
+            if (rand.nextDouble() > 0.2) return;         // z dala od wody rzadko
+            count = 1;
+        }
+
+        boolean town = false; // na starcie tylko wsie; miasta pozostają hardkodowane
+        for (Coordinate c : randomInteriorPoints(region.getArea(), count)) {
+            SimulationPlace place = engine.getCityInitializer().initializeUnnamedSettlement(c, town, builtYear);
+            region.getPlaces().add(place.getModel());
+        }
+    }
+
+    private int settlementCount(ModelRegion region) {
+        double fertility = region.getFertility() == null ? 0 : region.getFertility();
+        return switch (region.getType()) {
+            case FARMING_LAND -> 1 + (int) Math.min(2, fertility / GREAT_FERTILITY_LEVEL);
+            case SETTLERS_REACH, CRAFTS_LAND, ESTATE_REGION, TOURISTIC_LAND, IRON_MARCHES -> 1;
+            default -> 0; // SUPERNATURAL_EXPANSE i typy naturalne — na razie bez osad
+        };
+    }
+
+    private boolean nearWater(ModelRegion region) {
+        if (isWater(region)) return true;
+        return region.getNeighbourhood().keySet().stream().anyMatch(this::isWater);
+    }
+
+    private boolean isWater(ModelRegion region) {
+        return Boolean.TRUE.equals(region.getRiver())
+                || Boolean.TRUE.equals(region.getLake())
+                || Boolean.TRUE.equals(region.getCoast());
+    }
+
+    // Punkty pewnie wewnątrz poligonu; getInteriorPoint() gwarantuje co najmniej jeden.
+    private List<Coordinate> randomInteriorPoints(Polygon area, int n) {
+        List<Coordinate> result = new ArrayList<>();
+        if (n <= 0) return result;
+        Envelope env = area.getEnvelopeInternal();
+        double minGap = Math.sqrt(area.getArea() / (n + 1)) * 0.6;
+        int attempts = 0, maxAttempts = 200 * n;
+        while (result.size() < n && attempts < maxAttempts) {
+            attempts++;
+            double x = env.getMinX() + rand.nextDouble() * env.getWidth();
+            double y = env.getMinY() + rand.nextDouble() * env.getHeight();
+            Coordinate c = new Coordinate(x, y);
+            if (!area.contains(gf.createPoint(c))) continue;
+            boolean tooClose = result.stream().anyMatch(o -> o.distance(c) < minGap);
+            if (!tooClose) result.add(c);
+        }
+        if (result.isEmpty()) {
+            result.add(area.getInteriorPoint().getCoordinate());
+        }
+        return result;
     }
 
     private void fillParameterBasedRegionTypes(List<ModelRegion> regions, int notDetermined) {
