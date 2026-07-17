@@ -4,6 +4,23 @@
 > projekcja `EPSG:32743`, gotowy `float[][]` z `HighMapUtils.getEmptyMap(env)`.
 > Regiony (komórki Voronoi) **próbkują** rastry, nie zastępują ich.
 
+## Architektura: pieczenie (bake) vs symulacja
+Worldgen jest **oddzielony** od runtime'u: pieczemy stan wyjściowy raz, a
+symulacja działa na gotowym stanie.
+- **Etapy jako pipeline**: `WorldGenStage.run(WorldGenContext)` — etapy są
+  **czyste** (czytają/piszą stan w pamięci), a **orchestrator** (`WorldGenerator`)
+  odpowiada za zapis.
+- **Persystencja za flagą**: `WorldGenConfig.persist` (domyślnie **false**) —
+  dopóki wyłączona, cały pipeline liczy się w pamięci i nic nie ląduje na dysku
+  (FIXME: warstwa snapshotów jeszcze nie istnieje).
+- **Dwa tryby** (docelowo): *bake* (przelicz + zapisz snapshot) i *play* (boot
+  ładuje snapshot). Dziś generacja siedzi w `MainEngine.inject` — do wyjęcia.
+- **Fazy**: A) bake całości raz + load; B) persystencja artefaktów pośrednich →
+  re-run pojedynczego etapu; C) cienki REST nad etapami. Interfejs `WorldGenStage`
+  jest już pod to przygotowany.
+- Pakiet: `priv.mfurmane.szlachtownica.worldgen` (bez zależności od JTS w rdzeniu;
+  geometrię wstrzykuje adapter: szczyty + maska lądu).
+
 ## Zasada
 Prawie wszystko wynika z **ukształtowania terenu i geologii**; część zależności
 jest **wzajemna** (wysokość ↔ erozja ↔ gleba; klimat ↔ wilgotność ↔ hydrologia).
@@ -109,5 +126,11 @@ flagi po prostu zmienią źródło. Bez straty pracy.
 
 ## Status
 - ✅ Etap 0 (osadnictwo przy wodzie, prowizoryczne flagi).
-- ⬜ Etapy 1–12 — w powyższej kolejności. Najbliższy sensowny krok: **Etap 1**
-  (rastrowy DEM), bo odblokowuje 2–9.
+- ✅ Szkielet worldgen (`WorldGenStage`/`Context`/`Config`/`WorldGenerator`) +
+  **Etap 1 rdzeń** (`ElevationStage`: fBm + wypiętrzenie + batymetria + rampa
+  brzegowa). Czysta Java, skompilowany i zweryfikowany offline (podgląd DEM).
+- ⬜ **Adapter geometrii** dla Etapu 1: zbudować `WorldGenContext` z prowincji —
+  maska lądu z unii obszarów (`PreparedGeometry.contains`), szczyty z
+  `ModelMountains` (pozycja + `height`), georeferencja z `HighMapUtils`.
+- ⬜ Wyjęcie worldgen z `MainEngine.inject` + przełącznik bake/play.
+- ⬜ Etapy 2–12 w powyższej kolejności (Etap 2 geologia następny).
