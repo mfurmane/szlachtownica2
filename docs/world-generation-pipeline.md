@@ -144,4 +144,13 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   fBm, wybór typu kontrolowany wysokością i domenami wulkanicznymi; `hardness`
   pod erozję. Render `bedrock.png`. Wspólny szum wyciągnięty do `Noise`.
   Zweryfikowane offline.
-- ⬜ Etapy 3–12 (Etap 3: erozja + hydrologia — następny).
+- ✅ **Etap 3 (hydrologia)** — `HydrologyStage`: priority-flood (wypełnianie
+  zagłębień → jeziora + kierunki na płaskich), kierunek spływu = najstromszy
+  spadek po wypełnionym DEM (dendrytyczny), akumulacja przepływu, rzeki wg progu
+  powierzchni zlewni (`riverDrainageKm2`, niezależny od rozdzielczości). Render
+  `hydrology.png`. Zweryfikowane offline.
+  UWAGA: jakość dendrytów zależy od terenu — gładka, promienista wyspa daje
+  krótkie równoległe zlewnie (poprawne fizycznie). Efektowne doliny/dendryty
+  wymagają **Etapu 3b: erozji hydraulicznej** (wcinanie dolin w DEM przed
+  routingiem) — rekomendowane następne.
+- ⬜ Etap 3b (erozja hydrauliczna — dla wyraźnych dolin/rzek), potem Etapy 4–12.

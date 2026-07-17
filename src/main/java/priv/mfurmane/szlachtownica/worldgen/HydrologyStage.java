@@ -1,0 +1,148 @@
+package priv.mfurmane.szlachtownica.worldgen;
+
+import java.util.PriorityQueue;
+
+/**
+ * Etap 3: erozja/hydrologia na rastrze. Algorytm:
+ *  1. Priority-flood (Barnes) — wypełnia zagłębienia i nadaje kierunki spływu D8
+ *     tak, że każda komórka lądu ma ścieżkę do morza/krawędzi. Wypełnione misy
+ *     (filled &gt; teren) to JEZIORA.
+ *  2. Akumulacja spływu — w odwrotnej kolejności zdejmowania z kolejki (od
+ *     źródeł ku ujściom) sumuje spływ w dół.
+ *  3. RZEKI — komórki lądu z akumulacją powyżej progu (poza jeziorami).
+ *
+ * Wymaga {@code ctx.elevation} (morze = poniżej seaLevel). Wynik: flowAccum,
+ * river, lake w kontekście. Czysta Java (raster) → testowalne offline.
+ */
+public class HydrologyStage implements WorldGenStage {
+
+    private static final int[] DX = {1, -1, 0, 0, 1, -1, 1, -1};
+    private static final int[] DY = {0, 0, 1, -1, 1, -1, -1, 1};
+    private static final int[] OPP = {1, 0, 3, 2, 5, 4, 7, 6};
+
+    @Override
+    public String id() {
+        return "hydrology";
+    }
+
+    @Override
+    public void run(WorldGenContext ctx) {
+        if (ctx.elevation == null) {
+            throw new IllegalStateException("HydrologyStage wymaga ctx.elevation");
+        }
+        int w = ctx.width, h = ctx.height;
+        float[][] elev = ctx.elevation;
+        double seaLevel = ctx.config.seaLevel;
+
+        float[][] filled = new float[h][w];
+        int[][] dir = new int[h][w];       // indeks sąsiada w dół; -1 = brak (morze/ujście)
+        boolean[][] closed = new boolean[h][w];
+        int[] order = new int[w * h];      // kolejność zdejmowania z PQ (encoded j*w+i)
+        int orderCount = 0;
+
+        for (int[] row : dir) {
+            java.util.Arrays.fill(row, -1);
+        }
+
+        // Kolejka priorytetowa po wysokości "filled" (min-heap).
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) ->
+                Float.compare(filled[a[1]][a[0]], filled[b[1]][b[0]]));
+
+        // Źródła: morze + krawędzie mapy (woda schodzi tam).
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                boolean sea = elev[j][i] < seaLevel;
+                boolean border = i == 0 || j == 0 || i == w - 1 || j == h - 1;
+                if (sea || border) {
+                    filled[j][i] = elev[j][i];
+                    closed[j][i] = true;
+                    pq.add(new int[]{i, j});
+                }
+            }
+        }
+
+        while (!pq.isEmpty()) {
+            int[] c = pq.poll();
+            int ci = c[0], cj = c[1];
+            order[orderCount++] = cj * w + ci;
+            for (int k = 0; k < 8; k++) {
+                int ni = ci + DX[k], nj = cj + DY[k];
+                if (ni < 0 || nj < 0 || ni >= w || nj >= h || closed[nj][ni]) {
+                    continue;
+                }
+                filled[nj][ni] = Math.max(elev[nj][ni], filled[cj][ci]);
+                dir[nj][ni] = OPP[k]; // od sąsiada w stronę c
+                closed[nj][ni] = true;
+                pq.add(new int[]{ni, nj});
+            }
+        }
+
+        // Kierunek spływu = najstromszy spadek po WYPEŁNIONYM DEM (w dolinach zbiega
+        // się dendrytycznie). Płaskie dna (wypełnione misy) nie mają spadku → wtedy
+        // fallback na kierunek z priority-flood (dir), który routuje płaskie ku ujściu.
+        int[][] flow = new int[h][w];
+        for (int[] row : flow) {
+            java.util.Arrays.fill(row, -1);
+        }
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                if (elev[j][i] < seaLevel) {
+                    continue;
+                }
+                int best = -1;
+                float bestVal = filled[j][i];
+                for (int k = 0; k < 8; k++) {
+                    int ni = i + DX[k], nj = j + DY[k];
+                    if (ni < 0 || nj < 0 || ni >= w || nj >= h) {
+                        continue;
+                    }
+                    if (filled[nj][ni] < bestVal) {
+                        bestVal = filled[nj][ni];
+                        best = k;
+                    }
+                }
+                flow[j][i] = best >= 0 ? best : dir[j][i]; // fallback: płaskie → ku ujściu
+            }
+        }
+
+        // Akumulacja: init 1 na lądzie, 0 na morzu; sumuj w dół w odwrotnej kolejności.
+        float[][] accum = new float[h][w];
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                accum[j][i] = elev[j][i] < seaLevel ? 0 : 1;
+            }
+        }
+        for (int idx = orderCount - 1; idx >= 0; idx--) {
+            int enc = order[idx];
+            int ci = enc % w, cj = enc / w;
+            int d = flow[cj][ci];
+            if (d >= 0) {
+                int ni = ci + DX[d], nj = cj + DY[d];
+                accum[nj][ni] += accum[cj][ci];
+            }
+        }
+
+        // Jeziora + rzeki
+        boolean[][] lake = new boolean[h][w];
+        boolean[][] river = new boolean[h][w];
+        // Próg rzeki: powierzchnia zlewni (km²) → liczba komórek dla tej rozdzielczości.
+        double thr = ctx.config.riverDrainageKm2 * 1_000_000.0 / (ctx.cellSize * ctx.cellSize);
+        double lakeMin = ctx.config.lakeMinDepth;
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                if (elev[j][i] < seaLevel) {
+                    continue;
+                }
+                if (filled[j][i] > elev[j][i] + lakeMin) {
+                    lake[j][i] = true;
+                } else if (accum[j][i] >= thr) {
+                    river[j][i] = true;
+                }
+            }
+        }
+
+        ctx.flowAccum = accum;
+        ctx.lake = lake;
+        ctx.river = river;
+    }
+}
