@@ -139,4 +139,9 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   liczy się przy inicjalizacji jako podgląd).
 - ⬜ Kalibracja: skala `ModelMountains.getHeight()` vs `baseHeight`; rozdzielczość
   docelowa (dziś podgląd ograniczony `maxDim`).
-- ⬜ Etapy 2–12 w powyższej kolejności (Etap 2 geologia następny).
+- ✅ **Etap 2 (geologia)** — `GeologyStage` + `BedrockType` (granit/bazalt/łupek
+  metam./wapień/piaskowiec/iłowiec). Spójne formacje z niskoczęstotliwościowego
+  fBm, wybór typu kontrolowany wysokością i domenami wulkanicznymi; `hardness`
+  pod erozję. Render `bedrock.png`. Wspólny szum wyciągnięty do `Noise`.
+  Zweryfikowane offline.
+- ⬜ Etapy 3–12 (Etap 3: erozja + hydrologia — następny).

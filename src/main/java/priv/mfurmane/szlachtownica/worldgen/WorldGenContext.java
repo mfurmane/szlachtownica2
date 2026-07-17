@@ -22,7 +22,8 @@ public class WorldGenContext {
     public double cellSize;  // metry na piksel
 
     // Warstwy (wypełniane przez kolejne etapy)
-    public float[][] elevation; // [height][width], metry n.p.m.
+    public float[][] elevation;     // [height][width], metry n.p.m.
+    public BedrockType[][] bedrock; // [height][width], skała macierzysta; null poza lądem
 
     // Wejścia terenowe (wypełnia adapter z geometrii prowincji/gór/morza)
     public List<Peak> peaks = new ArrayList<>();
