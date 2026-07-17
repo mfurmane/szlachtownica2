@@ -66,15 +66,23 @@ public class HydrologyRaster {
                 }
             }
         }
-        // 3) rzeki — grubość wg akumulacji (log)
+        // 3) rzeki — grubość wg akumulacji (log), okrągłym pędzlem.
+        //    Promień rośnie łagodnie i ma twardy sufit, więc rzeki nie „eskalują"
+        //    grubościowo skokami; okrągły pędzel usuwa kanciastość kwadratowego stempla.
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
                 if (ctx.river == null || !ctx.river[j][i]) {
                     continue;
                 }
-                int r = (int) Math.max(0, Math.min(2, Math.log10(Math.max(1, ctx.flowAccum[j][i] / thr)) * 1.6));
-                for (int dj = -r; dj <= r; dj++) {
-                    for (int di = -r; di <= r; di++) {
+                double relief = Math.log10(Math.max(1, ctx.flowAccum[j][i] / thr));
+                double rad = Math.min(2.2, 0.4 + 0.55 * relief);
+                int ri = (int) Math.ceil(rad);
+                double rr = rad * rad;
+                for (int dj = -ri; dj <= ri; dj++) {
+                    for (int di = -ri; di <= ri; di++) {
+                        if (di * di + dj * dj > rr) {
+                            continue; // okrągły pędzel
+                        }
                         int ni = i + di, nj = j + dj;
                         if (ni >= 0 && nj >= 0 && ni < w && nj < h) {
                             pix[nj][ni] = rgb(RIVER);

@@ -31,11 +31,17 @@ public class ElevationStage implements WorldGenStage {
         WorldGenConfig c = ctx.config;
         float[][] elev = new float[h][w];
 
-        // 1) maska ląd/morze
+        // 1) maska ląd/morze. Morze = rzeczywiste akweny (seaMask); gdy brak seaMask
+        //    — fallback: morze to wszystko poza lądem. Punkty poza prowincjami, ale
+        //    nie w morzu (lądy za granicą S/W/E), zostają lądem.
         boolean[][] land = new boolean[h][w];
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
-                land[j][i] = ctx.landMask == null || ctx.landMask.isLand(ctx.worldX(i), ctx.worldY(j));
+                double wx = ctx.worldX(i), wy = ctx.worldY(j);
+                boolean sea = ctx.seaMask != null
+                        ? ctx.seaMask.isSea(wx, wy)
+                        : !(ctx.landMask == null || ctx.landMask.isLand(wx, wy));
+                land[j][i] = !sea;
             }
         }
 
@@ -68,7 +74,9 @@ public class ElevationStage implements WorldGenStage {
             return 0;
         }
         double wx = ctx.worldX(i), wy = ctx.worldY(j);
-        double sum = 0;
+        // MAKSIMUM, nie suma — grzbiet złożony z wielu nachodzących próbek wzdłuż
+        // linii pasma wznosi się do ~height, a nie do sumy wszystkich garbów.
+        double best = 0;
         for (WorldGenContext.Peak p : ctx.peaks) {
             if (p.radius() <= 0) {
                 continue;
@@ -76,9 +84,12 @@ public class ElevationStage implements WorldGenStage {
             double dx = wx - p.x(), dy = wy - p.y();
             double d2 = dx * dx + dy * dy;
             double r2 = p.radius() * p.radius();
-            sum += p.height() * Math.exp(-d2 / r2); // gaussowski garb
+            double contrib = p.height() * Math.exp(-d2 / r2); // gaussowski garb
+            if (contrib > best) {
+                best = contrib;
+            }
         }
-        return sum;
+        return best;
     }
 
     // Wielo-źródłowe BFS: odległość (w pikselach) do najbliższej komórki o zadanym
