@@ -129,8 +129,14 @@ flagi po prostu zmienią źródło. Bez straty pracy.
 - ✅ Szkielet worldgen (`WorldGenStage`/`Context`/`Config`/`WorldGenerator`) +
   **Etap 1 rdzeń** (`ElevationStage`: fBm + wypiętrzenie + batymetria + rampa
   brzegowa). Czysta Java, skompilowany i zweryfikowany offline (podgląd DEM).
-- ⬜ **Adapter geometrii** dla Etapu 1: zbudować `WorldGenContext` z prowincji —
-  maska lądu z unii obszarów (`PreparedGeometry.contains`), szczyty z
-  `ModelMountains` (pozycja + `height`), georeferencja z `HighMapUtils`.
-- ⬜ Wyjęcie worldgen z `MainEngine.inject` + przełącznik bake/play.
+- ✅ **Adapter geometrii** (`GeometryWorldInput`): buduje `WorldGenContext` z
+  prowincji (maska lądu z `PreparedGeometry.contains` + prefiltr obwiedni),
+  szczyty z `ModelMountains` (centroid w metryce + `height`, promień z
+  powierzchni pasma), georeferencja z `HighMapUtils`, limit rozmiaru rastra.
+  Wpięte w `initializeProvinces` → podgląd `elevation.png` (persist=false).
+  Uwaga: rdzeń zweryfikowany offline; adapter+wpięcie tylko przegląd (JTS).
+- ⬜ Wyjęcie worldgen z `MainEngine.inject` + przełącznik bake/play (dziś DEM
+  liczy się przy inicjalizacji jako podgląd).
+- ⬜ Kalibracja: skala `ModelMountains.getHeight()` vs `baseHeight`; rozdzielczość
+  docelowa (dziś podgląd ograniczony `maxDim`).
 - ⬜ Etapy 2–12 w powyższej kolejności (Etap 2 geologia następny).

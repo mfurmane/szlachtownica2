@@ -23,6 +23,7 @@ import priv.mfurmane.szlachtownica.model.main.repositories.SubProvinceRepository
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
 import priv.mfurmane.szlachtownica.model.simulation.terrain.*;
+import priv.mfurmane.szlachtownica.worldgen.*;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -197,6 +198,20 @@ public class ProvinceInitializer {
             }
         });
         List<Geometry> mapped = provinces.stream().map(val -> HighMapUtils.mapToMetric(val.getModel().getArea())).toList();
+
+        // Etap 1 (DEM) — podgląd wysokości na realnej geometrii → elevation.png.
+        // Persystencja wyłączona (WorldGenConfig.persist=false); to tylko podgląd,
+        // liczony w pamięci. Owinięte try/catch, żeby nie psuło inicjalizacji świata.
+        try {
+            WorldGenConfig wgConfig = new WorldGenConfig();
+            WorldGenContext wgCtx = GeometryWorldInput.fromProvinces(mapped, mountains, wgConfig, 1500);
+            new WorldGenerator(List.of(new ElevationStage())).bake(wgCtx);
+            ElevationRaster.writePng(wgCtx, new File("elevation.png"));
+            System.out.println("[worldgen] elevation.png zapisane (" + wgCtx.width + "x" + wgCtx.height + ")");
+        } catch (RuntimeException wgEx) {
+            System.out.println("[worldgen] podgląd DEM pominięty: " + wgEx);
+        }
+
         MapPrinterUtils.env = HighMapUtils.getEnvelope(mapped);
         MapPrinterUtils.emptyMap = HighMapUtils.getEmptyMap(MapPrinterUtils.env);
         MapPrinterUtils.print(provinceMap);
