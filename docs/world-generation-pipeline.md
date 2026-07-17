@@ -131,10 +131,22 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   brzegowa). Czysta Java, skompilowany i zweryfikowany offline (podgląd DEM).
 - ✅ **Adapter geometrii** (`GeometryWorldInput`): buduje `WorldGenContext` z
   prowincji (maska lądu z `PreparedGeometry.contains` + prefiltr obwiedni),
-  szczyty z `ModelMountains` (centroid w metryce + `height`, promień z
-  powierzchni pasma), georeferencja z `HighMapUtils`, limit rozmiaru rastra.
-  Wpięte w `initializeProvinces` → podgląd `elevation.png` (persist=false).
+  georeferencja z `HighMapUtils`, limit rozmiaru rastra. Wpięte w
+  `initializeProvinces` → podgląd `elevation.png` (persist=false).
   Uwaga: rdzeń zweryfikowany offline; adapter+wpięcie tylko przegląd (JTS).
+- ✅ **Maska morza z realnych akwenów** (`ctx.seaMask` z `List<ModelSeaPart>`):
+  „poza prowincjami" NIE znaczy już „morze". Morze jest tylko tam, gdzie leży
+  faktyczny akwen (dziś: na północy); lądy za południowymi górami, za rzeką na
+  zachodzie itd. pozostają lądem. To usuwa też ogromne fałszywe jeziora — gdy
+  ląd ma realny brzeg do spływu, priority-flood przestaje więzić wodę w środku
+  (weryfikacja offline: wyspa z brzegiem → 0% jezior; zamknięty prostokąt bez
+  ujścia → misy się zalewają, co jest fizycznie poprawne).
+- ✅ **Grzbiety gór próbkowane wzdłuż linii** (`ModelMountains.getLine()`):
+  pasmo to gęsta linia równych szczytów (`height` z modelu lub fallback
+  `defaultMountainHeight`), a etap wysokości bierze **maksimum** garbów, nie
+  sumę — grzbiet ma realny kształt zamiast jednego kopca w centroidzie i nie
+  wybija w absurdalne wysokości. Render rzek okrągłym pędzlem z łagodnym,
+  ograniczonym progiem grubości (koniec kanciastych, „eskalujących" rzek).
 - ⬜ Wyjęcie worldgen z `MainEngine.inject` + przełącznik bake/play (dziś DEM
   liczy się przy inicjalizacji jako podgląd).
 - ⬜ Kalibracja: skala `ModelMountains.getHeight()` vs `baseHeight`; rozdzielczość

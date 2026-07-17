@@ -32,6 +32,8 @@ public class WorldGenConfig {
     public double coastWidthMeters = 18000;
     /** Maks. głębokość morza przy brzegu→dalej (m). */
     public double seaDepth = 300;
+    /** Wysokość wypiętrzenia gór (m), gdy ModelMountains nie ma ustawionego height. */
+    public double defaultMountainHeight = 1800;
 
     // --- Parametry etapu geologii ---
     /** Rozmiar formacji geologicznych w metrach (większe = większe pasy litologii). */
@@ -69,6 +71,9 @@ public class WorldGenConfig {
      * rozdzielczości — w komórki przelicza się przez rozmiar piksela.
      */
     public double riverDrainageKm2 = 25;
-    /** Min. głębokość wypełnienia (m), by uznać zagłębienie za jezioro. */
-    public double lakeMinDepth = 0.5;
+    /**
+     * Min. głębokość wypełnienia (m), by uznać zagłębienie za jezioro. Wyżej =
+     * mniej fałszywych, płytkich jezior z drobnych basenów szumu.
+     */
+    public double lakeMinDepth = 12;
 }

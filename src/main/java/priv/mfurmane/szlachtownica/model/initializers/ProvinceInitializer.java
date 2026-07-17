@@ -204,7 +204,7 @@ public class ProvinceInitializer {
         // liczony w pamięci. Owinięte try/catch, żeby nie psuło inicjalizacji świata.
         try {
             WorldGenConfig wgConfig = new WorldGenConfig();
-            WorldGenContext wgCtx = GeometryWorldInput.fromProvinces(mapped, mountains, wgConfig, 1500);
+            WorldGenContext wgCtx = GeometryWorldInput.fromProvinces(mapped, mountains, seaShapes, wgConfig, 1500);
             new WorldGenerator(List.of(new ElevationStage(), new GeologyStage(), new ErosionStage(), new HydrologyStage())).bake(wgCtx);
             ElevationRaster.writePng(wgCtx, new File("elevation.png"));
             BedrockRaster.writePng(wgCtx, new File("bedrock.png"));

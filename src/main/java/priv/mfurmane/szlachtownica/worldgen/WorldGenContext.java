@@ -30,7 +30,8 @@ public class WorldGenContext {
 
     // Wejścia terenowe (wypełnia adapter z geometrii prowincji/gór/morza)
     public List<Peak> peaks = new ArrayList<>();
-    public LandMask landMask; // null => całość traktowana jako ląd
+    public LandMask landMask; // null => całość traktowana jako ląd (fallback)
+    public SeaMask seaMask;   // null => morze = poza lądem (fallback); inaczej morze = tylko tu
 
     public WorldGenContext(WorldGenConfig config) {
         this.config = config;
@@ -47,10 +48,16 @@ public class WorldGenContext {
         return minY + (j + 0.5) * cellSize;
     }
 
-    /** Czy dany punkt świata jest lądem (górski szczyt wypiętrzenia). */
+    /** Czy dany punkt świata jest lądem. */
     @FunctionalInterface
     public interface LandMask {
         boolean isLand(double worldX, double worldY);
+    }
+
+    /** Czy dany punkt świata jest morzem (rzeczywiste akweny, nie „poza lądem"). */
+    @FunctionalInterface
+    public interface SeaMask {
+        boolean isSea(double worldX, double worldY);
     }
 
     /** Szczyt/wypiętrzenie: pozycja w metrach, wysokość dodawana, promień wpływu. */
