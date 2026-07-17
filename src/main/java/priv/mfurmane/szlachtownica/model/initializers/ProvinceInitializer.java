@@ -205,10 +205,11 @@ public class ProvinceInitializer {
         try {
             WorldGenConfig wgConfig = new WorldGenConfig();
             WorldGenContext wgCtx = GeometryWorldInput.fromProvinces(mapped, mountains, wgConfig, 1500);
-            new WorldGenerator(List.of(new ElevationStage(), new GeologyStage())).bake(wgCtx);
+            new WorldGenerator(List.of(new ElevationStage(), new GeologyStage(), new HydrologyStage())).bake(wgCtx);
             ElevationRaster.writePng(wgCtx, new File("elevation.png"));
             BedrockRaster.writePng(wgCtx, new File("bedrock.png"));
-            System.out.println("[worldgen] elevation.png + bedrock.png zapisane (" + wgCtx.width + "x" + wgCtx.height + ")");
+            HydrologyRaster.writePng(wgCtx, new File("hydrology.png"));
+            System.out.println("[worldgen] elevation/bedrock/hydrology.png zapisane (" + wgCtx.width + "x" + wgCtx.height + ")");
         } catch (RuntimeException wgEx) {
             System.out.println("[worldgen] podgląd DEM pominięty: " + wgEx);
         }

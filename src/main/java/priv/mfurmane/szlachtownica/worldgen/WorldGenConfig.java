@@ -25,9 +25,9 @@ public class WorldGenConfig {
     /** Maks. wysokość bazowa lądu bez gór (m). */
     public double baseHeight = 700;
     /** Metry na komórkę szumu kontynentalnego (większe = większe, gładsze formy). */
-    public double continentalScaleMeters = 45000;
-    /** Liczba oktaw fBm dla lądu. */
-    public int elevationOctaves = 5;
+    public double continentalScaleMeters = 35000;
+    /** Liczba oktaw fBm dla lądu (więcej = drobniejszy relief, lepiej dla drenażu). */
+    public int elevationOctaves = 6;
     /** Szerokość strefy nadbrzeżnego wypłycenia/wypłaszczenia (m). */
     public double coastWidthMeters = 18000;
     /** Maks. głębokość morza przy brzegu→dalej (m). */
@@ -38,4 +38,13 @@ public class WorldGenConfig {
     public double geologyScaleMeters = 30000;
     /** Liczba oktaw fBm dla domen geologicznych. */
     public int geologyOctaves = 3;
+
+    // --- Parametry etapu hydrologii ---
+    /**
+     * Min. powierzchnia zlewni (km²), by komórka stała się rzeką. Niezależne od
+     * rozdzielczości — w komórki przelicza się przez rozmiar piksela.
+     */
+    public double riverDrainageKm2 = 25;
+    /** Min. głębokość wypełnienia (m), by uznać zagłębienie za jezioro. */
+    public double lakeMinDepth = 0.5;
 }
