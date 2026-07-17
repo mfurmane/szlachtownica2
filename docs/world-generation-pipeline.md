@@ -159,3 +159,15 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   przed hydrologią. Efekt: rzeki meandrują i rozgałęziają się dendrytycznie
   zamiast równoległych zlewni. Zweryfikowane offline.
 - ⬜ Etapy 4–12 (Etap 4: klimat z kotwicami prowincji — Twoja "chwila prawdy").
+- ⬜ **Dociąganie granic administracyjnych do naturalnych elementów** — po
+  hydrologii (Etap 3/3b) dociągnąć granice subprowincji i regionów do rzek,
+  grzbietów górskich, brzegów jezior i innych naturalnych linii podziału,
+  zamiast czysto geometrycznych krawędzi Voronoi. Zależności: potrzebuje rzek/
+  grzbietów z rastra (Etap 3) oraz podziału Voronoi z `ProvinceInitializer`
+  (`generateSubGeometries`). Pomysł na realizację: dla każdej krawędzi między
+  komórkami, jeśli w pobliżu biegnie rzeka/grzbiet, przesunąć (snap) krawędź do
+  tej linii; ewentualnie użyć rzek jako "twardych" krawędzi już na etapie
+  podziału (np. cięcie obszaru rzekami przed Voronoi). Po dociągnięciu odświeżyć
+  sąsiedztwo (`determineNeighbourhood`) — granice rzeczne to naturalne mosty/
+  promy. Uwaga: to spina worldgen (raster) z geometrią JTS (Voronoi), więc
+  zrobić po wyjęciu worldgen z boota i ustaleniu wspólnej georeferencji.
