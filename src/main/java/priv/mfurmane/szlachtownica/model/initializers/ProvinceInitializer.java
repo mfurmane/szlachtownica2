@@ -205,7 +205,7 @@ public class ProvinceInitializer {
         try {
             WorldGenConfig wgConfig = new WorldGenConfig();
             WorldGenContext wgCtx = GeometryWorldInput.fromProvinces(mapped, mountains, wgConfig, 1500);
-            new WorldGenerator(List.of(new ElevationStage(), new GeologyStage(), new HydrologyStage())).bake(wgCtx);
+            new WorldGenerator(List.of(new ElevationStage(), new GeologyStage(), new ErosionStage(), new HydrologyStage())).bake(wgCtx);
             ElevationRaster.writePng(wgCtx, new File("elevation.png"));
             BedrockRaster.writePng(wgCtx, new File("bedrock.png"));
             HydrologyRaster.writePng(wgCtx, new File("hydrology.png"));

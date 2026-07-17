@@ -39,6 +39,30 @@ public class WorldGenConfig {
     /** Liczba oktaw fBm dla domen geologicznych. */
     public int geologyOctaves = 3;
 
+    // --- Parametry etapu 3b: erozji hydraulicznej (kropelkowej) ---
+    /** Liczba kropli na komórkę rastra (więcej = mocniejsze wcięcie dolin, wolniej). */
+    public double erosionDropletDensity = 0.6;
+    /** Promień pędzla erozji (rozmycie, by nie robić kolców). */
+    public int erosionRadius = 3;
+    /** Maks. długość życia kropli (kroków). */
+    public int erosionMaxLifetime = 40;
+    /** Bezwładność kierunku kropli 0..1 (mniej = wierniej podąża spadkiem). */
+    public double erosionInertia = 0.06;
+    /** Współczynnik pojemności transportu osadu. */
+    public double erosionCapacity = 5;
+    /** Minimalny spadek (stabilizuje pojemność na płaskim). */
+    public double erosionMinSlope = 0.01;
+    /** Tempo erozji 0..1. */
+    public double erosionErode = 0.3;
+    /** Tempo depozycji 0..1. */
+    public double erosionDeposit = 0.3;
+    /** Parowanie na krok 0..1 (skraca zasięg kropli). */
+    public double erosionEvaporation = 0.02;
+    /** Grawitacja (przyspieszanie na spadku). */
+    public double erosionGravity = 6;
+    /** Jak bardzo twardość skały macierzystej spowalnia erozję 0..1. */
+    public double erosionHardnessInfluence = 0.7;
+
     // --- Parametry etapu hydrologii ---
     /**
      * Min. powierzchnia zlewni (km²), by komórka stała się rzeką. Niezależne od
