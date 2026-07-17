@@ -32,4 +32,10 @@ public class WorldGenConfig {
     public double coastWidthMeters = 18000;
     /** Maks. głębokość morza przy brzegu→dalej (m). */
     public double seaDepth = 300;
+
+    // --- Parametry etapu geologii ---
+    /** Rozmiar formacji geologicznych w metrach (większe = większe pasy litologii). */
+    public double geologyScaleMeters = 30000;
+    /** Liczba oktaw fBm dla domen geologicznych. */
+    public int geologyOctaves = 3;
 }
