@@ -153,4 +153,9 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   krótkie równoległe zlewnie (poprawne fizycznie). Efektowne doliny/dendryty
   wymagają **Etapu 3b: erozji hydraulicznej** (wcinanie dolin w DEM przed
   routingiem) — rekomendowane następne.
-- ⬜ Etap 3b (erozja hydrauliczna — dla wyraźnych dolin/rzek), potem Etapy 4–12.
+- ✅ **Etap 3b (erozja hydrauliczna)** — `ErosionStage`: symulacja kropli
+  (Musgrave/Beyer/Lague) wcina doliny w DEM, tempo modulowane twardością skały
+  macierzystej (granit stawia opór, iłowiec ustępuje). Uruchamiana po geologii,
+  przed hydrologią. Efekt: rzeki meandrują i rozgałęziają się dendrytycznie
+  zamiast równoległych zlewni. Zweryfikowane offline.
+- ⬜ Etapy 4–12 (Etap 4: klimat z kotwicami prowincji — Twoja "chwila prawdy").
