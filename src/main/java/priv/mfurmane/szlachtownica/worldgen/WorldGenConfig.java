@@ -99,21 +99,31 @@ public class WorldGenConfig {
     public double rainfallMin = 0.2;
     /** Opad (waga spływu na komórkę) przy ekstremalnej mokrości (wilgotność 1). */
     public double rainfallMax = 2.0;
-    /** Mnożnik progu jeziora przy suszy (wilgotność 0) — wyżej = trudniej o jezioro. */
-    public double lakeDryMultiplier = 3.0;
-    /** Mnożnik progu jeziora przy mokrości (wilgotność 1) — niżej = łatwiej o jezioro/mokradło. */
-    public double lakeWetMultiplier = 0.5;
+    /** Mnożnik progu STRUMIENIA przy suszy (wilgotność 0) — wyżej = mniej cieków. */
+    public double streamDryMultiplier = 2.5;
+    /** Mnożnik progu STRUMIENIA przy mokrości (wilgotność 1) — niżej = gęsta sieć strumyków. */
+    public double streamWetMultiplier = 0.35;
+
+    // --- Mokradła/bagna (osobna kategoria od jeziora) ---
+    /**
+     * Min. głębokość płytkiego rozlania (m), by zamiast suchego lądu było bagno.
+     * Nisko — szerokie, płytkie niecki mokrych nizin (dawniej fałszywe „jeziora")
+     * stają się bagnem/mokradłem zamiast otwartej wody.
+     */
+    public double marshMinDepth = 3.0;
+    /** Min. wilgotność, przy której płytka woda staje się bagnem. */
+    public double marshHumidity = 0.5;
 
     // --- Parametry etapu hydrologii ---
     /**
-     * Min. powierzchnia zlewni (km²), by komórka stała się rzeką. Niezależne od
-     * rozdzielczości — w komórki przelicza się przez rozmiar piksela.
+     * Bazowa min. powierzchnia zlewni (km²), by komórka stała się strumieniem/rzeką.
+     * Skalowana wilgotnością (streamDry/WetMultiplier). Niżej = gęstsza sieć cieków.
      */
-    public double riverDrainageKm2 = 25;
+    public double riverDrainageKm2 = 15;
     /**
-     * Min. głębokość wypełnienia (m), by uznać zagłębienie za jezioro. Wyżej =
-     * mniej fałszywych, płytkich jezior z drobnych basenów szumu (płaskie niziny
-     * highmapa robią ich dużo, stąd stosunkowo wysoki próg).
+     * Min. głębokość wypełnienia (m), by uznać zagłębienie za JEZIORO (otwarta woda).
+     * Wysoki próg — tylko głębokie niecki; płytsze rozlania idą w bagno, nie w wielkie
+     * jeziora. NIE skalowany wilgotnością (mokre niziny → bagna, nie gigantyczne jeziora).
      */
-    public double lakeMinDepth = 28;
+    public double lakeMinDepth = 22;
 }

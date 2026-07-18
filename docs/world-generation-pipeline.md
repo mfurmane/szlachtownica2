@@ -159,16 +159,24 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   wilgotność regionu (`Humidity.getLevel()`, 0..1, już modulowana terenem w
   `determineHumidity`) rasteryzowana z poligonów regionów i podawana hydrologii
   jako OPAD. Akumulacja spływu = opad ważony wilgotnością (mokry Orvanor → duży
-  spływ → gęstsze rzeki proceduralne; suchy Zaviles → mało), a próg jeziora
-  skalowany per komórka (sucho → trudniej o jezioro; mokro → rozlewiska i
-  mokradła). Autorska woda wypalona (rzeki i jeziora) jest ODPORNA na wilgotność
-  (maski `burnedRiver`/`burnedLake`) — Alsteda płynie przez suchą prowincję jak
-  Nil przez pustynię; wilgotność moduluje tylko wodę PROCEDURALNĄ. Parametry:
-  `rainfallMin/Max`, `lakeDryMultiplier`/`lakeWetMultiplier`. Zweryfikowane
-  offline na gradiencie suchy↔mokry: jeziora niemal znikają po suchej stronie,
-  a rozkwitają po mokrej; autorskie nurty i delta trwają w obu. Przyszłościowe:
-  gdy powstanie symulowany klimat (Etap 4/5), podmieni się tylko ŹRÓDŁO pola
-  wilgotności — hydrologia już je konsumuje.
+  spływ; suchy Zaviles → mało). Klasyfikacja wody w trzech kategoriach zamiast
+  „wszystko to jezioro":
+  - **jezioro** (otwarta woda) = tylko GŁĘBOKA niecka (`lakeMinDepth`, NIE
+    skalowane wilgotnością) → koniec molochów zalewających całe subprowincje;
+  - **bagno/mokradło** (nowa warstwa `ctx.marsh`) = płytkie rozlanie w wilgoci
+    (`marshMinDepth`, `marshHumidity`) → mokre niziny (Orvanor, Zielona Rubież)
+    dostają bagna zamiast gigantycznych jezior;
+  - **strumień/rzeka** = próg zlewni skalowany wilgotnością
+    (`streamDry/WetMultiplier`) → mokro = gęsta sieć strumyków, sucho = rzadka.
+  Autorska woda wypalona (rzeki i jeziora) ODPORNA na wilgotność (maski
+  `burnedRiver`/`burnedLake`) — Alsteda płynie przez suchą prowincję jak Nil
+  przez pustynię; autorskie Dibert/Vostin/Gilgam zostają wielkie zgodnie z
+  zamysłem. Mikro-jitter (~2 cm) na wypełnionym DEM łamie równoległy „combing"
+  D8 na płaskich dnach. Zweryfikowane offline (mokro/sucho/gradient): mokre
+  regiony → gęste strumienie + bagna + jeziorka w bagiennej obwódce; suche →
+  rzadkie cieki, bez bagien; autorskie nurty i delta trwają wszędzie.
+  Przyszłościowe: gdy powstanie symulowany klimat (Etap 4/5), podmieni się tylko
+  ŹRÓDŁO pola wilgotności — hydrologia już je konsumuje.
 - ✅ **Stream burning: predefiniowane rzeki i jeziora** (`BurnStage`): autorskie
   cieki (`ModelRiver`) i akweny (`ModelLake`) są „wypalane" w DEM PO erozji, a
   PRZED hydrologią. Rzeka = łamana rasteryzowana do łańcucha pikseli, koryto

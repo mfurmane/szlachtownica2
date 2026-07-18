@@ -26,7 +26,8 @@ public class WorldGenContext {
     public BedrockType[][] bedrock; // [height][width], skała macierzysta; null poza lądem
     public float[][] flowAccum;     // [height][width], akumulacja spływu (w komórkach)
     public boolean[][] river;       // [height][width], komórka rzeczna
-    public boolean[][] lake;        // [height][width], komórka jeziora (wypełnione zagłębienie)
+    public boolean[][] lake;        // [height][width], komórka jeziora (głęboka niecka = otwarta woda)
+    public boolean[][] marsh;       // [height][width], mokradło/bagno (płytka woda / płaski mokry teren)
 
     // Wejścia terenowe (wypełnia adapter z geometrii prowincji/gór/morza)
     public List<Peak> peaks = new ArrayList<>();
