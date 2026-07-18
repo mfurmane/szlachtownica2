@@ -31,11 +31,13 @@ public class BurnStage implements WorldGenStage {
         }
         WorldGenConfig c = ctx.config;
         if (c.burnRivers && ctx.riverPaths != null) {
+            ctx.burnedRiver = new boolean[ctx.height][ctx.width];
             for (double[][] path : ctx.riverPaths) {
                 burnRiver(ctx, path, c.riverBurnDepth, c.riverBurnRadius);
             }
         }
         if (c.burnLakes && ctx.lakePolys != null) {
+            ctx.burnedLake = new boolean[ctx.height][ctx.width];
             for (double[][] ring : ctx.lakePolys) {
                 burnLake(ctx, ring, c.lakeBurnDepth);
             }
@@ -62,6 +64,7 @@ public class BurnStage implements WorldGenStage {
         for (int k = 0; k < chain.size(); k++) {
             int[] p = chain.get(k);
             int i = p[0], j = p[1];
+            ctx.burnedRiver[j][i] = true; // oś cieku → zawsze rzeka (odporna na suszę)
             float target = (float) (base[k] - depth);
             for (int dj = -radius; dj <= radius; dj++) {
                 for (int di = -radius; di <= radius; di++) {
@@ -139,8 +142,11 @@ public class BurnStage implements WorldGenStage {
         maxJ = Math.min(ctx.height - 1, maxJ);
         for (int j = minJ; j <= maxJ; j++) {
             for (int i = minI; i <= maxI; i++) {
-                if (pointInRing(i, j, px) && elev[j][i] > basin) {
-                    elev[j][i] = basin;
+                if (pointInRing(i, j, px)) {
+                    ctx.burnedLake[j][i] = true; // wnętrze → zawsze jezioro (odporne na suszę)
+                    if (elev[j][i] > basin) {
+                        elev[j][i] = basin;
+                    }
                 }
             }
         }

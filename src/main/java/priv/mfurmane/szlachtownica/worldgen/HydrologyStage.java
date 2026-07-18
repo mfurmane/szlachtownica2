@@ -105,11 +105,19 @@ public class HydrologyStage implements WorldGenStage {
             }
         }
 
-        // Akumulacja: init 1 na lądzie, 0 na morzu; sumuj w dół w odwrotnej kolejności.
+        // Akumulacja: init = OPAD (ważony wilgotnością) na lądzie, 0 na morzu.
+        // Mokre regiony wnoszą więcej spływu → grubsze/gęstsze rzeki proceduralne;
+        // suche wnoszą mało. Suma w dół w odwrotnej kolejności.
+        WorldGenConfig cfg = ctx.config;
         float[][] accum = new float[h][w];
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
-                accum[j][i] = elev[j][i] < seaLevel ? 0 : 1;
+                if (elev[j][i] < seaLevel) {
+                    accum[j][i] = 0;
+                } else {
+                    double lvl = humidityLevel(ctx, i, j);
+                    accum[j][i] = (float) (cfg.rainfallMin + lvl * (cfg.rainfallMax - cfg.rainfallMin));
+                }
             }
         }
         for (int idx = orderCount - 1; idx >= 0; idx--) {
@@ -126,13 +134,25 @@ public class HydrologyStage implements WorldGenStage {
         boolean[][] lake = new boolean[h][w];
         boolean[][] river = new boolean[h][w];
         // Próg rzeki: powierzchnia zlewni (km²) → liczba komórek dla tej rozdzielczości.
-        double thr = ctx.config.riverDrainageKm2 * 1_000_000.0 / (ctx.cellSize * ctx.cellSize);
-        double lakeMin = ctx.config.lakeMinDepth;
+        double thr = cfg.riverDrainageKm2 * 1_000_000.0 / (ctx.cellSize * ctx.cellSize);
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
                 if (elev[j][i] < seaLevel) {
                     continue;
                 }
+                // Autorska woda (wypalona) — odporna na wilgotność: zawsze obecna.
+                if (ctx.burnedRiver != null && ctx.burnedRiver[j][i]) {
+                    river[j][i] = true;
+                    continue;
+                }
+                if (ctx.burnedLake != null && ctx.burnedLake[j][i]) {
+                    lake[j][i] = true;
+                    continue;
+                }
+                // Próg jeziora skalowany wilgotnością: sucho → trudniej o jezioro.
+                double lvl = humidityLevel(ctx, i, j);
+                double lakeMin = cfg.lakeMinDepth
+                        * (cfg.lakeDryMultiplier + lvl * (cfg.lakeWetMultiplier - cfg.lakeDryMultiplier));
                 if (filled[j][i] > elev[j][i] + lakeMin) {
                     lake[j][i] = true;
                 } else if (accum[j][i] >= thr) {
@@ -144,5 +164,17 @@ public class HydrologyStage implements WorldGenStage {
         ctx.flowAccum = accum;
         ctx.lake = lake;
         ctx.river = river;
+    }
+
+    /** Wilgotność 0..1 w komórce; brak pola lub punkt poza regionami => neutralna 0.5. */
+    private static double humidityLevel(WorldGenContext ctx, int i, int j) {
+        if (ctx.humidity == null) {
+            return 0.5;
+        }
+        double v = ctx.humidity.at(ctx.worldX(i), ctx.worldY(j));
+        if (v < 0) {
+            return 0.5;
+        }
+        return Math.max(0, Math.min(1, v));
     }
 }

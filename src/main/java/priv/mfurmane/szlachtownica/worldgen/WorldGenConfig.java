@@ -94,6 +94,16 @@ public class WorldGenConfig {
     /** Głębokość niecki jeziora poniżej najniższego punktu obrzeża (m). */
     public double lakeBurnDepth = 40;
 
+    // --- Sprzężenie wilgotności z hydrologią (opad → spływ, zalewanie) ---
+    /** Opad (waga spływu na komórkę) przy ekstremalnej suszy (wilgotność 0). */
+    public double rainfallMin = 0.2;
+    /** Opad (waga spływu na komórkę) przy ekstremalnej mokrości (wilgotność 1). */
+    public double rainfallMax = 2.0;
+    /** Mnożnik progu jeziora przy suszy (wilgotność 0) — wyżej = trudniej o jezioro. */
+    public double lakeDryMultiplier = 3.0;
+    /** Mnożnik progu jeziora przy mokrości (wilgotność 1) — niżej = łatwiej o jezioro/mokradło. */
+    public double lakeWetMultiplier = 0.5;
+
     // --- Parametry etapu hydrologii ---
     /**
      * Min. powierzchnia zlewni (km²), by komórka stała się rzeką. Niezależne od

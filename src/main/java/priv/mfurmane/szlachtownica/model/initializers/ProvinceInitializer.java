@@ -86,6 +86,7 @@ public class ProvinceInitializer {
                 merinia, nowacorellia, orvanor, pirena, carasera, viroelann, alstederia,
                 druantia, saraidan, miedzygorze, larazza, zaviles, zielonarubiez);
         Map<PreparedGeometry, SimulationProvince> provinceMap = new HashMap<>();
+        List<ModelRegion> humidityRegions = new ArrayList<>(); // dla pola wilgotności worldgen
         MapPrinterUtils.preparedGeometryStream = provinces.stream().map(val -> {
             Geometry geometry = HighMapUtils.mapToMetric(val.getModel().getArea());
             PreparedGeometry prep = PreparedGeometryFactory.prepare(geometry);
@@ -179,6 +180,7 @@ public class ProvinceInitializer {
                                         enchant))
                                 .setWoodRichness(determineWoodRichness(region, model, province.getConf().getWoodRichness()));
                     }
+                    humidityRegions.add(region); // wilgotność regionu → hydrologia worldgen
                 }
                 determineNeighbourhood(regions);
                 settleBestRegions(regions, regionsToSettle, province.getConf().getInitialSettlersProfile(), province.getConf().getSimulationStart());
@@ -208,7 +210,7 @@ public class ProvinceInitializer {
             // erozję). TODO przenieść z korzenia repo do src/main/resources i uczynić
             // ścieżkę konfigurowalną; brak pliku => adapter spada na czysto proceduralne.
             wgConfig.highmapPath = "working3.png";
-            WorldGenContext wgCtx = GeometryWorldInput.fromProvinces(mapped, mountains, seaShapes, rivers, lakes, wgConfig, 1500);
+            WorldGenContext wgCtx = GeometryWorldInput.fromProvinces(mapped, mountains, seaShapes, rivers, lakes, humidityRegions, wgConfig, 1500);
             new WorldGenerator(List.of(new ElevationStage(), new GeologyStage(), new ErosionStage(), new BurnStage(), new HydrologyStage())).bake(wgCtx);
             ElevationRaster.writePng(wgCtx, new File("elevation.png"));
             BedrockRaster.writePng(wgCtx, new File("bedrock.png"));
