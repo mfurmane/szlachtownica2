@@ -77,6 +77,15 @@ public class HydrologyStage implements WorldGenStage {
             }
         }
 
+        // Mikro-jitter na wypełnionym DEM: łamie równoległy „combing" D8 na płaskich
+        // dnach na naturalny dendryt. Amplituda ~2 cm — poniżej realnego reliefu, więc
+        // nie tworzy fałszywego drenażu ani nie rusza progów jeziora/bagna.
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                filled[j][i] += (float) (hash01(i, j) * 0.02);
+            }
+        }
+
         // Kierunek spływu = najstromszy spadek po WYPEŁNIONYM DEM (w dolinach zbiega
         // się dendrytycznie). Płaskie dna (wypełnione misy) nie mają spadku → wtedy
         // fallback na kierunek z priority-flood (dir), który routuje płaskie ku ujściu.
@@ -130,11 +139,14 @@ public class HydrologyStage implements WorldGenStage {
             }
         }
 
-        // Jeziora + rzeki
+        // Klasyfikacja wody: jezioro (głęboka niecka) / bagno (płytka woda lub płaski
+        // mokry teren) / strumień (próg skalowany wilgotnością). Autorska woda wypalona
+        // jest wymuszana i odporna na wilgotność.
         boolean[][] lake = new boolean[h][w];
         boolean[][] river = new boolean[h][w];
-        // Próg rzeki: powierzchnia zlewni (km²) → liczba komórek dla tej rozdzielczości.
-        double thr = cfg.riverDrainageKm2 * 1_000_000.0 / (ctx.cellSize * ctx.cellSize);
+        boolean[][] marsh = new boolean[h][w];
+        // Baza progu strumienia: powierzchnia zlewni (km²) → liczba komórek.
+        double baseThr = cfg.riverDrainageKm2 * 1_000_000.0 / (ctx.cellSize * ctx.cellSize);
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
                 if (elev[j][i] < seaLevel) {
@@ -149,14 +161,18 @@ public class HydrologyStage implements WorldGenStage {
                     lake[j][i] = true;
                     continue;
                 }
-                // Próg jeziora skalowany wilgotnością: sucho → trudniej o jezioro.
                 double lvl = humidityLevel(ctx, i, j);
-                double lakeMin = cfg.lakeMinDepth
-                        * (cfg.lakeDryMultiplier + lvl * (cfg.lakeWetMultiplier - cfg.lakeDryMultiplier));
-                if (filled[j][i] > elev[j][i] + lakeMin) {
-                    lake[j][i] = true;
+                double depth = filled[j][i] - elev[j][i];
+                // Próg strumienia skalowany wilgotnością: mokro → gęsta sieć cieków.
+                double thr = baseThr * (cfg.streamDryMultiplier
+                        + lvl * (cfg.streamWetMultiplier - cfg.streamDryMultiplier));
+
+                if (depth >= cfg.lakeMinDepth) {
+                    lake[j][i] = true;                         // głęboka niecka = otwarta woda
+                } else if (depth >= cfg.marshMinDepth && lvl >= cfg.marshHumidity) {
+                    marsh[j][i] = true;                        // płytkie rozlanie w wilgoci = bagno
                 } else if (accum[j][i] >= thr) {
-                    river[j][i] = true;
+                    river[j][i] = true;                        // strumień/rzeka
                 }
             }
         }
@@ -164,6 +180,16 @@ public class HydrologyStage implements WorldGenStage {
         ctx.flowAccum = accum;
         ctx.lake = lake;
         ctx.river = river;
+        ctx.marsh = marsh;
+    }
+
+    /** Deterministyczny hash [0,1) z (i,j) — do mikro-jittera rozbijającego combing. */
+    private static double hash01(int i, int j) {
+        long z = (i * 0x1f1f1f1fL) ^ (j * 0x8da6b343L);
+        z ^= (z >>> 13);
+        z *= 0x9E3779B97F4A7C15L;
+        z ^= (z >>> 7);
+        return (z & 0xffffffffL) / (double) 0x100000000L;
     }
 
     /** Wilgotność 0..1 w komórce; brak pola lub punkt poza regionami => neutralna 0.5. */

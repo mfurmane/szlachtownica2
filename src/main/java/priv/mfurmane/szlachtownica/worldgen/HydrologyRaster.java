@@ -13,6 +13,8 @@ public class HydrologyRaster {
 
     private static final int[] RIVER = {30, 90, 170};
     private static final int[] LAKE = {60, 120, 190};
+    private static final int[] MARSH = {78, 108, 86};   // mętna, bagienna zieleń
+    private static final int[] MARSH2 = {96, 124, 98};  // drugi ton do cętkowania
 
     public static void writePng(WorldGenContext ctx, File out) {
         float[][] e = ctx.elevation;
@@ -58,7 +60,17 @@ public class HydrologyRaster {
                 pix[j][i] = rgb(col);
             }
         }
-        // 2) jeziora
+        // 2) bagna/mokradła — mętna zieleń z cętkowaniem (pod jeziorami i rzekami)
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                if (ctx.marsh != null && ctx.marsh[j][i]) {
+                    // nieregularny hash → cętki bez ukośnej periodyczności
+                    int hsh = (i * 73856093) ^ (j * 19349663);
+                    pix[j][i] = rgb(((hsh >> 4) & 3) == 0 ? MARSH2 : MARSH);
+                }
+            }
+        }
+        // 3) jeziora
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
                 if (ctx.lake != null && ctx.lake[j][i]) {
