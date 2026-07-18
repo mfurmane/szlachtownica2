@@ -2,6 +2,7 @@ package priv.mfurmane.szlachtownica.model.initializers;
 
 import org.locationtech.jts.geom.Coordinate;
 import priv.mfurmane.szlachtownica.engine.MainEngine;
+import priv.mfurmane.szlachtownica.engine.utils.GeoUtils;
 import priv.mfurmane.szlachtownica.model.config.ConfigurationPlace;
 import priv.mfurmane.szlachtownica.model.main.ModelPlace;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
@@ -145,7 +146,9 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        // W delcie Alstedy, u zbiegu odnóg alsteda_1/2/3 przy północnym brzegu
+        // (piksel ~605,120 w siatce GeoUtils). Do doprecyzowania wg refki.
+        Coordinate coordinate = GeoUtils.pixelToLatLon(605, 120);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(7L)
