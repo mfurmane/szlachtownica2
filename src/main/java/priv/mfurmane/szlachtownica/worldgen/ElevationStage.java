@@ -57,9 +57,21 @@ public class ElevationStage implements WorldGenStage {
                 if (land[j][i]) {
                     double continental = Noise.fbm(i / noiseScale, j / noiseScale, c.elevationOctaves, c.seed); // [0,1]
                     double coastRamp = smoothstep(0, coastPx, distToSea[j][i]);                            // 0 brzeg → 1 w głąb
-                    double base = continental * c.baseHeight * coastRamp;
+                    double landHeight;
+                    double hm = ctx.heightBias != null ? ctx.heightBias.at(ctx.worldX(i), ctx.worldY(j)) : -1;
+                    if (hm >= 0) {
+                        // Hybryda: makro z highmapa (nizina→szczyt) zmieszane z proceduralnym
+                        // fBm, plus mały proceduralny detal, żeby erozja miała fakturę nawet
+                        // tam, gdzie highmap jest niedbały/płaski.
+                        double hmH = c.highmapLowland + hm * (c.highmapHeightScale - c.highmapLowland);
+                        double fbmH = continental * c.baseHeight;
+                        double detail = (continental - 0.5) * 2 * c.highmapDetailMeters;
+                        landHeight = c.highmapWeight * hmH + (1 - c.highmapWeight) * fbmH + detail;
+                    } else {
+                        landHeight = continental * c.baseHeight;
+                    }
                     double uplift = upliftAt(ctx, i, j);
-                    elev[j][i] = (float) (c.seaLevel + base + uplift);
+                    elev[j][i] = (float) (c.seaLevel + landHeight * coastRamp + uplift);
                 } else {
                     double depthRamp = smoothstep(0, coastPx, distToLand[j][i]);
                     elev[j][i] = (float) (c.seaLevel - depthRamp * c.seaDepth);

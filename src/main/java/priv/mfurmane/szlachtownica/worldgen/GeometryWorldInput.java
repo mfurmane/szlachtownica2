@@ -5,13 +5,17 @@ import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
 import org.locationtech.jts.linearref.LengthIndexedLine;
+import priv.mfurmane.szlachtownica.engine.utils.GeoUtils;
 import priv.mfurmane.szlachtownica.engine.utils.HighMapUtils;
 import priv.mfurmane.szlachtownica.model.main.ModelMountains;
 import priv.mfurmane.szlachtownica.model.main.ModelSeaPart;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +91,31 @@ public class GeometryWorldInput {
             }
             if (!seaPreps.isEmpty()) {
                 ctx.seaMask = (x, y) -> contains(seaPreps, seaEnvs, x, y);
+            }
+        }
+
+        // Highmap jako makro-relief (hybryda). Zakotwiczony w tym samym bboxie
+        // geograficznym co prowincje (GeoUtils LON/LAT), przetransformowanym do
+        // metryki — dzięki temu highmap i geometria pokrywają się bez własnej
+        // konwencji. Brak ścieżki/pliku => czysto proceduralnie (heightBias null).
+        if (config.highmapPath != null && !config.highmapPath.isBlank()) {
+            try {
+                HighmapBias bias = HighmapBias.load(new File(config.highmapPath), config.highmapMaxDim);
+                Polygon bboxGeo = GF.createPolygon(new Coordinate[]{
+                        new Coordinate(GeoUtils.LON_MIN, GeoUtils.LAT_MIN),
+                        new Coordinate(GeoUtils.LON_MAX, GeoUtils.LAT_MIN),
+                        new Coordinate(GeoUtils.LON_MAX, GeoUtils.LAT_MAX),
+                        new Coordinate(GeoUtils.LON_MIN, GeoUtils.LAT_MAX),
+                        new Coordinate(GeoUtils.LON_MIN, GeoUtils.LAT_MIN)
+                });
+                Envelope hm = HighMapUtils.mapToMetric(bboxGeo).getEnvelopeInternal();
+                double hmMinX = hm.getMinX(), hmMaxY = hm.getMaxY();
+                double hmW = hm.getWidth(), hmH = hm.getHeight();
+                ctx.heightBias = (x, y) -> bias.sample(
+                        (x - hmMinX) / hmW,   // u: zachód→wschód
+                        (hmMaxY - y) / hmH);  // v: północ (góra obrazu) → południe
+            } catch (IOException ex) {
+                System.out.println("[worldgen] highmap pominięty (" + config.highmapPath + "): " + ex);
             }
         }
 
