@@ -94,6 +94,18 @@ public class WorldGenConfig {
     /** Głębokość niecki jeziora poniżej najniższego punktu obrzeża (m). */
     public double lakeBurnDepth = 40;
 
+    // --- Etap 4: klimat (temperatura) ---
+    /**
+     * Średnia temp. na poziomie morza przy północnej krawędzi mapy (°C, ciepło —
+     * bliżej równika). Skalibrowane tak, by symulacja pokrywała się z autorskimi
+     * Climate prowincji (9 trafień co do stopnia, reszta w granicach jednego).
+     */
+    public double tempNorthC = 25;
+    /** Średnia temp. na poziomie morza przy południowej krawędzi mapy (°C, zimno — dalej od równika). */
+    public double tempSouthC = 9;
+    /** Pionowy gradient temperatury (°C na 1000 m wzniesienia). */
+    public double lapseRatePerKm = 6.5;
+
     // --- Sprzężenie wilgotności z hydrologią (opad → spływ, zalewanie) ---
     /** Opad (waga spływu na komórkę) przy ekstremalnej suszy (wilgotność 0). */
     public double rainfallMin = 0.2;

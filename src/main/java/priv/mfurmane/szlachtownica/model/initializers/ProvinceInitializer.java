@@ -211,11 +211,12 @@ public class ProvinceInitializer {
             // ścieżkę konfigurowalną; brak pliku => adapter spada na czysto proceduralne.
             wgConfig.highmapPath = "working3.png";
             WorldGenContext wgCtx = GeometryWorldInput.fromProvinces(mapped, mountains, seaShapes, rivers, lakes, humidityRegions, wgConfig, 1500);
-            new WorldGenerator(List.of(new ElevationStage(), new GeologyStage(), new ErosionStage(), new BurnStage(), new HydrologyStage())).bake(wgCtx);
+            new WorldGenerator(List.of(new ElevationStage(), new GeologyStage(), new ErosionStage(), new BurnStage(), new HydrologyStage(), new TemperatureStage())).bake(wgCtx);
             ElevationRaster.writePng(wgCtx, new File("elevation.png"));
             BedrockRaster.writePng(wgCtx, new File("bedrock.png"));
             HydrologyRaster.writePng(wgCtx, new File("hydrology.png"));
-            System.out.println("[worldgen] elevation/bedrock/hydrology.png zapisane (" + wgCtx.width + "x" + wgCtx.height + ")");
+            TemperatureRaster.writePng(wgCtx, new File("temperature.png"));
+            System.out.println("[worldgen] elevation/bedrock/hydrology/temperature.png zapisane (" + wgCtx.width + "x" + wgCtx.height + ")");
         } catch (RuntimeException wgEx) {
             System.out.println("[worldgen] podgląd DEM pominięty: " + wgEx);
         }

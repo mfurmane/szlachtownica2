@@ -28,6 +28,7 @@ public class WorldGenContext {
     public boolean[][] river;       // [height][width], komórka rzeczna
     public boolean[][] lake;        // [height][width], komórka jeziora (głęboka niecka = otwarta woda)
     public boolean[][] marsh;       // [height][width], mokradło/bagno (płytka woda / płaski mokry teren)
+    public float[][] temperature;   // [height][width], średnia temperatura (°C) — Etap 4 (klimat)
 
     // Wejścia terenowe (wypełnia adapter z geometrii prowincji/gór/morza)
     public List<Peak> peaks = new ArrayList<>();

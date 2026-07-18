@@ -177,6 +177,16 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   rzadkie cieki, bez bagien; autorskie nurty i delta trwają wszędzie.
   Przyszłościowe: gdy powstanie symulowany klimat (Etap 4/5), podmieni się tylko
   ŹRÓDŁO pola wilgotności — hydrologia już je konsumuje.
+- ✅ **Etap 4 (klimat: temperatura)** — `TemperatureStage`: średnia temp. (°C) z
+  szerokości geograficznej (liniowo od `tempSouthC` na zimnym południu do
+  `tempNorthC` na ciepłej północy — świat na półkuli południowej) minus spadek z
+  wysokością (`lapseRatePerKm`, 6.5 °C/km). Render `temperature.png` (rampa
+  zimno→ciepło). Czysta Java, zweryfikowane offline. „Chwila prawdy": symulacja
+  porównana z autorskimi `Climate` prowincji po kalibracji `tempNorthC=25`,
+  `tempSouthC=9` daje 9 trafień co do stopnia, resztę w granicach jednego, zero
+  twardych konfliktów — geografia potwierdza zamysł (Orvanor zimny, Zaviles/
+  Larazza/Alstederia gorące). PODGLĄD — jeszcze nie nadpisuje autorskich Climate;
+  wpięcie symulacji jako źródła klimatu to świadomy kolejny krok.
 - ✅ **Stream burning: predefiniowane rzeki i jeziora** (`BurnStage`): autorskie
   cieki (`ModelRiver`) i akweny (`ModelLake`) są „wypalane" w DEM PO erozji, a
   PRZED hydrologią. Rzeka = łamana rasteryzowana do łańcucha pikseli, koryto
