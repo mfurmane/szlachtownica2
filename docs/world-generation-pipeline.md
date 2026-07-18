@@ -177,6 +177,23 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   rzadkie cieki, bez bagien; autorskie nurty i delta trwają wszędzie.
   Przyszłościowe: gdy powstanie symulowany klimat (Etap 4/5), podmieni się tylko
   ŹRÓDŁO pola wilgotności — hydrologia już je konsumuje.
+- ✅ **Etap 5 (wilgotność z geografii)** — `HumidityStage`: advekcja wilgoci
+  wiatrem zachodnim (W→E; „ryczące czterdziestki" właściwe dla ~40–46°S, gdzie
+  leży kontynent Saravera na mapie planety). Sygnałem wilgotności jest ZASÓB
+  wilgoci docierający do komórki: maleje w głąb lądu, a wznoszenie po nawietrznym
+  stoku wytrąca opad i osusza powietrze za grzbietem (cień opadowy). Wynik
+  łączony z PRIOREM (ręczna `Humidity` regionu): `finalna = prior +
+  siła·(ambient − średnia)`, przycięta 0..1 — ręczny zamysł jest kotwicą, teren
+  go koryguje (jak chciał autor: „ręczna wilgotność = wstępna intensywność
+  opadów, potem realistyczna aktualizacja"). Wynik `ctx.humidityGrid` konsumuje
+  hydrologia (ma pierwszeństwo przed ręcznym polem). Render `humidity.png`.
+  Zweryfikowane offline: wyraźna mokra zachodnia nawietrzna; silny cień opadowy
+  jest — poprawnie — słaby dla małego, otoczonego morzem kontynentu (wilgoć ze
+  wszystkich stron), więc autorski prior pozostaje głównym nośnikiem kontrastu.
+  Ciekawostka: ręczne dane autora już odbijają wzór wiatrów zachodnich (mokry
+  zachód: Zielona Rubież/Saraidan; suchy wschód: Międzygórze/Zaviles/Pirena).
+  Parametry: `prevailingWindDeg`, `moistureMax/Evap`, `precipBaseFraction`,
+  `orographicFactor/RiseScale`, `humidityCorrectionStrength`.
 - ✅ **Etap 4 (klimat: temperatura)** — `TemperatureStage`: średnia temp. (°C) z
   szerokości geograficznej (liniowo od `tempSouthC` na zimnym południu do
   `tempNorthC` na ciepłej północy — świat na półkuli południowej) minus spadek z

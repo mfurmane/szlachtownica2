@@ -192,8 +192,15 @@ public class HydrologyStage implements WorldGenStage {
         return (z & 0xffffffffL) / (double) 0x100000000L;
     }
 
-    /** Wilgotność 0..1 w komórce; brak pola lub punkt poza regionami => neutralna 0.5. */
+    /**
+     * Wilgotność 0..1 w komórce. Priorytet: policzone pole {@code humidityGrid}
+     * (Etap 5: prior + korekta terenu), potem ręczne pole {@code humidity},
+     * inaczej neutralna 0.5.
+     */
     private static double humidityLevel(WorldGenContext ctx, int i, int j) {
+        if (ctx.humidityGrid != null) {
+            return ctx.humidityGrid[j][i];
+        }
         if (ctx.humidity == null) {
             return 0.5;
         }
