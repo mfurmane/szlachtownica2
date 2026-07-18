@@ -106,6 +106,28 @@ public class WorldGenConfig {
     /** Pionowy gradient temperatury (°C na 1000 m wzniesienia). */
     public double lapseRatePerKm = 6.5;
 
+    // --- Etap 5: wilgotność z geografii (wiatr + cień opadowy) ---
+    /**
+     * Kierunek dominującego wiatru w stopniach (0 = z zachodu na wschód — wiatry
+     * zachodnie, właściwe dla ~40–46°S). Na razie model używa składowej W→E.
+     */
+    public double prevailingWindDeg = 0;
+    /** Maks. zasób wilgoci niesiony przez wiatr (nad morzem dąży do tej wartości). */
+    public double moistureMax = 1.0;
+    /** Tempo nasycania wilgoci nad morzem (na komórkę). */
+    public double moistureEvap = 0.25;
+    /** Bazowy ułamek wilgoci wytrącany nad lądem na komórkę (opad tła). */
+    public double precipBaseFraction = 0.015;
+    /** Siła efektu orograficznego (opad na nawietrznym wzniesieniu). */
+    public double orographicFactor = 0.5;
+    /** Wzniesienie (m/komórkę) dające pełny efekt orograficzny. */
+    public double orographicRiseScale = 25;
+    /**
+     * Siła korekty terenowej nakładanej na prior (ręczną wilgotność). 0 = tylko
+     * prior; 1 = mocna korekta. Finalna = prior + siła·(sym − 0.5), przycięta 0..1.
+     */
+    public double humidityCorrectionStrength = 0.45;
+
     // --- Sprzężenie wilgotności z hydrologią (opad → spływ, zalewanie) ---
     /** Opad (waga spływu na komórkę) przy ekstremalnej suszy (wilgotność 0). */
     public double rainfallMin = 0.2;
