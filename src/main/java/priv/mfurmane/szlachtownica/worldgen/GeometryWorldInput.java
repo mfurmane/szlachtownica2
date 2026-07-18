@@ -11,7 +11,9 @@ import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
 import org.locationtech.jts.linearref.LengthIndexedLine;
 import priv.mfurmane.szlachtownica.engine.utils.GeoUtils;
 import priv.mfurmane.szlachtownica.engine.utils.HighMapUtils;
+import priv.mfurmane.szlachtownica.model.main.ModelLake;
 import priv.mfurmane.szlachtownica.model.main.ModelMountains;
+import priv.mfurmane.szlachtownica.model.main.ModelRiver;
 import priv.mfurmane.szlachtownica.model.main.ModelSeaPart;
 
 import java.io.File;
@@ -44,6 +46,14 @@ public class GeometryWorldInput {
         return fromProvinces(areasMetric, mountains, null, config, maxDim);
     }
 
+    /** Zgodność wsteczna: bez rzek/jezior do wypalenia. */
+    public static WorldGenContext fromProvinces(List<Geometry> areasMetric,
+                                                List<ModelMountains> mountains,
+                                                List<ModelSeaPart> seaParts,
+                                                WorldGenConfig config, int maxDim) {
+        return fromProvinces(areasMetric, mountains, seaParts, null, null, config, maxDim);
+    }
+
     /**
      * @param areasMetric obszary prowincji w układzie metrycznym (EPSG:32743)
      * @param mountains   pasma gór (Polygon + LineString grzbietu w EPSG:4326 + wysokość)
@@ -54,6 +64,8 @@ public class GeometryWorldInput {
     public static WorldGenContext fromProvinces(List<Geometry> areasMetric,
                                                 List<ModelMountains> mountains,
                                                 List<ModelSeaPart> seaParts,
+                                                List<ModelRiver> rivers,
+                                                List<ModelLake> lakes,
                                                 WorldGenConfig config, int maxDim) {
         Envelope env = HighMapUtils.getEnvelope(areasMetric);
         double span = Math.max(env.getWidth(), env.getHeight());
@@ -150,7 +162,44 @@ public class GeometryWorldInput {
                 }
             }
         }
+
+        // Predefiniowane rzeki → łamane world-metric (do wypalenia w DEM).
+        if (rivers != null) {
+            List<double[][]> paths = new ArrayList<>();
+            for (ModelRiver r : rivers) {
+                if (r.getLine() == null) {
+                    continue;
+                }
+                paths.add(toXY(HighMapUtils.mapToMetric(r.getLine()).getCoordinates()));
+            }
+            if (!paths.isEmpty()) {
+                ctx.riverPaths = paths;
+            }
+        }
+        // Predefiniowane jeziora → pierścienie zewnętrzne world-metric.
+        if (lakes != null) {
+            List<double[][]> rings = new ArrayList<>();
+            for (ModelLake l : lakes) {
+                if (l.getArea() == null) {
+                    continue;
+                }
+                Geometry m = HighMapUtils.mapToMetric(l.getArea());
+                rings.add(toXY(((Polygon) m).getExteriorRing().getCoordinates()));
+            }
+            if (!rings.isEmpty()) {
+                ctx.lakePolys = rings;
+            }
+        }
         return ctx;
+    }
+
+    private static double[][] toXY(Coordinate[] cs) {
+        double[][] xy = new double[cs.length][2];
+        for (int k = 0; k < cs.length; k++) {
+            xy[k][0] = cs[k].x;
+            xy[k][1] = cs[k].y;
+        }
+        return xy;
     }
 
     private static boolean contains(List<PreparedGeometry> preps, List<Envelope> envs, double x, double y) {

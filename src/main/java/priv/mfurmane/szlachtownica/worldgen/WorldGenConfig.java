@@ -82,6 +82,18 @@ public class WorldGenConfig {
     /** Jak bardzo twardość skały macierzystej spowalnia erozję 0..1. */
     public double erosionHardnessInfluence = 0.7;
 
+    // --- Etap wypalania predefiniowanych rzek/jezior (stream burning) ---
+    /** Czy wypalać predefiniowane rzeki (ModelRiver) w DEM przed hydrologią. */
+    public boolean burnRivers = true;
+    /** Czy wypalać predefiniowane jeziora (ModelLake) jako niecki. */
+    public boolean burnLakes = true;
+    /** Głębokość koryta wypalanego wzdłuż rzeki (m poniżej terenu). */
+    public double riverBurnDepth = 45;
+    /** Promień koryta rzeki (komórki) — szerokość wypalanego rowka. */
+    public int riverBurnRadius = 1;
+    /** Głębokość niecki jeziora poniżej najniższego punktu obrzeża (m). */
+    public double lakeBurnDepth = 40;
+
     // --- Parametry etapu hydrologii ---
     /**
      * Min. powierzchnia zlewni (km²), by komórka stała się rzeką. Niezależne od

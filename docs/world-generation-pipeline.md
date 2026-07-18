@@ -155,6 +155,20 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   proceduralnie. Zweryfikowane offline na realnym highmapie (working3.png):
   wynik oddaje morze na N, zatokę na NE, masyw i grzbiet na S/SE, dendrytyczne
   rzeki i nieliczne jeziora zaporowe u stóp gór.
+- ✅ **Stream burning: predefiniowane rzeki i jeziora** (`BurnStage`): autorskie
+  cieki (`ModelRiver`) i akweny (`ModelLake`) są „wypalane" w DEM PO erozji, a
+  PRZED hydrologią. Rzeka = łamana rasteryzowana do łańcucha pikseli, koryto
+  wcinane o stałą głębokość (`riverBurnDepth`) w promieniu `riverBurnRadius`;
+  kierunek spływu wyznacza priority-flood na wypalonym korytarzu. Jezioro =
+  wnętrze poligonu spłaszczone poniżej obrzeża (`lakeBurnDepth`) → hydrologia
+  rozpoznaje nieckę jako jezioro. Efekt: autorskie rzeki stają się GŁÓWNYMI
+  nurtami (akumulacja podąża nimi), a rzeki proceduralne degradują się do ich
+  dopływów; delta powstaje tam, gdzie rozgałęziony nurt (np. Alsteda +
+  `alsteda_1/2/3`) dochodzi do nadmorskiej niziny. Zwarstwy ląd/morze pozostają
+  z geometrii. Zweryfikowane offline na realnych `.points` — delta Alstedy
+  formuje się u północnego brzegu (tam osadzono Sartamę: `pixel ~605,120`).
+  Parametry: `burnRivers`/`burnLakes`, `riverBurnDepth` (45 m),
+  `riverBurnRadius` (1), `lakeBurnDepth` (40 m).
 - ✅ **Grzbiety gór próbkowane wzdłuż linii** (`ModelMountains.getLine()`):
   pasmo to gęsta linia równych szczytów (`height` z modelu lub fallback
   `defaultMountainHeight`), a etap wysokości bierze **maksimum** garbów, nie

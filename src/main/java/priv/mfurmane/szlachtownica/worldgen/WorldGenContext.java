@@ -34,6 +34,11 @@ public class WorldGenContext {
     public SeaMask seaMask;   // null => morze = poza lądem (fallback); inaczej morze = tylko tu
     public HeightBias heightBias; // null => brak highmapa (czysto proceduralnie); inaczej makro-relief
 
+    // Predefiniowane cieki/akweny do „wypalenia" w DEM (world-metric łamane).
+    // Każdy element to [n][2] = {x,y} w metrach. null => nic nie wypalamy.
+    public List<double[][]> riverPaths;  // łamane linii rzek (kolejność = bieg cieku)
+    public List<double[][]> lakePolys;   // pierścienie zewn. poligonów jezior
+
     public WorldGenContext(WorldGenConfig config) {
         this.config = config;
         this.rng = new Random(config.seed);
