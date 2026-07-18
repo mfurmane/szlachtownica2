@@ -35,6 +35,23 @@ public class WorldGenConfig {
     /** Wysokość wypiętrzenia gór (m), gdy ModelMountains nie ma ustawionego height. */
     public double defaultMountainHeight = 1800;
 
+    // --- Hybryda: autorski highmap jako makro-relief ---
+    /**
+     * Ścieżka do autorskiego highmapa (grayscale PNG w tej samej ramce bbox).
+     * null/pusto = tryb czysto proceduralny (highmap ignorowany).
+     */
+    public String highmapPath = null;
+    /** Górny limit dłuższego boku przy wczytywaniu highmapa (subsampling — oszczędza pamięć). */
+    public int highmapMaxDim = 2048;
+    /** Udział highmapa w makro-reliefie 0..1 (reszta to proceduralny fBm). */
+    public double highmapWeight = 0.85;
+    /** Wysokość niziny highmapa (m) — poziom dla czerni lądu (hm=0). */
+    public double highmapLowland = 220;
+    /** Wysokość najjaśniejszego piksela highmapa (m) — szczyt (hm=1). */
+    public double highmapHeightScale = 3000;
+    /** Amplituda proceduralnego detalu (m) dokładanego na highmap, by erozja miała co rzeźbić. */
+    public double highmapDetailMeters = 70;
+
     // --- Parametry etapu geologii ---
     /** Rozmiar formacji geologicznych w metrach (większe = większe pasy litologii). */
     public double geologyScaleMeters = 30000;
@@ -43,7 +60,7 @@ public class WorldGenConfig {
 
     // --- Parametry etapu 3b: erozji hydraulicznej (kropelkowej) ---
     /** Liczba kropli na komórkę rastra (więcej = mocniejsze wcięcie dolin, wolniej). */
-    public double erosionDropletDensity = 0.6;
+    public double erosionDropletDensity = 1.2;
     /** Promień pędzla erozji (rozmycie, by nie robić kolców). */
     public int erosionRadius = 3;
     /** Maks. długość życia kropli (kroków). */
@@ -73,7 +90,8 @@ public class WorldGenConfig {
     public double riverDrainageKm2 = 25;
     /**
      * Min. głębokość wypełnienia (m), by uznać zagłębienie za jezioro. Wyżej =
-     * mniej fałszywych, płytkich jezior z drobnych basenów szumu.
+     * mniej fałszywych, płytkich jezior z drobnych basenów szumu (płaskie niziny
+     * highmapa robią ich dużo, stąd stosunkowo wysoki próg).
      */
-    public double lakeMinDepth = 12;
+    public double lakeMinDepth = 28;
 }

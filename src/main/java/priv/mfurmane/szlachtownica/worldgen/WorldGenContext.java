@@ -32,6 +32,7 @@ public class WorldGenContext {
     public List<Peak> peaks = new ArrayList<>();
     public LandMask landMask; // null => całość traktowana jako ląd (fallback)
     public SeaMask seaMask;   // null => morze = poza lądem (fallback); inaczej morze = tylko tu
+    public HeightBias heightBias; // null => brak highmapa (czysto proceduralnie); inaczej makro-relief
 
     public WorldGenContext(WorldGenConfig config) {
         this.config = config;
@@ -58,6 +59,16 @@ public class WorldGenContext {
     @FunctionalInterface
     public interface SeaMask {
         boolean isSea(double worldX, double worldY);
+    }
+
+    /**
+     * Autorski highmap jako makro-relief. Zwraca jasność 0..1 (0 = nizina/dno,
+     * 1 = najwyższy szczyt) dla punktu świata, albo wartość ujemną, gdy punkt jest
+     * poza obrazem (wtedy etap wysokości spada na czystą proceduralną bazę).
+     */
+    @FunctionalInterface
+    public interface HeightBias {
+        double at(double worldX, double worldY);
     }
 
     /** Szczyt/wypiętrzenie: pozycja w metrach, wysokość dodawana, promień wpływu. */

@@ -141,6 +141,20 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   ląd ma realny brzeg do spływu, priority-flood przestaje więzić wodę w środku
   (weryfikacja offline: wyspa z brzegiem → 0% jezior; zamknięty prostokąt bez
   ujścia → misy się zalewają, co jest fizycznie poprawne).
+- ✅ **Hybryda: autorski highmap jako makro-relief** (`HighmapBias` + `ctx.heightBias`):
+  autorski, ręcznie rysowany highmap (grayscale PNG) dostarcza GRUBEGO kształtu
+  lądu/gór/nizin, a procedura (fBm + erozja) dokłada realistyczny detal i rzeźbi
+  doliny — więc niedbałe fragmenty highmapa i tak wychodzą wiarygodnie. Highmap
+  zakotwiczony w tym samym bboxie geograficznym co prowincje (`GeoUtils` LON/LAT
+  → metryka), wielkie PNG (rzędu 60 Mpix) wczytywane z subsamplingiem czytnika.
+  Wysokość lądu = `highmapWeight·(nizina→szczyt z highmapa) + (1−w)·fBm + detal`.
+  Zwarstwy ląd/morze pozostają autorytatywne z geometrii (prowincje + `seaMask`)
+  — highmap steruje TYLKO wysokością wewnątrz lądu. Parametry: `highmapPath`,
+  `highmapWeight` (0.85), `highmapLowland` (220 m), `highmapHeightScale` (3000 m),
+  `highmapDetailMeters` (70), `highmapMaxDim`. Brak ścieżki => czysto
+  proceduralnie. Zweryfikowane offline na realnym highmapie (working3.png):
+  wynik oddaje morze na N, zatokę na NE, masyw i grzbiet na S/SE, dendrytyczne
+  rzeki i nieliczne jeziora zaporowe u stóp gór.
 - ✅ **Grzbiety gór próbkowane wzdłuż linii** (`ModelMountains.getLine()`):
   pasmo to gęsta linia równych szczytów (`height` z modelu lub fallback
   `defaultMountainHeight`), a etap wysokości bierze **maksimum** garbów, nie
