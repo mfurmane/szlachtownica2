@@ -13,6 +13,7 @@ import priv.mfurmane.szlachtownica.engine.utils.GeoUtils;
 import priv.mfurmane.szlachtownica.engine.utils.HighMapUtils;
 import priv.mfurmane.szlachtownica.model.main.ModelLake;
 import priv.mfurmane.szlachtownica.model.main.ModelMountains;
+import priv.mfurmane.szlachtownica.model.main.ModelRegion;
 import priv.mfurmane.szlachtownica.model.main.ModelRiver;
 import priv.mfurmane.szlachtownica.model.main.ModelSeaPart;
 
@@ -46,12 +47,12 @@ public class GeometryWorldInput {
         return fromProvinces(areasMetric, mountains, null, config, maxDim);
     }
 
-    /** Zgodność wsteczna: bez rzek/jezior do wypalenia. */
+    /** Zgodność wsteczna: bez rzek/jezior/regionów. */
     public static WorldGenContext fromProvinces(List<Geometry> areasMetric,
                                                 List<ModelMountains> mountains,
                                                 List<ModelSeaPart> seaParts,
                                                 WorldGenConfig config, int maxDim) {
-        return fromProvinces(areasMetric, mountains, seaParts, null, null, config, maxDim);
+        return fromProvinces(areasMetric, mountains, seaParts, null, null, null, config, maxDim);
     }
 
     /**
@@ -66,6 +67,7 @@ public class GeometryWorldInput {
                                                 List<ModelSeaPart> seaParts,
                                                 List<ModelRiver> rivers,
                                                 List<ModelLake> lakes,
+                                                List<ModelRegion> regions,
                                                 WorldGenConfig config, int maxDim) {
         Envelope env = HighMapUtils.getEnvelope(areasMetric);
         double span = Math.max(env.getWidth(), env.getHeight());
@@ -188,6 +190,40 @@ public class GeometryWorldInput {
             }
             if (!rings.isEmpty()) {
                 ctx.lakePolys = rings;
+            }
+        }
+
+        // Pole wilgotności z regionów (opad → hydrologia). Poziom 0..1 z Humidity.
+        // Punkt poza regionami => -1 (hydrologia weźmie neutralną).
+        if (regions != null && !regions.isEmpty()) {
+            List<Envelope> hEnvs = new ArrayList<>();
+            List<PreparedGeometry> hPreps = new ArrayList<>();
+            List<Double> hLevels = new ArrayList<>();
+            for (ModelRegion r : regions) {
+                if (r.getArea() == null || r.getHumidity() == null) {
+                    continue;
+                }
+                Geometry g = HighMapUtils.mapToMetric(r.getArea());
+                hEnvs.add(g.getEnvelopeInternal());
+                hPreps.add(PreparedGeometryFactory.prepare(g));
+                hLevels.add(r.getHumidity().getLevel());
+            }
+            if (!hPreps.isEmpty()) {
+                ctx.humidity = (x, y) -> {
+                    Point p = null;
+                    for (int k = 0; k < hPreps.size(); k++) {
+                        if (!hEnvs.get(k).contains(x, y)) {
+                            continue;
+                        }
+                        if (p == null) {
+                            p = GF.createPoint(new Coordinate(x, y));
+                        }
+                        if (hPreps.get(k).contains(p)) {
+                            return hLevels.get(k);
+                        }
+                    }
+                    return -1;
+                };
             }
         }
         return ctx;

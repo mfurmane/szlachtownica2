@@ -39,6 +39,14 @@ public class WorldGenContext {
     public List<double[][]> riverPaths;  // łamane linii rzek (kolejność = bieg cieku)
     public List<double[][]> lakePolys;   // pierścienie zewn. poligonów jezior
 
+    // Maski komórek wypalonych — autorska woda odporna na wilgotność (Nil na pustyni).
+    public boolean[][] burnedRiver;      // oś wypalonego cieku → zawsze rzeka
+    public boolean[][] burnedLake;       // wnętrze wypalonego jeziora → zawsze jezioro
+
+    // Pole wilgotności (opad): 0 = ekstremalnie sucho, 1 = ekstremalnie mokro.
+    // null => hydrologia liczy jednorodny opad (jak dawniej).
+    public HumidityField humidity;
+
     public WorldGenContext(WorldGenConfig config) {
         this.config = config;
         this.rng = new Random(config.seed);
@@ -73,6 +81,15 @@ public class WorldGenContext {
      */
     @FunctionalInterface
     public interface HeightBias {
+        double at(double worldX, double worldY);
+    }
+
+    /**
+     * Wilgotność (opad) w punkcie świata: 0..1 (sucho→mokro), albo wartość
+     * ujemna, gdy punkt jest poza regionami (hydrologia bierze wtedy neutralną).
+     */
+    @FunctionalInterface
+    public interface HumidityField {
         double at(double worldX, double worldY);
     }
 

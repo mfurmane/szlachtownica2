@@ -155,6 +155,20 @@ flagi po prostu zmienią źródło. Bez straty pracy.
   proceduralnie. Zweryfikowane offline na realnym highmapie (working3.png):
   wynik oddaje morze na N, zatokę na NE, masyw i grzbiet na S/SE, dendrytyczne
   rzeki i nieliczne jeziora zaporowe u stóp gór.
+- ✅ **Sprzężenie wilgotności z hydrologią** (`ctx.humidity` + `HydrologyStage`):
+  wilgotność regionu (`Humidity.getLevel()`, 0..1, już modulowana terenem w
+  `determineHumidity`) rasteryzowana z poligonów regionów i podawana hydrologii
+  jako OPAD. Akumulacja spływu = opad ważony wilgotnością (mokry Orvanor → duży
+  spływ → gęstsze rzeki proceduralne; suchy Zaviles → mało), a próg jeziora
+  skalowany per komórka (sucho → trudniej o jezioro; mokro → rozlewiska i
+  mokradła). Autorska woda wypalona (rzeki i jeziora) jest ODPORNA na wilgotność
+  (maski `burnedRiver`/`burnedLake`) — Alsteda płynie przez suchą prowincję jak
+  Nil przez pustynię; wilgotność moduluje tylko wodę PROCEDURALNĄ. Parametry:
+  `rainfallMin/Max`, `lakeDryMultiplier`/`lakeWetMultiplier`. Zweryfikowane
+  offline na gradiencie suchy↔mokry: jeziora niemal znikają po suchej stronie,
+  a rozkwitają po mokrej; autorskie nurty i delta trwają w obu. Przyszłościowe:
+  gdy powstanie symulowany klimat (Etap 4/5), podmieni się tylko ŹRÓDŁO pola
+  wilgotności — hydrologia już je konsumuje.
 - ✅ **Stream burning: predefiniowane rzeki i jeziora** (`BurnStage`): autorskie
   cieki (`ModelRiver`) i akweny (`ModelLake`) są „wypalane" w DEM PO erozji, a
   PRZED hydrologią. Rzeka = łamana rasteryzowana do łańcucha pikseli, koryto
