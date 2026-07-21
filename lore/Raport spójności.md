@@ -1,0 +1,113 @@
+# Raport spójności — przejście I (domeny kotwiczne)
+
+Weryfikacja spójności lore (z pominięciem „Starej wizji"). Metoda: parsowanie
+obu arkuszy `.ods` (własny parser ODF → tekst), skan słownictwa, wyrywkowe
+czytanie. Źródła traktowane jako autorytatywne wg wskazań autora: **arkusze**
+(skrótowy zbiór wszystkiego), **Kroniki Bastionu Mądrości** (oś czasu).
+
+Legenda: ✅ spójne · ❌ sprzeczność · ⚠️ niejednoznaczne / do weryfikacji ·
+🕳️ luka (świadomy brak).
+
+---
+
+## 1. Panteon — ✅ spójny
+
+Arkusz **Kościoły** ↔ **Bogowie itp**: pełna zgodność.
+- 13 bogów Corellii: Armina, Birban, Eledin, Iliera, Irmus, Kalneter, Laenira,
+  Manara, Pirenus, Serbena, Taika, Verena, Wisterus.
+- Pierwotni Bogowie (Coacoaitla/Rogata Pani … Yuaxomoatla/Królowa Lodów) —
+  zgodni, z „Pradawnym imieniem" w arkuszu.
+- Zewnętrzni Bogowie (Pustka): Azrathun, Zug-Caiona, Cai'chaguth, Yuthogora,
+  Zegorath, Izgarthul, Aik'Thara, Sla'chargatha — komplet.
+- **Arcykapłani 1320** zgadzają się co do osoby między arkuszem a prozą (Armina→Irna,
+  Birban→Adela, Eledin→Rumen, Iliera→Aelnira, Manara→czarnowłosa gnomka,
+  Serbena→Haernal, Taika→Saersena Asi Noelar, Verena→Kajus, Wisterus→Golvar).
+- 🕳️ **Arcykapłani 1743** — puści w obu źródłach (spójna, świadoma luka do uzupełnienia).
+
+## 2. Kosmologia / wymiary — ✅ lore spójne, ❌ rozjazd kod↔lore
+
+Arkusz **Wymiary** ↔ **Bogowie itp**: 11 wymiarów zgodnych (Corellia, Wymiar
+duchowy, Nereneth, Taelia, Otchłań, Ghalagaar, Caithaloon, Czeluść, Pustka,
+Wymiar materialny), z magią/praktyką/mieszkańcami. Spójne.
+
+❌ **Kod `EnchantType` nie pokrywa się z listą wymiarów:**
+| Wymiar (lore) | `EnchantType` (kod) |
+|---|---|
+| Corellia | `CORELLIA` ✅ |
+| Nereneth | `NERENETH` ✅ |
+| Otchłań | `ABYSS` ✅ |
+| Caithaloon | `CAITHALOON` ✅ |
+| Taelia | `TAELIA` ✅ |
+| Pustka | `VOID` ✅ |
+| Wymiar duchowy | `VEIL`? (do potwierdzenia) ⚠️ |
+| Ghalagaar | — (brak) ❌ |
+| Czeluść | — (brak) ❌ |
+| Wymiar materialny | `NONE`? ⚠️ |
+| — | `LIMBO` (brak wymiaru-odpowiednika) ❌ |
+
+Do decyzji: czy `VEIL`=Wymiar duchowy, `NONE`=materialny, oraz **co to `LIMBO`**
+(nie ma go w Wymiarach), a Ghalagaar/Czeluść nie mają swoich `EnchantType`.
+
+## 3. Oś czasu — warstwy epok
+
+Nie ma jednej „teraźniejszości" — świat ma kilka warstw czasowych, i to jest
+spójne, o ile świadome:
+- **Osadnictwo** (kod, `PlacesConfiguration`): 265–1195 (miasta starsze od królestwa).
+- **Monarchia** (arkusz **Władcy**): 1151 (Żelazna Riana) → 1739 (Fallon II Ostatni),
+  dynastie Tagarytów (od 1194) i Holzerów (od 1507), bezkrólewie 1497–1507.
+- **Kroniki narracyjne**: 1320–1408+ (Tom 1 „Zelderińska Żmija" 1320).
+- **Dwie migawki bogów**: 1320 i 1743 (różnica 423 lata — potwierdza ją
+  arcykapłanka Taiki „starsza o 423 lata"). ✅ wewnętrznie spójne.
+- **Obłęd Irmusa / gra Anniversary**: ≈1743 (koniec monarchii = Fallon II *Ostatni*
+  od 1739). ✅ ładny zbieg: dynastia gaśnie wraz z upadkiem świata.
+
+### Miasta: kod ↔ Kroniki
+- ✅ **Verdalon** — kod „zniszczone 1193" = zniszczone przez Merinę II Zajadłą
+  (panowanie 1189–1194).
+- ✅ **Wornimore** — kod „zbudowane 1188" = miasta Fallona Zdobywcy (1183–1189).
+- ✅ **Gilgamore** — kod 1086, stolica; Kroniki: zalążek królestwa, rywal Lertavore.
+- ❌ **Lertavore** — kod „zbudowane **1195**", ale Kroniki: „starsze od Saravery,
+  stolica państewka, **podbite jeszcze przez Żelazną Rianę**" (≤1165). Rok w kodzie
+  jest o ~30 lat za późny.
+- ⚠️ **Egerenna** — kod „zbudowane **812**", ale Kroniki wśród „miast późniejszych"
+  (obok Jirdenal 1455). Sprzeczna kolejność — do ustalenia.
+- ⚠️ **Ergondol** — kod 894/zniszczone 1302; Kroniki: zniszczone, by pokonać
+  czarowników renegatów (bez daty). Founding 894 vs „miasto późniejsze" — jak Egerenna.
+
+### ⚠️ Irmus a Naderia
+Kroniki: „Naderia rozpieprzona przez Irmusa" (miasto z ery Tagary, 1194–1226) oraz
+Tom 14 „**W Rękach Irmusa — 1381**". Ale kanoniczny **obłęd Irmusa to 1743**.
+Do rozstrzygnięcia: czy Irmus niszczy Naderię jako *przytomny* bóg ~1381 (dziwne
+dla boga uzdrowienia), czy to zdarzenie należy do 1743, czy „Irmus" oznacza tu
+kogoś/coś innego (wcielenie, kult).
+
+## 4. Języki / geografia — ✅ spójne
+
+Arkusz **Języki** wewnętrznie spójny i zgodny z kosmologią oraz geografią:
+Aldaharski → Aldahar + **Zaviles, Larazza** (zgadza się z wpływami Kompanii
+Południowo-Aldaharskiej), Irwitański → Irwitan + **Tantanor** (miasto nieumarłych
+z Irwitanu), Pierwotny → Nereneth + domena Serbeny (Bogowie: „domena Serbeny
+graniczy z Nereneth"). Powiązanie Repenvore → najazd Mestilii → na gruzach
+Tantanor (Kroniki) spójne z Mestilskim „w nielicznych miejscach w Irwitanie".
+
+## 5. Kod ↔ lore: kalibracja highmapa — ⚠️
+
+Arkusz **Metryczka** to legenda highmapa: 0–2000 m (biel = 2000 m = 255/65535),
+pasma **Niziny / Wyżyny (400) / Góry (900) / Góry whui (1400)**. Worldgen używa
+`highmapHeightScale = 3000` — warto zejść do ~2000, żeby wysokości zgadzały się
+z kanonem arkusza (i ewentualnie odwzorować progi pasm terenu).
+
+---
+
+## Domeny jeszcze niezweryfikowane (przejście II)
+
+Duże pliki/arkusze wymagające osobnego przejścia:
+- **Rasy**: `🧠 TEST RASY` ↔ arkusze (Allele, Profesje) ↔ taksonomia elfów w Bogowie.
+- **Postaci / szlachta**: arkusze Szlachta, Władcy, Royal Debug ↔ `Towarzysze.md`
+  (970 KB) ↔ Kroniki (bohaterowie tomów).
+- **Organizacje**: `Organizacje.md` ↔ wzmianki (np. Zakon Gorejącego Słońca z arkusza
+  Władcy) ↔ Anniversary.
+- **Bestiariusz**: `Bestiariusz.md` ↔ arkusze Bestiariusz / Bestiariusz poziomowy.
+- **Pełen Kalendarz** (arkusz, 480 wierszy) ↔ Kroniki (pełne zestawienie dat).
+- **Geografia/Rejony** (arkusze) ↔ prowincje/regiony w kodzie ↔ Anniversary (podział
+  na rejony: „Merinia i Nowa Corellia = jeden rejon", „prowincja z Durnatel = dwa").
