@@ -333,7 +333,65 @@ zdolności (Łaska/Więź/Gniew/Wejrzenie/Nóż/Forma Wybrańca):
 
 ---
 
-## Domeny na przejście VII
+---
+
+# Przejście VII — Geografia / Rejony ↔ kod
+
+## 14. Prowincje — ✅ pełna zgodność, zbieżność klimatu
+
+Arkusz **Geografia** = master-tabela prowincji (dynastia → stolica → prowincja →
+miasta → rody → avg wysokość + klimat/wilgotność). **Wszystkie 13 prowincji
+zgadza się z kodem** (`ProvinceInitializer`):
+
+| Prowincja | Stolica | avg wys. | klimat / wilgotność |
+|---|---|---:|---|
+| Merinia | Gilgamore (stolica krajowa) | 1000 | klimat 3 |
+| Nowa Corellia (świątynna) | Lertavore | 80 | — |
+| Alstederia | Sartama (delta) | 150 | — |
+| Międzygórze | Uvarra (+Tantanor) | wys. | góry |
+| Viroelann | Wornimore | 1200 | klimat 4 |
+| Carasera | Caravista | — | — |
+| Druantia | Ergondol/Astaria | 400 | — |
+| Larazza | Jirdenal/Korsana | 100 | klimat 5 |
+| **Orvanor** | Xalivore | **1700** | **klimat 2–3, wilg 4–5 (mokro i zimno)** |
+| Pirena | Pernagol | 600 | klimat 3/2, wilg ~2 (sucho) |
+| Zaviles | Zelderin | 200 | klimat 4 |
+| Saraidan | Egerenna | — | — |
+| Zielona Rubież | Durnatel | 500 | klimat 2–4, wilg 4–5 (mokro) |
+
+- ✅ **Zbieżność klimatu z 4 źródeł**: Geografia ↔ autorska `Humidity`/`Climate`
+  (pass I) ↔ audyt temperatur (pass IV) ↔ intencja worldgenu. Orvanor
+  zimny+mokry, Zielona Rubież mokra, Pirena/Zaviles sucho-cieplejsze. Pełny consensus.
+- ✅ **Nowa Corellia = „prowincja świątynna"** — spójne z `EnchantType.CORELLIA`
+  (wymiar boski) i stolicą Lertavore (`LOCAL_CAPITAL` w kodzie).
+- ✅ **Rody per prowincja** (Tagar→Merinia, Holzer→Nowa Corellia, Elfogrzmot…) —
+  łączą się z arkuszem Nazwiska i Royal Debug (→ pass VIII: postaci).
+
+## 15. Rzeki i model temperatury — ✅
+
+- ✅ **Rzeki graniczne**: Elsenora (Saravera–Ernizjum–Leredia), Zeldera
+  (Saravera–Kalara; Zelderin od niej), Trebonar (Durnatel), Twilord (płd. granica
+  Zielonej Rubieży → Leredia). **Wszystkie mają pliki `.points` w kodzie.**
+- ✅ **Morze Długie** łączy Saraverę/Ernizjum/Kalarę/Aldahar + port Durrenburg.
+- ✅ **Kanoniczny model temperatury** (arkusz Geografia): 0 m = 26,5°C; 39°S =
+  22,8°C. Zgodny z kalibracją worldgenu (`tempNorthC≈25`). Można dostroić worldgen
+  do dokładnych wartości arkusza + użyć kanonicznych wysokości prowincji.
+
+## 16. Rejony (game-map) — ✅
+
+Arkusz **Rejony** (1001 wierszy) to podział świata na rejony (Irvitan, Lodowiec
+Irwitański, Kalarskie Kolonie 1-19…), nie tylko Saraverę. Prowincja↔rejon jest
+~1:1 z wyjątkami z Anniversary: „Merinia + Nowa Corellia = jeden rejon",
+„Durnatel (Zielona Rubież) = dwa rejony". Spójne (rejon = warstwa mapy gry).
+
+### Do ruszenia
+- ⚠️ (wciąż) **Lertavore** kod 1195 vs stolica starej Nowej Corellii podbita ≤1165.
+- ℹ️ **Kalibracja worldgenu** wg arkuszy: wysokości prowincji (Orvanor 1700 …
+  Nowa Corellia 80) i model temp (0 m=26,5°C, 39°S=22,8°C) — do wpięcia.
+
+---
+
+## Domeny na przejście VIII
 
 - **Postaci / szlachta**: arkusze Szlachta, Władcy, Nazwiska (Royal Debug = tylko
   sim, nie kanon) ↔ `Towarzysze.md` (970 KB) ↔ bohaterowie Kronik, `Zelderińska Żmija.md`.
