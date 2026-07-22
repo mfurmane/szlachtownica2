@@ -150,15 +150,66 @@ Leksykon mówi o **5 wymiarach rdzeniowych + Pustka**, arkusz Wymiary wylicza **
 
 ---
 
-## Domeny na przejście III
+---
+
+# Przejście III — Bestiariusz ↔ rasy ↔ wymiary
+
+## 8. Bestiariusz jako klucz spójności — ✅
+
+`Bestiariusz.md` jest zorganizowany **wg typów = wymiarów pochodzenia**, a te
+pokrywają się 1:1 z kolumną „Mieszkańcy" arkusza Wymiary i z Bogowie:
+Śmiertelnicy=materialny, Demony=Otchłań, Bestie=Ghalagaar, Potwory=Caithaloon,
+Cor-osi'ale=Corellia, Duchy=Wymiar duchowy, Pradawni=Nereneth, Przybysze=Pustka,
+Abominacje=Czeluść, Tai'Alain=Taelia, Irmusi'ale=(skażona Corellia). To spina
+kosmologię, rasy i mechanikę w jedno.
+
+### ✅ Skonsolidowana taksonomia elfów (pass-II flaga ZAMKNIĘTA)
+Bestiariusz dostarcza brakującej tabeli — każda gałąź Viare'sear żyje w wymiarze
+odpowiadającym jej skażeniu:
+
+| formalna (Bogowie) | pospolita | typ / wymiar (Bestiariusz) |
+|---|---|---|
+| kael'sear | Alfy | Pradawni — Nereneth |
+| quana'sear | Elfy | Śmiertelnicy — materialny |
+| teial'sear | Tulfy | Tai'Alain — Taelia |
+| zalea'sear | Zelerowie | Bestie — Ghalagaar |
+| dira'sear | **Dergowie** (dawniej „drowy") | Potwory — Caithaloon |
+
+Pozostałe rasy-„potwory" też mają czysty wymiar: Gobliny, Harpie → Bestie
+(Ghalagaar); Wendigo → Potwory (Caithaloon); sorcas → Tai'Alain (Taelia).
+Rekomendacja: przenieść tę tabelę do Bogowie/Leksykonu jako jedno źródło prawdy.
+
+### Pochodzenie ras — ✅ spójne (bestiariusz rozstrzyga)
+- **sorcas** (Tai'Alain, Taelia) przekształcili niziołki → **Peura**.
+- **Kalowie**: planeta Kalarnia → wrzuceni do Otchłani straszną magią →
+  Saravera (~672); ocalali dzięki ofierze czczonej jako półbóg. Spina
+  Kalara / Verena (bóstwo kalów) / arkusz Planety.
+- **Aldahar**: ludzie zesłani przez magów-elfów z Ernizjum na drugą stronę globu.
+- **Blossomici**: z „Zielonej Planety" przez Nereneth; przybyli z Peurą ~300 lat
+  temu po wojnie z Leredią.
+
+### Do ruszenia
+- ⚠️ **Pisownia „Blossomite"**: `Blosomita` (Bestiariusz) / `Blossomici`
+  (TEST RASY) / `BLOSSOMITE` (kod) — ujednolicić.
+- ⚠️ **Datowanie względne**: elfy pamiętają założenie Saravery „5,5 wieku temu"
+  (≈1701), wojna z Leredią „~300 lat temu" (≈1400) → „teraz" bestiariusza ≈ 1700
+  (era obłędu Irmusa). Zweryfikować z arkuszem **Kalendarz** (daty bezwzględne).
+- ⚠️ **Peura — podwójne pochodzenie**: „sorcas (Taelia) przekształcili niziołki"
+  (Bestiariusz) vs „dotknięci przez Nereneth / sprzężeni z drzewami" (TEST RASY).
+  sorcas są z Taelii, nie Nereneth — drobne tarcie do domknięcia.
+- 🕳️ Staby: Torakka, Cyklop, zdublowane wpisy Kal/Torakka (szablon, jak w TEST RASY).
+- ✅ Sprzątanie „drowy"→Dergowie (3 miejsca) — zob. `Ustalenia audytu.md`.
+
+---
+
+## Domeny na przejście IV
 
 - **Postaci / szlachta**: arkusze Szlachta, Władcy, Royal Debug, Nazwiska ↔
   `Towarzysze.md` (970 KB) ↔ Kroniki (bohaterowie tomów), `Zelderińska Żmija.md`.
 - **Organizacje**: `Organizacje.md`, `Organizacje i siedziby…` ↔ wzmianki
   (Zakon Gorejącego Słońca, Bastion Mądrości, Ametystowy Pakt) ↔ arkusz Pakt.
-- **Bestiariusz**: `Bestiariusz.md` ↔ arkusze Bestiariusz / Bestiariusz poziomowy.
-- **Pełen Kalendarz** (arkusz, 480 wierszy) ↔ Kroniki (kompletne zestawienie dat,
-  m.in. Kalowie 672, Jirdenal 1455, tomy 1320–1408).
+- **Pełen Kalendarz** (arkusz, 480 wierszy) ↔ Kroniki (kompletne daty; rozstrzygnie
+  „teraz≈1700", Kalowie 672, Jirdenal 1455, wojna z Leredią, tomy 1320–1408).
 - **Geografia/Rejony** (arkusze Geografia, Rejony) ↔ prowincje/regiony w kodzie ↔
   Anniversary („Merinia i Nowa Corellia = jeden rejon", „Durnatel = dwa rejony").
 - **Profesje/Umki** ↔ przebudowa umiejętności z Anniversary (worki zamiast domen).
