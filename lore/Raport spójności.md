@@ -542,11 +542,62 @@ kanonie i kodzie, więc nie wnosi sprzeczności, a raczej *domyka przyczyny*:
 
 ---
 
-## Domeny na przejście X (pozostałe)
+# Przejście X — Rzemiosło / materiały / ekwipunek / ekonomia
 
-- **Rzemiosło / ekwipunek / ekonomia**: arkusze Materiały, Rzemiosło, Cennik,
-  Składniki, Crafterials, Biżuteria, CRAFTING ↔ `Ekwipunek.md`, `Handlarze Saqra.md`.
-- **Rośliny / składniki** (arkusze Rośliny, Składniki) ↔ Bestiariusz poziomowy.
+## 22. Taksonomia materiałów — ✅ arkusz ↔ kod ↔ lore
+
+- **Arkusz Materiały ↔ kod `TerrainResource` / `MaterialStats`.** 106 surowców w
+  kategoriach STONE / ORE / GEM / FLUID / FOOD (`ResourceCategory`, każda z własną
+  skalą wielkości złóż `ResourceDeposit`). Wymyślone metale — **Leranit, Barnizyt,
+  Kasalit, Vealitium, Keltainum, Garandal, Eleryt, Perianit, Kuparin, Celenit,
+  Turanit, Irintal** — są **i w arkuszu Materiały, i w enumie** kodu. ✅
+- **`MaterialStats` = kolumny arkusza:** twardość / waga / wytrzymałość (endurance) /
+  trwałość (durability) / komfort / prestiż / wartość + `ProductionType` + lista
+  `TerrainResource`. Model kodu odwzorowuje strukturę arkusza. ✅
+- **Materiały żyją w świecie** (nie są czysto mechaniczne): Anniversary l. 332 używa
+  ich w epitetach gnomów (**Murandytowy Rapier, Perianitowy Automaton, Obsydianowa
+  Tarcza**), a l. 596 w mechanice rozpoznawania („topór z **irmunu**", „**gilgamorska**
+  zbroja"). Materiał = i statystyki, i element kultury nazewniczej. ✅
+
+## 23. Handlarze Saqra — ✅ spójni z kosmologią (Taelia / Tai'Alain)
+
+- Design (`Handlarze Saqra.md`): tajemniczy kupiec + **żeńska wersja**, wymiana
+  **unikat-za-unikat**, magiczna waluta z magicznych przedmiotów/części stworzeń,
+  znamię przywołania. Archetyp „diabelskiego sklepiku".
+- **Bestiariusz** l. 1642: `Saqra` typowana jako **Tai'Alain** (byty Taelii — wymiaru
+  dzikiej, chaotycznej magii). **Biblioteka Szczelin** l. 571: **Patriarcha Saqra /
+  Matriarchini Saqra** = dokładnie para kupiecka (męska + żeńska) z design doca. ✅
+- Spójne z backbone'em wymiarów: kupiec spoza praw materialnych = byt Taelii. Nie
+  „diabeł" dosłownie, lecz istota chaotycznej magii — pasuje do bezwartościowo-cennych
+  unikatów („zbroja, która się nie brudzi", „flet grający ciszę").
+
+## 24. Profesje rzemieślnicze — ✅ spójne (game-side)
+
+`Ekwipunek.md` opisuje rzemiosła (Alchemia, Bednarstwo, Garbarstwo, Introligatorstwo,
+Inżynieria, Jubilerstwo, …) + system zarządzania ekwipunkiem (widok drużynowy,
+pojemniki dedykowane, tragarze). Spójne z arkuszem Rzemiosło i systemem profesji
+(pass VIII). Warstwa gry — jak klasy, nie ma jej w kodzie sim genealogii (kod = podzbiór).
+
+### Do ruszenia
+
+- 🕳️ **Brak glosariusza materiałów wymyślonych.** Leranit, Barnizyt, Kasalit,
+  Vealitium, Diabelium (Sertelat/Murandyt) i in. istnieją jako **mechanika (arkusz +
+  enum) + rozproszone użycia**, ale nie mają nigdzie opisu lore (czym są, skąd, jakie
+  właściwości narracyjne). Tonalnie spójne (metale „diabelskie", rudy Pustki:
+  `VOID_ORE`, metale niebiańskie: `MOON_METAL`/`SUM_METAL`/`NIGHT_METAL`, `SOUL_STONE`),
+  ale warto by dorobić krótki leksykon materiałów, spinając je z wymiarami/kosmologią.
+- ℹ️ **`ProductionType` / `ExploitationType` / taksonomia terenu** z odzyskanego
+  „Szlachtownica 2.0" (TerrainType/Shape/Characteristic/Enchant) — spójna z enumami
+  kodu (`SoilType`, `TerrainResource`, `ProductionType`, `RegionType`); pełna weryfikacja
+  reguł przejść `RegionType` (setki reguł) to osobne, mechaniczne zadanie, nie lore.
+
+---
+
+## Domeny na przejście XI (pozostałe)
+
+- **Rośliny / składniki** (arkusze Rośliny, Składniki, `rośliny coś`) ↔ Bestiariusz
+  poziomowy (alchemia, zielarstwo).
 - **Drobne pliki**: `Biblioteka Szczelin.md`, `Gilgamore.md`, `Barwy Czerwieni.md`
   (żagle Kompanii Południowoaldaharskiej — nawiązane w pass IX).
-- **`Zelderińska Żmija.md`** (powieść, epoka Eola Szalonego) — na sam koniec.
+- **`Zelderińska Żmija.md`** (powieść, epoka Eola Szalonego; tło: klątwa Zelderinu
+  1305–1322, jesień 1320 — patrz pass IX/sekcja 21) — na sam koniec.
