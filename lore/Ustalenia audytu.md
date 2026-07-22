@@ -38,11 +38,15 @@ Log decyzji autora zapadających w trakcie weryfikacji spójności. Uzupełnia
 
 ## Do rozstrzygnięcia przez autora (otwarte)
 
-### Wornimore — który ród panuje? (pass IX)
+### Wornimore — który ród panuje? (pass IX) — ✅ ROZSTRZYGNIĘTE (powieść, pass XII)
 - Feudalizm: linia **Seldan** (Ludzie, 1154–1186) jako panująca w Wornimore.
 - Szlachta: „ważny" ród **Raevill** (Elfy, 687).
-- Hipoteza audytu: starożytny ród elfów (Raevill) + późniejsze ludzkie nadanie
-  książęce (Seldan) współistnieją. **Do potwierdzenia:** współistnienie czy rozjazd?
+- **Rozstrzygnięcie:** `Zelderińska Żmija` l. 1477 potwierdza **ród Raevil(l)** jako
+  starożytny ród elfów z Viroelann, który zjednoczył okoliczne rasy ~500 lat przed
+  Tagarą i po sojuszu z Fallonem I został jego namiestnikiem; Wornimore pozostało
+  niezdobyte, rodzina wyprowadziła się, oddając pałac Lidze Grymuaru. Raevill =
+  kanoniczny ród Wornimore. „Seldan (1154–1186)" to najpewniej wcześniejsza/ludzka
+  linia namiestnicza — nie sprzeczność.
 
 ### Lertavore — rok założenia w kodzie (pass IX, domknięcie flagi pass III)
 - Kanon (Szlachta/Feudalizm + Kroniki): ród Holzer / miasto od **~1183–1189**
