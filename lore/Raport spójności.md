@@ -595,10 +595,9 @@ pojemniki dedykowane, tragarze). Spójne z arkuszem Rzemiosło i systemem profes
 
 ---
 
-## Domeny na przejście XII (pozostałe)
+## Domeny na przejście XII
 
-- **`Zelderińska Żmija.md`** (powieść, epoka Eola Szalonego; tło: klątwa Zelderinu
-  1305–1322, jesień 1320 — patrz pass IX/sekcja 21) — na sam koniec, ~1/3 powieści.
+- **`Zelderińska Żmija.md`** — ukończone (sekcja 27). Audyt spójności całości domknięty.
 
 ---
 
@@ -651,3 +650,77 @@ pojemniki dedykowane, tragarze). Spójne z arkuszem Rzemiosło i systemem profes
   (Kroniki), ale to nie ten plik.
 - ℹ️ **`Barwy Czerwieni` i część `Gilgamore`/`Biblioteka`** mają wiele placeholderów
   („X – lider/ka…", puste „Długość:") — to szkice do rozpisania, nie braki spójności.
+
+---
+
+# Przejście XII — Zelderińska Żmija (powieść)
+
+## 27. Powieść jako kanon w akcji — ✅ wzorcowa spójność, domyka wątki
+
+`Zelderińska Żmija` (1320–1323, epoka Eola II Szalonego) to nie osobny tekst, lecz
+**kanon zdramatyzowany**. Napisana część (Tom 1 + początek Tomu 2, dalej notatki
+fabularne) potwierdza i domyka niemal każdą wcześniejszą flagę:
+
+- **Oś czasu (Władcy) — dokładna.** Eol II rządzi od 9 lat, ma 31 lat (1312–1346,
+  ur. 1289 ✅); książę Ranal ma 4 lata (przyszły Ranal I, ur. 1316 ✅); „historia
+  Saravery sięga 170 lat", Tagara I = 7. władczyni, dynastia wydała Erwina I
+  Niezłomnego, Merinę III, Erwina II — 1:1 z arkuszem. Fallon I Zdobywca „~130 lat
+  temu" (≈1191; kanon 1183–1189 ✅).
+- **Rody i herby.** Książę **Melvin Sarrazin** z Zelderinu/Zavilesu; herb **ognisty
+  wąż przebity czarnym ostrzem z rubinem** = dosłownie nota herbowa z arkusza Szlachta
+  (Zelderin/Sarrazin). Dar „Kieł Falaka" (obsydian, płonie ogniem Otchłani). ✅
+- **Kosmologia — verbatim.** Wymiar materialny bez strażników → Panteon z Corellii;
+  domena Serbeny = Corellia∩Nereneth; Ghalagaar = Nereneth∩Otchłań → **bestie**
+  (gobliny); **cor-osi'ale**. Laergana (szamanka) wykłada **Zewnętrznych Bogów z
+  Pustki** (Zug-Caiona / Martwa Gwiazda o Białym Świetle), którzy „wykiełkowali"
+  **Caithaloon** w Nereneth i **Czeluść** w Otchłani; nieumarli Zoraza = dusze
+  uwięzione przez Białą Gwiazdę. Zgodne z Bogowie, odzyskanym doc i ustaleniami autora.
+- **Klątwa Zelderinu domknięta.** Zoraz **Serrena** (wuj Collera, kapłan Vereny →
+  sługa **Izgarthula**) sprowadza skrzynie **czarnej viruki** (owoc Caithaloonu),
+  otwiera portal do Caithaloonu — dokładnie „owoce z Caithaloonu / epidemia CURSED"
+  z odzyskanego dokumentu (sekcja 21). Abalan **Coller** = „Abalan", siostrzeniec
+  doradcy (recovered doc). ✅
+- **Pochodzenie ras — pokazane.** Uwięziony Maelius spotyka **dira'sear** (l. 1472):
+  elfy-pokrewni (potomkowie **kael'sear**), którzy zostali w Nereneth, gdy „nastała
+  ciemność" Caithaloonu, i zostali przez nią odmienieni. Notatki (l. 1564): „dergi,
+  alfi rodowód". To **dira'sear = Dergowie** z ustaleń autora — origin rasy
+  **zdramatyzowany w powieści** i spójny z kosmologią. Morfologia elfia `X'sear`
+  (kael'sear, quana'sear, dira'sear, cor-osi'ale) + osobny „pradawny" (mowa pradawnych)
+  vs „otchłanny" (mowa demonów).
+- **Geografia/klimat = model temperatury.** Zaviles/Zelderin gorące i suche (susza),
+  Orvanor/Xalivore zimne i mokre, zima X–IV (spójne z kotwicą wysokości Orvanoru 1700 m
+  i modelem temperatury). Rzeki (Berenora, Zeldara→Zelderin, Alsteda, Inortus), promy
+  przy Grani Królów / Krwawym Masywie, jezioro Gilgam — kanoniczna mapa w akcji.
+- **Ernizjum.** Cesarzowa **Ilasaera III Ori Trianlateon**; imperium >1000 lat, czas
+  liczony od powstania Ernizjum, doktryna „nie prowadzimy wojen, o ile nas nie
+  zaatakują". Spójne z epoką (rok 0 = założenie Ernizjum) i motywem „wiecznego pokoju".
+
+### Domknięcie flagi z pass IX (Wornimore — ród)
+
+**Rozstrzygnięte przez powieść.** L. 1477: **ród Raevil(l)** to starożytny ród elfów
+z Viroelann, który zjednoczył okoliczne rasy ~500 lat przed Tagarą; po sojuszu z
+Fallonem I został jego namiestnikiem, a siedziba **Wornimore pozostała niezdobyta**.
+Rodzina wyprowadziła się, oddając pałac **Lidze Grymuaru** (magowie, „Alabastrowa
+Loża"). Zatem **Raevill = kanoniczny ród Wornimore** (arkusz Szlachta miał rację);
+„Seldan (1154–1186)" z Feudalizmu to najpewniej wcześniejsza/ludzka linia namiestnicza,
+nie sprzeczność. Finał Tomu 1 = **bariera wokół Wornimore** (nota autora l. 43 i 1570).
+
+### Do ruszenia
+
+- ℹ️ **Stan tekstu:** napisany Tom 1 + początek Tomu 2; dalej **notatki fabularne**
+  (Plany na Saraverę / Caithaloon / zakończenie). Spójność pełna; brakuje domknięcia
+  narracyjnego (śmierć Zoraza, powrót/kwarantanna drużyny, bariera Wornimore).
+- ℹ️ Drobne robocze markery autora na początku pliku (uwagi „Ważne", „Więcej scen…") —
+  notatki warsztatowe, nie treść kanonu.
+
+---
+
+## Podsumowanie audytu (przejścia I–XII) — ✅ świat wyjątkowo spójny
+
+Po przejściu wszystkich domen: **lore jest wybitnie spójne**, a spoiwem są
+**wymiary/kosmologia** — łączą bogów, rasy, bestiariusz, materiały, rośliny, patronów
+Paktu, geopolitykę i fabułę powieści w jeden system. Twarde sprzeczności są nieliczne
+i w większości **domknięte** w trakcie audytu (Irmus/obłęd 1743 = Izgarthul; Lertavore
+= dryf ~pokolenia w kodzie; Wornimore/Raevill; drowy→Dergowie). Pozostałe punkty to
+**kod↔lore drobne dryfy dat** (`PlacesConfiguration`) i **luki opisowe** (glosariusz
+materiałów, placeholdery w plikach-szkicach), nie sprzeczności kanonu.
