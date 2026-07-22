@@ -81,6 +81,14 @@ Do rozstrzygnięcia: czy Irmus niszczy Naderię jako *przytomny* bóg ~1381 (dzi
 dla boga uzdrowienia), czy to zdarzenie należy do 1743, czy „Irmus" oznacza tu
 kogoś/coś innego (wcielenie, kult).
 
+> **Aktualizacja (odzyskany dokument „Szlachtownica 2.0"):** mechanizm obłędu jest
+> teraz udokumentowany — Irmus próbuje poznać tajemnicę śmierci **z pominięciem
+> Kalnetera**, zagląda w Pustkę i napotyka **spojrzenie Izgarthula** (1743), co
+> niszczy jego umysł (zgodne z `Bogowie itp.md:1` i :665 „Istota, którą dostrzegł
+> Irmus, gdy zajrzał w Pustkę"). To domyka *przyczynę* 1743. Otwarta pozostaje
+> tylko relacja do „1381 / Naderia" — najpewniej metafora tytułu tomu albo osobne,
+> wcześniejsze zdarzenie, nie sam obłęd.
+
 ## 4. Języki / geografia — ✅ spójne
 
 Arkusz **Języki** wewnętrznie spójny i zgodny z kosmologią oraz geografią:
@@ -493,6 +501,41 @@ rozjazd to tylko **kod = 1195 vs lore ≈ 1183–1189** (dryf ~jednego pokolenia
   autora, czy współistnieją, czy to rozjazd.
 - 🕳️ **`Towarzysze.md`** ma miejscami surowe notatki robocze (język roboczy,
   „XD") — do redakcji, ale merytorycznie spójne.
+
+---
+
+## 21. Odzyskany dokument „Szlachtownica 2.0 — notatki projektowe" — ✅ źródło, nie sprzeczność
+
+Autor dostarczył brakujący plik (tylko jako PDF → `lore/Szlachtownica 2.0 - notatki
+projektowe.md`). To **dokument-źródło**: roboczy zlew projektowy, z którego wyrosła
+część obecnego kanonu. Weryfikacja: elementy z niego **już istnieją** spójnie w
+kanonie i kodzie, więc nie wnosi sprzeczności, a raczej *domyka przyczyny*:
+
+- **Panteon Pustki**: `Verena` (bogini pragmatyzmu/„skurwysyństwa") i `Izgarthul`
+  (Patrzący z Pustki) — **już w `Bogowie itp.md`** (417, 662). ✅
+- **Obłęd Irmusa 1743**: udokumentowana przyczyna (spojrzenie Izgarthula przy próbie
+  poznania śmierci z pominięciem Kalnetera) — patrz aktualizacja flagi Irmus/Naderia. ✅
+- **Zug-Caiona** (upadek Aldaharu) — spójne z ustaleniem autora z wcześniejszej sesji. ✅
+- **Geografia/rody w kodzie**: `Korsana` (zniszczona ~1140 → migracja → Jirdenal),
+  ród `Sarrambert` z siedzibą `Amarastus`, `Alabaster` k. Tantanoru — **Korsana i
+  Sarrambert już są w kodzie** (`PlacesConfiguration`, `FamiliesConfiguration`;
+  Sarrambert z wasalstwem 1186→Tagar 1194→∅ 1497→Holzer 1507 — zgodne z osią rodów). ✅
+- **Klątwa Zavilesu/Zelderinu** (~1305–1322, kapłan Vereny → kultysta Izgarthula,
+  „owoce z Caithaloonu", epidemia CURSED) — tło powieści z jesieni 1320 (panowanie
+  Eola II Szalonego 1312–1346 ✅). Materiał do przyszłego pass o `Zelderińska Żmija`.
+- **Warstwa silnika** (BreedingStrategy, State, pełne reguły przejść RegionType /
+  TerrainType, taksonomia terenu) — spójna z enumami w kodzie; do wykorzystania przy
+  pass X (rzemiosło/teren) i przy ewentualnym refaktorze inicjalizatorów.
+
+### Do ruszenia (nowe z dokumentu)
+
+- 🕳️ **`Amarastus` / `Alabaster` — potwierdzone TODO kodu.** Dokument: „Dodać Alabaster
+  w pobliżu Tantanoru", „predefiniowana siedziba Amarastus dla Sarrambertów". Stan kodu:
+  `Tantanor` istnieje jako miejsce, ale **`Alabaster` to tylko `TerrainResource`** (kamień),
+  nie osada; **`Amarastus` nie istnieje** jako miejsce (ród `Sarrambert` jest, jego siedziba
+  — nie). Oba do zainicjalizowania w `PlacesConfiguration`, jeśli mają być na mapie.
+- ℹ️ **„Zaktualizować daty startu prowincji"** — nota TODO autora; spina się z flagą
+  dryfu dat (Lertavore 1195 itd.). Kandydat do przeglądu `PlacesConfiguration`.
 
 ---
 
