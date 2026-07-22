@@ -36,6 +36,7 @@ public class WorldGenContext {
     public LandMask landMask; // null => całość traktowana jako ląd (fallback)
     public SeaMask seaMask;   // null => morze = poza lądem (fallback); inaczej morze = tylko tu
     public HeightBias heightBias; // null => brak highmapa (czysto proceduralnie); inaczej makro-relief
+    public ElevationAnchor elevationAnchor; // null => brak kotwicy; inaczej kanoniczna wys. prowincji
 
     // Predefiniowane cieki/akweny do „wypalenia" w DEM (world-metric łamane).
     // Każdy element to [n][2] = {x,y} w metrach. null => nic nie wypalamy.
@@ -93,6 +94,15 @@ public class WorldGenContext {
      */
     @FunctionalInterface
     public interface HumidityField {
+        double at(double worldX, double worldY);
+    }
+
+    /**
+     * Kanoniczna średnia wysokość prowincji (m n.p.m.) w punkcie świata — kotwica
+     * poziomu terenu. Zwraca wartość ujemną poza prowincjami (morze/za granicą).
+     */
+    @FunctionalInterface
+    public interface ElevationAnchor {
         double at(double worldX, double worldY);
     }
 

@@ -51,6 +51,11 @@ public class WorldGenConfig {
     /** Wysokość najjaśniejszego piksela highmapa (m) — szczyt (hm=1). Kanon:
      *  arkusz Metryczka mapuje highmap 0→2000 m (Uvarra/Międzygórze = 2000 m, max). */
     public double highmapHeightScale = 2000;
+    /** Amplituda reliefu (m) wokół kanonicznej kotwicy wysokości prowincji (highmap/fBm). */
+    public double elevationAnchorRelief = 550;
+    /** Szerokość wygładzenia kotwicy na granicach prowincji (m) — bez klifów między prowincjami. */
+    public double elevationAnchorBlurMeters = 7000;
+
     /** Amplituda proceduralnego detalu (m) dokładanego na highmap, by erozja miała co rzeźbić. */
     public double highmapDetailMeters = 70;
 

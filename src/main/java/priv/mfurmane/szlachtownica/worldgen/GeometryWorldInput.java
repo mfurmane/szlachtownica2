@@ -69,6 +69,24 @@ public class GeometryWorldInput {
                                                 List<ModelLake> lakes,
                                                 List<ModelRegion> regions,
                                                 WorldGenConfig config, int maxDim) {
+        return fromProvinces(areasMetric, mountains, seaParts, rivers, lakes, regions, null, config, maxDim);
+    }
+
+    /**
+     * Wariant z kanoniczną kotwicą wysokości prowincji.
+     *
+     * @param provinceElevations kanoniczna średnia wysokość (m n.p.m.) każdej prowincji,
+     *                           równolegle do {@code areasMetric} (ten sam indeks). null lub
+     *                           wartość ujemna/na danym indeksie => brak kotwicy dla prowincji.
+     */
+    public static WorldGenContext fromProvinces(List<Geometry> areasMetric,
+                                                List<ModelMountains> mountains,
+                                                List<ModelSeaPart> seaParts,
+                                                List<ModelRiver> rivers,
+                                                List<ModelLake> lakes,
+                                                List<ModelRegion> regions,
+                                                List<Double> provinceElevations,
+                                                WorldGenConfig config, int maxDim) {
         Envelope env = HighMapUtils.getEnvelope(areasMetric);
         double span = Math.max(env.getWidth(), env.getHeight());
         double cell = Math.max(config.metersPerPixel, span / Math.max(1, maxDim));
@@ -90,6 +108,37 @@ public class GeometryWorldInput {
             preps.add(PreparedGeometryFactory.prepare(g));
         }
         ctx.landMask = (x, y) -> contains(preps, envs, x, y);
+
+        // Kanoniczna kotwica wysokości: dla punktu w prowincji zwróć jej średnią
+        // wysokość (arkusz Geografia). Reużywa prepared/obwiedni prowincji.
+        if (provinceElevations != null && !provinceElevations.isEmpty()) {
+            final double[] elevByProv = new double[preps.size()];
+            boolean anyElev = false;
+            for (int k = 0; k < elevByProv.length; k++) {
+                Double e = k < provinceElevations.size() ? provinceElevations.get(k) : null;
+                elevByProv[k] = (e != null && e >= 0) ? e : -1;
+                if (elevByProv[k] >= 0) {
+                    anyElev = true;
+                }
+            }
+            if (anyElev) {
+                ctx.elevationAnchor = (x, y) -> {
+                    Point p = null;
+                    for (int k = 0; k < preps.size(); k++) {
+                        if (elevByProv[k] < 0 || !envs.get(k).contains(x, y)) {
+                            continue;
+                        }
+                        if (p == null) {
+                            p = GF.createPoint(new Coordinate(x, y));
+                        }
+                        if (preps.get(k).contains(p)) {
+                            return elevByProv[k];
+                        }
+                    }
+                    return -1;
+                };
+            }
+        }
 
         // Maska morza z rzeczywistych akwenów (jeśli podane).
         if (seaParts != null && !seaParts.isEmpty()) {
