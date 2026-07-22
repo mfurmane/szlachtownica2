@@ -529,11 +529,14 @@ kanonie i kodzie, więc nie wnosi sprzeczności, a raczej *domyka przyczyny*:
 
 ### Do ruszenia (nowe z dokumentu)
 
-- 🕳️ **`Amarastus` / `Alabaster` — potwierdzone TODO kodu.** Dokument: „Dodać Alabaster
-  w pobliżu Tantanoru", „predefiniowana siedziba Amarastus dla Sarrambertów". Stan kodu:
-  `Tantanor` istnieje jako miejsce, ale **`Alabaster` to tylko `TerrainResource`** (kamień),
-  nie osada; **`Amarastus` nie istnieje** jako miejsce (ród `Sarrambert` jest, jego siedziba
-  — nie). Oba do zainicjalizowania w `PlacesConfiguration`, jeśli mają być na mapie.
+- ✅ **`Alabaster` — nie osada, lecz złoże (ustalenie autora).** Alabaster to **złoża
+  alabastru w pobliżu Tantanoru**, z którego zbudowano samo Tantanor. W kodzie już jest
+  jako `TerrainResource.ALABASTER` — poprawnie. Detal geologiczno-budowlany (region wokół
+  Tantanoru powinien mieć alabaster w surowcach), nie brakujące miejsce.
+- ℹ️ **`Amarastus` — siedziba rodu, nie miasto (ustalenie autora).** To **pałacyk/twierdza
+  głowy rodu Sarrambert**, nie osada — nie należy do listy miast. Ewentualne wpięcie zależy
+  od tego, czy sim modeluje siedziby rodowe odrębnie od miast; jeśli nie, pozostaje elementem
+  lore. Nie jest to brak na mapie miast.
 - ℹ️ **„Zaktualizować daty startu prowincji"** — nota TODO autora; spina się z flagą
   dryfu dat (Lertavore 1195 itd.). Kandydat do przeglądu `PlacesConfiguration`.
 
