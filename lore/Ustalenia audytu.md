@@ -10,6 +10,9 @@ Log decyzji autora zapadających w trakcie weryfikacji spójności. Uzupełnia
 ### Fallon II Ostatni — koniec monarchii, początek Rady
 - Fallon II ma poglądy **demokratyczne**. Z jego inicjatywy **zniesiona zostaje
   monarchia** — stąd przydomek „Ostatni".
+- **Powód osobisty:** Fallon II jest gejem i bardzo nie chce być zmuszany do
+  płodzenia potomstwa (dziedzica) — to leży u podstaw jego niechęci do
+  dynastycznej monarchii.
 - Władza NIE przechodzi w ręce losowych osób wybieranych przez społeczeństwo,
   lecz **Rady złożonej z przedstawicieli grup** (kościoły, akademie magiczne itp.).
 - Jest po prostu królem **w czasach obłędu Irmusa** (≈1739–1743+).
@@ -17,3 +20,16 @@ Log decyzji autora zapadających w trakcie weryfikacji spójności. Uzupełnia
   republika ludowa. Ładnie domyka „Fallon II *Ostatni* od 1739" z arkusza Władcy
   i spina się z erą gry Anniversary (chaos po obłędzie Irmusa).
 - Status flag z raportu: zbieg „ostatni monarcha ≈ obłęd Irmusa" = ✅ zamierzony.
+
+### Nazewnictwo: „drowy" → Dergowie (dira'sear)
+- Nazwa **„drowy" jest deprecjonowana — to błąd.** „Drow" jest zbyt zrośnięte z
+  Forgotten Realms (konkretne skojarzenia, m.in. wygląd). Właściwa nazwa
+  pospolita to **Dergowie** (dergi) — daje pole na liczne mutacje (np. mace itp.).
+- Nazwa formalna (elfia) pozostaje **dira'sear**. Mapowanie:
+  dira'sear = Dergowie (dawniej błędnie „drowy").
+- **Sprzątanie** — 3 pozostałe wystąpienia „drowy" do zamiany na Dergowie
+  (wszystkie już z dopiskiem „dira'sear" i znakiem zapytania):
+  - `Bogowie itp.md:717`
+  - `Anniversary Concept.md:622`
+  - `Anniversary Concept.md:632`
+  Zero w kodzie. (Fałszywe trafienia grepa „Wędrowiec/wędrowny" — od Taiki — pominięte.)
