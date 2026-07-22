@@ -124,3 +124,47 @@ Pogrom (sierpień 1323) + drużyna wraca za późno + zbieżność w Wornimore +
 - **Montaż ≠ streszczenie:** każde datowane uderzenie to realna mała scena (jak
   Trzęsibrzuszek), a daty coraz rzadsze i coraz gorsze — samo rozrzedzenie dat imituje
   sytuację wymykającą się spod kontroli.
+
+---
+
+## Ekspozycja kosmologiczna: schody, nie pętla
+
+Uwagi do przepisania scen „mądra postać tłumaczy nowicjuszom, jak działa świat".
+Cel: mniej ekspozycji, więcej napięcia — bez utraty charakteru.
+
+### Zasada
+Kolejne sceny kosmologiczne mają być **schodami** (każda o poziom głębiej i z
+odwołaniem do poprzedniej), a nie **pętlą** (ta sama głębokość powtórzona). Trzy sceny
+na trzech różnych głębokościach są OK; trzy na tej samej męczą. Mapowanie:
+1. **Wykład goblinowy** (ognisko, Rozdz. 4, ~659–675) = podstawowa **mapa wymiarów**
+   (materialny bez strażników → Ghalagaar = bestie → Otchłań/Nereneth). Niska stawka.
+2. **Wykład w Caithaloonie** (Rozdz. 8, ~1325–1332) = „jesteś w tym złym, oto jak
+   przeżyć" + wyznanie pod przymusem (guślarz, Sorderon). Wysoka stawka.
+3. **Laergana → Vaviraen** (Rozdz. 7, ~1217–1257) = **kosmiczna groza** za tym
+   wszystkim (Zewnętrzni Bogowie, Pustka, Zug-Caiona). Najgłębszy poziom.
+
+### Konkretne cięcia
+- **Goblinowy — ZOSTAW, ale przytnij treść do „ziarna".** Jego prawdziwa rola to
+  **uzbrojenie słownika**, żeby wykład w Caithaloonie mógł być szybki (setup→payoff).
+  **Chroń beat charakterologiczny** „Oszołom się nakręcił, gdy ktoś słuchał" — robi
+  potrójną robotę (jego głód bycia wysłuchanym; kontrast z gadatliwym-ale-nie-słuchającym
+  Maeliusem; siew pod „nie znasz nawet mojego imienia"). **Beat i ekspozycja są
+  rozłączne** — można ściąć treść o połowę i zachować 100% wartości postaci; beat
+  wybrzmi wtedy *mocniej*, bo nie będzie przysypany.
+- **W Caithaloonie — pilnuj, żeby jechał na CALLBACKU** („pamiętacie Ghalagaar? tu
+  jest gorzej"), a nie uczył od nowa. To najlepiej umotywowany z wykładów (survival +
+  wyznanie pod przymusem) — broni się.
+- **Rozmowa o torbie/składnikach** (Rozdz. 4, ~716–734) — **ZWIŃ.** Sygnał, że to
+  martwa scena: sam autor o niej zapomniał, a narracja ją przewija („Reszta dnia minęła
+  im na słuchaniu…"). Redundantna wobec goblinowego. Jej treść (energia wymiarów w
+  składnikach, kawałki demonów, nazwanie czarnej viruki) **rozsyp w fabułę jako
+  odkrycia**: przeczucie Adalii przy torbie zostaw **zagadką** (nierozwiązana jest
+  straszniejsza), rozwiąż przy skrzyniach przemytnika / gdy Kern rozpoznaje virukę —
+  wtedy czytelnik składa to sam.
+
+### Wzorzec do naśladowania
+Reguła „światło Taiki oślepia stwory Caithaloonu" (~1436) — wiedza **odkryta w
+działaniu**, nie wyłożona. Im więcej kosmologii przechodzi tym trybem, tym mniej
+potrzeba wykładów. Przy każdej ekspozycji: rozbijać rytm Q&A (dziewczyny podające
+piłki „naprawdę? a dlaczego?") — niech informacja wychodzi bokiem, kontestowana
+(nieufność Natalii jako *tarcie*, nie kolejny prompt).
