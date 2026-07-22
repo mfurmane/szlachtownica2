@@ -51,6 +51,27 @@ public class ProvinceInitializer {
     // Powyżej tego udziału (w powierzchni mniejszego regionu) nakładka jest
     // logowana jako ostrzeżenie — mniejsze traktujemy jak zwykły szum numeryczny.
     static final double OVERLAP_WARN_FRACTION = 0.02;
+
+    /**
+     * Kanoniczna średnia wysokość prowincji (m n.p.m.) wg arkusza Geografia. Kotwica
+     * poziomu terenu w worldgenie — highmap/fBm dają tylko relief WOKÓŁ tej średniej,
+     * więc Orvanor jest wysoki, a Alstederia niska niezależnie od jakości highmapa.
+     */
+    static final Map<String, Double> CANONICAL_PROVINCE_ELEVATION = Map.ofEntries(
+            Map.entry("Merinia", 1000.0),
+            Map.entry("Nowa Corellia", 800.0),
+            Map.entry("Orvanor", 1700.0),
+            Map.entry("Pirena", 600.0),
+            Map.entry("Carasera", 700.0),
+            Map.entry("Viroelann", 1200.0),
+            Map.entry("Alstederia", 150.0),
+            Map.entry("Druantia", 400.0),
+            Map.entry("Saraidan", 100.0),
+            Map.entry("Międzygórze", 2000.0),
+            Map.entry("Larazza", 100.0),
+            Map.entry("Zaviles", 200.0),
+            Map.entry("Zielona Rubież", 500.0));
+
     private final ProvinceRepository provinceRepository;
     private final SubProvinceRepository subProvinceRepository;
     private final RegionRepository regionRepository;
@@ -200,6 +221,12 @@ public class ProvinceInitializer {
             }
         });
         List<Geometry> mapped = provinces.stream().map(val -> HighMapUtils.mapToMetric(val.getModel().getArea())).toList();
+        // Kanoniczne średnie wysokości prowincji (arkusz Geografia) — kotwica poziomu
+        // terenu w worldgenie, równolegle do `mapped`. Brak w mapie => brak kotwicy.
+        List<Double> provinceElevations = provinces.stream()
+                .map(val -> CANONICAL_PROVINCE_ELEVATION.get(val.getModel().getName()))
+                .map(e -> e == null ? -1.0 : e)
+                .toList();
 
         // Etap 1 (DEM) — podgląd wysokości na realnej geometrii → elevation.png.
         // Persystencja wyłączona (WorldGenConfig.persist=false); to tylko podgląd,
@@ -210,7 +237,7 @@ public class ProvinceInitializer {
             // erozję). TODO przenieść z korzenia repo do src/main/resources i uczynić
             // ścieżkę konfigurowalną; brak pliku => adapter spada na czysto proceduralne.
             wgConfig.highmapPath = "working3.png";
-            WorldGenContext wgCtx = GeometryWorldInput.fromProvinces(mapped, mountains, seaShapes, rivers, lakes, humidityRegions, wgConfig, 1500);
+            WorldGenContext wgCtx = GeometryWorldInput.fromProvinces(mapped, mountains, seaShapes, rivers, lakes, humidityRegions, provinceElevations, wgConfig, 1500);
             new WorldGenerator(List.of(new ElevationStage(), new GeologyStage(), new ErosionStage(), new BurnStage(), new TemperatureStage(), new HumidityStage(), new HydrologyStage())).bake(wgCtx);
             ElevationRaster.writePng(wgCtx, new File("elevation.png"));
             BedrockRaster.writePng(wgCtx, new File("bedrock.png"));
