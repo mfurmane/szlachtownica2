@@ -533,10 +533,12 @@ kanonie i kodzie, więc nie wnosi sprzeczności, a raczej *domyka przyczyny*:
   alabastru w pobliżu Tantanoru**, z którego zbudowano samo Tantanor. W kodzie już jest
   jako `TerrainResource.ALABASTER` — poprawnie. Detal geologiczno-budowlany (region wokół
   Tantanoru powinien mieć alabaster w surowcach), nie brakujące miejsce.
-- ℹ️ **`Amarastus` — siedziba rodu, nie miasto (ustalenie autora).** To **pałacyk/twierdza
-  głowy rodu Sarrambert**, nie osada — nie należy do listy miast. Ewentualne wpięcie zależy
-  od tego, czy sim modeluje siedziby rodowe odrębnie od miast; jeśli nie, pozostaje elementem
-  lore. Nie jest to brak na mapie miast.
+- ℹ️ **`Amarastus` — siedziba rodu, nie miasto (ustalenie autora, potwierdzone 3×).**
+  To **pałacyk/twierdza głowy rodu Sarrambert**, nie osada. Korroboracja: (1) odzyskany
+  doc „predefiniowana siedziba Amarastus dla Sarrambertów"; (2) ustalenie autora; (3)
+  **`Lochołaz` l. 143: „Amarastus – Pałac Vincenta Amadeusa Claribela von Amarastus"**.
+  Późniejsza gałąź wampirza (von Amarastus) rezyduje w tym pałacu (patrz sekcja 26).
+  Nie należy do listy miast.
 - ℹ️ **„Zaktualizować daty startu prowincji"** — nota TODO autora; spina się z flagą
   dryfu dat (Lertavore 1195 itd.). Kandydat do przeglądu `PlacesConfiguration`.
 
@@ -593,11 +595,59 @@ pojemniki dedykowane, tragarze). Spójne z arkuszem Rzemiosło i systemem profes
 
 ---
 
-## Domeny na przejście XI (pozostałe)
+## Domeny na przejście XII (pozostałe)
 
-- **Rośliny / składniki** (arkusze Rośliny, Składniki, `rośliny coś`) ↔ Bestiariusz
-  poziomowy (alchemia, zielarstwo).
-- **Drobne pliki**: `Biblioteka Szczelin.md`, `Gilgamore.md`, `Barwy Czerwieni.md`
-  (żagle Kompanii Południowoaldaharskiej — nawiązane w pass IX).
 - **`Zelderińska Żmija.md`** (powieść, epoka Eola Szalonego; tło: klątwa Zelderinu
-  1305–1322, jesień 1320 — patrz pass IX/sekcja 21) — na sam koniec.
+  1305–1322, jesień 1320 — patrz pass IX/sekcja 21) — na sam koniec, ~1/3 powieści.
+
+---
+
+# Przejście XI — Rośliny / składniki + drobne pliki
+
+## 25. Rośliny / składniki — ✅ biogeografia spójna z geografią i kosmologią
+
+- **Arkusz Rośliny**: kolumny `real`/`mine` (rzeczywista vs wymyślona), `Wymiar`
+  (domyślnie **Fizyczny + Nereneth** = wymiar natury), `Pochodzenie` (skąd gatunek).
+  Origina: **Saravera (54), Leredia (42), Ernizjum (35), Kalara (31), Aldahar (27),
+  Irwitan (5), Caithaloon (3)** — wszystkie to **kanoniczne miejsca** (Geopolityka:
+  Kalara = imperium podbojów „kalów", Leredia itd.). Biogeografia = geografia świata. ✅
+- **Rośliny z Caithaloonu** (`Czarne Drzewo`, `Czarna Viruka`) — wymiar i pochodzenie
+  Caithaloon. To domyka motyw **„owoce z Caithaloonu"** z klątwy Zelderinu (odzyskany
+  doc / sekcja 21): kultysta hoduje właśnie rośliny wymiaru Caithaloon. ✅
+- **Arkusz Składniki**: rozbicie każdej rośliny na części (owoce/kwiaty/liście/kora/
+  łyko/nasiona/drewno) z flagami użycia (Pożywienie / Przyprawa / Zielarstwo / Alchemia
+  / Rzemiosło / Zaklinanie) — system alchemii/zielarstwa z `Ekwipunek.md`. ✅
+- **Grzyby** (dół arkusza): wymyślone modelowane na realnych (Phallus, Omphalotus,
+  Microstoma…) — ta sama metoda `real → mine` co przy roślinach i materiałach.
+
+## 26. Drobne pliki — ✅ spójne, domykają wątki
+
+- **`Gilgamore.md`** — klucz lokacji stolicy Tagarytów (pass IX). Dzielnice/obiekty:
+  **Podarek Kalnetera** i **Świątynia Kalnetera** (bóg śmierci), **Siedziba licza**
+  (nieśmiertelny władca umarłych — postać-legenda, którą autor rozwijał), **Grobowiec
+  Królów**, **Zakon Gorejącego Słońca** (zakon Tagary!), świątynie panteonu (Iliera,
+  Eledin, Armina, Laenira, Wisterus, Taika), Rezydencja **Canderelii … von Amoladora**.
+  Spójne z pass IX (stolica + Zakon Gorejącego Słońca) i pantheonem. Gilgamore =
+  sakralne serce (dar boga śmierci), stąd siedziba licza. ✅
+- **`Barwy Czerwieni.md`** — ⚠️ **KOREKTA pass IX:** to NIE żagle Kompanii, lecz
+  **polityka frakcji wampirzych** („czerwień" = krew/nieumarli). Zawartość: zakony
+  nieumarłych z siedzibą w **Tantanorze** (Pochmurni Krzyżowcy, Kapituła Wieczności,
+  Rada Szkarłatu, Perłowa Rota), **Rada Cieni** w Lazurowej Radzie w Gilgamore, Liga
+  Żywych Inaczej (koegzystencja). Postacie wampirze złożone są z **kolumn wampirzych
+  arkusza Szlachta**: „Silvius Flavius Alistair von Lunacarmesi" = Silvius+Flavius+
+  Alistair (wszystkie w arkuszu). ✅ **Tantanor** jako kolebka zakonów nieumarłych
+  spina się z ustaleniem autora („W Tantanorze narodził się zakon") i „Siedzibą licza"
+  w Gilgamore. `von Amarastus` (Vincent) = wampirza gałąź w Pałacu Amarastus (sekcja 21).
+- **`Biblioteka Szczelin.md`** — katalog ksiąg in-world wg domen wiedzy, z nakładem
+  (Popularny → Unikat) i systemem **Ekspertyzy** (uczenie się tylko z ksiąg,
+  niechronologicznie). Spójny z kulturą akademicką (Bastion Mądrości, akademie magów).
+  Zawiera **Patriarcha/Matriarchini Saqra** (patrz pass X). Autorzy z rasowymi imionami
+  (Caelia Uro Serean itd.) — spójne z systemem nazewnictwa.
+
+### Do ruszenia
+
+- ✅ Flaga pass IX o „Barwy Czerwieni = żagle Kompanii" — **błędna, skorygowana** (to
+  frakcje wampirze). Powiązanie Kompanii z czerwonymi żaglami pozostaje prawdziwe
+  (Kroniki), ale to nie ten plik.
+- ℹ️ **`Barwy Czerwieni` i część `Gilgamore`/`Biblioteka`** mają wiele placeholderów
+  („X – lider/ka…", puste „Długość:") — to szkice do rozpisania, nie braki spójności.
