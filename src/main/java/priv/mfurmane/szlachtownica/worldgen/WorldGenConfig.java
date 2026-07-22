@@ -45,10 +45,12 @@ public class WorldGenConfig {
     public int highmapMaxDim = 2048;
     /** Udział highmapa w makro-reliefie 0..1 (reszta to proceduralny fBm). */
     public double highmapWeight = 0.85;
-    /** Wysokość niziny highmapa (m) — poziom dla czerni lądu (hm=0). */
-    public double highmapLowland = 220;
-    /** Wysokość najjaśniejszego piksela highmapa (m) — szczyt (hm=1). */
-    public double highmapHeightScale = 3000;
+    /** Wysokość niziny highmapa (m) — poziom dla czerni lądu (hm=0). Nadmorskie
+     *  prowincje kanonu (Larazza/Saraidan ~100 m). */
+    public double highmapLowland = 100;
+    /** Wysokość najjaśniejszego piksela highmapa (m) — szczyt (hm=1). Kanon:
+     *  arkusz Metryczka mapuje highmap 0→2000 m (Uvarra/Międzygórze = 2000 m, max). */
+    public double highmapHeightScale = 2000;
     /** Amplituda proceduralnego detalu (m) dokładanego na highmap, by erozja miała co rzeźbić. */
     public double highmapDetailMeters = 70;
 
@@ -97,13 +99,15 @@ public class WorldGenConfig {
     // --- Etap 4: klimat (temperatura) ---
     /**
      * Średnia temp. na poziomie morza przy północnej krawędzi mapy (°C, ciepło —
-     * bliżej równika). Skalibrowane tak, by symulacja pokrywała się z autorskimi
-     * Climate prowincji (9 trafień co do stopnia, reszta w granicach jednego).
+     * bliżej równika). KANON (arkusz Geografia): 39°S = 22,8°C, gradient −0,7°C/°;
+     * północna krawędź ≈ 39,9°S → ~22,2°C. Chłód Orvanoru itd. bierze się z
+     * WYSOKOŚCI (spadek 6,5°C/km), nie z zimnego poziomu morza.
      */
-    public double tempNorthC = 25;
-    /** Średnia temp. na poziomie morza przy południowej krawędzi mapy (°C, zimno — dalej od równika). */
-    public double tempSouthC = 9;
-    /** Pionowy gradient temperatury (°C na 1000 m wzniesienia). */
+    public double tempNorthC = 22.2;
+    /** Średnia temp. na poziomie morza przy południowej krawędzi mapy (°C).
+     *  KANON: 46,5°S ≈ 17,6°C (22,8 − 0,7·7,5). */
+    public double tempSouthC = 17.6;
+    /** Pionowy gradient temperatury (°C na 1000 m). KANON: 0,65°C/100 m = 6,5°C/km. */
     public double lapseRatePerKm = 6.5;
 
     // --- Etap 5: wilgotność z geografii (wiatr + cień opadowy) ---
