@@ -346,7 +346,7 @@ zgadza się z kodem** (`ProvinceInitializer`):
 | Prowincja | Stolica | avg wys. | klimat / wilgotność |
 |---|---|---:|---|
 | Merinia | Gilgamore (stolica krajowa) | 1000 | klimat 3 |
-| Nowa Corellia (świątynna) | Lertavore | 80 | — |
+| Nowa Corellia (świątynna) | Lertavore | 800 | — |
 | Alstederia | Sartama (delta) | 150 | — |
 | Międzygórze | Uvarra (+Tantanor) | wys. | góry |
 | Viroelann | Wornimore | 1200 | klimat 4 |
@@ -386,17 +386,48 @@ Irwitański, Kalarskie Kolonie 1-19…), nie tylko Saraverę. Prowincja↔rejon 
 
 ### Do ruszenia
 - ⚠️ (wciąż) **Lertavore** kod 1195 vs stolica starej Nowej Corellii podbita ≤1165.
-- ℹ️ **Kalibracja worldgenu** wg arkuszy: wysokości prowincji (Orvanor 1700 …
-  Nowa Corellia 80) i model temp (0 m=26,5°C, 39°S=22,8°C) — do wpięcia.
+- ✅ **Kalibracja worldgenu WPIĘTA** (branch worldgenu): model temp (tempNorthC=22.2,
+  tempSouthC=17.6, lapse 6.5) + highmapHeightScale=2000. Zweryfikowane renderem
+  (masyw zimny). Follow-up: kotwica wysokości per prowincja (working3.png to szkic).
 
 ---
 
-## Domeny na przejście VIII
+---
 
-- **Postaci / szlachta**: arkusze Szlachta, Władcy, Nazwiska (Royal Debug = tylko
-  sim, nie kanon) ↔ `Towarzysze.md` (970 KB) ↔ bohaterowie Kronik, `Zelderińska Żmija.md`.
-- **Organizacje**: `Organizacje.md`, `Organizacje i siedziby…` ↔ wzmianki
-  (Zakon Gorejącego Słońca, Bastion Mądrości, Ametystowy Pakt) ↔ arkusz Pakt.
-- **Geografia/Rejony** (arkusze Geografia, Rejony) ↔ prowincje/regiony w kodzie ↔
-  Anniversary („Merinia i Nowa Corellia = jeden rejon", „Durnatel = dwa rejony").
-- **Profesje/Umki** ↔ przebudowa umiejętności z Anniversary (worki zamiast domen).
+# Przejście VIII — Profesje / Umki
+
+## 17. System klas/umiejętności — ⚠️ w trakcie refaktoru (najwięcej rozbieżności)
+
+Zgodnie z przewidywaniem — to najmniej ustabilizowana domena. Rozbieżności są tu
+głównie **wewnętrzne** (równoległe wersje), nie sprzeczne z resztą świata:
+
+- ⚠️ **Równoległe wersje (refaktor „worki zamiast domen" z Anniversary):**
+  `Profesje` vs `Profesje - nowe` (oba ~1000 wierszy), `Umki` vs `Szerokie Umki`.
+  „nowe"/„Szerokie" to wersja bucketowa. **Rekomendacja: wybrać kanoniczną,
+  drugą zarchiwizować** — inaczej każda zmiana musi być robiona dwa razy.
+- ⚠️ **Roster klas/podklas jest ogromny (~100+) i miesza epoki:** przetrwałe ze
+  Starej wizji (`Czempion`, `Czarnoksiężnik`), obecne z Organizacji (`Technomanta`,
+  `Mechanik`, `Kamikaze`, `Flagelant`, `Kultysta`), i lore'owe nowe
+  (`Apostoł Białej Gwiazdy`, `Badacz Wymiarów`, `Druid Śmierci`, `Cmentarnik`).
+  Warto uzgodnić jedną kanoniczną listę klas między `Organizacje.md` a arkuszem Profesje.
+- ✅ **Zależności (relacje bóg↔klasa)** spójne z resztą: multiklasy i łączone
+  wyznania (Kalneter + Eledin/Irmus/Taika/Laenira/Armina/Wisterus; Eledin →
+  paladyni/wojownicy/barbarzyńcy) — zgodne z „kapłanami wielofunkcyjnymi" z
+  Anniversary i parami bogów z Bogowie itp.
+- ✅ **Klasy lore'owe pasują do kosmologii:** Apostoł Białej Gwiazdy (Pustka),
+  Badacz Wymiarów, Demonolog (Otchłań), Druid Śmierci — spójne z wymiarami.
+- ℹ️ **Klasy są game-side** — nie ma ich w kodzie symulacji genealogii (kod = sim
+  rodów, nie mechanika walki RPG). Spójne (kod = podzbiór).
+- 🕳️ Arkusze mają markery WIP (np. „MODYFIKATOR MODYFIKATORA … WYJEBAĆ") — do sprzątnięcia.
+
+---
+
+## Domeny na przejście IX (pozostałe)
+
+- **Postaci / szlachta / feudalizm**: arkusze Szlachta, Nazwiska, Feudalizm,
+  Władcy ↔ `Towarzysze.md` (970 KB) ↔ bohaterowie Kronik. (Royal Debug = tylko sim.)
+- **Rzemiosło / ekwipunek / ekonomia**: arkusze Materiały, Rzemiosło, Cennik,
+  Składniki, Crafterials, Biżuteria, CRAFTING ↔ `Ekwipunek.md`, `Handlarze Saqra.md`.
+- **Rośliny / składniki** (arkusze Rośliny, Składniki) ↔ Bestiariusz poziomowy.
+- **Drobne pliki**: `Biblioteka Szczelin.md`, `Gilgamore.md`, `Barwy Czerwieni.md`.
+- **`Zelderińska Żmija.md`** (powieść, epoka Eola Szalonego) — na sam koniec.
