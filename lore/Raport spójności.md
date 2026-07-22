@@ -245,7 +245,51 @@ Uzupełniają je daty w kodzie (miasta 265–1195) i w Bogowie (1597, 1671, 1743
 
 ---
 
-## Domeny na przejście V
+---
+
+# Przejście V — Geopolityka
+
+## 11. Geopolityka — ✅ bardzo spójna, rozwiązuje flagi
+
+`Geopolityka.md` to datowana historia narodów i kosmosu. Cross-checki:
+- ✅ **Ernizjum założone w ROKU 0**, stolica Armatan — domyka epokę (Kalendarz:
+  „Nowy Rok = założenie Ernizjum"). Wszystkie daty liczone od Ernizjum.
+- ✅ **„Teraz ≈ 1700" ROZWIĄZANE (flaga z pass IV):** najnowsze wydarzenie to
+  durrenburdzki silnik parowy **1693**; Aldahar pada ~**1628** po wojnie z
+  Białą Gwiazdą. Czyli rozwinięta „teraźniejszość" dokumentów ≈ 1700, a gra
+  (obłęd Irmusa **1743**) to nadchodzący kryzys. Bestiariusz ~1700 ↔ geopolityka
+  1693 ↔ gra 1743 = spójny ciąg, nie sprzeczność.
+- ✅ **Kalowie 672** (pierwsi kalowie) / państwo 697 / imperializm 812 — zgodne z
+  bestiariuszem i TEST RASY.
+- ✅ **Ziemie Białej Gwiazdy**: „na biegunie północnym Pustka sięga świata, na
+  czele Armii stoi apostoł" — dokładnie jak Bogowie (apostoł Zug-Caiony).
+- ✅ **Aldahar**: zał. 794 → Kompania Południowoaldaharska 1423 → okręty w
+  Saraverze **1454** → Imperium pada ~1628 (Biała Gwiazda). Spina bestiariusz
+  (Aldahar = zesłani ludzie) i wcześniejsze ustalenia (podbój → handel).
+  Uwaga: wpływy aldaharskie w Saraverze (Zaviles/Larazza) to zjawisko **post-1454**.
+- ✅ **Irwitan** (zał. 428, nieumarli z głodu, wędrówka na północ po upadku
+  **Mestilii 1253–1447**) — zgodne z Bogowie i z „Repenvore→Tantanor" z Kronik.
+- ✅ **Cesarstwo Tuexucańskie** (nagi, arcykapłani Pierwotnych: Tuetuezaltla,
+  Xuxucoatla, Yocaquecua) i **Pocisearna** (nagi wodne, Xohuepoca/Quatlacoqua/Taika)
+  — spójne z bestiariuszem (Naga Tuexuca/Poci) i Kościołami (Pierwotni).
+- 🎯 **Szczelina Życia** (~8500 przed Ernizjum: Nereneth muska materię, pierwsze
+  alfy w **Serea Quearna**) = źródło nazwy „Świat Szczelin" i pochodzenia elfów
+  (alfy → Serea Quearna → elfy → część zakłada Ernizjum).
+
+### Do ruszenia / TODO autora
+- 🕳️/⚠️ **Mityczny założyciel Ernizjum — TODO autora.** W tekście jest wprost:
+  „(Przepisać tak, żeby mieli mitycznego półboskiego założyciela)". Obecny kanon:
+  Ernizjum założone przez elfy z Serea Quearna, rządzone przez Cesarzową (następczyni
+  wybierana + namaszczenie bogów — niedynastycznie). To już **pasuje do „przyciąga,
+  nie anektuje"** (Sojusz Ernizyjski rósł handlem, zatrzymał się na barierach), ale
+  planowany mityczny założyciel nie jest jeszcze wpisany.
+- 🕳️ **Sojusz Ernizyjski — daty placeholder** „xxx-xxxx" do uzupełnienia.
+- ℹ️ **„Towarzysze Namiestnicy"** (Dominium Kalarskie) — sprawdzić, czy „Towarzysze"
+  to ten sam byt/tytuł co plik `Towarzysze.md` (przejście VI: postaci).
+
+---
+
+## Domeny na przejście VI
 
 - **Postaci / szlachta**: arkusze Szlachta, Władcy, Nazwiska (Royal Debug = tylko
   sim, nie kanon) ↔ `Towarzysze.md` (970 KB) ↔ bohaterowie Kronik, `Zelderińska Żmija.md`.
