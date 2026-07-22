@@ -33,3 +33,20 @@ Log decyzji autora zapadających w trakcie weryfikacji spójności. Uzupełnia
   - `Anniversary Concept.md:622`
   - `Anniversary Concept.md:632`
   Zero w kodzie. (Fałszywe trafienia grepa „Wędrowiec/wędrowny" — od Taiki — pominięte.)
+
+---
+
+## Do rozstrzygnięcia przez autora (otwarte)
+
+### Wornimore — który ród panuje? (pass IX)
+- Feudalizm: linia **Seldan** (Ludzie, 1154–1186) jako panująca w Wornimore.
+- Szlachta: „ważny" ród **Raevill** (Elfy, 687).
+- Hipoteza audytu: starożytny ród elfów (Raevill) + późniejsze ludzkie nadanie
+  książęce (Seldan) współistnieją. **Do potwierdzenia:** współistnienie czy rozjazd?
+
+### Lertavore — rok założenia w kodzie (pass IX, domknięcie flagi pass III)
+- Kanon (Szlachta/Feudalizm + Kroniki): ród Holzer / miasto od **~1183–1189**
+  (podbój Fallona I Zdobywcy 1183–1189).
+- Kod `PlacesConfiguration`: Lertavore zbudowane **1195**.
+- Rozjazd zawężony do **~jednego pokolenia** (nie 30 lat, jak sugerowała pierwotna
+  flaga „≤1165"). Drobne wyrównanie kodu 1195 → ~1185, jeśli autor zechce.

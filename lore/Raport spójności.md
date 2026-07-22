@@ -422,12 +422,85 @@ głównie **wewnętrzne** (równoległe wersje), nie sprzeczne z resztą świata
 
 ---
 
-## Domeny na przejście IX (pozostałe)
+# Przejście IX — Postaci / szlachta / feudalizm
 
-- **Postaci / szlachta / feudalizm**: arkusze Szlachta, Nazwiska, Feudalizm,
-  Władcy ↔ `Towarzysze.md` (970 KB) ↔ bohaterowie Kronik. (Royal Debug = tylko sim.)
+## 18. Władcy ↔ Kroniki — ✅ wzorcowa zgodność (Kroniki = oś czasu)
+
+Arkusz **Władcy** (26 monarchów, 1151→1739+) to tabelaryczny zapis dokładnie tej
+samej historii, którą **Kroniki** opowiadają narracyjnie. Zbieżność jest pełna:
+
+- **Żelazna Riana** (1151–1165) → zabita przez **Urga I Kowala** („bo rozłupał jej
+  czaszkę młotem", Władcy) = Kroniki: „posługująca się imieniem zabójczyni Urga…
+  zagryza Fallona… jej ludzie zabijają kapłana i maga". ✅
+- **Tagara I Budownicza** (1194) — Kroniki: kapłanka Iliery prowadzi powstanie
+  przeciw Merinie II, nie chce korony, w końcu przyjmuje; buduje kraj, zakłada
+  **Zakon Gorejącego Słońca** (paladyni-stróże) i **dynastię Tagarytów**. ✅
+- **Garvon I Bezpłodny** (do 1497, bez potomka) → **bezkrólewie 1497–1507** →
+  Wielki Mistrz Zakonu Gorejącego Słońca **Garvon Holzer** kończy walki książąt,
+  opuszcza zakon, zakłada **dynastię Holzerów**. Nota bezkrólewia we Władcach jest
+  słowo-w-słowo streszczeniem sceny z Kronik. ✅
+- **Fallon II Ostatni** (1739–, ur. 1710) — epitet „Ostatni" potwierdza **ustalenie
+  autora**: Fallon II znosi monarchię na rzecz Rady, jest królem w czasach szaleństwa
+  Irmusa (1743; w 1743 ma 33 lata). Ostatni monarcha = domknięcie linii. ✅
+
+## 19. Szlachta ↔ Władcy ↔ kod — ✅ spójny system
+
+- **Rody królewskie osadzone w miastach**: `Gilgamore → ród Tagar` (dyn. od 1194)
+  = dynastia Tagarytów; `Lertavore → ród Holzer` (od 1183, królewski od 1507) =
+  dynastia Holzerów. Feudalizm potwierdza zakres: „Tagar 1194-1497" = pełne
+  panowanie Tagarytów (Tagara I → koniec Garvona I → bezkrólewie). ✅
+- **Etymologia szlachty** (Kroniki l. 39): Fallon Zdobywca nagradza zasługi,
+  Tagara dokłada „szlachetność serca" → grupa nazwana **szlachtą**; od Erwina
+  Kupca zwani **książętami**. Zgadza się z kolumnami nadania w arkuszu Szlachta
+  (**Riana 1151 / Fallon 1183 / Merina 1194** — daty panowań nadających). ✅
+- **Trasa podboju Fallona** (Kroniki): Gilgamore/Lertavore → bród → Xalivore →
+  Pernagol → Caravista → Sartama → Astaria — wszystkie to miasta z arkusza
+  Szlachta. ✅ Kolonie północy: Kompania Południowoaldaharska zakłada **Jirdenal**,
+  potem dominuje **Zelderin** — zgodne z rodami Astager/Jirdenal i Sarrazin/Zelderin
+  (start dyn. 1195) oraz z motywem „czerwonych żagli" (plik `Barwy Czerwieni`).
+- **Cecha rodu ↔ kod `CharacterTrait`**: kolumna „Cecha" (MODESTY, ALTRUISM,
+  COURAGE, EGOISM…) to **dokładnie** enum `CharacterTrait.java` — 31 cech 1:1,
+  każdy ród ma odrębną. ✅
+- **Nazwiska** (pula per rasa): krasnoludzko/niziołkowe nazwiska składane
+  (Moczy+dupa, Męczy+buła) generują komiczne rody z arkusza Szlachta
+  (Moczydupa, Męczybuła). ✅ Kod używa tej samej mechaniki (`ElvenNameGenerator`
+  dla elfów; enum `CharacterTrait` w obu).
+
+## 20. Towarzysze / Royal Debug — ✅ warstwy odrębne, niesprzeczne
+
+- **`Towarzysze.md`** = postacie-towarzysze do gry, osadzone w **epoce powieści**
+  (narratorka Aelervesa działa „kilkaset lat po wydarzeniach książek"). To nie
+  rody szlacheckie z arkuszy, lecz bohaterowie osobowi — inna warstwa, brak
+  sprzeczności. Odwołań do kanonicznych rodów/miast mało i spójne.
+- **Royal Debug** = zrzut symulatora genealogii (`#LEGAL`, pary rodziców, daty).
+  Używa kanonicznych rodów (Tagar, Szybcioszek, Gillear), ale **własny seed**:
+  Tagara I ur. 1191 (sim) vs 1168 (kanon, Władcy). Potwierdza: **sim ≠ kanon** —
+  Royal Debug to wyjście generatora, nie źródło prawdy osi czasu. ✅
+
+### Domknięcie flagi z przejścia III (Lertavore)
+
+Flaga „Lertavore: kod 1195 vs Kroniki ≤1165" — **przeszacowana**. Fallon I Zdobywca
+panuje **1183–1189** (Władcy), a Kroniki (l. 122) mówią, że Lertavore istniało już
+za jego podbojów; ród Holzer datowany od **1183** (Szlachta/Feudalizm). Realny
+rozjazd to tylko **kod = 1195 vs lore ≈ 1183–1189** (dryf ~jednego pokolenia,
+`PlacesConfiguration`), nie 30-letnia sprzeczność. Do drobnego wyrównania w kodzie.
+
+### Do ruszenia
+
+- ⚠️ **Wornimore — ród:** Feudalizm podaje linię **Seldan** (1154–1186) jako
+  panującą, arkusz Szlachta jako „ważny" ród **Raevill** (Elfy, 687). Prawdopodobnie
+  starożytny ród elfów (Raevill) + ludzkie nadanie książęce (Seldan) — do potwierdzenia
+  autora, czy współistnieją, czy to rozjazd.
+- 🕳️ **`Towarzysze.md`** ma miejscami surowe notatki robocze (język roboczy,
+  „XD") — do redakcji, ale merytorycznie spójne.
+
+---
+
+## Domeny na przejście X (pozostałe)
+
 - **Rzemiosło / ekwipunek / ekonomia**: arkusze Materiały, Rzemiosło, Cennik,
   Składniki, Crafterials, Biżuteria, CRAFTING ↔ `Ekwipunek.md`, `Handlarze Saqra.md`.
 - **Rośliny / składniki** (arkusze Rośliny, Składniki) ↔ Bestiariusz poziomowy.
-- **Drobne pliki**: `Biblioteka Szczelin.md`, `Gilgamore.md`, `Barwy Czerwieni.md`.
+- **Drobne pliki**: `Biblioteka Szczelin.md`, `Gilgamore.md`, `Barwy Czerwieni.md`
+  (żagle Kompanii Południowoaldaharskiej — nawiązane w pass IX).
 - **`Zelderińska Żmija.md`** (powieść, epoka Eola Szalonego) — na sam koniec.
