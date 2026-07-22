@@ -202,14 +202,55 @@ Rekomendacja: przenieść tę tabelę do Bogowie/Leksykonu jako jedno źródło 
 
 ---
 
-## Domeny na przejście IV
+---
 
-- **Postaci / szlachta**: arkusze Szlachta, Władcy, Royal Debug, Nazwiska ↔
-  `Towarzysze.md` (970 KB) ↔ Kroniki (bohaterowie tomów), `Zelderińska Żmija.md`.
+# Przejście IV — Kalendarz / oś czasu
+
+## 9. Kalendarz jako system — ✅ spójny
+
+Arkusz **Kalendarz** to **zegar świata, nie kronika** (brak dat rocznych — te
+żyją w Kronikach i Władcach). Ustala:
+- ✅ **Epokę**: „Nowy Rok = **założenie Ernizjum**" (1-Jan ernizyjski). Potwierdza,
+  że wszystkie lata (1151, 1320, 1743…) liczy się **od powstania Ernizjum**.
+- **Półkula południowa**: ernizyjski styczeń = ziemski lipiec (pory roku odwrócone) —
+  spójne z położeniem Saravery (~40–46°S) z worldgenu.
+- **Kalendarze kulturowe** (geopolityka): Ernizyjski (standard Saravery), **Aldaharski**
+  (16 miesięcy po 21–23 dni), **Pradawny** („w Nereneth nie ma pór roku"). Mapują się
+  na kultury z arkusza Języki / narody świata (Ernizjum, Aldahar, Nereneth).
+- Rok ~364 dni: okresy ~26-dniowe, 4 pory roku (wiosna/lato ~89, jesień 87, zima 84 dni).
+
+### ✅ Święta ↔ bogowie (spójne)
+- Birbańskie święto miłości (Birban) · Eledińsko-Kalneterskie święto zmarłych
+  (Eledin+Kalneter — **para jak w Bogowie**) · Irmusiańsko-Ilierskie święto nowego
+  życia (Irmus+Iliera) · Manarskie święto handlu (Manara) · Pirenusiańskie święto
+  ogniska (Pirenus) · Początek sezonu rolniczego. Wszystkie zgodne z domenami bogów.
+
+## 10. Model osi czasu — trzy komplementarne warstwy
+
+Nie ma jednej „master-listy" dat; oś czasu to trzy zgodne warstwy:
+- **Kroniki** = wydarzenia (tomy 1320–1408+), Twój główny wyznacznik;
+- **Kalendarz** = zegar (miesiące/tygodnie/święta, epoka = Ernizjum);
+- **Władcy** = reżimy (1151–1739, dynastie).
+Uzupełniają je daty w kodzie (miasta 265–1195) i w Bogowie (1597, 1671, 1743).
+
+### Do rozstrzygnięcia (przeniesione/nowe)
+- ⚠️ **Royal Debug ≠ kanon.** To **wygenerowane dane symulacji** genealogii (imiona
+  typu „Moczynosek"), a jego daty rozjeżdżają się z Władcami (np. Tagara I:
+  ur. 1191 w debugu vs ur. 1168 w kanonie Władców). Nie traktować jako źródła dat.
+- ⚠️ **Rok „teraźniejszości".** Bestiariusz pisany ok. **1700** (Saravera zał. 1151
+  „5,5 wieku temu"), a obłęd Irmusa / gra Anniversary = **1743**. Warto ustalić jeden
+  kanoniczny „rok teraz" dokumentów in-world (albo świadomie różnicować daty pisania).
+- ⚠️ (z pass I, wciąż otwarte) **Lertavore** kod 1195 vs podbite ≤1165; **Irmus a
+  Naderia** 1381 vs obłęd 1743.
+
+---
+
+## Domeny na przejście V
+
+- **Postaci / szlachta**: arkusze Szlachta, Władcy, Nazwiska (Royal Debug = tylko
+  sim, nie kanon) ↔ `Towarzysze.md` (970 KB) ↔ bohaterowie Kronik, `Zelderińska Żmija.md`.
 - **Organizacje**: `Organizacje.md`, `Organizacje i siedziby…` ↔ wzmianki
   (Zakon Gorejącego Słońca, Bastion Mądrości, Ametystowy Pakt) ↔ arkusz Pakt.
-- **Pełen Kalendarz** (arkusz, 480 wierszy) ↔ Kroniki (kompletne daty; rozstrzygnie
-  „teraz≈1700", Kalowie 672, Jirdenal 1455, wojna z Leredią, tomy 1320–1408).
 - **Geografia/Rejony** (arkusze Geografia, Rejony) ↔ prowincje/regiony w kodzie ↔
   Anniversary („Merinia i Nowa Corellia = jeden rejon", „Durnatel = dwa rejony").
 - **Profesje/Umki** ↔ przebudowa umiejętności z Anniversary (worki zamiast domen).
