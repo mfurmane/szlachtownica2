@@ -110,13 +110,17 @@ z kanonem arkusza (i ewentualnie odwzorować progi pasm terenu).
   Niziołki, Gnomy, Peura, Blossomici). Reszta ras (Nagi, Cyklopy, Minotaury,
   Ogry, Centaury, Selkie, Gobliny, Harpie, Dergowie, Kalowie, Torakka, +gałęzie
   elfów) jest lore-only — sim genealogii obejmuje tylko rasy „szlacheckie".
-- ⚠️ **Taksonomia elfów rozjeżdża się nazewniczo.** Bogowie używają formalnej:
-  kael'sear (=alfy), quana'sear (=elfy), teial'sear (=tulfy, król Oberon),
-  zalea'sear (=zelerowie), dira'sear (=drowy). `TEST RASY` używa pospolitej:
-  Alfy, Tulfy, Zelerowie, **Dergowie** — bez tabeli mapującej (terminy `*'sear`
-  = 0 trafień w TEST RASY). Ponadto w `TEST RASY` są **Dergowie** i **sorcas**
-  (Anniversary: „sorcas z Taelii"), których **nie ma w Bogowie**. Do ustalenia:
-  Dergowie = dira'sear/drowy? sorcas = nowa rasa Taelii do wpisania w taksonomię?
+- ✅/⚠️ **Taksonomia elfów — nazewnictwo częściowo rozstrzygnięte.** Bogowie używają
+  formalnej: kael'sear (=alfy), quana'sear (=elfy), teial'sear (=tulfy, król
+  Oberon), zalea'sear (=zelerowie), **dira'sear (=Dergowie)**. `TEST RASY` używa
+  pospolitej (Alfy, Tulfy, Zelerowie, Dergowie) — brak tabeli mapującej w samych
+  plikach (`*'sear` = 0 trafień w TEST RASY), warto ją dodać.
+  - ✅ **ROZSTRZYGNIĘTE (autor):** „drowy" to deprecjonowany błąd → **Dergowie**
+    (dira'sear). Do posprzątania 3 wystąpienia: `Bogowie:717`, `Anniversary:622,632`
+    (zob. `Ustalenia audytu.md`).
+  - ⚠️ **sorcas** (z Taelii) występuje w `TEST RASY`/Anniversary, brak w Bogowie —
+    do wpisania w taksonomię. Rasy przecinają się z `Bestiariusz.md` i arkuszami
+    bestiariuszowymi → domknąć w przejściu III.
 - ℹ️ **Kalowie i Blossomici są pozaświatowi** (arkusz Planety: „Planeta kalów",
   „Planeta blossomitów" — rasy przybyłe). Kotwica: „w **672** pojawia się
   pierwsze miasto kalów" (bardzo wczesna data, przed monarchią).
