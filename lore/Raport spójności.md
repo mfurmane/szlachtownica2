@@ -289,7 +289,51 @@ Uzupełniają je daty w kodzie (miasta 265–1195) i w Bogowie (1597, 1671, 1743
 
 ---
 
-## Domeny na przejście VI
+---
+
+# Przejście VI — Organizacje / Pakt
+
+## 12. System Paktu (patroni) — ✅ spójny z kosmologią
+
+Arkusz **Pakt** = patroni pogrupowani **wg wymiarów**, każdy z domeną i drabinką
+zdolności (Łaska/Więź/Gniew/Wejrzenie/Nóż/Forma Wybrańca):
+- **Caithaloon**: Ziz/Kraken/Behemot (Powietrze/Woda/Ziemia) — ofiara: Życie.
+- **Otchłań (Demony)**: Ojciec Czartów, Ognisty Smok, Matka Lilimów — ofiara:
+  Rytualne/Brutalne Morderstwo.
+- **Wymiar Duchowy (Duchy)**: Geniusze Ognia/Powietrza/Wody/Ziemi — ofiara: Artefakt/Mana.
+- **Nereneth (Natura)**: Pierwotni Bogowie jako patroni — ofiara: Krew/Życie.
+- **Pustka**: Zewnętrzni Bogowie (Cai'chaguth, Yuthogora, Sla'chargatha, Zegorath…)
+  — ofiara: Brutalne Morderstwo / **cudza Dusza**.
+- ✅ **Koszt ofiary rośnie z „ciemnością" wymiaru** (Życie → Krew → Morderstwo →
+  Dusza) — dokładnie jak moralny koszt patronów w Anniversary.
+
+### Do ruszenia
+- ⚠️ **13. Pierwotny bóg — „Pradziad Leszy" (Zemsta)** jest w arkuszu Pakt, ale
+  **Bogowie itp wymienia tylko 12** Pierwotnych. Dodać do Bogowie/Kościołów lub
+  wyjaśnić status.
+- ℹ️ Artefakt edycji: w komórce „Królowa Lodów" wpadło „-Michał Furmanek" — usunąć.
+
+## 13. Organizacje — ✅ spójna sieć
+
+`Organizacje.md` (JAWNE/TAJNE + system klas). Kluczowe byty spinają się z resztą:
+- ✅ **Zakon Gorejącego Słońca** (Organizacje + Kroniki) — jego wielki mistrz kończy
+  bezkrólewie i **zakłada dynastię Holzerów w 1507** (arkusz Władcy). Spójne.
+- ✅ **Bastion Mądrości** — instytucja-autor **Kronik** („Kroniki Bastionu Mądrości").
+- ✅ **Ametystowy Pakt** — inspirowany Tomem 23 Kronik („Ametystowe Kłamstwo”),
+  ametyst = kamień **Kalnetera** (jego symbol: „kruk z ametystowymi oczami”). Spójne.
+- ✅ **Dzieci Taiki** — rada magów z **Egerenny**, elita **Wędrownych Sztukmistrzów**
+  (Kroniki: fala wędrownych magików, kościół Taiki). Spójne.
+- ℹ️ Sekcja klas/podklas (Barbarzyńca…Zwiadowca, w tym Technomanta/Mechanik dla
+  Durrenburga, Kultysta dla Pustki) = mechanika gry → domknąć z arkuszami Umki/Profesje.
+
+### Nota osi czasu (potwierdzenie autora)
+- ✅ **Zelderińska Żmija = powieść z epoki Eola Szalonego.** Eol II Szalony rządził
+  **1312–1346** (Władcy), a Kroniki datują „Zelderińską Żmiję" na **1320–1323** —
+  mieści się w jego panowaniu. Kroniki ↔ Władcy ↔ powieść zgodne.
+
+---
+
+## Domeny na przejście VII
 
 - **Postaci / szlachta**: arkusze Szlachta, Władcy, Nazwiska (Royal Debug = tylko
   sim, nie kanon) ↔ `Towarzysze.md` (970 KB) ↔ bohaterowie Kronik, `Zelderińska Żmija.md`.
