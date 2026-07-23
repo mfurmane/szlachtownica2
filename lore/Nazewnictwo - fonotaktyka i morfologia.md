@@ -83,19 +83,32 @@ Słownik i kod (`NerenethPhonotactic`) są **zgodne** — to najlepiej rozwinię
 - **Coda:** `n, r, l, ∅` > `s`. Maks. onset 2, coda 2, 2–4 sylaby.
 - **Reguły:** brak hiatu (samogłoska+samogłoska w szwie), brak `qu+u`, `r+r`, `l+l`.
 
-**⚠️ Rozbieżność do naprawy — końcówki miast.** *Aktywne* końcówki `CITY` w kodzie to
-`twich, vell, dell, lash, sill, swin, loi` — **nie pasują do kanonu**. Kanoniczne miasta
-Saravery mają końcówki (zakomentowane w kodzie, obecne w korpusie):
+**✅ Stratygrafia toponimów (ustalenie autora) — nie błąd, lecz warstwy historyczne.**
+Saravera ma **dwie (a właściwie trzy) warstwy nazewnicze**, przypisywane wg **wieku i
+prestiżu** osady, a nie samego rozmiaru — dokładnie jak w realnym angielskim (prestiżowe
+łacińsko-normańskie `-chester/-caster` dla starych ważnych ośrodków vs anglosaskie
+`-wich/-ton` dla reszty; autor wprost wskazuje wzorzec **Nantwich**):
 
-`-more/-vore` (Gilga**more**, Lerta**vore**, Worni**more**, Xali**vore**, Osti**vore**,
-Quvel**more**) · `-dol/-gol` (Ergon**dol**) · `-na` (Egeren**na**, Sarde**na**,
-Vizar**na**, Anver**na**, Felar**na**) · `-in` (Zelder**in**, Isvell**in**) ·
-`-nor/-tor/-dar` (Tanta**nor**, Orva**nor**, Vango**dar**) · `-el` (Durna**tel**,
-Mirna**del**, Reside**l**, Nadarve**l**) · `-ia/-ria` (Astar**ia**, Meri**nia**).
-**Rekomendacja:** przywrócić zakomentowaną listę (`more, vore, gol, dol, na, lon, ia,
-rin, ta, ra, nal, lin, nor, tel, rel, del, el, ria, vel, al, gal`) jako `CITY`, a
-`twich/vell/dell/lash` przenieść do rejestru, do którego faktycznie pasują (brzmią
-gnomio/krasnoludzko, por. Gra'ben**dell**, Ser'ge**vall**).
+1. **Warstwa ernizyjska (substrat prestiżowy)** — końcówki `-more/-vore, -dol/-gol,
+   -na, -in, -nor/-dar, -el, -ia/-ria`. **Stare, dostojne i istotne ośrodki**
+   (Gilga**more**, Lerta**vore**, Worni**more**, Xali**vore**, Osti**vore**, Ergon**dol**,
+   Egeren**na**, Zelder**in**, Isvell**in**, Tanta**nor**, Orva**nor**, Durna**tel**,
+   Astar**ia**). To **nazewnictwo ernizyjskie, ewentualnie lekko zlokalizowane** —
+   sfosylizowane w ważnych miejscach, mimo że wernakularem jest dziś Saraverski (patrz
+   sekcja Ernizyjski; te toponimy „należą" do Ernizjum jako kultury nadrzędnej).
+2. **Warstwa rodzima saraverska (Nantwich)** — końcówki `-twich/-wich, -vell, -dell,
+   -lash, -sill, -swin, -loi`. **Późniejsze małe miasteczka.** To właśnie *aktywny*
+   zestaw `CITY` w `SaraveraMorphology` — i jest poprawny, tylko dotyczy tej warstwy.
+3. **Warstwa wiejska (polski rustykalny)** — `VillageNameGenerator` (Zabłocie,
+   Żabianka, Wierzbianka, Sośnica, Zadupie…): pełna polska morfologia (przypadki, l.
+   mnoga) dla **wsi**; renderowana po polsku jak cały Saraverski „w tłumaczeniu".
+
+**Wniosek dla generatora (rekomendacja, nie naprawa):** wybór rejestru **sterować
+wiekiem + prestiżem** osady: prastare/stołeczne/dostojne → **ernizyjski** (końcówki
+`-more/-vore/-dol/-na/-in…`, patrz sekcja Ernizyjski); późniejsze miasteczka → **rodzimy
+Saraverski** (`-twich/-vell/-dell`); wsie → `VillageNameGenerator`. Dziś kod ma warstwy
+2 i 3 poprawnie; brakuje jedynie wpięcia warstwy 1 (ernizyjskiej) dla ważnych ośrodków
+i przełącznika rejestru wg prestiżu.
 
 **Rzeki:** `-a/-ora` (Beren**ora**, Zeld**ara**, Alsteda) — osobny sufiks hydronimiczny,
 warto dodać `WordType.RIVER`.
@@ -113,7 +126,13 @@ kopia 1:1):
   nie ma; to najprostszy dystynktywny rys.
 - koniugacja czasownika przez końcówkę: `-ar` (bezokolicznik) → `-ara` (1 os.) / `-are`
   (2 os.) — regularny, produktywny paradygmat.
-- toponimia z `-vista/-voore/-moore` (por. Cara**vista** — miasto na styku wpływów).
+- **Ernizyjski jest substratem prestiżowej toponimii Saravery** (patrz Saraverski,
+  warstwa 1): to on „posiada" końcówki ważnych ośrodków `-more/-vore/-vista/-voore/-dol/
+  -na/-in/-nor/-el/-ia`. Prastare/stołeczne miasta Saravery to **nazwy ernizyjskie,
+  ewentualnie lekko zlokalizowane** (Cara**vista**, Gilga**more**, Lerta**vore**). To
+  tłumaczy, czemu Ernizyjski wciąż żyje w Wornimore i Alstederii (arkusz Języki) — te
+  ośrodki zachowały warstwę ernizyjską. Dlatego to **`ErnizjumMorphology`, nie
+  Saraverska, powinna nieść ten zestaw końcówek `CITY`** (dziś oba pliki to kopia).
 > **Nota kanonu:** cesarzowa Ernizjum to **Ilasaera III *Ori* Trianlateon** — używa
 > elfiej cząstki-cechy `Ori` (patrz Warstwa II). Ernizjum ma więc elficką elitę /
 > dzieli z elfami system cząstek; imiona władców łączą dyftongi (Ila**sae**ra) z
@@ -272,12 +291,16 @@ brzmieniem azteckim (Coacoaitla, Yuaxomoatla).
 
 # Rozbieżności i rekomendacje (do decyzji autora)
 
-1. **⚠️ Saravera — końcówki miast.** Aktywne `twich/vell/dell/lash/sill/swin/loi` nie
-   pasują do kanonu (`-more/-vore/-dol/-na/-in`). Przywrócić zakomentowaną listę jako
-   `CITY`; „gnomie" końcówki (`-dell/-vall`) przenieść do gnomów.
-2. **🔶 Ernizjum ≠ Saravera.** `ErnizjumPhonotactic` to dziś kopia 1:1. Zróżnicować
-   minimalnie: **długie samogłoski** `aa/ee/oo/uu` i końcówki `-vista/-voore/-moore` ze
-   słownika. Dodać paradygmat `-ar/-ara/-are`.
+1. **✅ Saravera — stratygrafia toponimów (nie błąd).** Aktywne `twich/vell/dell/lash/
+   sill/swin/loi` to poprawna **warstwa rodzima (Nantwich)** dla późniejszych miasteczek.
+   Brakuje jedynie: (a) **wpięcia warstwy ernizyjskiej** (`-more/-vore/-dol/-na/-in…`,
+   patrz pkt 2) dla starych/dostojnych/ważnych ośrodków, (b) **przełącznika rejestru wg
+   wieku+prestiżu** osady (prestiż→ernizyjski, miasteczko→rodzimy, wieś→`VillageNameGenerator`).
+2. **🔶 Ernizjum ≠ Saravera + posiada prestiżowe końcówki.** `ErnizjumPhonotactic` to
+   dziś kopia 1:1 Saravery. Zróżnicować (długie `aa/ee/oo/uu`, paradygmat `-ar/-ara/
+   -are`) i **przenieść zestaw końcówek ważnych miast** (`-more/-vore/-vista/-voore/-dol/
+   -na/-in/-nor/-el/-ia`) do `ErnizjumMorphology` — to substrat prestiżowej toponimii
+   Saravery (Gilgamore, Lertavore, Caravista).
 3. **🕳️ Caithaloon i Corellia — morfologia zakomentowana** (niezaimplementowana).
    Słownik Caithalooński (koniugacja `-a/-q/-x`, apostrof-szew) daje gotowy spec —
    patrz Warstwa I. Corelliański: brak jakiegokolwiek materiału (do zaprojektowania;
@@ -292,8 +315,10 @@ brzmieniem azteckim (Coacoaitla, Yuaxomoatla).
 
 ## Kolejność wdrożenia (proponowana)
 
-1. Naprawa końcówek Saravery (pkt 1) — najszybszy zysk jakości, zero decyzji twórczych.
-2. Wypełnienie pustych fonotaktyk słownika (pkt 4) tekstem z tego dokumentu — czysta
-   dokumentacja, łatwa do zaakceptowania/poprawienia.
-3. Zróżnicowanie Ernizjum (pkt 2) + implementacja Caithaloon (pkt 3) w kodzie.
+1. Wypełnienie pustych fonotaktyk słownika (pkt 4) tekstem z tego dokumentu — czysta
+   dokumentacja, zero decyzji twórczych.
+2. Warstwa ernizyjska toponimii (pkt 1+2): przenieść końcówki prestiżowe do
+   `ErnizjumMorphology`, dodać przełącznik rejestru wg wieku/prestiżu osady
+   (prestiż→ernizyjski, miasteczko→rodzimy Saraverski/Nantwich, wieś→`VillageNameGenerator`).
+3. Zróżnicowanie fonotaktyki Ernizjum (długie samogłoski) + implementacja Caithaloon (pkt 3).
 4. Projekt Corelliańskiego i pozostałych stubów — osobna sesja twórcza.
