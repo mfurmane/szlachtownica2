@@ -322,3 +322,108 @@ brzmieniem azteckim (Coacoaitla, Yuaxomoatla).
    (prestiż→ernizyjski, miasteczko→rodzimy Saraverski/Nantwich, wieś→`VillageNameGenerator`).
 3. Zróżnicowanie fonotaktyki Ernizjum (długie samogłoski) + implementacja Caithaloon (pkt 3).
 4. Projekt Corelliańskiego i pozostałych stubów — osobna sesja twórcza.
+
+---
+
+# Wstępne fonotaktyki języków-stubów (na bazie korpusu nazw)
+
+Rozwinięcie sekcji „Pozostałe stuby" z Warstwy I. **Wersje WSTĘPNE** — wyprowadzone z
+istniejących nazw (powieść, arkusze Szlachta/Nazwiska/Geografia, Leksykon, notatki Next
+Steps). Przy każdym języku podaję **korpus**, **pewność** i propozycję `Onset/Nucleus/
+Coda`. To materiał do akceptacji/strojenia przez autora, nie kanon.
+
+## Aldaharski — 🔶 pewność WYSOKA (bogaty korpus)
+
+Język Aldaharu; wernakular szlachty Zavilesu i Larazzy (arkusz Języki). Charakter
+**romański (iberyjsko-włoski)** — najlepiej udokumentowany ze stubów.
+- **Korpus (nazwiska):** Sarrazin, Sartori, Castellano, Davila, Carranza, Tejero, Monzo,
+  Serrena, Montilla, Sarrambert, Bonnet, Paquin, Molla, Navarra, Gaumont, Mondenero,
+  Morten, Coller. **Imiona:** Melvin, Abalan, Zoraz, Vincent Amadeus Claribel, Silvius
+  Flavius Alistair. **Toponimy:** Zelderin, Zaviles, Larazza, Jirdenal, Vizarna, Korsana.
+- **Onset:** `b, c, d, f, g, l, m, n, p, r, s, t, v` + klastry `br, cr, tr, cl, gr` +
+  geminaty `rr, ll` (Sa**rr**azin, Mo**ll**a).
+- **Nucleus:** `a, e, i, o` (pełny zestaw, `o` częste — Monz**o**, Sartor**i**) + dyftongi
+  `ia, io, ai, au` (rzadkie).
+- **Coda:** samogłoskowe zakończenia dominują (`-o, -a, -e, -i`); spółgłoskowe `n, r, s,
+  z, t, l` (Sarrazi**n**, Colle**r**, Monz**o**). Akcent paroksytoniczny.
+- **Sygnatura:** dużo otwartych sylab CV, `-o/-a` na końcu, geminaty, brak twardych zbitek.
+
+## Corelliański — 🔶 pewność ŚREDNIA (derywacja z Panteonu)
+
+Brak nazw wprost „corelliańskich", ale **bogowie są bytami Corellii** — ich imiona to
+najlepszy dostępny sondaż (por. `cor-osi'ale` = istoty Corellii).
+- **Korpus (Panteon):** Armina, Birban, Eledin, Iliera, Irmus, Kalneter, Laenira, Manara,
+  Pirenus, Serbena, Taika, Verena, Wisterus.
+- **Onset:** `l, r, n, m, s, v, t, k, b, p` (miękkie, bez twardych klastrów); `∅`.
+- **Nucleus:** `a, e, i, o` + lekkie dyftongi `ae, ia, ei` (L**ae**nira).
+- **Coda:** otwarte lub `n, r, s` (Armin**a**, Eledi**n**, Manar**a**, Wisteru**s**).
+- **Sygnatura:** świetlisty, melodyjny, 2–3 sylaby, końcówki `-a/-us/-in/-er/-a`. Kontrast
+  do Pradawnego: mniej dyftongów, więcej pełnych samogłosek, spokojny rytm.
+
+## Durrenburdzki — 🔶 pewność ŚREDNIA (germański + industrialny)
+
+Durrenburg = najmłodsza, „przemysłowa" kultura (silnik parowy 1693). Charakter **germański**.
+- **Korpus:** Durrenburg, Durnatel, (por. Durren-, -burg). Wpływ na Saraverę: „Durrenburdzki".
+- **Onset:** `d, b, g, t, k, r, n, s, h` + klastry `br, gr, dr, tr, st, str`.
+- **Nucleus:** `u, e, a, o` (ciemniejszy, „twardy" zestaw; mało `i`).
+- **Coda:** `r, n, g, rg, rk, rn, t` (Durrenbu**rg**, Durnat**el**). Zbitki spółgłoskowe OK.
+- **Sygnatura:** twarde, industrialne, `-burg/-berg/-natel`, bliskie krasnoludzkiemu, ale
+  bardziej „ludzko-germańskie".
+
+## Kalarski — 🕳️ pewność NISKA (imperium wschodu, kalowie)
+
+Kalara, wschód; rasa **kalowie** (ostre zęby, imperium podbojów, „Towarzysze Namiestnicy").
+- **Korpus:** Kalara, kalowie, `kalaruna` (nazwa języka, którą Maelius próbuje w powieści).
+- **Onset:** `k, g, t, d, r, n, kh, tr, kr` (twarde, tylnojęzykowe).
+- **Nucleus:** `a, u, o` (tylne, ciemne; mało `e/i`).
+- **Coda:** `r, n, k, t` + `-una, -ar, -an`.
+- **Sygnatura:** twarda, „obca", dużo `a/u`, tylnojęzykowe zwarte; brzmienie zaborcze.
+
+## Leredyjski — 🕳️ pewność NISKA (natura, peura, blisko Pradawnego)
+
+Leredia, Zielona Rubież; rasa **peura**; region używa też Pierwotnego (blisko Nereneth).
+- **Korpus:** Leredia, `lerediar` (nazwa języka z powieści), peura. Nazwy peura po polsku
+  (Zielona Wiśnia, Cny Miłorząb) — warstwa „w tłumaczeniu".
+- **Onset:** `l, r, n, m, v, p, s` (płynne, miękkie); `∅`.
+- **Nucleus:** `a, e, i` + dyftongi `ia, ie, ea` (L**e**r**e**dia).
+- **Coda:** `r, n, l`, często otwarte.
+- **Sygnatura:** liryczna, l/r-płynna, blisko Pradawnego, ale prostsza (mniej `ae`);
+  końcówki `-ia, -iar, -edia`.
+
+## Irwitański — 🕳️ pewność NISKA (nieumarli, Tantanor)
+
+Irwitan (dom wolnych nieumarłych), Tantanor (na gruzach Repenvore po najeździe Mestilii).
+- **Korpus:** Irwitan, Tantanor. (Repenvore = saraverski, nie irwitański.)
+- **Onset:** `t, n, r, w, v, s, ir` (por. **Ir**witan).
+- **Nucleus:** `a, i, o`.
+- **Coda:** `n, r, t, l` (Irwita**n**, Tantano**r**).
+- **Sygnatura:** cicha, dostojna, „starodawna"; dużo `n/r/t`, końcówki `-tan, -nor, -an`;
+  pasuje do kultury śmierci/pamięci.
+
+## Mestilski — 🕳️ pewność NISKA (język niemal martwy)
+
+Mestilia (najeźdźcy 1439, zpacyfikowani 1443); przetrwał w nielicznych miejscach Irwitanu.
+- **Korpus:** Mestilia, `mestilee` (nazwa języka z powieści).
+- **Onset:** `m, s, t, l, r, n`.
+- **Nucleus:** `e, i, a` + długie `ee` (mestil**ee**).
+- **Coda:** `l, s, n`, często otwarte.
+- **Sygnatura:** szeleszcząca, `s/t/l`-owa, długie `ee`; końcówki `-ee, -ia, -il`.
+
+## Otchłanny (mowa demonów) — 🕳️ pewność NISKA (1 próbka)
+
+Odrębny od Pustki/Zewnętrznego i od Caithaloońskiego. Maelius go zna (ale nie pradawnego).
+- **Korpus:** `Gooth nwraghaz!` (jedyna próbka). Nazwy demonów/lewiatanów: Sorderon (ziz).
+- **Onset:** `g, n, nw, gr, thr, zr, dr` (ciężkie klastry).
+- **Nucleus:** `oo, a, e` (długie, tylne, ciemne).
+- **Coda:** `th, z, gh, az, ath` (Goo**th**, nwragha**z**).
+- **Sygnatura:** gardłowa, klastrowa, długie `oo`; kontrast do Caithaloońskiego (ten ma
+  apostrof-szew i koniugację `-a/-q/-x`), do Zewnętrznego (Pustka: `irz'ens, voor, xers`)
+  i do Pradawnego (dyftongi). Trzy „złe" języki są rozróżnialne fonetycznie — dobrze.
+
+---
+
+**Nota o pewności:** Aldaharski jest gotowy do implementacji (duży korpus). Corelliański
+i Durrenburdzki są rozsądnie ugruntowane. Kalarski, Leredyjski, Irwitański, Mestilski i
+Otchłanny to **kierunkowe szkice** z ubogiego korpusu — traktować jako punkt wyjścia do
+autorskiej decyzji, nie gotowy kanon. Wszystkie do wpisania w puste pola
+`Szczeliny - Słowniki.md`, gdy autor je zaakceptuje.
