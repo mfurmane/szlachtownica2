@@ -19,6 +19,55 @@ System ma **dwie warstwy**, które warto trzymać osobno:
 
 ---
 
+## Metodologia (ustalenia autora)
+
+**1. Generowanie w locie zamiast gotowych słowników leksykalnych.** Nie budujemy
+pełnych słowników słowo→znaczenie z fonotaktyk. Wygenerowany leksykon to najgorsze z
+obu światów: kosztuje pracę, a czyta się jak losowe pary bez etymologii, pokrewieństw i
+historii — czyli bez tego, co sprawia, że język *żyje*. Zamiast tego:
+- **imiona/nazwy generuje silnik** (fonotaktyka), bo symulacja i tak chrzci tysiące
+  osób i miejsc — z **kotwiczeniem ręcznymi wzorcami**: ważne/widoczne/znaczące nazwy
+  pisane na wyczucie, masa niewidoczna generowana tak, by brzmiała jak te ręczne;
+- **słownictwo powstaje „just in time"** — tylko tam, gdzie scena albo mechanika go
+  dotyka (realnie 2–3 języki w scenach). **Fonotaktyka służy jako walidator i
+  podpowiadacz** przy vibe-coiningu („pasuje / nie pasuje"), nie jako fabryka słowników.
+- *Świadomie* nie idziemy w kompletny leksykon wszystkich języków — to nora czasowa,
+  a deliverable to powieść i sim, nie „Silmarillion".
+
+**2. Warianty międzyjęzykowe nazw — tylko przez `WordCore`.** Chcemy, żeby ta sama nazwa
+własna istniała w wariantach w różnych językach — ale **tylko dla nazw rozkładalnych na
+znaczenie**, tj. zbudowanych z jednostek `WordCore` (morfemy z zapisanym znaczeniem i
+formami). Dwa mechanizmy „istnienia nazwy w innym języku":
+- **Tłumaczenie / kalka** — dla nazw z `WordCore`: przekładamy *znaczenie* na docelowy
+  język (np. wieś od `błot` = „miejsce błota" → rdzeń „błoto" + sufiks miejsca w języku
+  docelowym). **To tu ograniczamy krzyżowanie** (ustalenie autora).
+- **Adaptacja fonologiczna** — dla nazw *nieprzezroczystych* (bez zapisanego znaczenia,
+  np. Gilgamore): nie da się ich przetłumaczyć, można je tylko dostosować brzmieniem do
+  fonotaktyki docelowego języka. To jest owo „**ewentualnie lekko lokalizowane**" ze
+  stratygrafii toponimów — i mikro-etymologia (niżej) czyni te adaptacje *nielosowymi*.
+
+Wniosek: opaque prestiżowe toponimy (warstwa ernizyjska) żyją co najwyżej przez adaptację
+brzmienia; znaczące nazwy rustykalne (`WordCore`) mogą mieć prawdziwe warianty przez kalkę.
+
+**3. Mikro-etymologia rodzin języków — jedyna inwestycja „systematyczna".** Zamiast
+słowników — **mała warstwa wspólnych rdzeni + reguły przesuwki głoskowej** dla języków
+*pokrewnych*. Daje efekt „żywego, spokrewnionego języka" za mały koszt i jest już
+zasugerowana przez lore. Kandydaci:
+- **Rodzina Nereneth:** Pradawny → **Caithalooński** („przeżarty Pradawny": dira'sear
+  mówią pradawnym, Caithalooński to ich skażony dialekt) → ewentualnie **Leredyjski**
+  (Leredia używa Pierwotnego). Przykładowe reguły przesuwki (do dostrojenia): pradawne
+  miękkie `s → z` w Caithaloońskim, dyftong `ae/ea → a` (twarda samogłoska), wstawka
+  apostrofu-szwu przed końcówką gramatyczną (`car'an-`, `kza'v-`). Wtedy `sear` (lud) i
+  caithaloońskie formy wyglądają jak kognaty.
+- **Rodzina romańska:** **Aldaharski** jako wspólny pień nazwisk Zavilesu/Larazzy
+  (Sarrazin / Sartori / Serrena już wyglądają na kognaty jednego rdzenia).
+Ta warstwa **podpiera** oba mechanizmy z pkt 2: kalki między pokrewnymi językami idą po
+wspólnych rdzeniach, a adaptacje fonologiczne — po regularnych korespondencjach rodziny
+(nie „na czuja"). To jedyne miejsce, gdzie system bije vibe, bo etymologia to jedyna
+rzecz, której samo wyczucie nie ogarnia, a która najmocniej sprzedaje „prawdziwość".
+
+---
+
 ## Taksonomia języków (arkusz Języki)
 
 | Język | Główny w | Używany też w | Status |
