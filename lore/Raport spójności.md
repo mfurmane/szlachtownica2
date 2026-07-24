@@ -724,3 +724,62 @@ i w większości **domknięte** w trakcie audytu (Irmus/obłęd 1743 = Izgarthul
 = dryf ~pokolenia w kodzie; Wornimore/Raevill; drowy→Dergowie). Pozostałe punkty to
 **kod↔lore drobne dryfy dat** (`PlacesConfiguration`) i **luki opisowe** (glosariusz
 materiałów, placeholdery w plikach-szkicach), nie sprzeczności kanonu.
+
+---
+
+# Uzupełnienie — odzyskany dokument „Next Steps — wyciąg (świat)"
+
+## 28. Wyciąg z Next Steps — ✅ źródło, mocno spójne; domyka oś czasu i magię
+
+Autor dostarczył kolejny plik-zlew (`lore/Next Steps - wyciąg (świat).md`). Jak przy
+„Szlachtownica 2.0" — to **materiał źródłowy**, nie sprzeczność. Cztery bloki:
+
+### System magii — ✅ spina się z kosmologią i profesjami (pass II + VIII)
+Magia = **transfer energii konkretnego wymiaru**, z jednolitą strukturą umiejętności
+(Więź, Czerpanie, Kształtowanie, Wyczucie, Wiązanie, **Synchronizacja**). Efekt
+Synchronizacji jest **inny dla każdego z 11 wymiarów** i dokładnie odwzorowuje ich
+charakter z Leksykonu/Bogów: Nereneth = wzmocnienie życia, Corellia = oczyszczenie/
+wskrzeszenie, Otchłań = destrukcja, Caithaloon = splugawienie życia, Ghalagaar =
+zdziczenie, Czeluść = rzeźbienie w mięsie, Pustka = negacja/uszkodzenie duszy, Taelia =
+nieokreśloność/teleportacja, Wymiar Duchowy = transcendencja. ✅
+- **Profesje ↔ typ magii (wymiar)** — domyka domenę profesji (pass VIII) i weryfikuje
+  powieść: **Guślarz = Magia Caithaloonu** (= Oszołom, „guślarz" ✅), **Szaman = Magia
+  spirytualna/Duchowy** (= Laergana, projekcja astralna ✅), **Kultysta = Magia Pustki**
+  (= Zoraz/Izgarthul ✅), Druid = Nereneth, Kapłan = boska, Czarnoksiężnik = demoniczna,
+  Plugawiciel = Czeluść, Prymarcha = bestii (Ghalagaar). Klasy = podzbiór wymiarów.
+
+### Rozbudowana oś czasu 1323–1743 — ✅ staje się drugim (obok Kronik) źródłem osi
+Datowany szkielet, który **Kroniki narratywnie opowiadają**. Zweryfikowane zbieżności:
+- **Czarny Sierpień = sierpień 1323** — potwierdza wnioskowanie z pass XII (pogrom =
+  finał Części 3 powieści). Dalej wielowiekowe **oblężenie Wornimore** / zimna wojna,
+  „miasto uchodźców" — bezpośrednia kontynuacja bariery z końca Tomu 1.
+- **Kompania Południowoaldaharska — maj 1456**: wpada w regencję **Garvona I** (koronacja
+  1454 w wieku 10 lat), dokładnie jak Kroniki („młody Garvon… złote statki, czerwone
+  żagle… przyczółek Jirdenal"). ✅
+- **Obalenie króla — 1641**: paladyni Gorejącego Słońca obalają tyrana = **Ranal II
+  Okrutny** (Władcy 1637–1641) → Mereina I Mądra. ✅
+- **Tantanor — maj 1597** „z niczego powstał" = Kroniki l. 269 słowo w słowo; porozumienie
+  z Tantanorem/Irwitanem i **Pochmurni Krzyżowcy — 1671** = koniec panowania Mereiny I
+  (1641–1671), zgodnie z Kronikami i Ligą Żywych Inaczej (`Barwy Czerwieni`). ✅
+- **1743 — obłęd Irmusa** (spójne z całą resztą; przyczyna = Izgarthul, sekcja 21).
+- Handel: Hanza Sartamska zał. 1429; Wojny Leredyjskie 1447–1454; inwazja Mestilii
+  1439–1443 (Repenvore→Tantanor). Bogaty materiał do przyszłej rekoncyliacji tom-po-tomie
+  z Kronikami (nowa mikro-oś, nie wykryto sprzeczności).
+
+### Kalendarz świąt — ✅ spójny (pass IV/IX)
+Święta globalne (daty naturalnie magiczne: równonoce/przesilenia + 31 X „wymiar duchowy
+silniej wpływa"), święta Panteonu (13 bóstw, m.in. Birbańskie „święto miłości i sztuki"
+= Belleteyn; Eledińsko-Kalneterskie święto zmarłych 1 XII), święta z Ernizjum (**Nowy Rok
+1 I = rocznica założenia Ernizjum → nowa era** — potwierdza epokę = rok 0 Ernizjum),
+święta prowincji (Alstederia: Manaria/Hanza; Larazza: „Dzień Złotych Żagli").
+
+### Notatki symulacyjne — ℹ️ warstwa silnika
+Generowanie infrastruktury osad (ulice/budynki per rok w bazie), precyzja geometrii
+EPSG:4326 vs metryczny SRID, typy budynków z wymiarami (chata/dworek/kamienica/rezydencja).
+Warstwa projektowa (jak połowa „Szlachtownica 2.0"), nie lore.
+
+### Do ruszenia
+- ℹ️ **Mikro-oś 1323–1743 vs Kroniki (tomy)** — spójna w próbkach; warto przy okazji
+  przejść tom po tomie i wpiąć daty z tego wyciągu jako szkielet dat Kronik.
+- 🕳️ **Kultura okołokapłańska** (który bóg popularny na wsi, multiklasy) — częściowo
+  rozpisana (Eledin, Armina, Iliera), reszta pusta; do uzupełnienia, nie sprzeczność.
