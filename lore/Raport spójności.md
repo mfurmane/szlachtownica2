@@ -783,3 +783,54 @@ Warstwa projektowa (jak połowa „Szlachtownica 2.0"), nie lore.
   przejść tom po tomie i wpiąć daty z tego wyciągu jako szkielet dat Kronik.
 - 🕳️ **Kultura okołokapłańska** (który bóg popularny na wsi, multiklasy) — częściowo
   rozpisana (Eledin, Armina, Iliera), reszta pusta; do uzupełnienia, nie sprzeczność.
+
+---
+
+# Przejście XIII — Model magii (Next Steps) ↔ Profesje / Umki
+
+## 29. System magii — ✅ = arkusz „Szerokie Umki"; ⚠️ dwie warstwy klas do uzgodnienia
+
+### ✅ Model magii z Next Steps = arkusz „Szerokie Umki" (dosłownie)
+To nie nowy system, lecz **zapis** modelu z arkusza. Zgodność pełna:
+- **9 magii wymiarowych** jako kolumny: Magia Taelii, Corellii, Nereneth, Spirytualna
+  (Duchowy), Caithaloonu, Czeluści, Otchłani, Ghalagaaru, Pustki.
+- **6 poddrzewek** identycznych: Więź, Czerpanie, Kształtowanie, Wyczucie, Wiązanie,
+  **Synchronizacja**.
+- **Efekty Synchronizacji zgadzają się CO DO SŁOWA**: nieokreśloność (Taelia),
+  oczyszczenie (Corellia), wzmocnienie życia (Nereneth), splugawienie życia (Caithaloon),
+  rzeźbienie w mięsie (Czeluść), destrukcja (Otchłań), zdziczenie (Ghalagaar), negacja
+  (Pustka). Identyczne z Leksykonem/Bogami (charakter wymiarów).
+> **Domyka flagę z pass VIII** („równoległe wersje: Umki vs Szerokie Umki"): kierunkiem
+> kanonicznym jest **model wymiarowy (Szerokie Umki)**, a Next Steps to jego formalny
+> zapis. Stare „Umki"/„Profesje" → warstwa do archiwizacji.
+
+### ✅ Wiedza / Ekspertyza per wymiar
+Kolumny „Wiedza: Nereneth / Corellia / Otchłań / Wymiar Duchowy / Ghalagaar / Taelia /
+Caithaloon / Czeluść / Pustka" + Anatomia/Zoologia/Historia/Magia — spójne z systemem
+**Ekspertyzy** (`Biblioteka Szczelin`, pass XI).
+
+### ✅ Klasy bojowe
+Roster Next Steps ≈ archetypy Zależności (Wojownik, Najemnik, Paladyn, Berserker,
+Barbarzyńca, Skrytobójca, Szermierz, Mnich, Bard, Łotrzyk, Łowca, Strażnik). Drobne
+różnice nazw do ujednolicenia: Autsajder≈Odludek, Flagelant≈Masochista(?), Zwiadowca.
+
+### ⚠️ Rozjazd: dwie warstwy organizacji klas magicznych
+- **Zależności (arkusz):** 5 archetypów magicznych — **Kapłan, Czarodziej, Szaman,
+  Kultysta, Druid** — a Guślarz / Plugawiciel / Czarnoksiężnik / Prymarcha to
+  **specjalizacje** pod nimi (np. Guślarz *(Kultysta)*, Czarnoksiężnik *(Szaman)*).
+- **Next Steps:** 9 **klas bazowych** — te 5 + **Guślarz=Caithaloon, Plugawiciel=Czeluść,
+  Czarnoksiężnik=demoniczna, Prymarcha=bestii/Ghalagaar** — po jednej na magię wymiarową.
+- **Konkretne sprzeczności mapowania:**
+  - **Guślarz** — Next Steps **i POWIEŚĆ** = Caithaloon (Zoraz do Oszołoma: *„Czerpiesz
+    moc z Caithaloonu, gnomie"*); Zależności = pod **Kultystą (Pustka)**. Kuzynowskie
+    (Caithaloon powstał z wpływu Pustki), ale to różne wymiary — do rozstrzygnięcia.
+  - **Czarnoksiężnik** — Next Steps = **demoniczna (Otchłań)**; Zależności = pod
+    **Szamanem (spirytualna/Duchowy)**. Większy rozjazd.
+- **Rekomendacja:** przyjąć **model Next Steps / Szerokie Umki jako kanoniczny** (9 klas
+  bazowych = 9 magii wymiarowych), a bogaty roster specjalizacji z Zależności (~10 na
+  archetyp) podpiąć pod właściwy wymiar. Powieść jednoznacznie wspiera Guślarz=Caithaloon.
+
+### Do ruszenia
+- 🕳️ Marker WIP „MODYFIKATOR MODYFIKATORA … WYJEBAĆ" nadal obecny w Szerokie Umki
+  (do sprzątnięcia — jak zauważono w pass VIII).
+- ℹ️ Ujednolicić nazwy klas bojowych Next Steps ↔ Zależności (Odludek/Autsajder itd.).
