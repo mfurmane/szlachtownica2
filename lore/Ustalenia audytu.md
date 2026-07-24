@@ -17,8 +17,8 @@ Log decyzji autora zapadających w trakcie weryfikacji spójności. Uzupełnia
 - Grupowania z Zależności (Guślarz pod Kultystą, Czarnoksiężnik pod Szamanem) to **legacy
   starej siatki**, nie żywe sprzeczności. Kanon: **Guślarz=Caithaloon** (wspiera powieść),
   Czarnoksiężnik=demoniczna/Otchłań, Kultysta=Pustka, Plugawiciel=Czeluść, Prymarcha=
-  Ghalagaar, Druid=Nereneth, Szaman=Duchowy. Do potwierdzenia: Kapłan↔Corellia,
-  Czarodziej↔Taelia (patrz Raport, sekcja 29).
+  Ghalagaar, Druid=Nereneth, Szaman=Duchowy, **Kapłan=Corellia i Czarodziej=Taelia
+  (potwierdzone przez autora)**. Backbone 9 klas magicznych domknięty (patrz Raport, sekcja 29).
 
 ### Fallon II Ostatni — koniec monarchii, początek Rady
 - Fallon II ma poglądy **demokratyczne**. Z jego inicjatywy **zniesiona zostaje

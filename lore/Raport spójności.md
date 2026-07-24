@@ -863,7 +863,7 @@ Materialnego). Zgodne z 9 kolumnami arkusza Szerokie Umki:
 | Klasa bazowa | Magia | Wymiar |
 |---|---|---|
 | Kapłan | boska | **Corellia** |
-| Czarodziej | tajemna | **Taelia** *(inferencja — do potwierdzenia)* |
+| Czarodziej | tajemna | **Taelia** ✅ |
 | Druid | natury | Nereneth |
 | Szaman | spirytualna | Wymiar Duchowy |
 | Czarnoksiężnik | demoniczna | Otchłań |
@@ -873,7 +873,6 @@ Materialnego). Zgodne z 9 kolumnami arkusza Szerokie Umki:
 | Kultysta | (Pustki) | Pustka |
 
 Dwie kotwice pewne z korpusu: **Druid=Nereneth, Szaman=Duchowy** (Laergana), **Guślarz=
-Caithaloon** (Oszołom, powieść). Do potwierdzenia przez autora tylko górne dwa wiersze:
-**Kapłan↔Corellia** (bogowie = byty Corellii) i **Czarodziej↔Taelia** (jedyna wolna
-kolumna; „tajemna" = dzika magia Taelii). Roster specjalizacji z Zależności (~10 na
+Caithaloon** (Oszołom, powieść). **Potwierdzone przez autora:** **Kapłan↔Corellia** (bogowie = byty Corellii) i
+**Czarodziej↔Taelia** („tajemna" = dzika magia Taelii). Backbone 9 klas magicznych domknięty. Roster specjalizacji z Zależności (~10 na
 archetyp) podpiąć pod właściwy wymiar wg tej tabeli.
