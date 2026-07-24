@@ -7,6 +7,19 @@ Log decyzji autora zapadających w trakcie weryfikacji spójności. Uzupełnia
 
 ## Rozstrzygnięcia
 
+### System klas magicznych — nowy model (podporządkowany kosmologii)
+- **Stary podział na 5 archetypów magicznych PRZETERMINOWANY.** Pochodził z nieaktualnej
+  siatki **4×5 = 20 klas** (rola: tank/DPS/magik/strzelec × domena: świętość/natura/
+  spirytualizm/chaos/piąta-trudna-do-doprecyzowania). „5 archetypów" = wiersz *magik*.
+- **Obowiązuje nowy model: 9 klas magicznych 1:1 z 9 „rzucalnymi" wymiarami** (=arkusz
+  Szerokie Umki = zapis w Next Steps). Nowy model rozbija rozmytą „chaos"+„piątą" na
+  precyzyjne wymiary (Otchłań, Pustka, Caithaloon, Czeluść, Ghalagaar, Taelia).
+- Grupowania z Zależności (Guślarz pod Kultystą, Czarnoksiężnik pod Szamanem) to **legacy
+  starej siatki**, nie żywe sprzeczności. Kanon: **Guślarz=Caithaloon** (wspiera powieść),
+  Czarnoksiężnik=demoniczna/Otchłań, Kultysta=Pustka, Plugawiciel=Czeluść, Prymarcha=
+  Ghalagaar, Druid=Nereneth, Szaman=Duchowy. Do potwierdzenia: Kapłan↔Corellia,
+  Czarodziej↔Taelia (patrz Raport, sekcja 29).
+
 ### Fallon II Ostatni — koniec monarchii, początek Rady
 - Fallon II ma poglądy **demokratyczne**. Z jego inicjatywy **zniesiona zostaje
   monarchia** — stąd przydomek „Ostatni".
