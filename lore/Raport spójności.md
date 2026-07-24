@@ -834,3 +834,46 @@ różnice nazw do ujednolicenia: Autsajder≈Odludek, Flagelant≈Masochista(?),
 - 🕳️ Marker WIP „MODYFIKATOR MODYFIKATORA … WYJEBAĆ" nadal obecny w Szerokie Umki
   (do sprzątnięcia — jak zauważono w pass VIII).
 - ℹ️ Ujednolicić nazwy klas bojowych Next Steps ↔ Zależności (Odludek/Autsajder itd.).
+
+### Aktualizacja (ustalenie autora) — podział na 5 archetypów jest PRZETERMINOWANY
+
+Grupowanie z Zależności (Guślarz pod Kultystą itd.) to relikt **starego, nieaktualnego
+systemu**: siatki **4×5 = 20 klas głównych** (oś rola × oś domena). Dla zapisu:
+
+| rola \ domena | świętość | natura | spirytualizm | chaos | (piąta, trudna do doprecyzowania) |
+|---|---|---|---|---|---|
+| **tank** | Paladyn | Barbarzyńca | Oficer/Wojownik | Berserker | Najemnik |
+| **DPS** | Szermierz | Odludek | Mnich | Masochista | Asasyn |
+| **magik** | **Kapłan** | **Druid** | **Szaman** | **Kultysta** | **Czarodziej** |
+| **strzelec** | Strażnik | Łowca | Bard | Łotrzyk | Zwiadowca |
+
+Stąd „5 archetypów magicznych" = po prostu wiersz **magik** tej siatki, a jego 5 kolumn
+(świętość/natura/spirytualizm/chaos/piąta) to **zgrubna** wersja osi wymiarów. Nowy model
+**rozbija rozmytą „chaos"+„piątą" na precyzyjne wymiary kosmologii** (Otchłań, Pustka,
+Caithaloon, Czeluść, Ghalagaar, Taelia). **To rozstrzyga „rozjazd" powyżej:** grupowania
+z Zależności to legacy, nie żywy kanon — obowiązuje **nowy model podporządkowany
+kosmologii**. „Sprzeczności" (Guślarz pod Kultystą, Czarnoksiężnik pod Szamanem) to
+artefakty starej siatki, nie decyzje do podjęcia.
+
+### Nowy model — klasy magiczne 1:1 z wymiarami (kanon)
+
+Kanoniczny backbone: **9 klas bazowych = 9 „rzucalnych" wymiarów** (wszystkie prócz
+Materialnego). Zgodne z 9 kolumnami arkusza Szerokie Umki:
+
+| Klasa bazowa | Magia | Wymiar |
+|---|---|---|
+| Kapłan | boska | **Corellia** |
+| Czarodziej | tajemna | **Taelia** *(inferencja — do potwierdzenia)* |
+| Druid | natury | Nereneth |
+| Szaman | spirytualna | Wymiar Duchowy |
+| Czarnoksiężnik | demoniczna | Otchłań |
+| Prymarcha | bestii | Ghalagaar |
+| Guślarz | (Caithaloonu) | Caithaloon |
+| Plugawiciel | (Czeluści) | Czeluść |
+| Kultysta | (Pustki) | Pustka |
+
+Dwie kotwice pewne z korpusu: **Druid=Nereneth, Szaman=Duchowy** (Laergana), **Guślarz=
+Caithaloon** (Oszołom, powieść). Do potwierdzenia przez autora tylko górne dwa wiersze:
+**Kapłan↔Corellia** (bogowie = byty Corellii) i **Czarodziej↔Taelia** (jedyna wolna
+kolumna; „tajemna" = dzika magia Taelii). Roster specjalizacji z Zależności (~10 na
+archetyp) podpiąć pod właściwy wymiar wg tej tabeli.
