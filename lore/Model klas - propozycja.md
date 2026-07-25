@@ -227,3 +227,51 @@ przodu) — **przyjąć jako bazę**, `Profesje` (stare) zarchiwizować. Marker 
 3. Rozbudowa Paktu o patronów sub-boskich (drakolicz, smok, ascendowani śmiertelnicy)?
    — Ghalagaar/Czeluść zostają bez patronów (kanał-only), 12 vs 13 rozstrzygnięte.
 4. Przyjąć `Profesje - nowe` jako bazę; dodać kolumny Etos/Źródło/Ścieżka.
+
+---
+
+## Propozycje wpisów Paktu — drakolicz i smok Taelii
+
+Format kolumn arkusza Pakt: **Patron · Wymiar · Domena · Ofiara · Łaska · Więź · Gniew ·
+Wejrzenie · Nóż · Forma Wyższa.** Oba to **nazwane osobniki** (model „patron = typ z
+osobnikami"): Morvenkaal to jeden drakolicz z wielu możliwych; Xarhaelis — jeden potężny
+smok Taelii. Dary nazwane w stylu arkusza (dwuwyrazowe, ewokacyjne).
+
+### Morvenkaal, Strażnik Ostatniej Bramy (drakolicz)
+Sub-boski **czempion Kalnetera**, poza Saraverą. Wypełnia **oblicze śmierci Corellii**
+(brak w rosterze — dziś tylko Handel/Zdrowie/Zemsta). Przypadek mostowy: z samym
+Kalneterem się nie paktuje (bóg-kult), ale z jego nieumarłym sługą — tak.
+
+| Pole | Wartość |
+|---|---|
+| **Wymiar** | Corellia (oblicze śmierci / Kalneter) — poza Saraverą |
+| **Domena** | Śmierć |
+| **Ofiara** | Dusze odebrane Pustce i ciała odesłane w cykl (patron „dostaje" dusze wrócone cyklowi; ty — moc). *Inwersja: pakt, który Kalneter sankcjonuje.* |
+| **Łaska** | Potężny buff drużynowy na dłuższy czas (wspólne) |
+| **Więź** | **Nieustępliwa Kość** — raz na jakiś czas nie giniesz od ciosu, który by cię zabił (stabilizacja na progu); odporność na wpływ Pustki na duszę |
+| **Gniew** | **Zaciągnięcie za Bramę** — złamanie paktu: drakolicz przywołuje cię do krypty i czyni jednym ze swych nieumarłych sług |
+| **Wejrzenie** | **Wzrok Kostuchy** — widzisz umierających, nieumarłych i dusze skażone Pustką; poznajesz, komu bliska śmierć |
+| **Nóż** | **Kieł Ostatniej Bramy** — oderwany kieł drakolicza; rani nekrotycznie i „odsyła" nieumarłych/skażonych w prawdziwą śmierć *(echo „Kła Falaka")* |
+| **Forma Wyższa** | **Widmowy Wyrm** — na chwilę przybierasz postać mniejszego drakolicza (kościane skrzydła, oddech grobu), stając między duszą a Pustką |
+
+### Xarhaelis, Wąż Tysiąca Rozstajów (smok Taelii)
+Self-made patron wymiaru **rozproszonego** — ambitny smok, który uzbierał patronowski
+udział mocy Taelii. Zamiast złota hołduje **możliwościom**. Domena **Los** (proponuję —
+różni go od Saqra: Magia/Władza już zajęte przez Patriarchę/Matriarchinię; Los oddaje
+istotę Taelii: nieokreśloność, teleportację, nieciągłość). Alternatywa autora: Władza/Magia.
+
+| Pole | Wartość |
+|---|---|
+| **Wymiar** | Taelia |
+| **Domena** | Los *(alt. Władza/Magia)* |
+| **Ofiara** | Unikatowy przedmiot albo wybrana **możliwość** — utracona ścieżka (oddajesz jedną ze swoich przyszłych dróg) |
+| **Łaska** | Potężny buff drużynowy na dłuższy czas (wspólne) |
+| **Więź** | **Zwrotnica Losu** — raz na sytuację przełączasz wynik na sąsiednią możliwość (przerzut / zamiana rezultatu) |
+| **Gniew** | **Pasmo Nieszczęść** — złamanie paktu: twój los kwaśnieje, każdy krytyczny moment obraca się przeciw tobie, aż smok odbierze należną możliwość |
+| **Wejrzenie** | **Oko Rozstajów** — dostrzegasz rozgałęziające się przyszłości i ścieżki teleportacji tuż obok |
+| **Nóż** | **Ostrze Między** — broń, która tnie „spomiędzy": uderza z niemożliwych kątów, krótki skok tuż przed ciosem |
+| **Forma Wyższa** | **Postać Migotliwa** — stajesz się półrzeczywisty, migotliwy i nieciągły (esencja Taelii): trudny do trafienia, przeskakujesz między punktami |
+
+**Konsekwencja strukturalna:** drakolicz obnaża, że etykieta rodziny **„Światłość" jest za
+wąska** dla Corellii (która ma też oblicze śmierci — Kalneter). Do rozważenia:
+przemianować rodzinę na **„Corellia"** albo rozbić na pod-rodziny „Światłość" + „Śmierć".
