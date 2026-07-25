@@ -13,12 +13,15 @@ Każda klasa opisywana **trzema niezależnymi osiami**:
 - **ETOS** — jak podchodzisz: jedna z **5 filozofii walki** (przekrojowy klimat, spina
   magię i nie-magię, bez wiązania ich strukturalnie).
 
-Dla źródeł magicznych **dwie ścieżki dostępu**:
+Dla źródeł magicznych **trzy tryby dostępu** (D&D-owo: mag / warlock / kapłan):
 - **Kanałowanie** (samodzielne) — uczysz się czerpać wymiar sam, drzewkami
-  Więź/Czerpanie/Kształtowanie/Wyczucie/Wiązanie/Synchronizacja. Ścieżka „wypracowanej
-  biegłości" (Czarodziej, Kapłan).
-- **Pakt** — wiążesz się z konkretnym **patronem** wymiaru, który daje dary za **ofiarę**.
-  Ścieżka „pożyczonej mocy / targu" (Guślarz, Kultysta, Czarnoksiężnik, Druid). Patrz §5.
+  Więź/Czerpanie/Kształtowanie/Wyczucie/Wiązanie/Synchronizacja. „Wypracowana biegłość"
+  (Czarodziej-arcane, Prymarcha, Plugawiciel).
+- **Pakt** — targ z konkretnym **patronem** wymiaru; dary za **ofiarę**, ze smyczą (Gniew
+  Patrona). „Pożyczona moc" (Guślarz, Kultysta, Czarnoksiężnik, Druid).
+- **Oddanie / Kult** — relacja wiary ze **skoncentrowaną, uporządkowaną** mocą (Corellia);
+  łaski płyną ze służby, nie z transakcji. To D&D-owy **kapłan**, nie warlock. Główny tryb
+  Kapłana. Który tryb obowiązuje w danym wymiarze — rządzi **prawo koncentracji mocy**, §5.
 
 ---
 
@@ -108,10 +111,10 @@ każda = inny pakiet drzewek). To siatka „głównych" klas; specjalizacje wisz
 Klasa magiczna = **wymiar (źródło) + ulubione szkoły (efekt) + ścieżka dostępu + etos**:
 | Klasa | Wymiar | Ścieżka | Typowe szkoły | Etos |
 |---|---|---|---|---|
-| Kapłan | Corellia | kanał/pakt-lite | Rekonstrukcja, Aury, Uświęcanie | Opieka |
-| Czarodziej | Taelia | kanał | dowolne (arcane), Metamagia | (dowolny) |
-| Druid | Nereneth | **Pakt** (Natura) | Rekonstrukcja, Zmiennokształtność | Przetrwanie |
-| Szaman | Duchowy | kanał | Kontakt, Transcendencja, Urok | Hart |
+| Kapłan | Corellia | **Oddanie/kult** | Rekonstrukcja, Aury, Uświęcanie | Opieka |
+| Czarodziej | Taelia | Kanał / Pakt (Saqra, smok?) | dowolne (arcane), Metamagia | (dowolny) |
+| Druid | Nereneth | **Pakt** (Aspekt Natury) | Rekonstrukcja, Zmiennokształtność | Przetrwanie |
+| Szaman | Duchowy | Pakt (geniusz) / Kanał | Kontakt, Transcendencja, Urok | Hart |
 | Czarnoksiężnik | Otchłań | **Pakt** (Demony) | Destrukcja, Demonologia | Poświęcenie |
 | Prymarcha | Ghalagaar | **tylko kanał** (brak paktu) | Zmiennokształtność, Przywoływanie | Przetrwanie |
 | Guślarz | Caithaloon | **Pakt** (lewiatan) | Nekromancja, Wypaczenie | Poświęcenie |
@@ -168,10 +171,38 @@ Struktura wpisu patrona (kolumny arkusza) pasuje do modelu: **Wymiar, Domena, Of
     figuruje tylko w Pakcie, a nie wśród 12 Pierwotnych w Bogach. **Nie sprzeczność.**
 - ℹ️ Mapowanie rodzin: potwierdzić Światłość=Corellia, Duchy=Wymiar Duchowy.
 
-### Rozważana rozbudowa (brainstorm autora) — patroni sub-boscy
-Autor rozważa dodanie kolejnych bytów tego kalibru (drakolicz, smok itp.). Rekomendacje
-w czacie; zasada: nowy patron musi spełniać **warunek paktu** (świadomy + potężny) i
-przypisywać się do wymiaru, którego smak nadaje jego darom.
+### Prawo koncentracji mocy → tryb dostępu i kształt rosteru (ustalenie autora)
+Pakt wymaga **skupienia woli i mocy** w bycie. To, ilu i jakich patronów ma wymiar,
+zależy od tego, jak **skoncentrowana vs rozproszona** jest w nim moc+wola (analogia:
+Warcraft — tytani nieliczni, ale przepotężni; naaru bez liku, ale przy tytanach jak
+pchły). Im bardziej chaotyczny wymiar, tym bardziej moc się rozprasza i ambitne,
+zdolne byty **nie-boskie** mogą uzbierać jej patronowski udział. Spektrum:
+
+| Wymiar(y) | Koncentracja mocy | Tryb dostępu | Roster patronów |
+|---|---|---|---|
+| **Corellia** | skoncentrowana + **uporządkowana** | **Oddanie/kult** (kapłan) | pakty wyjątkowe (Manara i in.) |
+| **Nereneth, Pustka** | skoncentrowana (nie „poukładana") | **Pakt z tytanami** | **konkretna lista** (12 Aspektów / 8 Zewnętrznych) |
+| **Taelia, Caithaloon, Otchłań, Duchowy** | rozproszona | **Pakt (self-made) / Kanał** | **otwarty** — patron = *typ*, wiele osobników |
+| **Ghalagaar, Czeluść** | rozproszona do frenezji (wpływ Otchłani) | **tylko Kanał** | **brak** — nikt nie skupi woli |
+
+Konsekwencje dla rosteru:
+- **Patron w wymiarze rozproszonym = TYP, nie jednostka.** „Ziz/Kraken/Behemot",
+  „Geniusz", „Saqra" to *kategorie*; **Sorderon to jeden z wielu zizów** dość potężnych,
+  by paktować. Lista jest z natury otwarta.
+- **3 patroni demoniczni to wyjątek, nie reguła** — to trójka na tyle *opanowana*, by
+  paktować; większość Otchłani jest zbyt chaotyczna. Otchłań rozlewa ten chaos na
+  Ghalagaar i Czeluść, stąd tam zero patronów.
+- **Im bardziej chaotyczny/rozproszony wymiar, tym więcej self-made patronów** — stąd
+  czwórka Saqra w Taelii i otwartość na kolejnych ambitnych (patrz niżej).
+
+### Rozważana rozbudowa (brainstorm autora)
+- **Drakolicz oddany Kalneterowi** — ✅ przyjęte, ale **umiejscowiony poza Saraverą**
+  (odległy patron). Wypełnia oblicze śmierci Corellii (Kalneter), którego brak w rosterze.
+- **Wyjątkowo potężny smok jako patron Taelii** — spójne z prawem koncentracji: Taelia
+  jest rozproszona, więc ambitny, potężny smok naturalnie mógł uzbierać patronowski
+  udział mocy (obok czwórki Saqra; domena Magia/Władza). Dobry kandydat.
+- Zasada dla nowych: musi spełniać **warunek paktu** (skupiona wola + moc), przypisać się
+  do wymiaru rozproszonego (self-made) albo być tytanem wymiaru skoncentrowanego.
 
 ---
 
