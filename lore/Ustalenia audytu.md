@@ -29,8 +29,18 @@ Log decyzji autora zapadających w trakcie weryfikacji spójności. Uzupełnia
   **sub-boski, ale pactowalny** (lewiatany, geniusze, potężni Saqra, demony, **Pradziad
   Leszy**). Leszy = poziom sub-boski, stąd tylko w Pakcie, nie wśród 12 Pierwotnych w
   Bogach. **Domyka starą flagę 12 vs 13.**
-- Autor rozważa dorzucenie kolejnych patronów sub-boskich (drakolicz, smok, ascendowani
-  śmiertelnicy) — muszą spełniać warunek paktu i przypisywać się do wymiaru.
+- **Prawo koncentracji mocy** (rządzi trybem dostępu i kształtem rosteru): pakt wymaga
+  skupienia woli+mocy. Corellia (skoncentrowana+uporządkowana) → **oddanie/kult** (kapłan,
+  nie warlock; pakty wyjątkowe). Nereneth/Pustka (skoncentrowana) → **pakt z tytanami**,
+  konkretne listy (12 Aspektów / 8 Zewnętrznych). Taelia/Caithaloon/Otchłań/Duchowy
+  (rozproszona) → **pakt z self-made / kanał**, patron = *typ* z wieloma osobnikami
+  (Sorderon = jeden z wielu zizów). Ghalagaar/Czeluść (rozproszona do frenezji przez wpływ
+  Otchłani) → **tylko kanał**, zero patronów. Trzy tryby dostępu: Kanał / Pakt / Oddanie.
+- **3 patroni demoniczni = wyjątek** (na tyle opanowani, by paktować); większość Otchłani
+  zbyt chaotyczna.
+- **Drakolicz** oddany Kalneterowi — przyjęty, ale **poza Saraverą** (wypełnia oblicze
+  śmierci Corellii). **Potężny smok** jako patron Taelii — rozważany (spójny: Taelia
+  rozproszona, self-made patron ma sens).
 
 ### Fallon II Ostatni — koniec monarchii, początek Rady
 - Fallon II ma poglądy **demokratyczne**. Z jego inicjatywy **zniesiona zostaje
