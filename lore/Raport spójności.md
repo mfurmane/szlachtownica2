@@ -316,9 +316,11 @@ zdolności (Łaska/Więź/Gniew/Wejrzenie/Nóż/Forma Wybrańca):
   Dusza) — dokładnie jak moralny koszt patronów w Anniversary.
 
 ### Do ruszenia
-- ⚠️ **13. Pierwotny bóg — „Pradziad Leszy" (Zemsta)** jest w arkuszu Pakt, ale
-  **Bogowie itp wymienia tylko 12** Pierwotnych. Dodać do Bogowie/Kościołów lub
-  wyjaśnić status.
+- ✅ **13. „Pierwotny" — „Pradziad Leszy" (Zemsta) — ROZWIĄZANE (ustalenie autora).**
+  Leszy **nie jest** 13. Aspektem Natury na poziomie boskim — należy do **niższego,
+  sub-boskiego poziomu pactowalnych bytów** (jak lewiatany, geniusze, potężni Saqra,
+  demony). Dlatego figuruje tylko w Pakcie, nie wśród 12 boskich Pierwotnych w Bogach.
+  Nie sprzeczność, lecz różnica poziomu mocy (patrz `Model klas - propozycja.md` §5).
 - ℹ️ Artefakt edycji: w komórce „Królowa Lodów" wpadło „-Michał Furmanek" — usunąć.
 
 ## 13. Organizacje — ✅ spójna sieć

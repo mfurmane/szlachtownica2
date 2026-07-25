@@ -20,6 +20,18 @@ Log decyzji autora zapadających w trakcie weryfikacji spójności. Uzupełnia
   Ghalagaar, Druid=Nereneth, Szaman=Duchowy, **Kapłan=Corellia i Czarodziej=Taelia
   (potwierdzone przez autora)**. Backbone 9 klas magicznych domknięty (patrz Raport, sekcja 29).
 
+### Pakt — warunek i taksonomia patronów
+- **Pakt wymaga bytu świadomego, inteligentnego i potężnego** (jest z kim się targować).
+- **Ghalagaar i Czeluść nie mają patronów — z założenia** (dzicz bez rozumu / bezwolne
+  abominacje). Konsekwencja: **Prymarcha (Ghalagaar) i Plugawiciel (Czeluść) = klasy
+  wyłącznie kanałujące, bez ścieżki Pakt.**
+- **Dwa poziomy patronów:** boski (Panteon, Zewnętrzni Bogowie, 12 Aspektów Natury) oraz
+  **sub-boski, ale pactowalny** (lewiatany, geniusze, potężni Saqra, demony, **Pradziad
+  Leszy**). Leszy = poziom sub-boski, stąd tylko w Pakcie, nie wśród 12 Pierwotnych w
+  Bogach. **Domyka starą flagę 12 vs 13.**
+- Autor rozważa dorzucenie kolejnych patronów sub-boskich (drakolicz, smok, ascendowani
+  śmiertelnicy) — muszą spełniać warunek paktu i przypisywać się do wymiaru.
+
 ### Fallon II Ostatni — koniec monarchii, początek Rady
 - Fallon II ma poglądy **demokratyczne**. Z jego inicjatywy **zniesiona zostaje
   monarchia** — stąd przydomek „Ostatni".

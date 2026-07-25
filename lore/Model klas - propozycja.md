@@ -113,9 +113,9 @@ Klasa magiczna = **wymiar (źródło) + ulubione szkoły (efekt) + ścieżka dos
 | Druid | Nereneth | **Pakt** (Natura) | Rekonstrukcja, Zmiennokształtność | Przetrwanie |
 | Szaman | Duchowy | kanał | Kontakt, Transcendencja, Urok | Hart |
 | Czarnoksiężnik | Otchłań | **Pakt** (Demony) | Destrukcja, Demonologia | Poświęcenie |
-| Prymarcha | Ghalagaar | Pakt/kanał | Zmiennokształtność, Przywoływanie | Przetrwanie |
+| Prymarcha | Ghalagaar | **tylko kanał** (brak paktu) | Zmiennokształtność, Przywoływanie | Przetrwanie |
 | Guślarz | Caithaloon | **Pakt** (lewiatan) | Nekromancja, Wypaczenie | Poświęcenie |
-| Plugawiciel | Czeluść | Pakt/kanał | Nekromancja, Transmutacja | Poświęcenie |
+| Plugawiciel | Czeluść | **tylko kanał** (brak paktu) | Nekromancja, Transmutacja | Poświęcenie |
 | Kultysta | Pustka | **Pakt** (Zewnętrzni) | Wypaczenie, Urok | Podstęp |
 
 ---
@@ -149,13 +149,29 @@ Arkusz grupuje patronów po rodzinach, które **mapują się na wymiary**:
 Struktura wpisu patrona (kolumny arkusza) pasuje do modelu: **Wymiar, Domena, Ofiara,
 Łaska/Więź/Gniew/Wejrzenie/Nóż Patrona, Forma Wyższa**. To gotowy szablon „ścieżki Pakt".
 
-### Do uzupełnienia / rozstrzygnięcia
-- 🕳️ **Brak patronów dla Ghalagaaru i Czeluści** (2 z 9 wymiarów). Do dodania (władcy
-  bestii / rzeźbiarze mięsa), by pakt-ścieżka pokrywała komplet.
-- ⚠️ **13 patronów Natury = 13 Pierwotnych** (Pradziad Leszy = 13., domena Zemsta) — to
-  **odświeża starą flagę** (Bogowie wymieniają 12 Pierwotnych, Pakt 13). Do ujednolicenia.
-- ℹ️ „Światłość" i „Duchy" jako etykiety rodzin — potwierdzić mapowanie Światłość=Corellia,
-  Duchy=Wymiar Duchowy (a nie osobny „żywiołowy" pod-wymiar).
+### Warunek paktu i taksonomia patronów (ustalenie autora)
+**Pakt jest możliwy tylko tam, gdzie istnieje byt odpowiednio potężny, inteligentny i
+świadomy** — jest z KIM się targować. To ma dwie ważne konsekwencje:
+
+- ✅ **Ghalagaar i Czeluść nie mają patronów — z założenia, nie z braku.** To wymiary
+  bezrozumnej dziczy (Ghalagaar) i bezwolnych abominacji (Czeluść) — potęga bez umysłu,
+  więc **nie ma z czym zawrzeć paktu**. Mechaniczna konsekwencja: **Prymarcha (Ghalagaar)
+  i Plugawiciel (Czeluść) to klasy WYŁĄCZNIE kanałujące — brak ścieżki Pakt.** To
+  charakterna asymetria, która sama wypada z lore (nie luka do załatania).
+- ✅ **12 vs 13 Pierwotnych — rozwiązane (różnica poziomu mocy).** Patroni dzielą się na
+  **dwa poziomy**, oba pactowalne, byle świadome i potężne:
+  - **Boski poziom** (bóstwa): Panteon (Corellia), Zewnętrzni Bogowie (Pustka), **12
+    Aspektów Natury** (Nereneth) — te są w Bogach jako bogowie.
+  - **Sub-boski, ale pactowalny** (potężne byty poniżej bogów): lewiatany (Caithaloon),
+    geniusze (Duchowy), potężni Saqra (Taelia), demony (Otchłań) — **i Pradziad Leszy**
+    (Nereneth). Leszy należy do TEJ kategorii, nie do 12 boskich Aspektów — dlatego
+    figuruje tylko w Pakcie, a nie wśród 12 Pierwotnych w Bogach. **Nie sprzeczność.**
+- ℹ️ Mapowanie rodzin: potwierdzić Światłość=Corellia, Duchy=Wymiar Duchowy.
+
+### Rozważana rozbudowa (brainstorm autora) — patroni sub-boscy
+Autor rozważa dodanie kolejnych bytów tego kalibru (drakolicz, smok itp.). Rekomendacje
+w czacie; zasada: nowy patron musi spełniać **warunek paktu** (świadomy + potężny) i
+przypisywać się do wymiaru, którego smak nadaje jego darom.
 
 ---
 
@@ -177,5 +193,6 @@ przodu) — **przyjąć jako bazę**, `Profesje` (stare) zarchiwizować. Marker 
 ## Podsumowanie (co decydujesz)
 1. Zaakceptować 3 osie (źródło / efekt / etos) + 2 ścieżki (kanał / Pakt)?
 2. Nazwy 5 etosów (Opieka/Przetrwanie/Hart/Poświęcenie/Podstęp) — OK czy własne?
-3. Pakt: dodać patronów Ghalagaaru i Czeluści; rozstrzygnąć 12 vs 13 Pierwotnych.
+3. Rozbudowa Paktu o patronów sub-boskich (drakolicz, smok, ascendowani śmiertelnicy)?
+   — Ghalagaar/Czeluść zostają bez patronów (kanał-only), 12 vs 13 rozstrzygnięte.
 4. Przyjąć `Profesje - nowe` jako bazę; dodać kolumny Etos/Źródło/Ścieżka.
