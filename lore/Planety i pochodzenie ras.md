@@ -54,7 +54,6 @@ osobno do szóstki).
 | **Kalowie** | planetarne (podbój) | **planeta kalów** | kontynent Saravery (ten sam co Saravera) ✅ |
 | **Cyklopi** | planetarne | planeta kalów | kontynent **SW** Saravery ✅ |
 | **Minotaury** | planetarne | planeta kalów | kontynent **SW** Saravery ✅ |
-| **Cuasahy** (Tai'Alain) | 🔶 roboczo, planetarne | **planeta Corellii** — świetlisty ród „anielski" | offscreen; rzadkie zjawy uzdrowienia |
 | **Gobliny, Harpie** | wymiarowe (bestie) | Ghalagaar (Nereneth∩Otchłań) | dzicz, szczeliny; nie „rasa planetarna" |
 | Ogry, Centaury, Selkie | 🕳️ niezdecydowane | otwarte — czy w ogóle w świecie | — |
 
@@ -100,9 +99,11 @@ połączonym z Taelią** — stąd „kwiatowy", losowo-piękny charakter blosso
 (jak zaglądanie w Pustkę). Możliwy związek z zasięgiem konkretnego Zewnętrznego Boga.
 
 #### Planeta Corellii ‹nazwa› — uporządkowana/świetlista · **Niski/offscreen**
-Lustro planety Pustki po stronie ładu. Dom **cuasahów** (Tai'Alain — świetliste ptaki
-uzdrowienia) i zapewne innych rodów „anielskich". Porządek absolutny → mało co się tu
-„dzieje" fabularnie, ale to skąd może przychodzić boska/uzdrowicielska interwencja.
+Lustro planety Pustki po stronie ładu. **Nie ma rozumnej rasy planetarnej** — zamiast tego
+świetlista **fauna Tai'Alain**: cuasahy (ptaki uzdrowienia), pyrausty i inne stworzenia na
+poziomie mentalnym **zwierząt**, nie rozumnych. Porządek absolutny → mało co się tu „dzieje"
+fabularnie, ale to skąd może przychodzić boska/uzdrowicielska interwencja i skąd bierze się
+świetlisty bestiariusz Corellii.
 
 ### C. Areny — dwie/trzy siły w patowej wojnie (2)
 
@@ -143,7 +144,7 @@ resztka w Nereneth). Miejsca-grobowce; źródło ruin, widm, „ostatnich ocala�
 |---|---|---|
 | **Nereneth** | ✅ tak | 2 planety (I: +Caithaloon/Ghalagaar; II: +Taelia = blossomici) |
 | **Pustka** | ✅ tak | 1 planeta (pochłonięta, zostaje) |
-| **Corellia** | ✅ tak | 1 planeta (świetlista, cuasahy) + arena wojny |
+| **Corellia** | ✅ tak | 1 planeta (świetlista, fauna Tai'Alain) + arena wojny |
 | **Otchłań** | ✖ (demony odchodzą) | arena kalów, arena wojny, martwe skały |
 | **Czeluść** | ✖ (wypluwa w kosmos) | współczynnik areny kalów |
 | **Caithaloon** | ✖ rozproszony | kawałek planety Nereneth I |
@@ -158,11 +159,14 @@ wchodzi bokiem — skażeniem, areną albo formą liminalną. Zgodne z Twoją ni
 
 ---
 
+**Cuasahy — rozstrzygnięte:** *nie* rozumna rasa, lecz **istoty na poziomie mentalnym
+zwierząt** (fauna Tai'Alain planety Corellii). Wykreślone z master-tabeli ras.
+
 ## Do decyzji
-1. **Nazwy** — 5 zrównoważonych (4 poza Saraverą), 2 Nereneth, Pustka, Corellia, kalów,
-   wojna, widmo, żywiołowa, 2–3 skały. Mogę zaproponować z fonotaktyk, jak zechcesz.
+1. **Nazwy planet = nazwy nadane przez alfy → fonotaktyka Nereneth** (`NerenethPhonotactic`
+   w kodzie, dopracowana: onsety s/v/l/r/qu/th, rdzenne nuklea ae/ea/oe/eo, kody r/l/n).
+   Do nazwania: 4 zrównoważone (poza Saraverą), 2 Nereneth, Pustka, Corellia, kalów, wojna,
+   widmo, żywiołowa, 2–3 skały. Propozycje niżej / mogę odpalić generator na większą pulę.
 2. **Ogry / Centaury / Selkie** — nadal otwarte: w świecie czy nie? (Jeśli tak — rodzime,
    wymiarowe czy z którejś planety?)
-3. **Cuasahy jako rasa** — potwierdzić awans z „bestia/Tai'Alain" do kontaktowalnej rasy
-   z planety Corellii, czy zostają tylko istotami/symbolem?
-4. **Martwe skały** — 2 czy 3, i czy któraś ma konkretny fabularny hak (ruina, ocalały).
+3. **Martwe skały** — 2 czy 3, i czy któraś ma konkretny fabularny hak (ruina, ocalały).
