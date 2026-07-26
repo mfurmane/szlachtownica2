@@ -1,125 +1,168 @@
 # Planety Wymiaru Materialnego i pochodzenie ras
 
 Przekrój rasowy planet, z którymi możliwy jest kontakt — potrzebny, bo przez Nereneth
-rasy mieszają się między planetami. **Propozycja/robocze** (ustalenia autora oznaczone
-✅; placeholdery nazw w `‹nawiasach›`).
+rasy mieszają się między planetami. Ustalenia autora oznaczone ✅; placeholdery nazw
+w `‹nawiasach›`.
 
 ## Zasady (mechanika)
 
 - **Wymiar Materialny = najmłodszy, sporny** (Leksykon): siły pozostałych wymiarów
   próbują go przekształcać na swoje podobieństwo. **Każda planeta to inny wynik tej
   walki** — „pogoda wymiarowa" mówi, który wymiar przecieka najmocniej.
-- **Prawo koncentracji → planeta vs region (rozwiązuje „czy całe planety").** Tylko
-  wymiary o **skoncentrowanej woli** (Nereneth, Pustka, Corellia) mogą zdominować **całą
-  planetę**. Wymiary **rozproszone** (Otchłań, Caithaloon, Czeluść, Ghalagaar, Taelia)
-  manifestują się **lokalnie** — jako skażone regiony/miejsca na planecie zrównoważonej,
-  nie jako całe światy. (To samo prawo, co przy Pakcie.) ✅ kierunek autora.
+- **Prawo koncentracji → kto może zdominować całą planetę.** Pełną dominację nad **całą
+  planetą** utrzymują tylko wymiary o **skoncentrowanej woli**: **Nereneth, Pustka,
+  Corellia**. Wymiary **rozproszone** (Otchłań, Caithaloon, Czeluść, Ghalagaar, Taelia,
+  Duchowy) **nigdy nie są jedynym właścicielem świata** — pojawiają się jako **skażenia,
+  kawałki, areny walki albo formy liminalne**. (To samo prawo, co przy Pakcie.) ✅
+- **Trzy postacie „nie-zdominowanej" planety:** (1) **zrównoważona** — wiele wymiarów
+  przecieka po trochu (jak Saravera); (2) **arena** — dwie/trzy siły toczą patową wojnę
+  (planeta kalów, planeta wiecznej wojny); (3) **liminalna/szczątkowa** — planeta pół
+  w innym planie albo martwa skała z ocalałym „echem" w innym wymiarze.
 - **Nereneth = wielki siewca i wspólny skwer.** Planeta zdominowana przez Nereneth
-  **fizycznie z nim sąsiaduje** → przejścia banalne. Tak alfy weszły w materię. Skutek:
-  rasy z miejsc Nereneth-sąsiedzkich **mieszają się** i **każdą łatwo spotkać w samym
-  Nereneth**. To definiuje „kontaktowalność". ✅
-- **Dwa mechanizmy kontaktu:** (1) **przez Nereneth** — wymiarowo, dla planet/lokacji
-  Nereneth-sąsiedzkich; (2) **fizyczny/portalowy podbój** — rzadszy, jak inwazja kalów.
-- **Mechanizm „nowej rasy z ingerencji":** potężny byt Natury/Taelii bywa, że
-  **przekształca lokalną populację w nową rasę** — peura (sorcas z Taelii na niziołkach
-  Leredii) i (roboczo) nagi (Matka Węży). To powtarzalny wzorzec, nie jednorazowy dziw.
+  **fizycznie z nim sąsiaduje** → przejścia banalne; tak alfy weszły w materię.
+  „Kontaktowalność" rasy = ma lokację **Nereneth-sąsiedzką** *albo* doszło do
+  podboju/portalu. ✅
+- **Mechanizm „nowej rasy z ingerencji"** (powtarzalny): potężny byt Natury/Taelii
+  przekształca lokalną populację w nową rasę. Kanon: **peura** (sorcas/Taelia na
+  niziołkach Leredii) i **nagi** (Matka Węży na wężach planety Saravery) ✅.
+- **Kontrast demony vs Pustka (ważny tematycznie):** demony **niszczą i odchodzą** do
+  Otchłani, gdy nie zostaje już nic do zniszczenia → po nich **martwe skały** z resztką
+  życia ocalałą w innych wymiarach. **Pustka zostaje** tam, gdzie wygrała → planeta
+  Pustki trwale martwa i obłąkana. **Czeluść** nie dominuje planet — **wypluwa pomioty
+  w przestrzeń kosmiczną** i liczy się głównie jako współczynnik na arenach (planeta kalów).
 
 ---
 
 ## Master-tabela pochodzenia ras
 
+**Sześć ras rodzimych planety Saravery** ✅. Peura = *odgałęzienie* niziołków (nie liczone
+osobno do szóstki).
+
 | Rasa | Status | Skąd | Gdzie spotkać |
 |---|---|---|---|
-| **Ludzie** | ✅ rodzime | planeta Saravery | wszędzie; Aldahar (NW) = byłe imperium ludzi |
-| **Niziołki** | ✅ rodzime | planeta Saravery | Saravera |
-| **Krasnoludy** | ✅ rodzime | planeta Saravery | Saravera, góry |
-| **Gnomy** | ✅ rodzime (magiczno-zależne) | planeta Saravery | Saravera; hodowane przez kalów |
-| **Torakka** | ✅ rodzime (insektoidy) | planeta Saravery, **NE** | NE Saravery; związek z Durrenburgiem/„Maszyną" |
+| **Ludzie** | ✅ rodzime (1/6) | planeta Saravery | wszędzie; Aldahar (NW) = byłe imperium ludzi |
+| **Niziołki** | ✅ rodzime (2/6) | planeta Saravery | Saravera, Leredia |
+| **Krasnoludy** | ✅ rodzime (3/6) | planeta Saravery | Saravera, góry |
+| **Gnomy** | ✅ rodzime (4/6) | planeta Saravery | Saravera; hodowane przez kalów |
+| **Torakka** | ✅ rodzime (5/6), insektoidy | planeta Saravery, **NE** | NE Saravery; związek z Durrenburgiem/„Maszyną" |
+| **Nagi** | ✅ rodzime (6/6), *stworzone* | **węże przetworzone przez Matkę Węży (Tuetuezaltla)** na planecie Saravery | ciepłe/wodne regiony Saravery |
+| — **Peura** | ✅ odgałęzienie niziołków | **sorcas (Taelia) na niziołkach Leredii** | Leredia, Zielona Rubież |
 | **Elfy** (quana'sear) | wymiarowe | **z Nereneth** (alfy weszły przejściem) | Saravera, Ernizjum, Serea Quealna, Nereneth |
-| — Alfy (kael'sear) | wymiarowe | Nereneth (przodkowie elfów) | Nereneth, dzikie lasy |
-| — Zelerowie, Tulfy | wymiarowe | gałęzie elfów (Nereneth) | j.w. |
+| — Alfy (kael'sear), Zelerowie, Tulfy | wymiarowe | gałęzie elfów (Nereneth) | Nereneth, dzikie lasy |
 | — **Dergowie** (dira'sear) | odmienione | **alfy pozostałe w Caithaloonie**, przemienione | Caithaloon |
-| **Peura** | lokalnie przetworzone | **sorcas (Taelia) na niziołkach Leredii** (Nereneth-land) | Leredia, Zielona Rubież |
-| **Blossomici** | planetarne (przez Nereneth) | **planeta Natury** → Leredia (~1459) ✅ | Leredia, przez Nereneth |
+| **Blossomici** | planetarne (przez Nereneth) | **planeta Natury** (Nereneth+Taelia) → Leredia (~1459) ✅ | Leredia, przez Nereneth |
 | **Kalowie** | planetarne (podbój) | **planeta kalów** | kontynent Saravery (ten sam co Saravera) ✅ |
 | **Cyklopi** | planetarne | planeta kalów | kontynent **SW** Saravery ✅ |
 | **Minotaury** | planetarne | planeta kalów | kontynent **SW** Saravery ✅ |
-| **Nagi** | 🔶 roboczo | **ingerencja Matki Węży** (Tuetuezaltla) — patrz niżej | (do ustalenia) |
+| **Cuasahy** (Tai'Alain) | 🔶 roboczo, planetarne | **planeta Corellii** — świetlisty ród „anielski" | offscreen; rzadkie zjawy uzdrowienia |
 | **Gobliny, Harpie** | wymiarowe (bestie) | Ghalagaar (Nereneth∩Otchłań) | dzicz, szczeliny; nie „rasa planetarna" |
-| Ogry, Centaury, Selkie | 🕳️ stub | otwarte | — |
+| Ogry, Centaury, Selkie | 🕳️ niezdecydowane | otwarte — czy w ogóle w świecie | — |
 
 ---
 
-## Roster planet kontaktowalnych
+## Roster planet i ciał (16 obiektów)
 
-Placeholdery nazw do Twojego nazwania. Skala kontaktu: **Wysoki** (łatwe przejścia
-Nereneth / fizyczna bliskość) · **Średni** · **Niski/offscreen**.
+Skala kontaktu: **Wysoki** (łatwe przejścia Nereneth / fizyczna bliskość) · **Średni** ·
+**Niski/offscreen**.
 
-### ✅ Planeta Saravery — zrównoważona, sporna (dom)
+### A. Zrównoważone (5) — życie, walka wymiarów trwa
+
+#### ✅ Planeta Saravery — dom · kontakt **Wysoki**
 Przecieka **wieloma wymiarami** → maksymalna bioróżnorodność i cały enchant-teren. Miejsca
 Nereneth-sąsiedzkie: **Leredia** i **Serea Quealna** (naturalne przejścia). Kontynenty:
 - **Saravera** + **kalowie** (ten sam kontynent → stałe zagrożenie).
-- **SW**: cyklopi + minotaury.
-- **NE**: torakka (rodzime).
+- **SW**: cyklopi + minotaury. · **NE**: torakka (rodzime).
 - **NW**: **Aldahar** — byłe imperium ludzi (zapędy ukrócone przez Armię Białej Gwiazdy).
 - **Biegun N**: Armia Białej Gwiazdy (nieumarli).
 
-### Planeta Natury ‹nazwa› — Nereneth-zrośnięta · kontakt **Wysoki**
-Nereneth zdominowało → fizycznie sąsiaduje z Nereneth, przejścia banalne. **Kolebka życia
-i siewca**; **ojczyzna blossomitów** ✅; jedno z łatwych wejść alf do materii. Rasy
-Nature-adjacent tu i w Nereneth mieszają się swobodnie.
+#### ‹cztery pozostałe zrównoważone› — kontakt **Średni/Niski**
+Życie jest, walka wymiarów jak na Saraverze, ale **kontakt tylko jeśli** mają lokację
+Nereneth-sąsiedzką albo doszło do podboju. Każdą można scharakteryzować **lekką lokalną
+przewagą** jednego wymiaru w wybranych regionach (bez pełnej dominacji). Inaczej „znane,
+że istnieją, minimalny kontakt".
 
-### Druga planeta Nereneth-zrośnięta ‹nazwa› — kontakt **Wysoki**
-Wariant powyższej (autor chce ~2). Może inny „smak" Natury (np. oceaniczno-bagienny —
-potencjalny dom/korzeń **nagów**, jeśli wybierzesz wariant „inna planeta").
+### B. Zdominowane przez wymiar skoncentrowany (4)
 
-### ~2–4 planety zrównoważone ‹nazwy› — kontakt **Średni/Niski**
-Życie jest, walka wymiarów trwa jak na Saraverze, ale **kontakt tylko jeśli** mają lokację
-Nereneth-sąsiedzką albo doszło do podboju. Inaczej „znane, że istnieją, minimalny kontakt".
-Każdą można scharakteryzować lekką przewagą jednego wymiaru w wybranych regionach.
+#### Planeta Nereneth I ‹nazwa› — + skażenie Caithaloonem (i może Ghalagaarem) · **Wysoki**
+Nereneth zdominowało → fizycznie sąsiaduje z Nereneth, przejścia banalne. Jedno z łatwych
+wejść alf w materię. **Kawałek przeżarty Caithaloonem** (marzenno-koszmarne strefy),
+lokalnie może i **Ghalagaarem** (dzicz na styku Nereneth∩Otchłań). Dobre źródło „dziwnych"
+wariantów ras Nereneth-adjacent.
 
-### ✅ Planeta kalów ‹nazwa› — okrucieństwo/rozproszona destrukcja · kontakt **Niski/offscreen**
-Wykształciły się tam **tylko trzy rasy: kalowie, cyklopi, minotaury** ✅. **Kalowie szybko
-stali się hamulcem** — zdusili dalszy rozwój ✅. Monokultura okrucieństwa; źródło inwazji;
-grozi sprowadzeniem Pustki. Głównie za kulisami.
+#### Planeta Natury / Nereneth II ‹nazwa› — Nereneth + kawałek Taelii · **Wysoki**
+**Ojczyzna blossomitów** ✅. Nereneth-zrośnięta (przejścia banalne), z **regionem
+połączonym z Taelią** — stąd „kwiatowy", losowo-piękny charakter blossomitów. Kolebka
+życia i siewca; rasy Nature-adjacent mieszają się swobodnie tu i w samym Nereneth.
 
-### Planeta pochłonięta przez Pustkę ‹nazwa› — kontakt **Niski (i lepiej, żeby został)**
-Świat, który Pustka „wygrała": martwy, obłąkany, wyjałowiony z sensu. **Ostrzeżenie**,
-dokąd prowadzi droga kalów i Zug-Caiony. Kontakt sam w sobie niebezpieczny (jak zaglądanie
-w Pustkę). Możliwy związek z zasięgiem konkretnego Zewnętrznego Boga.
+#### Planeta Pustki ‹nazwa› — w pełni pochłonięta · **Niski (i lepiej, żeby został)**
+Świat, który Pustka „wygrała" i **została**: martwy, obłąkany, wyjałowiony z sensu.
+**Ostrzeżenie**, dokąd prowadzi droga kalów i Zug-Caiony. Kontakt sam w sobie niebezpieczny
+(jak zaglądanie w Pustkę). Możliwy związek z zasięgiem konkretnego Zewnętrznego Boga.
 
-### (opcjonalnie) Planeta Corellii ‹nazwa› — uporządkowana/świetlista
-Lustro planety Pustki po stronie ładu (prawo koncentracji dopuszcza dominację Corellii nad
-całą planetą). Autor nie prosił wprost — do rozważenia dla symetrii.
+#### Planeta Corellii ‹nazwa› — uporządkowana/świetlista · **Niski/offscreen**
+Lustro planety Pustki po stronie ładu. Dom **cuasahów** (Tai'Alain — świetliste ptaki
+uzdrowienia) i zapewne innych rodów „anielskich". Porządek absolutny → mało co się tu
+„dzieje" fabularnie, ale to skąd może przychodzić boska/uzdrowicielska interwencja.
 
-**Uwaga o „miejscach przesiąkniętych":** dla wymiarów **rozproszonych** (Otchłań,
-Caithaloon, Czeluść, Ghalagaar, Taelia) saturacja to **regiony/miejsca**, nie planety —
-np. skażony las, przeklęta kotlina, szczelina. Twoja intuicja „nie całe planety" jest
-trafna właśnie dla nich.
+### C. Areny — dwie/trzy siły w patowej wojnie (2)
+
+#### ✅ Planeta kalów ‹nazwa› — arena Pustki × Otchłani × Czeluści · **Niski/offscreen**
+Nie zdominowana przez jeden wymiar — **arena starć trzech sił destrukcji**. Wykształciły
+się tam **tylko trzy rasy: kalowie, cyklopi, minotaury** ✅; **kalowie szybko stali się
+hamulcem** rozwoju ✅. Monokultura okrucieństwa; źródło inwazji; grozi ściągnięciem Pustki
+(gdyby ta „wygrała" arenę — świat by po niej został, w odróżnieniu od Czeluści/Otchłani).
+
+#### Planeta wiecznej wojny ‹nazwa› — Corellia × Otchłań · **Niski**
+Ład i demony w **patowej, nie kończącej się wojnie**. Żadna strona nie może dobić —
+Corellia odbudowuje, demony niszczą. Krajobraz blizn i cudów naraz; potencjalne źródło
+zahartowanych wojowników/relikwii obu obozów.
+
+### D. Liminalne i szczątkowe — głos wymiarów rozproszonych, zwł. Duchowego (3+)
+
+#### Widmo ‹nazwa› — pół w planie materialnym, pół w duchowym · **Średni (dla duchowych)**
+Planeta istniejąca **jednocześnie w dwóch planach**; z materii widać ją jak zjawę.
+Tu **Wymiar Duchowy** ma swój znaczny udział (bez łamania prawa koncentracji — nie
+„posiada" świata, lecz **współistnieje** w liminalnym rozszczepieniu). Naturalne miejsce
+spotkań z duchami, przodkami, szamańskimi patronami.
+
+#### Planeta żywiołowa ‹nazwa› — duchy żywiołów, przesiąknięta Duchowym · **Niski/Średni**
+Zamieszkana głównie przez **duchy żywiołów**, silnie **przesiąknięta Wymiarem Duchowym**.
+Drugi kanał, którym Duchowy „mówi" w rosterze. Źródło żywiołaków, paktów szamańskich,
+egzotycznych reagentów.
+
+#### 2–3 martwe skały ‹nazwy› — po demonach · **Niski/offscreen**
+Światy **zmiecione przez demony**, które **odeszły do Otchłani**, gdy nie zostało już nic
+do zniszczenia. Fizycznie martwe, ale **coś ocalało w innych wymiarach** (echo w Duchowym,
+resztka w Nereneth). Miejsca-grobowce; źródło ruin, widm, „ostatnich ocalałych".
 
 ---
 
-## Nagi — trzy warianty (rekomendacja)
+## Rozkład wymiarów na rosterze (kontrola spójności)
 
-Nagi silnie kojarzą się z **Matką Węży (Tuetuezaltla)** — Aspektem Natury. Warianty:
-- **(a) Ingerencja Matki Węży na planecie Saravery** — nagi jako *lokalnie przetworzona*
-  rasa (jak peura z sorcas), w ciepłym/wodnym regionie. **Rekomenduję.** Zalety: idealny
-  **parallel do peury** (potężny byt Natury/Taelii przekształca lokalną populację), trzyma
-  nagów na Saraverze (kontaktowalni, w świecie fabuły), spina z **motywem węża** (Żmija,
-  Sarrazin, Bractwo Kobry). Mechanizm: Matka Węży wyniosła/przekształciła gady ku
-  świadomości.
-- **(b) Ingerencja Matki Węży na planecie Natury/blossomitów** — nagi obcy, przez Nereneth.
-  Dokłada do wieloplanetarności, ale oddala ich od fabuły Saravery.
-- **(c) Wprost z Nereneth** — Twoja wątpliwość jest słuszna: byt „wprost z Nereneth" bliższy
-  jest pradawnemu/duchowi natury niż śmiertelnej rasie; (a) daje czystszą rasę grywalną.
+| Wymiar | Może dominować planetę? | Obecność w rosterze |
+|---|---|---|
+| **Nereneth** | ✅ tak | 2 planety (I: +Caithaloon/Ghalagaar; II: +Taelia = blossomici) |
+| **Pustka** | ✅ tak | 1 planeta (pochłonięta, zostaje) |
+| **Corellia** | ✅ tak | 1 planeta (świetlista, cuasahy) + arena wojny |
+| **Otchłań** | ✖ (demony odchodzą) | arena kalów, arena wojny, martwe skały |
+| **Czeluść** | ✖ (wypluwa w kosmos) | współczynnik areny kalów |
+| **Caithaloon** | ✖ rozproszony | kawałek planety Nereneth I |
+| **Ghalagaar** | ✖ rozproszony | ewentualny kawałek planety Nereneth I |
+| **Taelia** | ✖ rozproszony | kawałek planety Nereneth II; sorcas→peura na Saraverze |
+| **Duchowy** | ✖ rozproszony, ale znaczny | widmo (pół-plan), planeta żywiołowa, echa na martwych skałach |
+| **Materialny** | (tło) | wszystkie |
 
-Roboczo w tabeli przyjąłem **(a)**; łatwo przełączyć, gdy zdecydujesz.
+Prawo koncentracji trzyma: **pełną planetę biorą tylko Nereneth/Pustka/Corellia**; reszta
+wchodzi bokiem — skażeniem, areną albo formą liminalną. Zgodne z Twoją niechęcią do
+„planety w pełni Taelii/Ghalagaaru/Czeluści/Caithaloonu".
 
 ---
 
 ## Do decyzji
-1. **Nagi** — wariant (a) / (b) / (c)?
-2. **Nazwy planet** (placeholdery ‹nazwa›) + ile dokładnie zrównoważonych (4–6) i czy druga
-   Nereneth-zrośnięta.
-3. **Planeta Corellii** — dodać dla symetrii z Pustką, czy pominąć?
-4. Status stubów: Ogry / Centaury / Selkie — rodzime, wymiarowe czy planetarne?
+1. **Nazwy** — 5 zrównoważonych (4 poza Saraverą), 2 Nereneth, Pustka, Corellia, kalów,
+   wojna, widmo, żywiołowa, 2–3 skały. Mogę zaproponować z fonotaktyk, jak zechcesz.
+2. **Ogry / Centaury / Selkie** — nadal otwarte: w świecie czy nie? (Jeśli tak — rodzime,
+   wymiarowe czy z którejś planety?)
+3. **Cuasahy jako rasa** — potwierdzić awans z „bestia/Tai'Alain" do kontaktowalnej rasy
+   z planety Corellii, czy zostają tylko istotami/symbolem?
+4. **Martwe skały** — 2 czy 3, i czy któraś ma konkretny fabularny hak (ruina, ocalały).

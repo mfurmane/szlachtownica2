@@ -62,10 +62,32 @@ Log decyzji autora zapadających w trakcie weryfikacji spójności. Uzupełnia
 - **Geografia planety Saravery ✅:** kalowie na **tym samym kontynencie** co Saravera;
   cyklopi + minotaury na kontynencie **SW**; torakka rodzime na **NE**; **Aldahar (NW)** =
   byłe imperium ludzi; Leredia i Serea Quealna **sprzężone z Nereneth** (naturalne przejścia).
-- **Roster planet:** ~4–6 zrównoważonych, ~2 Nereneth-zrośnięte (jedna = ojczyzna
-  blossomitów), planeta kalów, **planeta pochłonięta przez Pustkę** (ostrzeżenie), opcjonalnie
-  planeta Corellii dla symetrii. Nazwy, dokładna liczba i wariant nagów — **do decyzji autora**
-  (patrz `Planety i pochodzenie ras.md`, sekcja „Do decyzji").
+- **Nagi ✅ ROZSTRZYGNIĘTE:** rasa **stworzona z węży przez Matkę Węży (Tuetuezaltla)**
+  na **planecie Saravery** (wariant a). Domyka szóstkę ras rodzimych.
+- **Sześć ras rodzimych planety Saravery ✅:** Ludzie, Niziołki, Krasnoludy, Gnomy,
+  Torakka, **Nagi**. Peura = *odgałęzienie* niziołków (nie liczone do szóstki).
+
+### Roster planet — pełna struktura ✅
+Zamiast luźnego „4–6" — 16 obiektów, podporządkowanych prawu koncentracji (pełną planetę
+biorą TYLKO Nereneth/Pustka/Corellia; reszta wchodzi skażeniem, areną albo formą liminalną):
+- **5 zrównoważonych** (w tym planeta Saravery); każda z lekką lokalną przewagą wymiaru.
+- **2 planety Nereneth:** I — skażona Caithaloonem (i może Ghalagaarem); II — z kawałkiem
+  Taelii, **ojczyzna blossomitów**.
+- **1 planeta Pustki** (pochłonięta, Pustka **zostaje**).
+- **1 planeta Corellii** (świetlista) — roboczo ojczyzna **cuasahów** (Tai'Alain).
+- **1 planeta kalów** — **arena Pustki × Otchłani × Czeluści**; tylko 3 rasy (kalowie/
+  cyklopi/minotaury), kalowie = hamulec.
+- **1 planeta wiecznej wojny** — Corellia × Otchłań (pat).
+- **1 widmo** — pół w planie materialnym, pół w duchowym.
+- **1 planeta żywiołowa** — duchy żywiołów, przesiąknięta Wymiarem Duchowym.
+- **2–3 martwe skały** — zmiecione przez demony (odeszły do Otchłani, gdy nie zostało nic
+  do zniszczenia), coś ocalało w innych wymiarach.
+- **Zasady dodatkowe ✅:** Czeluść **nie dominuje planet** — wypluwa pomioty w kosmos.
+  Demony **niszczą i odchodzą**; Pustka **zostaje** (kontrast). **Wymiar Duchowy** —
+  rozproszony, więc nie posiada świata, ale ma **znaczny wpływ** przez formy liminalne
+  (widmo, planeta żywiołowa, echa na martwych skałach).
+- **Otwarte:** nazwy planet; Ogry/Centaury/Selkie (czy w ogóle w świecie); awans cuasahów
+  do rangi kontaktowalnej rasy. Patrz `Planety i pochodzenie ras.md` § „Do decyzji".
 
 ### Fallon II Ostatni — koniec monarchii, początek Rady
 - Fallon II ma poglądy **demokratyczne**. Z jego inicjatywy **zniesiona zostaje
