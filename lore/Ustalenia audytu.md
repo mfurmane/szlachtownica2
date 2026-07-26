@@ -42,6 +42,31 @@ Log decyzji autora zapadających w trakcie weryfikacji spójności. Uzupełnia
   śmierci Corellii). **Potężny smok** jako patron Taelii — rozważany (spójny: Taelia
   rozproszona, self-made patron ma sens).
 
+### Planety Wymiaru Materialnego i pochodzenie ras
+- **Prawo koncentracji rozstrzyga „czy całe planety".** Całą planetę dominują tylko
+  wymiary o **skoncentrowanej woli** — Nereneth, Pustka, Corellia. Wymiary **rozproszone**
+  (Otchłań, Caithaloon, Czeluść, Ghalagaar, Taelia) saturują tylko **regiony/miejsca**, nie
+  światy. To samo prawo, co przy Pakcie i rosterze patronów.
+- **Nereneth = siewca i wspólny skwer.** Planeta zdominowana przez Nereneth **fizycznie
+  z nim sąsiaduje** → przejścia banalne; tak alfy weszły w materię. „Kontaktowalność" rasy =
+  ma lokację Nereneth-sąsiedzką **lub** doszło do podboju/portalowego kontaktu.
+- **Mechanizm „nowej rasy z ingerencji"** (powtarzalny): potężny byt Natury/Taelii
+  przekształca lokalną populację w nową rasę. Kanon: **peura = sorcas (Taelia) na
+  niziołkach Leredii**. Roboczo **nagi = ingerencja Matki Węży (Tuetuezaltla)**.
+- **Pochodzenie ras (kanon ✅):** rodzime na planecie Saravery — **ludzie, niziołki,
+  krasnoludy, gnomy (czysto rodzime), torakka (NE, insektoidy)**. Elfy/alfy — **z Nereneth**.
+  **Blossomici — z planety Natury** (Nereneth-zrośniętej), przez Nereneth do Leredii (~1459).
+  Peura — lokalnie z niziołków Leredii. **Kalowie, cyklopi, minotaury — z planety kalów**;
+  na tej planecie **wykształciły się tylko te trzy rasy**, a **kalowie szybko stali się
+  hamulcem** rozwoju. Nagi — roboczo Matka Węży (wariant do wyboru).
+- **Geografia planety Saravery ✅:** kalowie na **tym samym kontynencie** co Saravera;
+  cyklopi + minotaury na kontynencie **SW**; torakka rodzime na **NE**; **Aldahar (NW)** =
+  byłe imperium ludzi; Leredia i Serea Quealna **sprzężone z Nereneth** (naturalne przejścia).
+- **Roster planet:** ~4–6 zrównoważonych, ~2 Nereneth-zrośnięte (jedna = ojczyzna
+  blossomitów), planeta kalów, **planeta pochłonięta przez Pustkę** (ostrzeżenie), opcjonalnie
+  planeta Corellii dla symetrii. Nazwy, dokładna liczba i wariant nagów — **do decyzji autora**
+  (patrz `Planety i pochodzenie ras.md`, sekcja „Do decyzji").
+
 ### Fallon II Ostatni — koniec monarchii, początek Rady
 - Fallon II ma poglądy **demokratyczne**. Z jego inicjatywy **zniesiona zostaje
   monarchia** — stąd przydomek „Ostatni".
