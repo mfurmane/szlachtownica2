@@ -75,6 +75,7 @@ rzecz, której samo wyczucie nie ogarnia, a która najmocniej sprzedaje „prawd
 | Saraverski | Saravera | (lingua franca powieści) | ✅ fonotaktyka / ⚠️ końcówki |
 | Ernizyjski | Ernizjum | Wornimore, Alstederia | 🔶 słownik + kopia Saravery |
 | **Pradawny** (=Pierwotny) | Nereneth | Caithaloon, domena Serbeny, Leredia, Zielona Rubież | ✅ pełny (słownik==kod) |
+| **Język Aspektów** (roboczo) | Aspekty Natury (nie-geograficzny) | Cesarstwo Tuexucańskie, Pocisearna (nagi) | 🔶 korpus bogaty (12+ imion), fonotaktyka proponowana |
 | Caithalooński | Caithaloon | — | 🔶 słownik (leksyka+koniugacja), brak fonotaktyki |
 | Zewnętrzny | Pustka | Caithaloon, Czeluść | 🕳️ minimalny |
 | Otchłanny | Otchłań, Czeluść | — | 🕳️ 1 próbka |
@@ -121,6 +122,18 @@ Słownik i kod (`NerenethPhonotactic`) są **zgodne** — to najlepiej rozwinię
 **Rdzenie znane:** `sear` = lud/naród · `na` = tu · `sue` = co · `caerna` = robisz ·
 `kaesa` = dom · `quealna` = ojczyzna · `serea(n)` = nowy/-a. Stąd **`Serea Quealna`** =
 „Nowa Ojczyzna" (nazwa kraju) i cały system `X'sear` (patrz Warstwa II — elfy).
+
+**⚠️ Złożenia z apostrofem (`określnik'rdzeń`) — luka generatora (ustalenie autora).**
+Apostrof w `kael'sear, quana'sear, dira'sear, zalea'sear, teial'sear` oraz `cor-osi'ale`
+**to nie ozdobnik, lecz szew złożenia Pradawnego** — łączy rdzeń-określnik z rdzeniem-
+rzeczownikiem (systematyczny człon: `'sear` = „-lud"). Skoro to nazwy *w Pradawnym*,
+fonotaktyka/morfologia Pradawnego musi umieć je **generować**. Dziś nie umie:
+`NerenethMorphology.applyEnding()` dokleja wyłącznie pusty przyrostek — brak reguły
+złożeń. **Zakres poprawki wąski:** osobny generator złożeń `rdzeń + ' + rdzeń` dla nazw
+zbiorowych/krainowych („lud X", „kraina X"), wywoływany dla `WordType` typu ETHNONYM/
+PLACE — **nie** dla imion osobowych (Aelervel, Vaviraen apostrofu nie mają, i słusznie).
+Apostrof medialny w `car'an-/kza'v-` to osobna sprawa (sygnatura Caithaloońskiego, niżej),
+nie mylić z apostrofem-złożeniem Pradawnego.
 
 ## Saraverski (ludzie, lingua franca) — ✅ fonotaktyka, ⚠️ końcówki toponimów
 
@@ -218,6 +231,35 @@ Słownik + próbki z powieści dają wyraźny obraz:
 - **Otchłanny** (mowa demonów, odrębna od Pustki): 1 próbka `Gooth nwraghaz!`. Cechy:
   klastry `nwr, gh`, długie `oo`, końcówki `-az/-az`. Maelius zna otchłanny, ale nie
   pradawny — to dwa różne języki (demon ≠ pradawny lud).
+
+## Język Aspektów (pierwotny sakralny; nagi) — 🔶 korpus bogaty, fonotaktyka proponowana
+
+**Ustalenie autora (nowe).** Imiona Aspektów Natury nie są Pradawnym — to **osobny,
+spójny język** w stylu **inkasko-majańsko-azteckim (nahuatl)**. Aspekty są „równie stare
+co samo Nereneth" i są jego tytanami, więc język należy do *sfery* Nereneth jako wymiaru,
+ale to odrębny **ród/rejestr** niż elficki wernakular (Pradawny). Roboczo **„język
+Aspektów"** — nie „pierwotny" (za blisko „pradawnego") ani „tuexucański" (zbyt wiąże z
+nagami zamiast z Aspektami). **Nagi go używają, ale nie są jego właścicielem** — to język
+ich patronek. Kanon lore: obie kultury nag czczą aztecko-nazwane Aspekty (Cesarstwo
+Tuexucańskie — bagna, arcykapłani Tuetuezaltli/Xuxucoatli/Yocaquecuy; Pocisearna —
+wyspy, Xohuepoca/Quatlacoqua/Taika).
+
+- **Korpus (12 Aspektów + patroni nag):** Huelocatla, Xomocutla, Omotlacoqua, Xuxucoatla,
+  Yocaquecua, Tuetuezaltla, Quehualoca, Coacoaitla, Quinahuipoca, Quatlacoqua, Xohuepoca,
+  Yuaxomoatla. (Por. nota w „Zewnętrzni Bogowie": Pierwotni kontrastują brzmieniem azteckim.)
+- **Onset:** `qu, x, t, c, h, hu, y, m, n, l, p, z, w` + medialne zbitki `tl, tz, ch`
+  (X**omo**cutla, Que**hua**loca, Coa**c**oaitla).
+- **Nucleus:** pełny `a, o, e, i, u` + **bardzo częste dyftongi** `ua, ue, oa, ui, ia, au`
+  (Q**ue**h**ua**loca, C**oa**c**oa**itla, Quinah**ui**poca) — to one dają aztecki „ślizg".
+- **Coda:** przeważnie **otwarte**; medialnie `tl, tz, lt, c`; **końcówki-sygnatury**
+  `-atla, -tla, -oqua, -qua, -ecua, -cua, -oca, -poca` (Tuetuez**altla**, Omotlac**oqua**,
+  Yocaqu**ecua**, Quinahu**ipoca**).
+- **Sygnatura:** długie słowa (4–5 sylab), `tl/tz/x`, `hua/hue`, samogłoskowo gęste,
+  końcówki `-tla/-oqua/-ecua`. Maksymalny kontrast do Pradawnego (dyftongi `ae/ea`, płynne,
+  apostrof-złożenie) i do „złych" języków (Otchłanny/Zewnętrzny: klastry, apostrof-szew).
+- **Do implementacji:** nowa `AspectPhonotactic` (roboczo) zaseedowana z korpusu; brak
+  apostrofu (odróżnia od Pradawnego i Caithaloońskiego). Nazwy nag/imperium (miasta
+  Tuexucanu, tytuły arcykapłanów) generować tym językiem.
 
 ## Pozostałe stuby (Kalarski, Aldaharski, Leredyjski, Irwitański, Mestilski, Durrenburdzki)
 
@@ -327,6 +369,26 @@ kolumna „Niziołki".)
 
 Nazwy z natury/roślin (Zielona Wiśnia, Cny Miłorząb), region Leredia/Zielona Rubież.
 
+## Nagi — dwie kultury, dwa rejestry nazewnicze
+
+Nagi (rasa stworzona z węży przez Matkę Węży — patrz `Planety i pochodzenie ras.md`)
+posługują się **językiem Aspektów** (patrz Warstwa I), ale dwie kultury robią to inaczej:
+
+1. **Cesarstwo Tuexucańskie** (bagna na północ od Kalary; teokracja arcykapłanów
+   Tuetuezaltli/Xuxucoatli/Yocaquecuy; piramidy schodkowe, kult śmierci). **Rejestr
+   czysto aztecki** — toponimy, tytuły i imiona z języka Aspektów (końcówki `-tla/-oqua/
+   -poca`). Sama nazwa „Tuexucan" pasuje do sygnatury (`x`, `-can`).
+2. **Pocisearna** („Tutaj ludu Poci"; wyspiarskie królestwo na zachód od Aldaharu; kult
+   Xohuepoci/Quatlacoquy/Taiki i geniuszy wody). **Rejestr mieszany/dwujęzyczny:** religia
+   aztecka, ale **sama nazwa krainy jest Pradawna** — `Poci` + `sear` (lud) + `-na` (tu) =
+   „Tu, lud Poci", ta sama morfologia co `Serea Quealna` i `X'sear`. To onomastyczny ślad
+   **asymilacji z alfami/elfami** (Pocisearna leży blisko sfery elfiej — Aldahar/Serea
+   Quealna). Wniosek: wodne nagi nazywają rzeczy świeckie/krainowe po Pradawnemu, a
+   sakralne (patronki, kapłani) po azteckiemu — bilingwizm sakralno-świecki.
+
+Wskazówka generatywna: Tuexucan → wszystko z `AspectPhonotactic`; Pocisearna → sakralne z
+`AspectPhonotactic`, świeckie/krainowe przez Pradawny + złożenie `'sear`/`-na`.
+
 ## Zewnętrzni Bogowie — onomastyka grozy
 
 8 imion (Leksykon): **Azrathun, Zegorath, Cai'chaguth, Izgarthul, Yuthogora, Aik'Thara,
@@ -334,7 +396,7 @@ Zug-Caiona, Sla'chargatha.** Sygnatura: apostrof (`Cai'chaguth, Aik'Thara,
 Sla'chargatha`), zbitki `thr/chg/rg/thg`, końcówki `-th/-thun/-gorath/-thul/-thara`,
 łączenie z tytułem-epitetem („Martwa Gwiazda o Białym Świetle"). Mają być **trudne do
 wymówienia** — to celowe (kontakt z Pustką kaleczy). Pierwotni Bogowie kontrastują
-brzmieniem azteckim (Coacoaitla, Yuaxomoatla).
+brzmieniem azteckim (Coacoaitla, Yuaxomoatla) — to **język Aspektów**, patrz Warstwa I.
 
 ---
 
@@ -361,6 +423,13 @@ brzmieniem azteckim (Coacoaitla, Yuaxomoatla).
    wymiar = *Nereneth*).
 6. **Dodać `WordType.RIVER`** (hydronimy `-ora/-ara`) i rejestr gnomich/krasnoludzkich
    końcówek osobno od saraverskich.
+7. **🆕 Apostrof-złożenie w Pradawnym (`X'sear`).** Dorobić generator złożeń
+   `rdzeń + ' + rdzeń` w `NerenethMorphology` dla nazw zbiorowych/krainowych (ETHNONYM/
+   PLACE); dziś `applyEnding` daje tylko pusty przyrostek. Nie ruszać imion osobowych.
+8. **🆕 Język Aspektów — nowa `AspectPhonotactic`.** Zaseedować z 12 imion Aspektów
+   (nahuatl: `tl/tz/x/hua`, końcówki `-atla/-oqua/-ecua`), dopisać do słownika jako osobny
+   język. Nazwać go na stałe (roboczo „język Aspektów"). Wpiąć jako rejestr nazewniczy nag
+   (Tuexucan — czysto; Pocisearna — sakralnie, świeckie po Pradawnemu).
 
 ## Kolejność wdrożenia (proponowana)
 
