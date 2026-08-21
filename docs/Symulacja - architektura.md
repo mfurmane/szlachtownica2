@@ -50,24 +50,41 @@ zdarzenia**. Rozmiar kroku przestaje istnieć.
 
 Dzięki temu zmiana struktury osad/populacji dotyka warstwy agregatowej, nie kolejki szlachty.
 
-## 5. Historia i odbijanie alternatyw ✅ (event sourcing)
+## 5. Historia i odbijanie alternatyw ✅ (zapis stanu, BEZ determinizmu)
 
 Wymóg autora: **przeglądać stan na mapie w dowolnym momencie historii, w każdą stronę**, oraz
-**cofnąć się do daty i wygenerować od niej alternatywną ścieżkę**. To determinuje szkielet:
+**cofnąć się do daty i wygenerować od niej alternatywną ścieżkę** (świeże losowania → inny
+wynik).
 
-- **Ziarno (seed) + snapshot początkowy + append-only log zdarzeń/decyzji** = pełna,
-  odtwarzalna linia czasu.
-- **Keyframe'y (snapshoty stanu) co interwał** (np. co rok) — żeby skok do przeszłości nie
-  odgrywał od zera: `stan(data) = najbliższy wcześniejszy keyframe + replay do daty`.
-- **Odbicie alternatywy = fork** od keyframe'u/daty: kopiujemy stan z tego punktu i jedziemy
-  dalej (inne ziarno lub dalsze losowania) jako **nowa linia czasu**.
-- **Warunki konieczne determinizmu:** (a) **RNG z ziarna, odtwarzalny** (najlepiej per-strumień,
-  np. per prowincja/rok, żeby fork nie rozjeżdżał niepowiązanych losowań); (b) **stabilny
-  porządek zdarzeń** o tej samej dacie — zrobione w `EventManager` (tie-break po numerze
-  rejestracji).
+**Determinizm RNG odrzucony (ustalenie autora) — bo kłóci się z celem.** Rozplątanie trzech
+rzeczy, które łatwo pomylić:
+1. **oglądanie już rozegranej przeszłości** — cofasz się do 1300 i widzisz, co *się stało*;
+2. **świeże losowania na forku** — alt-linia musi wypaść inaczej;
+3. **zdefiniowana kolejność zdarzeń z tej samej daty** — spójność, nie losowość kopca.
 
-To nie jest „pauza + wyłączenie aplikacji + wznowienie" — to **generujemy raz i swobodnie
-przeglądamy/odbijamy**.
+Determinizm RNG byłby potrzebny **tylko** dla realizacji pkt 1 metodą „replay z ziarna" — a ta
+metoda jest **sprzeczna** z pkt 2 (to samo ziarno → to samo). Dlatego:
+
+- **Realizujemy pkt 1 przez ZAPIS STANU, nie replay-z-ziarna.** Keyframe'y (snapshoty) co
+  interwał (np. co rok) + zapis zmian między nimi. `stan(data)` = najbliższy keyframe (+ ew.
+  odtworzenie **zapisanych** zmian, nie przeliczanie od nowa). Skok w przeszłość = wczytanie.
+- **Fork = klon stanu z daty + dalsze losowania ze ŚWIEŻYM RNG** → nowa linia czasu. O to
+  właśnie chodzi w „resecie od daty".
+- **RNG:** jedno źródło, **ziarno świeże per uruchomienie/fork** (z entropii). Zero seedowania
+  pod odtwarzalność.
+- **„Szyny" niezależne od losowań:** zdarzenia, które *muszą* zajść (narodziny postaci
+  historycznych, wojny) to **zaplanowane zdarzenia z datą** w kolejce — odpalają się mimo
+  różnych losowań. Sweepy stochastyczne wypełniają emergentną resztę i to ona różni forki.
+- **Tie-break w `EventManager`** (numer rejestracji) zostaje — ale to **pkt 3** (zdefiniowana
+  kolejność same-date), **nie** determinizm losowań.
+
+Koszt tej drogi to tylko miejsce na zapisany stan; przy LOD z pkt 4 (agregaty + zdarzenia
+nazwanych) keyframe/rok + log zmian wystarcza. To nie „pauza + wyłączenie + wznowienie" —
+**generujemy raz i swobodnie przeglądamy/odbijamy**.
+
+**Otwarte (szyny vs emergencja):** co, gdy fork podkopie warunki wstępne szyny (postać ma się
+urodzić w 1400, ale jej rodzice zginęli w alt-linii w 1380)? Odpalać szynę na siłę czy pozwolić
+„nie zajść"? Do rozstrzygnięcia przy listach — nie blokuje szkieletu.
 
 ## 6. Sterowanie ✅
 
@@ -103,8 +120,8 @@ Dla każdego procesu opisz cztery rzeczy — to wystarcza, by go wpiąć:
     `time <= now`;
   - `ArrayList` + skan liniowy → **`PriorityQueue`** po (czas, sekwencja), z obsługą kaskad
     tego samego dnia (zdarzenie z `act()` może dorzucić kolejne);
-  - stabilny tie-break pod replay (pkt 5).
+  - tie-break dla zdefiniowanej kolejności same-date (pkt 5.3), **nie** pod determinizm losowań.
 - **Do zrobienia (po listach autora):** ujednolicić `Calendar`/`LocalDate`; baza
   `RecurringEvent` (self-reschedule) dla sweepów; cienki driver + endpointy sterowania;
-  warstwa snapshot/keyframe + seedowany RNG; rozdział worldgen→snapshot→sim; wypełnić
-  `registerEventsFor` (odtwarzanie zdarzeń z danych).
+  warstwa snapshot/keyframe (zapis stanu, świeży RNG na forku); rozdział worldgen→snapshot→sim;
+  wypełnić `registerEventsFor` (odtwarzanie zdarzeń z danych).

@@ -14,9 +14,10 @@ public class EventManager {
 
     /**
      * Kolejka przyszłych zdarzeń uporządkowana po (czas, kolejność rejestracji).
-     * Stabilny tie-break (sequence) daje deterministyczny porządek dla zdarzeń o tej
-     * samej dacie — warunek konieczny pod odtwarzalny replay (odbijanie alternatywnych
-     * linii czasu z tej samej daty i ziarna).
+     * Tie-break po numerze rejestracji daje zdarzeniom o tej samej dacie
+     * **zdefiniowaną kolejność** (a nie zależną od wnętrza kopca) — spójność
+     * zachowania symulacji. To NIE ma związku z odtwarzalnością losowań: RNG jest
+     * świeży per uruchomienie/fork, żeby alternatywne linie czasu wypadały inaczej.
      */
     private final PriorityQueue<Scheduled> queue = new PriorityQueue<>(
             Comparator.comparing((Scheduled s) -> s.event().getTime())
