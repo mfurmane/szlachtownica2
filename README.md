@@ -6,7 +6,7 @@ Docelowo ma symulować pełną historię rozwoju królestwa (osadnictwo, handel,
 
 Obecnie generuje geografię świata. Prowincje mają odgórnie zadane granice, a na podprowincje i regiony dzieli je diagram Voronoi. Każdy region dostaje konfigurację (klimat, wilgotność, ukształtowanie terenu, zalesienie), na której mają się później opierać osadnictwo i handel.
 
-![Mapa regionów we frontendzie: przełączanie trybów legendy, parametry regionu pod kursorem i podświetlanie kategorii z legendy](docs/demo.gif)
+![Mapa regionów we frontendzie: przełączanie trybów legendy, szczegóły klikniętego regionu i podświetlanie wybranej kategorii](docs/demo.gif)
 
 Nazwy miejsc i postaci w kilku sztucznych językach powstają z reguł fonotaktyki i morfologii. Gotowe są `ErnizjumPhonotactic` i `NerenethPhonotactic`, reszta to na razie stuby. Nazwy ludowe generuje osobno `VillageNameGenerator`.
 
