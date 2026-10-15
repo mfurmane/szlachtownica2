@@ -2,15 +2,13 @@ package priv.mfurmane.szlachtownica.api.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wololo.geojson.Geometry;
 import org.wololo.jts2geojson.GeoJSONWriter;
 import priv.mfurmane.szlachtownica.api.dto.Place;
 import priv.mfurmane.szlachtownica.api.dto.Province;
 import priv.mfurmane.szlachtownica.api.dto.Region;
 import priv.mfurmane.szlachtownica.api.dto.SubProvince;
-import priv.mfurmane.szlachtownica.engine.MainEngine;
+import priv.mfurmane.szlachtownica.engine.registry.PlaceRegistry;
 import priv.mfurmane.szlachtownica.engine.registry.ProvinceRegistry;
-import priv.mfurmane.szlachtownica.model.main.ModelRegion;
 import priv.mfurmane.szlachtownica.model.main.ModelSubProvince;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationProvince;
@@ -21,15 +19,20 @@ import java.util.List;
 @Service
 public class ProvinceService {
     @Autowired
-    private ProvinceRegistry registry;
+    private ProvinceRegistry provinceRegistry;
+    @Autowired
+    private PlaceRegistry placeRegistry;
 
     private final GeoJSONWriter writer = new GeoJSONWriter();
 
     public List<Province> getAll() {
-        return registry.getAll().stream().map(this::mapProvince).toList();
+        List<SimulationPlace> allPlaces = placeRegistry.getAll();
+        return provinceRegistry.getAll().stream()
+                .map(sp -> mapProvince(sp, allPlaces))
+                .toList();
     }
 
-    private Province mapProvince(SimulationProvince sp) {
+    private Province mapProvince(SimulationProvince sp, List<SimulationPlace> allPlaces) {
         Province province = new Province();
         province.setId(sp.getModel().getId());
         province.setName(sp.getModel().getName());
@@ -43,15 +46,10 @@ public class ProvinceService {
                 result.setArea(writer.write(model.getArea()));
                 model.getRegions().forEach(reg -> {
                     Region region = new Region(reg);
-                    reg.getPlaces().forEach(placeId -> {
-//                        if (placeId == 1) {
-//                            SimulationPlace place = MainEngine.getInstance().getPlaceRegistry().get(placeId);
-//                            Place newPlace = new Place();
-//                            newPlace.setName(place.getModel().getName());
-//                            newPlace.setLocation(writer.write(place.getModel().getLocation()));
-//                            region.getPlaces().add(newPlace);
-//                        }
-                    });
+                    allPlaces.stream()
+                        .filter(place -> place.getModel().getLocation() != null && reg.getArea()
+                        .contains(place.getModel().getLocation()))
+                        .map(this::mapPlace).forEach(region.getPlaces()::add);
                     region.setArea(writer.write(reg.getArea()));
                     result.getRegions().add(region);
                 });
@@ -59,6 +57,16 @@ public class ProvinceService {
             province.getSubProvinces().add(result);
         });
         return province;
+    }
+
+    private Place mapPlace(SimulationPlace place) {
+        Place newPlace = new Place();
+        newPlace.setId(place.getModel().getId());
+        newPlace.setName(place.getModel().getName());
+        newPlace.setType(place.getModel().getType());
+        newPlace.setPlaceCharacteristics(List.copyOf(place.getModel().getPlaceCharacteristics()));
+        newPlace.setLocation(writer.write(place.getModel().getLocation()));
+        return newPlace;
     }
 
 }

@@ -348,7 +348,7 @@ public class ProvinceInitializer {
 
     private TerrainShape determineTerrainShape(ModelRegion region, ModelSubProvince model, Map<TerrainShape, Double> terrainProfile) {
         if (!region.getPlaces().isEmpty()) {
-            List<TerrainShape> list = terrainProfile.keySet().stream().toList();
+            List<TerrainShape> list = new ArrayList<>(terrainProfile.keySet());
             list.sort((o1, o2) -> o2.getFertility().compareTo(o1.getFertility()));
             Double best = list.get(0).getFertility();
             int firstWorse = 0;
@@ -416,12 +416,11 @@ public class ProvinceInitializer {
     }
 
     private void settleBestRegions(List<ModelRegion> regions, int regionsToSettle, Map<RegionType, Double> initialSettlersProfile) {
-        regions.sort(ModelRegion::compareTo);
-        for (int i = 0; i < regionsToSettle; i++) {
+        regions.sort(Comparator.reverseOrder());
+        int settled = 0;
+        for (int i = 0; i < regions.size() && settled < regionsToSettle; i++) {
             ModelRegion region = regions.get(i);
-            if (region.getType().equals(RegionType.SETTLERS_REACH)) {
-                i--;
-            } else {
+            if (!region.getType().equals(RegionType.SETTLERS_REACH)) {
                 if (region.getEnchantmentLevel() > 3) {
                     region.setType(RegionType.SUPERNATURAL_EXPANSE);
                 } else if (region.getFertility() > GREAT_FERTILITY_LEVEL) {
@@ -429,6 +428,7 @@ public class ProvinceInitializer {
                 } else {
                     region.setType(chooseType(initialSettlersProfile, true));
                 }
+                settled++;
             }
             createPlacesForRegion(region);
         }

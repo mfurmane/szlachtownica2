@@ -54,7 +54,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(76.15903292918286, -45.07889465508716);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(2L)
@@ -73,7 +73,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(73.33083227153435, -43.622299936603966);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(3L)
@@ -91,7 +91,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(1193)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(73.89316421895862, -45.11636363636364);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(4L)
@@ -109,7 +109,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(74.33393348233876, -42.71867550303021);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(5L)
@@ -127,7 +127,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(1302)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(75.76061415220293, -42.81515151515151);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(6L)
@@ -145,7 +145,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(75.08416267126775, -40.433522993678224);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(7L)
@@ -166,7 +166,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(78.32470767940681, -41.829927926995985);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(8L)
@@ -186,7 +186,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(1451)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(79.04516946154514, -40.15125002825611);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(9L)
@@ -205,7 +205,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(79.58065048018723, -41.56387841319398);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(10L)
@@ -225,7 +225,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(79.53995728161951, -43.174263697353226);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(11L)
@@ -245,7 +245,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(81.72883845126836, -45.378787878787875);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(12L)
@@ -266,7 +266,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(77.17682074036732, -40.860559950178235);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(13L)
@@ -287,7 +287,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(77.58567961689569, -45.106915655527246);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(14L)
@@ -307,7 +307,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(80.40045004682638, -44.26452753287526);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(15L)
@@ -327,7 +327,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(77.98952653975074, -43.40046821544536);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(16L)
@@ -345,7 +345,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(1442)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(79.8415220293725, -45.445454545454545);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(17L)
@@ -362,7 +362,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(79.8415220293725, -45.445454545454545);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(18L)
@@ -380,7 +380,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(71.5720961281709, -44.915151515151514);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(19L)
@@ -398,7 +398,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(79.07687988132454, -41.61313829139748);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(20L)
@@ -416,7 +416,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(76.81188251001335, -43.86969696969697);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(21L)
@@ -434,7 +434,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(1743)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(76.11236024187434, -44.305562427311195);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(22L)
@@ -452,7 +452,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(1640)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(76.19475664124445, -41.47711276847121);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(23L)
@@ -488,7 +488,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(null)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(77.59826435246995, -44.24545454545454);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(25L)
@@ -524,7 +524,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(null)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(74.99273541192179, -41.69126559714795);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(27L)
@@ -596,7 +596,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(null)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(79.86070853469141, -44.684157364350355);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(31L)
@@ -632,7 +632,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(null)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(76.60080106809079, -42.31818181818182);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(33L)
@@ -686,7 +686,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(null)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(78.31014686248331, -42.49393939393939);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(36L)
@@ -704,7 +704,7 @@ public class PlacesConfiguration {
                 .setDestroyedYear(9999)
 //                .setPreferedMaterial(Material.)
                 .build();
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate coordinate = new Coordinate(74.64312416555407, -44.50606060606061);
         ModelPlace model = new ModelPlace();
         model.setType(PlaceType.SETTLEMENT)
                 .setId(37L)

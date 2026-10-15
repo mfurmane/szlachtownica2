@@ -7,6 +7,7 @@ import priv.mfurmane.szlachtownica.model.simulation.SimulationPerson;
 import priv.mfurmane.szlachtownica.model.simulation.SimulationPlace;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -27,5 +28,9 @@ public class PlaceRegistry {
 
     public void setEngine(MainEngine mainEngine) {
         engine = mainEngine;
+    }
+
+    public List<SimulationPlace> getAll() {
+        return registry.values().stream().toList();
     }
 }
